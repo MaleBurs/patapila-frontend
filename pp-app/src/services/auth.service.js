@@ -64,7 +64,7 @@ const findUserById = async (id) => {
 
 const getUserMilestones = async (userId) => {
   try {
-    const response = await axios.post("http://localhost:8080/api/milestone/getUserWithMilestones", {
+    const response = await axios.post("https://pp-app-backend.herokuapp.com/api/auth/", {
       userId,
     });
     return response;
