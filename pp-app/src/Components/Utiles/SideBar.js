@@ -21,7 +21,7 @@ const Sidebar = ({displaySubscriptionInformation}) => {
                                         ((selectedUserSubs.frequency === 2) 
                                           ? "1 vez cada 3 meses"
                                           :((selectedUserSubs.frequency === 3)
-                                          ? "1 vex cada 6 meses"
+                                          ? "1 vez cada 6 meses"
                                           :((selectedUserSubs.frequency === 4)
                                           ? "1 vez cada 1 año"
                                           :"")))},
