@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "http://localhost:8080/api/activities/";
+const API_URL = "https://pp-app-backend.herokuapp.com/api/activities/";
 
 const getUserActivities = (id) => {
   return axios.post(API_URL + "getUserActivities", {
