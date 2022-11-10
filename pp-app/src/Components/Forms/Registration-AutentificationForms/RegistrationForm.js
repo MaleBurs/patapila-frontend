@@ -81,7 +81,7 @@ export default function RegistrationForm(props) {
           setMessage(response.data.message);
           setSuccessful(true);
           if(props.refferalUser){
-            DonationService.addReferred(response.data.id,props.refferalUser.id);
+            DonationService.addReferred(props.refferalUser.id,response.data.id);
           }
           ActServices.createActivity(userRegistredEventDescription.title, userRegistredEventDescription.description, response.data.id). then(
             (res)=> console.log(res)
