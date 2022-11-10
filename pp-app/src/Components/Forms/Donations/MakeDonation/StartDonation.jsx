@@ -19,10 +19,10 @@ const StartDonation = ({ setStep }) => {
   const [showModal, setShowModal] = useState(false);
 
   const newSubscriptionEvenctDescription = (amount,nextPaymentDate) =>{
-    return {title: "Te has subscipto!", description: "Has iniciado una subscripicon de "+amount+" que tiene como proxima fecha de pago "+nextPaymentDate+"."}
+    return {title: "Te has subscipto!", description: "Has iniciado una subscripicon de $"+amount+" que tiene como proxima fecha de pago "+nextPaymentDate+"."}
   }
   const newOneTimeDonationEvenctDescription = (amount) =>{
-    return {title: "Has realizado una donacion de única vez!", description: "Has realizado una donacion de "+amount+"."}
+    return {title: "Has realizado una donacion de única vez!", description: "Has realizado una donacion de $"+amount+"."}
   }
 
   useEffect(() => {
