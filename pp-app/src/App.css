@@ -1,0 +1,164 @@
+/**Fonts**/
+@font-face {
+    font-family: "Poppins-SemiB";   /*Can be any text*/
+    src: local("Poppins-SemiB"),
+      url("./Fonts/Poppins-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Poppins-Regular";   /*Can be any text*/
+    src: local("Poppins-Regular"),
+      url("./Fonts/Poppins-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Poppins-Medium";   /*Can be any text*/
+    src: local("Poppins-Medium"),
+      url("./Fonts/Poppins-Medium.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Poppins-Bold";   /*Can be any text*/
+    src: local("Poppins-Bold"),
+      url("./Fonts/Poppins-Bold.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Poppins-Light";   /*Can be any text*/
+    src: local("Poppins-Light"),
+      url("./Fonts/Poppins-Light.ttf") format("truetype");
+}
+
+.font-Pop-L{
+    font-family: "Poppins-Light";
+}
+
+.font-Pop-M{
+    font-family: "Poppins-Medium";
+}
+
+.font-Pop-B{
+    font-family: "Poppins-Bold";
+}
+
+.font-Pop-SB{
+    font-family: "Poppins-SemiB";
+}
+
+.font-Pop-R{
+    font-family: "Poppins-Regular";
+}
+
+/*Text Color*/
+.darkGrayText{
+    color: #353330; 
+}
+.redText{
+    color: #DA1212;
+}
+.greenText{
+    color:#0F6938;
+}
+.blackText{
+    color: #2e2a25;
+}
+.purpleText{
+    color: #6c3333;
+}
+.lightGreyText{
+    color: #e7e6e6;
+}
+.yellowText{
+    color: #eb8301;
+}
+.yellowTextHover:focus, .yellowTextHover:hover{
+    color: #eb8301;
+    transition: 0.5s;
+}
+.purpleTextHover:focus, .purpleTextHover:hover{
+    color: #6c3333;
+    transition: 0.5s;
+}
+.greenTextHover:focus, .greenTextHover:hover{
+    color:#0F6938;
+    transition: 0.5s;
+}
+
+/*Border Color*/
+.whiteBorder{
+    border: 2.5px solid #FFFFFF !important;
+}
+.purpleBorder{
+    border: 2px solid #6c3333 !important;
+}
+
+.greenBorderWhenFocus:focus{
+    border-color: #0F6938;
+}
+.grayBorder{
+    border: 0.25px solid #e7e7e7 !important;
+}
+.darkGrayBorder{
+    border: 0.25px solid #cecdcd !important;
+}
+.grayBottomBorder{
+    border-bottom: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #f3f1f1;
+}
+.darkGrayBottomBorder{
+    border-bottom: 0.25px solid #cecdcd !important;
+}
+.grayDottedBorder{
+    border: 0.25px dashed #cecdcd !important;
+}
+.image {
+    background-image: url("./Components/Images/ImagenHijoYMadre.jpg");
+}
+/*Background Color*/
+.greenBg{
+    background-color: #0F6938;
+}
+.purpleBg{
+    background-color: #6c3333;
+}
+.purpleBgHover:hover, .purpleBgHover:focus{
+    background-color: #6c333349;
+    transition: 2s;
+}
+.lightGreyBg{
+    background-color: #e7e6e6;
+}
+.lighterGreyBg{
+    background-color: #e7e6e61c;
+}
+.almostWhiteBg{
+    background-color: #fdfdfd;
+}
+.greyBg{
+    background-color: #e7e6e649;
+}
+.darkGreyBg{
+    background-color: rgba(0,0,0,0.3);
+}
+.yellowBg{
+    background-color: #eb8301;
+}
+.yellowBgHover:hover, .yellowBgHocer:focus{
+    transition: 0.7s;
+    background-color: #eb8301;
+}
+.reallyLightgreyBg{
+    background-color: #fdfcfc;;
+}
+.greenBgHover:hover, .greenBgHover:focus{
+    transition: 0.7s;
+    background-color: #0F6938;
+}
+.lightgreyBgTranslucentHover:focus, .lightgreyBgTranslucentHover:hover {
+    background-color:  #f3f1f1;
+}
+
+/*Positions*/
+.position-relative-nowrap {
+    position: relative;
+    white-space: nowrap;
+}

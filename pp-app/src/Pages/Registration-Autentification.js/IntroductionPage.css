@@ -1,0 +1,49 @@
+@font-face {
+    font-family: "Poppins-SemiB";   /*Can be any text*/
+    src: local("Poppins-SemiB"),
+      url("../../Fonts/Poppins-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Poppins-Regular";   /*Can be any text*/
+    src: local("Poppins-Regular"),
+      url("../../Fonts/Poppins-Regular.ttf") format("truetype");
+}
+
+.image {
+    background-image: url("../../Components/Images/ImagenHijoYMadre.jpg");
+}
+
+.uneteTitle{
+    font-family: "Poppins-SemiB";
+    font-size: 20pt;
+    letter-spacing: 0px;
+    color:white;
+}
+
+.uneteText{
+    font-family: "Poppins-Regular";
+    font-size: 15pt;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    color:white;
+}
+
+.greenBg{
+    background-color: #0F6938;
+}
+
+.modalTitle{
+    font-family: "Poppins-SemiB";
+    font-size: 20pt;
+    letter-spacing: 0px;
+    color:#2e2a25;
+}
+
+.modalText{
+    font-family: "Poppins-Regular";
+    font-size: 15pt;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    color:#2e2a25;
+}
