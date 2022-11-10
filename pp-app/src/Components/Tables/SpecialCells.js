@@ -90,13 +90,13 @@ export function PaymentFrecuency({ value }) {
         className="text-xs text-gray-500 font-Pop-L"
       >
          {(value===1) 
-        ? '1 vez al mes'
+        ? 'una vez al mes'
         : ((value===2) 
-        ? '1 vez cada 3 meses'
+        ? 'una vez cada 3 meses'
         : ((value===3) 
-        ? '1 vez cada 6 meses'
+        ? 'una vez cada 6 meses'
         :((value===4)
-        ?  '1 vez cada 1 año'
+        ?  'una vez cada 1 año'
         : ""
         ))
         )}

@@ -69,7 +69,7 @@ const ModalWithConfirmationAndDetails = (props) =>{
                     <div className="font-Pop-M flex flex-wrap space-x-1 leading-relaxed font-Pop-R text-sm tracking-[0.2px] purpleText">
                       <p className="normal-case">Se </p><p className="normal-case">{props.action}</p><p className="normal-case">una donacion de </p>
                       <p className="normal-case underline decoration-[#eb8301] decoration-wavy underline-offset-4">${selectedAmount}</p>
-                      <p className="normal-case">, </p>
+                      <p className="normal-case">, que se cobra </p>
                       <p className="normal-case underline decoration-[#eb8301] decoration-wavy underline-offset-4">{subsPeriod.label},</p>
                       <p className="normal-case">con el próximo pago el día </p>
                        <p className="normal-case underline decoration-[#eb8301] decoration-wavy underline-offset-4">{(calculateDate())}</p>
