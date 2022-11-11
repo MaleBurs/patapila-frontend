@@ -73,6 +73,18 @@ const getUserMilestones = async (userId) => {
   }
 };
 
+const getUserLifeImpact = async (userId) => {
+  try {
+    const response = await axios.post("https://pp-app-backend.herokuapp.com/api/auth/getUserLifeImpact", {
+      userId,
+    });
+    return response;
+  } catch (e) {
+      console.log(e);
+  }
+};
+
+
 const AuthService = {
   register,
   login,
@@ -82,7 +94,7 @@ const AuthService = {
   updatePasswordViaEmail,
   updatePasswordViaSettings,
   findUserById,
-
+  getUserLifeImpact,
   getUserMilestones
 }
 export default AuthService;

@@ -1,10 +1,22 @@
-import React from "react";
+import React, {useEffect} from "react";
 import ManoConCorazon from "../../Components/Images/ManoConCorazon.png";
 import InformationTooltips from "../Utiles/InformationDisplayTooltip";
 import { useCurrentUser } from "../../Context/CurrentUserContext";
+import AuthService from "../../services/auth.service";
+
+import AdminServices from "../../services/transactions.service";
 
 const UserInformationSection = () => {
   const {currentUser, profilePictureURL} = useCurrentUser();
+  const {lifeImpact, setLifeImpact} = React.useState(0);
+
+   useEffect(() => {
+    AuthService.getUserLifeImpact(currentUser.id).then((response) => {
+      setLifeImpact(response);});
+    AdminServices.getTransactions(10,10).then((response) => {
+      console.log(response);})
+    }, [currentUser.id]);
+
   return (
     <>
     <div className = "flex flex-col space-y-4 md:space-y-0 md:flex-row z-10 px-6 md:px-12 lg:px-32 basis-1/3 bg-[#F6F7F3] border border-[#E3E7DA] py-6 md:py-10 lg:py-8 mt-6 md:mt-14">
@@ -26,7 +38,7 @@ const UserInformationSection = () => {
             <div className="flex flex-col justify-center z-10 space-y-1 py-1">
                 
                 <div className="flex flex-row items-center justify-center space-x-4">
-                <div className="font-Pop-R text-xl md:text-2xl text-center ">456</div>
+                <div className="font-Pop-R text-xl md:text-2xl text-center ">{lifeImpact}</div>
                 <img
                     className="object-cover h-10 w-10 md:h-14 md:w-14 "
                     src={ManoConCorazon}

@@ -17,7 +17,7 @@ export function CurrentUserContextProvider (props) {
   useEffect(() => {
     ImageService.getImageUrl().then((url) => {
       setProfilePictureURL(url);
-    }).catch(console.log("hola"))
+    }).catch()
   }, []);
 
   const value = useMemo(() => {
