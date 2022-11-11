@@ -11,7 +11,7 @@ export function OpenSideBarFromUser({value, row}){
   const [user, setUser] = useState(null)
   useEffect(() => {
     console.log(value);
-    AuthService.findUserById(value).then(res=>setUser(res.data))
+    AuthService.findUserById(parseInt(value)).then(res=>setUser(res.data))
   }, [value])
   
   return(
