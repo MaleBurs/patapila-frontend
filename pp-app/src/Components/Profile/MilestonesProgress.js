@@ -68,7 +68,8 @@ const MilestonesBox = (props) => {
                 />
                 <div className="flex flex-col justify-center">
                     <h3 class="mb-1 text-sm lg:text-base font-Pop-R text-gray-900"> Has alcanzado un hito <span onClick={()=>setModal(true)} className="hover:underline focus:underline underline-offset-2">{props.title}</span></h3>
-                    <time class="block mb-2 text-xs lg:text-sm font-Pop-L leading-none text-gray-400">Ganado el 7 de Diciembre, 2021</time>
+                    <time class="block mb-2 text-xs lg:text-sm font-Pop-L leading-none text-gray-400">milestones.createdAt</time>
+                    {/* <time class="block mb-2 text-xs lg:text-sm font-Pop-L leading-none text-gray-400">Ganado el 7 de Diciembre, 2021milestones.createdAt</time> */}
                 </div>
             </div>
         </li>   
@@ -82,7 +83,6 @@ const MilestonesProgress = () => {
   useEffect(() => {
     AuthService.getUserMilestones(currentUser.id).then(resp=> setMilestones(resp.data.milestones));
   }, [currentUser.id]);
-  console.log(milestones.createdAt);
   return (
     <>
     <div className="py-10 lg:py-16">
