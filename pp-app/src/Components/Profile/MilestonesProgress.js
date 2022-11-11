@@ -82,6 +82,7 @@ const MilestonesProgress = () => {
   const currentUser = AuthService.getCurrentUser();
   useEffect(() => {
     AuthService.getUserMilestones(currentUser.id).then(resp=> setMilestones(resp.data.milestones));
+    console.log(milestones)
   }, [currentUser.id]);
   return (
     <>
