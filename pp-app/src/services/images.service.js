@@ -4,7 +4,7 @@ import AuthService from "./auth.service";
 const upload = async(file) => {
     const fd = new FormData()
     fd.append('file', file)
-    await axios.post(`https://pp-app-backend.herokuapp.com/profile/picture/${AuthService.getCurrentUser().id}`, fd)
+    return axios.post(`https://pp-app-backend.herokuapp.com/profile/picture/${AuthService.getCurrentUser().id}`, fd)
 }
 
 const getImageUrl = async() => {
