@@ -68,7 +68,7 @@ const MilestonesBox = (props) => {
                 />
                 <div className="flex flex-col justify-center">
                     <h3 class="mb-1 text-sm lg:text-base font-Pop-R text-gray-900"> Has alcanzado un hito <span onClick={()=>setModal(true)} className="hover:underline focus:underline underline-offset-2">{props.title}</span></h3>
-                    <time class="block mb-2 text-xs lg:text-sm font-Pop-L leading-none text-gray-400">milestones.createdAt.split('T')[0]</time>
+                    <div class="block mb-2 text-xs lg:text-sm font-Pop-L leading-none text-gray-400">milestones.createdAt.split('T')[0]</div>
                 </div>
             </div>
         </li>   
