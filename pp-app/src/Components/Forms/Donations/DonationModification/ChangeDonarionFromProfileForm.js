@@ -38,11 +38,11 @@ const ChangeDonationFromProfileForm = (props) =>{
   const [message, setMessage] = useState("");
 
   const modificationSubscriptionEvenctDescription = (amount, frecuency, nextPaymentDate) =>{
-    return {title: "Has modificado una subscripcion", description: "El monto es de "+amount+", se cobra "+frecuency+ " y la proxima fecha de pago es el "+nextPaymentDate+"." }
+    return {title: "Has modificado una subscripción", description: "El monto es de "+amount+", se cobra "+frecuency+ " y la próxima fecha de pago es el "+nextPaymentDate+"." }
   }
 
   const resetSubscriptionEvenctDescription = (amount, frecuency, nextPaymentDate) =>{
-    return {title: "Has reanudado una subscripcion", description: "Has reanudado una subscripcion de "+amount+", que se cobra "+frecuency+ " y la proxima fecha de pago es el "+nextPaymentDate+"." }
+    return {title: "Has reanudado una subscripción", description: "Has reanudado una subscripción de "+amount+", que se cobra "+frecuency+ " y la próxima fecha de pago es el "+nextPaymentDate+"." }
   }
 
   const closeModalWithConfirmation = () => {

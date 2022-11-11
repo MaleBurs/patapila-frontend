@@ -24,11 +24,11 @@ const ModifyStatePopUp = ( ) => {
     const currentUser = AuthService.getCurrentUser();
 
     const cancelledSubscriptionEvenctDescription = (amount, frequency) =>{
-      return {title: "Has cancelado una subscripcion", description: "Has cancelado una subscripcion de $"+amount+" que se cobraba "+frequency+"."}
+      return {title: "Has cancelado una subscripción", description: "Has cancelado una subscripción de $"+amount+" que se cobraba "+frequency+"."}
     }
     
     const pausedSubscriptionEvenctDescription = (amount, frequency) =>{
-        return {title: "Has pausado una subscripcion", description: "Has pausado una subscripcion de $"+amount+" que se cobraba "+frequency+"."}
+        return {title: "Has pausado una subscripción", description: "Has pausado una subscripción de $"+amount+" que se cobraba "+frequency+"."}
     }
 
     const closeModalWithConfirmation = () => {
