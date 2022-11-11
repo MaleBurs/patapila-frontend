@@ -10,6 +10,7 @@ export function OpenSideBarFromUser({value, row}){
   const {setSelectedUser, setShowSidebar} = useSelectionOnTable();
   const [user, setUser] = useState(null)
   useEffect(() => {
+    console.log(value);
     AuthService.findUserById(value).then(res=>setUser(res.data))
   }, [value])
   
