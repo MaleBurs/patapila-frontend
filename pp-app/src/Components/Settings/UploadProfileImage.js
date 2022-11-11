@@ -18,7 +18,7 @@ const UploadProfileImage = (props) => {
   }
 
   const upload = async (event) => {
-    ImageService.upload(file)
+    ImageService.upload(file).then(window.location.reload())
     //window.location.reload()
   }
   return (
