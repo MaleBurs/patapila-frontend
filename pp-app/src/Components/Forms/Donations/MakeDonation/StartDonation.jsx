@@ -56,7 +56,7 @@ const StartDonation = ({ setStep }) => {
       DonationService.generateSubscription(currentUser.id, selectedAmount, selectedFrequency, subsPeriod.value, paymentDay).then(
         () => {
           setShowModal(true);
-          ActServices.createActivity(newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay).title, newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay.format('YYYY-MM-DD')).description, currentUser.id). then(
+          ActServices.createActivity(newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay).title, newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay).description, currentUser.id). then(
             (res)=> console.log(res)
           )
           //navigate("a donde querramos mandar");
