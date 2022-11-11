@@ -53,10 +53,10 @@ const StartDonation = ({ setStep }) => {
     if (isFormValid()) {
       if(selectedFrequency === 2){
         //la subscripció no tiene un tipo, la trasacción unida a la subscripcion debería de tener un tipo?
-      DonationService.generateSubscription(currentUser.id, selectedAmount, selectedFrequency, subsPeriod.value, paymentDay.format('YYYY-MM-DD')).then(
+      DonationService.generateSubscription(currentUser.id, selectedAmount, selectedFrequency, subsPeriod.value, paymentDay).then(
         () => {
           setShowModal(true);
-          ActServices.createActivity(newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay.format('YYYY-MM-DD')).title, newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay.format('YYYY-MM-DD')).description, currentUser.id). then(
+          ActServices.createActivity(newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay).title, newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay.format('YYYY-MM-DD')).description, currentUser.id). then(
             (res)=> console.log(res)
           )
           //navigate("a donde querramos mandar");
