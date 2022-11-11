@@ -23,7 +23,6 @@ export function MonthlySubscriptionStateContextProvider(props) {
     for (const el of options) {
         await AdminServices.getMonthIncome(el.value).then(res => setMonthlyAmounts(prev => [...prev, res.data.total]))
     }
-    console.log(monthlyAmounts)
 }*/
   const setMonthsIncome = async () => {
 

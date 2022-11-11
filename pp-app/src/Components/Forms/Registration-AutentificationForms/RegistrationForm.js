@@ -81,12 +81,12 @@ export default function RegistrationForm(props) {
           setMessage(response.data.message);
           setSuccessful(true);
           if(props.refferalUser){
-            DonationService.addReferred(props.refferalUser.id,response.data.id);
+            DonationService.addReferred(response.data.id,props.refferalUser.id);
           }
           ActServices.createActivity(userRegistredEventDescription.title, userRegistredEventDescription.description, response.data.id). then(
             (res)=> console.log(res)
           )
-          ActServices.createActivity(refferalEventDescription(name,lastname).title, refferalEventDescription(name,lastname).description, response.data.id). then(
+          ActServices.createActivity(refferalEventDescription(name,lastname).title, refferalEventDescription(name,lastname).description, props.refferalUser.id). then(
             (res)=> console.log(res)
           )
           continuePostNavigationSuccessful();

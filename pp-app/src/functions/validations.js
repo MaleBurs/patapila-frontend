@@ -2,7 +2,6 @@ import { isEmail } from "validator";
 
 const required = (value) => {
     if (!value) {
-      console.log("required!");
       return (
         <div className="alert redText alert-danger text-base my-2 mx-1" role="alert">
           ¡Este campo es obligatorio!
@@ -12,7 +11,6 @@ const required = (value) => {
   };
   const validEmail = (value) => {
     if (!isEmail(value)) {
-      console.log("invalid email!");
       return (
         <div className="alert redText alert-danger text-base my-2 mx-0" role="alert">
         Mail no válido.

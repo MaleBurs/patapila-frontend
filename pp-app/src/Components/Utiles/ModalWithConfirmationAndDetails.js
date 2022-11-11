@@ -15,7 +15,6 @@ const ModalWithConfirmationAndDetails = (props) =>{
     }
     function calculateDate(){
       if((typeof(paymentDay) === 'string')){
-        console.log("1");
         const [dateStr] = paymentDay.split('T');
         const [year, month, day] = dateStr.split('-');
         const date = day+'/'+month+'/'+year;

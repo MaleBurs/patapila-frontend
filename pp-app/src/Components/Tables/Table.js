@@ -60,7 +60,6 @@ function Table({ columns, functionToLoadData }) {
     skipPageResetRef.current = false
     functionToLoadData(20,0).then(res=>{
       res? setData(res.data) : setData();
-      console.log(res)
     });
   }, [functionToLoadData]);
 

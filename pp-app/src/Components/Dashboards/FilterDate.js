@@ -7,7 +7,6 @@ import { useMonthlySubscriptionStateContext } from "../../Context/MonthlySubscri
 
 const FilterDate = (props) => {
   const { year, setYear, month, setMonth, monthlyData} = useMonthlySubscriptionStateContext();
-   console.log(monthlyData);
 
   const setFilter =(value, tittle) => {
     if (tittle === "Mes"){
