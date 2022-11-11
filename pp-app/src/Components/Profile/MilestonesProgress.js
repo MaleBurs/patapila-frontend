@@ -9,7 +9,6 @@ const MileStoneModal = (props) =>{
     function closeModal() {
         props.onCloseModal();
     }
-    
     return(
         <>
           <div className="darkGreyBg justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
@@ -83,6 +82,7 @@ const MilestonesProgress = () => {
   useEffect(() => {
     AuthService.getUserMilestones(currentUser.id).then(resp=> setMilestones(resp.data.milestones));
   }, [currentUser.id]);
+  console.log(milestones.createdAt);
   return (
     <>
     <div className="py-10 lg:py-16">
