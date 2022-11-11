@@ -14,9 +14,10 @@ export function CurrentUserContextProvider (props) {
   useEffect(() => {
     DonationService.getSubscription(currentUser.id).then(res=>{res? setSubscriptionData(res.data) : setSubscriptionData(null)});
   }, [currentUser.id])
+
   useEffect(() => {
     ImageService.getImageUrl().then((url) => {
-      setProfilePictureURL(url);
+      url ? setProfilePictureURL(url) : setProfilePictureURL(null)
     }).catch()
   }, []);
 
