@@ -27,7 +27,7 @@ export default function UserNavBar(props) {
   useEffect(() => {
     ImageService.getImageUrl().then((url) => {
       setImgSrc(url);
-    });
+    }).catch();
   }, []);
 
 
