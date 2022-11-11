@@ -54,7 +54,8 @@ const MilestonesBox = (props) => {
                 onCloseModal={()=>setModal(false)}
                 image={milestoneImage}
                 title={props.title}
-                description={props.description}/>
+                description={props.description}
+                createdAt={props.createdAt}/>
             : null}               
             <li class="mb-10 ml-7 md:ml-8 lg:ml-10 bg-white">
             <span class="flex absolute -left-4 justify-center items-center w-8 h-8 bg-blue-200 rounded-full ring-8 ring-[#f6f7f36b] greenBg">
@@ -94,6 +95,7 @@ const MilestonesProgress = () => {
                 id={milestone.id}
                 title={milestone.title}
                 description={milestone.description}
+                createdAt={milestone.createdAt}
                 />
                 </>
             ))
