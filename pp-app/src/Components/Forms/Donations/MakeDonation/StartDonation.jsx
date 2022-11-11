@@ -18,8 +18,8 @@ const StartDonation = ({ setStep }) => {
   const currentUser = AuthService.getCurrentUser();
   const [showModal, setShowModal] = useState(false);
 
-  const newSubscriptionEvenctDescription = (amount,nextPaymentDate) =>{
-    return {title: "Te has subscipto!", description: "Has iniciado una subscripción de $"+amount+" que tiene como próxima fecha de pago "+nextPaymentDate+"."}
+  const newSubscriptionEvenctDescription = (amount, frequency, nextPaymentDate) =>{
+    return {title: "Te has subscipto!", description: "Has iniciado una subscripción de $"+amount+" que se cobra " + frequency + " y tiene como próxima fecha de pago "+nextPaymentDate+"."}
   }
   const newOneTimeDonationEvenctDescription = (amount) =>{
     return {title: "Has realizado una donación de única vez!", description: "Has realizado una donación de $"+amount+"."}
@@ -56,7 +56,7 @@ const StartDonation = ({ setStep }) => {
       DonationService.generateSubscription(currentUser.id, selectedAmount, selectedFrequency, subsPeriod.value, paymentDay.format('YYYY-MM-DD')).then(
         () => {
           setShowModal(true);
-          ActServices.createActivity(newSubscriptionEvenctDescription(selectedAmount,paymentDay.format('YYYY-MM-DD')).title, newSubscriptionEvenctDescription(selectedAmount,paymentDay.format('YYYY-MM-DD')).description, currentUser.id). then(
+          ActServices.createActivity(newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay.format('YYYY-MM-DD')).title, newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay.format('YYYY-MM-DD')).description, currentUser.id). then(
             (res)=> console.log(res)
           )
           //navigate("a donde querramos mandar");
