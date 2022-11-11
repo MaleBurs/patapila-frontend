@@ -28,7 +28,7 @@ const MileStoneModal = (props) =>{
                     <div className="flex flex-col justify-center space-y-4">
                         <div class="mb-1 text-lg md:text-xl font-Pop-M text-gray-900 text-center blackText"> {props.title} </div>
                         <div className="text-center font-Pop-L text-xs md:text-sm px-4 md:px-8 lg:px-14">{props.description}</div>
-                        <div class="block mb-2 text-xs font-Pop-L leading-none text-gray-500 text-center">{props.createdAt.split('T')[0]}</div>
+                        <div class="block mb-2 text-xs font-Pop-L leading-none text-gray-500 text-center">Ganado el {props.createdAt.split('T')[0]}.</div>
                     </div>
                 </div>
               </div>
@@ -69,7 +69,7 @@ const MilestonesBox = (props) => {
                 />
                 <div className="flex flex-col justify-center">
                     <h3 class="mb-1 text-sm lg:text-base font-Pop-R text-gray-900"> Has alcanzado un hito <span onClick={()=>setModal(true)} className="hover:underline focus:underline underline-offset-2">{props.title}</span></h3>
-                    <div class="block mb-2 text-xs lg:text-sm font-Pop-L leading-none text-gray-400">{props.createdAt.split('T')[0]}</div>
+                    <div class="block mb-2 text-xs lg:text-sm font-Pop-L leading-none text-gray-400">Ganado el {props.createdAt.split('T')[0]}.</div>
                 </div>
             </div>
         </li>   
