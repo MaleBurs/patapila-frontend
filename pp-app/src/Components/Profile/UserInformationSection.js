@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import ManoConCorazon from "../../Components/Images/ManoConCorazon.png";
 import InformationTooltips from "../Utiles/InformationDisplayTooltip";
 import { useCurrentUser } from "../../Context/CurrentUserContext";
@@ -8,7 +8,11 @@ import AdminServices from "../../services/transactions.service";
 
 const UserInformationSection = () => {
   const {currentUser, profilePictureURL} = useCurrentUser();
-  const {lifeImpact, setLifeImpact} = React.useState(432);
+  const [lifeImpact, setLifeImpact] = useState(0);
+
+  useEffect(() => {
+    AuthService.getUserLifeImpact(currentUser.id).then(res=>setLifeImpact(res.data))
+  }, [])
 
   return (
     <>
