@@ -8,7 +8,7 @@ import AdminServices from "../../services/transactions.service";
 
 const UserInformationSection = () => {
   const {currentUser, profilePictureURL} = useCurrentUser();
-  const [lifeImpact, setLifeImpact] = useState(0);
+  const [lifeImpact, setLifeImpact] = useState(null);
 
   useEffect(() => {
     AuthService.getUserLifeImpact(currentUser.id).then(res=>setLifeImpact(res.data))
