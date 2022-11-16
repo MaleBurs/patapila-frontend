@@ -40,7 +40,7 @@ const ModalWithConfirmationAndDetails = (props) =>{
                 {/*body*/}
                 <div className="relative flex flex-col space-y-10">
                     <div className="font-Pop-M flex flex-wrap space-x-1 leading-relaxed font-Pop-R text-sm tracking-[0.2px] purpleText">
-                      <p>Se </p><p>{props.action}</p><p>una donacion de </p>
+                      <p>Se </p><p>{props.action}</p><p>una donación de </p>
                       <p className="underline decoration-[#eb8301] decoration-wavy underline-offset-4">${selectedAmount}</p>
                       <p>, que se cobra </p>
                       <p className="underline decoration-[#eb8301] decoration-wavy underline-offset-4">{subsPeriod.label},</p>
@@ -53,8 +53,8 @@ const ModalWithConfirmationAndDetails = (props) =>{
                   </p>
                 </div>
                 <div className="flex items-center flex-rows justify-between">
-                <button onClick={closeModal} className="mx-3 py-3 h-fit px-7 greyBg rounded-xl tracking-widest font-Pop-M uppercase font-medium text-gray-500 duration-700 hover:bg-gray-300 focus:bg-gray-300  hover:text-white focus:text-white text-xs">Cancelar</button>
-                <button onClick={saveChangesFromModal} text="Guardar Cambios" className="mx-3 py-3 h-fit px-7 bg-[#0F6938] text-white rounded-xl tracking-widest font-Pop-M uppercase font-medium duration-700 hover:bg-[#6c3333] focus:bg-[#6c3333]  text-xs">Guardar Cambios</button>
+                <button onClick={closeModal} className="mx-3 py-3 h-fit px-7 greyBg rounded-xl tracking-widest font-Pop-M uppercase font-medium text-gray-500 duration-700 hover:bg-gray-300 focus:bg-gray-300  hover:text-white focus:text-white text-xs">{props.cancelButton}</button>
+                <button onClick={saveChangesFromModal} text="Guardar Cambios" className="mx-3 py-3 h-fit px-7 bg-[#0F6938] text-white rounded-xl tracking-widest font-Pop-M uppercase font-medium duration-700 hover:bg-[#6c3333] focus:bg-[#6c3333]  text-xs">{props.saveButton}</button>
                 </div>
               </div>
             </div>

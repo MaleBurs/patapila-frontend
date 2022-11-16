@@ -120,11 +120,11 @@ const ChangeDonationFromProfileForm = (props) =>{
       body={(subscriptionData.subscriptionState.state !== 'P') ? "Si guardas los cambios, tu donación actual se modificará."
               :   "Si guardas los cambios, tu donación recurrente se renaudará."} 
       saveChanges={(subscriptionData.subscriptionState.state !== 'P') ? modifyDonation : handleResetDonation}
-      action= {(subscriptionData.subscriptionState.state !== 'P') ? "modificará" : "renaudará"}></ModalWithConfirmationAndDetails>
+      action= {(subscriptionData.subscriptionState.state !== 'P') ? "modificará" : "renaudará"} cancelButton="Volver atras" saveButton="Guardar cambios"></ModalWithConfirmationAndDetails>
     ) : null}
     {showModal ? (
       <Modal value={showModal} onChange={closeModal} header={(subscriptionData.subscriptionState.state !== 'P') ?
-      "Tu donación ha sido modificada con éxito!"  :  "Tu donación ha sido activada con éxito!"
+      "Tu donación recurrente ha sido modificada con éxito!"  :  "Tu donación recurrente ha sido activada con éxito!"
           }body={""} buttonText={"Continuar"}></Modal>
     ) : null}
     <div className="p-6 md:p-6 lg:py-8 lg:px-11">
@@ -148,7 +148,7 @@ const ChangeDonationFromProfileForm = (props) =>{
         <DashedLine></DashedLine>
         <SubscriptionAmountImpactMessage></SubscriptionAmountImpactMessage>
         <div className="flex flex-row justify-between space-x-6 w-full">
-          <Buttons.IndicationButton text={"Cancelar"} onClick={()=>{setIfUserWantsToModifySubs(false); setMessage("")}} customStyle={"w-full basis-1/2 text-gray-500 greyBg w-full text-gray-500 hover:bg-gray-300 focus:bg-gray-300 "}></Buttons.IndicationButton>
+          <Buttons.IndicationButton text={"Volver Atras"} onClick={()=>{setIfUserWantsToModifySubs(false); setMessage("")}} customStyle={"w-full basis-1/2 text-gray-500 greyBg w-full text-gray-500 hover:bg-gray-300 focus:bg-gray-300 "}></Buttons.IndicationButton>
           <Buttons.IndicationButton  text={"Modificar"} customStyle={"basis-1/2 text-white greenBg yellowBgHover w-full"} onClick={()=>{setShowModalWithConfirmation(true)}}></Buttons.IndicationButton>
         </div>
       </div>
