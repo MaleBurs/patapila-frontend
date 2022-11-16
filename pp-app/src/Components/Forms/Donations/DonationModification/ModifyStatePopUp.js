@@ -86,21 +86,21 @@ const ModifyStatePopUp = ( ) => {
     {showModalWithConfirmation ? (
     <ModalWithConfirmationAndDetails 
     value={showModalWithConfirmation} onChange={closeModalWithConfirmation} header={
-      "¿Estás seguro de que deseas pausar tu donación recurrente?"
-          } body={"Si guardas los cambios, tu donación actual se pausará."} saveChanges={handlePausedSubs}
-    action={ "pausará"}></ModalWithConfirmationAndDetails>
+      "¿Estás seguro de que deseas pausar tu suscripción?"
+          } body={"Si guardas los cambios, tu suscripción actual se pausará."} saveChanges={handlePausedSubs}
+    action={ "pausará"} saveButton="Guardar cambios" cancelButton="Volver atras"></ModalWithConfirmationAndDetails>
     ) : null}
     { showModalWithWrittenConfirmation ? (
       <ModalWithWrittenConfirmation 
     value={showModalWithConfirmation} onChange={closeModalWithWrittenConfirmation} header={"¿Estás seguro de que deseas cancelar tu donación recurrente?"
-          } body={"Si guardas los cambios, tu donación recurrente se cancelará."} saveChanges={handleCancelledSubs}
+          } body={"Si guardas los cambios, tu suscripción se cancelará."} saveChanges={handleCancelledSubs}
     action={"cancelará"}></ModalWithWrittenConfirmation>
     ) : null
 
     }
     {showModal ? (
       <Modal value={showModal} onChange={closeModal} header={(!cancellationRequest) ?
-      "Tu donación ha sido pausada con éxito!"  :  "Tu donación ha sido cancelada con éxito!"
+      "Tu suscripción ha sido pausada con éxito!"  :  "Tu suscripción ha sido cancelada con éxito!"
           }body={""} buttonText={"Continuar"}></Modal>
     ) : null}
         <Popover className={"grid relative"}>
