@@ -32,7 +32,7 @@ const required = (value) => {
     if (value.length < 6 || value.length > 20) {
       return (
         <div className="alert redText alert-danger text-sm my-2 mx-1 " role="alert">
-          La contraseña tiene que tener al menos 10 caracteres y como máximo 20.
+          La contraseña  debe tener como mínimo 10 caracteres y como máximo 20.
         </div>
       );
     }
