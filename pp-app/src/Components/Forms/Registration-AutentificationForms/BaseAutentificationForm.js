@@ -19,28 +19,14 @@ export default function BaseAutetificationForm(props) {
     setPasswordShown(!passwordShown);
   };
 
-  const changeLoadingState = () => {
-    setIsLoading(!isLoading);
-  };
-
-  const delay = ms => new Promise(
-    resolve => setTimeout(resolve, ms)
-  );
-  const handleClick = async event => {
-    console.log("empezo la espera");
-    await delay(5000);
-    console.log("termino la espera");
-  };
-
   const startSubmition = (e) => {
-    handleClick();
     e.preventDefault();
     setMessage("");
     form.current.validateAll();
     if (checkBtn.current.context._errors.length === 0) {
-      changeLoadingState();
+      setIsLoading(!isLoading);
       props.submitFunction({setMessage});
-      changeLoadingState();
+      setIsLoading(!isLoading);
     }
   }
 
