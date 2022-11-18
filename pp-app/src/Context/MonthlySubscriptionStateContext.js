@@ -40,7 +40,7 @@ export function MonthlySubscriptionStateContextProvider(props) {
     var newMonthData ={};
     for(const item of res.data){
       if(item.state=="A"){
-      a=a+1;
+        a=a+1;
       }else if(item.state=="P"){
         p=p+1;
       }else if(item.state=="C"){
