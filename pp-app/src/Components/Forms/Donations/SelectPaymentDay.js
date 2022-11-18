@@ -28,6 +28,7 @@ const SelectPaymentDay = (props) => {
                       onChange={(newPaymentDay) => {
                         setPaymentDay(newPaymentDay.format("YYYY-MM-DD"));
                       }}
+                      inputProps={{readOnly: true}}
                       renderInput={(params) => 
                       <TextField {...params}
                         sx={{

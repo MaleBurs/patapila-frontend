@@ -85,7 +85,7 @@ const MilestonesProgress = () => {
   }, [currentUser.id]);
   return (
     <>
-    <div className="py-10 lg:py-16">
+    <div className="py-10 lg:py-6">
         <ol className="relative border-l border-[#0f693893]">
             {
             (milestones) ?
