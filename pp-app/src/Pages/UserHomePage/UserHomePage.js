@@ -7,7 +7,7 @@ import UserInformationSection from "../../Components/Profile/UserInformationSect
 import CopyLinkSection from "../../Components/Profile/CopyLinkSection";
 import MilestonesProgress from "../../Components/Profile/MilestonesProgress";
 import LatestActivity from "../../Components/Profile/LatestActivty";
-
+import InvitationToDonate from "../../Components/Profile/InvitationToDonate";
 
 const UserHome = () => {
   const currentUser = AuthService.getCurrentUser();
@@ -30,6 +30,7 @@ const UserHome = () => {
           <div className="flex flex-col md:flex-row px-10 md:px-12 lg:px-32 md:space-x-5 lg:space-x-16 bg-[#f6f7f36b]">
             <div className="md:basis-3/5">
               <MilestonesProgress/>
+              <InvitationToDonate/>
             </div>
             <div className="md:basis-2/5 flex flex-col space-y-4">
               <CopyLinkSection/>
