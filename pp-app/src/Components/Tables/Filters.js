@@ -93,7 +93,7 @@ export function SelectModoFilter({
     if (row === "onlyTime")
       options.push({ value: row, label: "Donaciones de una única vez" })
     if (row === "recurrent")
-      options.push({ value: row, label: "Transacciones generadas por subscripciones" })}
+      options.push({ value: row, label: "Transacciones generadas por suscripciones" })}
 }
 
 export function SelectStateFilter({

@@ -19,7 +19,7 @@ const StartDonation = ({ setStep }) => {
   const [showModal, setShowModal] = useState(false);
 
   const newSubscriptionEvenctDescription = (amount, frequency, nextPaymentDate) =>{
-    return {title: "Te has subscipto!", description: "Has iniciado una subscripción de $"+amount+" que se cobra " + frequency + " y tiene como próxima fecha de pago "+nextPaymentDate+"."}
+    return {title: "Te has suscrito!", description: "Has iniciado una suscripción de $"+amount+" que se cobra " + frequency + " y tiene como próxima fecha de pago "+nextPaymentDate+"."}
   }
   const newOneTimeDonationEvenctDescription = (amount) =>{
     return {title: "Has realizado una donación de única vez!", description: "Has realizado una donación de $"+amount+"."}
@@ -37,7 +37,7 @@ const StartDonation = ({ setStep }) => {
 
   const isFormValid = () =>{
     if (selectedFrequency === 2 && (paymentDay===null || paymentDay=== undefined)){
-      setMessage("Para activar una subscripción debe seleccionar la fecha del primer pago.");
+      setMessage("Para activar una suscripción debe seleccionar la fecha del primer pago.");
       return false
     }
     if (selectedAmount < 1 || selectedAmount===undefined){
@@ -52,15 +52,12 @@ const StartDonation = ({ setStep }) => {
     setMessage("");
     if (isFormValid()) {
       if(selectedFrequency === 2){
-        //la subscripció no tiene un tipo, la trasacción unida a la subscripcion debería de tener un tipo?
       DonationService.generateSubscription(currentUser.id, selectedAmount, selectedFrequency, subsPeriod.value, paymentDay).then(
         () => {
           setShowModal(true);
           ActServices.createActivity(newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay).title, newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay).description, currentUser.id). then(
             (res)=> console.log(res)
           )
-          //navigate("a donde querramos mandar");
-          //window.location.reload();
         },
         (error) => {
           const resMessage =
@@ -78,8 +75,6 @@ const StartDonation = ({ setStep }) => {
             ActServices.createActivity(newOneTimeDonationEvenctDescription(selectedAmount).title, newOneTimeDonationEvenctDescription(selectedAmount).description, currentUser.id). then(
               (res)=> console.log(res)
             )
-            //navigate("a donde querramos mandar");
-            //window.location.reload();
           },
           (error) => {
             const resMessage =

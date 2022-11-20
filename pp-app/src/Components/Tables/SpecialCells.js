@@ -122,7 +122,7 @@ export function TransactionType({ value }) {
          {(value==="onlyTime") 
         ? 'donación de una única vez'
         : ((value==="recurrent") 
-        ? 'subscripción'
+        ? 'suscripción'
         : ""
         )}
         

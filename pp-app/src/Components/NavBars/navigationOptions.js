@@ -2,7 +2,7 @@
 const adminNavigation =[
   { name: 'Ajustes', path: "/settings"},
   { name: 'Reporte Transacciones', path:"/reporteTransacciones"},
-  { name: 'Reporte Subscripciones', path:"/reporteSubscripciones"},
+  { name: 'Reporte Suscripciones', path:"/reporteSubscripciones"},
   { name: 'Dashboard', path:"/reportes"},
 ]
 

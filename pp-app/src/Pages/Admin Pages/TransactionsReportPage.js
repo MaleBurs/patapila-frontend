@@ -8,7 +8,7 @@ const TransactionReportPage = () => {
   return (
     <TableBasePage 
       title="Reporte de Transacciones"
-      subtitle="Reporte historico de las transacciones realizadas"
+      subtitle="Reporte histórico de las transacciones realizadas"
       dataForColumns={TransactionTableInformation.columns}
       functionToLoadData={getTransactionsForTable}
     />

@@ -153,7 +153,7 @@ const ChangePasswordFromProfileForm = (props) => {
         )}
 
         <div className="flex flex-rows justify-between pt-4">
-          <button onClick={closeForm} className="mx-3 py-3 h-fit px-7 greyBg rounded-xl tracking-widest font-Pop-M uppercase text-gray-500 duration-700 hover:bg-gray-300 focus:bg-gray-300  hover:text-white focus:text-white text-sm">Volver atras</button>
+          <button onClick={closeForm} className="mx-3 py-3 h-fit px-7 greyBg rounded-xl tracking-widest font-Pop-M uppercase text-gray-500 duration-700 hover:bg-gray-300 focus:bg-gray-300  hover:text-white focus:text-white text-sm">Volver atrás</button>
           <button onClick={null} className="mx-3 py-3 h-fit px-7 bg-[#0F6938] text-white rounded-xl tracking-widest font-Pop-M uppercase duration-700 hover:bg-[#6c3333] focus:bg-[#6c3333]  text-sm">Guardar Cambios</button>
         </div>
 

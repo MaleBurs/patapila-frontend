@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "../../../App.css";
 import SeparationLine from '../../Utiles/SeparationLine';
 import Buttons from '../../Utiles/Butttons';
@@ -19,15 +19,19 @@ export default function BaseAutetificationForm(props) {
     setPasswordShown(!passwordShown);
   };
 
+  const changeLoadingState = () =>{
+    setIsLoading(current => !current);
+  }
+
   const startSubmition = (e) => {
     e.preventDefault();
     setMessage("");
     form.current.validateAll();
     if (checkBtn.current.context._errors.length === 0) {
-      setIsLoading(!isLoading);
+      changeLoadingState();
       props.submitFunction({setMessage});
-      setIsLoading(!isLoading);
     }
+    //changeLoadingState();
   }
 
   return (
@@ -66,7 +70,7 @@ export default function BaseAutetificationForm(props) {
               );})} 
             </div>
     
-            <Buttons.SolidGreenButton text={props.textOnButton} loading={isLoading} color={"greenBg"} margins={"my-4 md:my-6"} onClick={null} ref={checkBtn}/> 
+            <Buttons.SolidGreenButton text={props.textOnButton} loading={()=>isLoading && message===""} color={"greenBg"} margins={"my-4 md:my-6"} onClick={null} ref={checkBtn}/> 
 
             {(props.textBeforeSeparationLine) ?
             <div className="grid justify-items-center">
