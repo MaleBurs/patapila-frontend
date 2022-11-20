@@ -151,7 +151,7 @@ export default function RegistrationForm(props) {
   return (
     <>  
       {showModal ? (
-        <Modal value={showModal} onChange={closeModal} header={"Tu cuenta ha sido creada con exito!"} body={" Para formar parte de la comunidad y comenzar a tener un impacto, junto a Pata Pila, inicie sesión."} buttonText={"Ir a iniciar sesión"}></Modal>
+        <Modal value={showModal} onChange={closeModal} header={"Tu cuenta ha sido creada con éxito!"} body={" Para formar parte de la comunidad y comenzar a tener un impacto, junto a Pata Pila, inicie sesión."} buttonText={"Ir a iniciar sesión"}></Modal>
       ) : null}
       {!successful && (
         <>

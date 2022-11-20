@@ -24,11 +24,11 @@ const ModifyStatePopUp = ( ) => {
     const currentUser = AuthService.getCurrentUser();
 
     const cancelledSubscriptionEvenctDescription = (amount, frequency) =>{
-      return {title: "Has cancelado una subscripción", description: "Has cancelado una subscripción de $"+amount+" que se cobraba "+frequency+"."}
+      return {title: "Has cancelado una suscripción", description: "Has cancelado una suscripción de $"+amount+" que se cobraba "+frequency+"."}
     }
     
     const pausedSubscriptionEvenctDescription = (amount, frequency) =>{
-        return {title: "Has pausado una subscripción", description: "Has pausado una subscripción de $"+amount+" que se cobraba "+frequency+"."}
+        return {title: "Has pausado una suscripción", description: "Has pausado una suscripción de $"+amount+" que se cobraba "+frequency+"."}
     }
 
     const closeModalWithConfirmation = () => {
@@ -88,7 +88,7 @@ const ModifyStatePopUp = ( ) => {
     value={showModalWithConfirmation} onChange={closeModalWithConfirmation} header={
       "¿Estás seguro de que deseas pausar tu suscripción?"
           } body={"Si guardas los cambios, tu suscripción actual se pausará."} saveChanges={handlePausedSubs}
-    action={ "pausará"} saveButton="Guardar cambios" cancelButton="Volver atras"></ModalWithConfirmationAndDetails>
+    action={ "pausará"} saveButton="Guardar cambios" cancelButton="Volver atrás"></ModalWithConfirmationAndDetails>
     ) : null}
     { showModalWithWrittenConfirmation ? (
       <ModalWithWrittenConfirmation 
@@ -112,11 +112,11 @@ const ModifyStatePopUp = ( ) => {
             <Popover.Panel className={"absolute top-0 right-0 mt-4 p-3 rounded-lg almostWhiteBg grayBorder space-y-2"}>
                 <div className="space-y-2">
                 <button onClick={()=>{setCancellationRequest(true);setShowModalWithWrittenConfirmation(true)}} className='w-full text-left z-50 relative text-gray-400 duration-700 font-Pop-M hover:text-gray-500 focus:text-gray-500 tracking-[0.5px] grayBottomBorder block px-1 py-2 text-xs'>
-                    Cancelar Subscripción
+                    Cancelar suscripción
                 </button>
                 {(subscriptionData.subscriptionState.state !== 'P') ?
                 <button onClick={()=>{setShowModalWithConfirmation(true)}} className='w-full text-left z-50 relative text-gray-400 duration-700 hover:text-gray-500 focus:text-gray-500 font-Pop-M tracking-[0.5px] block px-1 py-2 text-xs'>
-                    Pausar Subscripción
+                    Pausar suscripción
                 </button>
                 : null
                 }

@@ -85,7 +85,7 @@ export default function ChangePasswordForm(props)  {
 
     <>
        {showModal ? (
-        <Modal value={showModal} onChange={closeModal} header={"Tu contraseña ha sido cambiada con exito!"} body={"Inicie sesión para continuar contribuyendo a la comunidad."} buttonText={"Ir a iniciar sesión"}></Modal>
+        <Modal value={showModal} onChange={closeModal} header={"Tu contraseña ha sido cambiada con éxito!"} body={"Inicie sesión para continuar contribuyendo a la comunidad."} buttonText={"Ir a iniciar sesión"}></Modal>
       ) : null}
       <div className="min-h-full md:items-center mb-10 justify-items-center grid px-4 md:pb-9 mt-3 lg:mt-20 px-8 pt-10 lg:px-8 mt-3 lg:mt-20">
         <div className="grid content-center w-full rounded-3xl max-w-md space-y-2 bg-white bg-opacity-90 lg:mx-60 drop-shadow-2xl p-8 md:p-16 h-4/5 md:h-2/3 lg:h-4/5 my-5 lg:my-10">

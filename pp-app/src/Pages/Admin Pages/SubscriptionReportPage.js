@@ -8,7 +8,7 @@ const SubscriptionReportPage = () => {
   return (
     <TableBasePage 
       title="Reporte de Suscripciones"
-      subtitle="Reporte historico de las suscripciones realizadas"
+      subtitle="Reporte histórico de las suscripciones realizadas"
       dataForColumns={SubscriptionTableInformation.columns}
       functionToLoadData={getSubscriptionsForTable}
     />

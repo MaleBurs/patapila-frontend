@@ -21,7 +21,6 @@ export default function BaseAutetificationForm(props) {
 
   const changeLoadingState = () =>{
     setIsLoading(current => !current);
-    console.log("chnageLoadingState:", isLoading);
   }
 
   const startSubmition = (e) => {

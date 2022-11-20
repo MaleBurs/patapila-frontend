@@ -38,11 +38,11 @@ const ChangeDonationFromProfileForm = (props) =>{
   const [message, setMessage] = useState("");
 
   const modificationSubscriptionEvenctDescription = (amount, frecuency, nextPaymentDate) =>{
-    return {title: "Has modificado una subscripción", description: "El monto es de "+amount+", se cobra "+frecuency+ " y la próxima fecha de pago es el "+nextPaymentDate+"." }
+    return {title: "Has modificado una suscripción", description: "El monto es de "+amount+", se cobra "+frecuency+ " y la próxima fecha de pago es el "+nextPaymentDate+"." }
   }
 
   const resetSubscriptionEvenctDescription = (amount, frecuency, nextPaymentDate) =>{
-    return {title: "Has reanudado una subscripción", description: "Has reanudado una subscripción de "+amount+", que se cobra "+frecuency+ " y la próxima fecha de pago es el "+nextPaymentDate+"." }
+    return {title: "Has reanudado una suscripción", description: "Has reanudado una suscripción de "+amount+", que se cobra "+frecuency+ " y la próxima fecha de pago es el "+nextPaymentDate+"." }
   }
 
   const closeModalWithConfirmation = () => {
@@ -115,12 +115,12 @@ const ChangeDonationFromProfileForm = (props) =>{
       value={showModalWithConfirmation} 
       onChange={closeModalWithConfirmation} 
       header={(subscriptionData.subscriptionState.state !== 'P') ?
-      "¿Estás seguro de que deseas modificar tu donación recurrente?"  :  "¿Estás seguro de que deseas renaudar tu donación recurrente?"
+      "¿Estás seguro de que deseas modificar tu donación recurrente?"  :  "¿Estás seguro de que deseas reanudar tu donación recurrente?"
           } 
       body={(subscriptionData.subscriptionState.state !== 'P') ? "Si guardas los cambios, tu donación actual se modificará."
-              :   "Si guardas los cambios, tu donación recurrente se renaudará."} 
+              :   "Si guardas los cambios, tu donación recurrente se reanudará."} 
       saveChanges={(subscriptionData.subscriptionState.state !== 'P') ? modifyDonation : handleResetDonation}
-      action= {(subscriptionData.subscriptionState.state !== 'P') ? "modificará" : "renaudará"} cancelButton="Volver atras" saveButton="Guardar cambios"></ModalWithConfirmationAndDetails>
+      action= {(subscriptionData.subscriptionState.state !== 'P') ? "modificará" : "reanudará"} cancelButton="Volver atrás" saveButton="Guardar cambios"></ModalWithConfirmationAndDetails>
     ) : null}
     {showModal ? (
       <Modal value={showModal} onChange={closeModal} header={(subscriptionData.subscriptionState.state !== 'P') ?
@@ -148,7 +148,7 @@ const ChangeDonationFromProfileForm = (props) =>{
         <DashedLine></DashedLine>
         <SubscriptionAmountImpactMessage></SubscriptionAmountImpactMessage>
         <div className="flex flex-row justify-between space-x-6 w-full">
-          <Buttons.IndicationButton text={"Volver Atras"} onClick={()=>{setIfUserWantsToModifySubs(false); setMessage("")}} customStyle={"w-full basis-1/2 text-gray-500 greyBg w-full text-gray-500 hover:bg-gray-300 focus:bg-gray-300 "}></Buttons.IndicationButton>
+          <Buttons.IndicationButton text={"Volver Atrás"} onClick={()=>{setIfUserWantsToModifySubs(false); setMessage("")}} customStyle={"w-full basis-1/2 text-gray-500 greyBg w-full text-gray-500 hover:bg-gray-300 focus:bg-gray-300 "}></Buttons.IndicationButton>
           <Buttons.IndicationButton  text={"Modificar"} customStyle={"basis-1/2 text-white greenBg yellowBgHover w-full"} onClick={()=>{setShowModalWithConfirmation(true)}}></Buttons.IndicationButton>
         </div>
       </div>
@@ -158,8 +158,8 @@ const ChangeDonationFromProfileForm = (props) =>{
         :
         <>
         <div className="flex flex-col space-y-6">
-          <Buttons.IndicationButton  text={"Renaudar Donación"} customStyle={"w-full text-white greenBg yellowBgHover "} onClick={()=>{setShowModalWithConfirmation(true)}}></Buttons.IndicationButton>
-          <div className="font-Pop-R text-lg text-gray-400 basis-1/2" >Su donación se encuentra pausada, esto significa que no se realizará ninguna pago hasta que usted reactive su subscripión </div> 
+          <Buttons.IndicationButton  text={"Reanudar Donación"} customStyle={"w-full text-white greenBg yellowBgHover "} onClick={()=>{setShowModalWithConfirmation(true)}}></Buttons.IndicationButton>
+          <div className="font-Pop-R text-lg text-gray-400 basis-1/2" >Su donación se encuentra pausada, esto significa que no se realizará ninguna pago hasta que usted reactive su suscripción </div> 
         </div>
         </>
         )}

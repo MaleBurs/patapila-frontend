@@ -31,7 +31,7 @@ const FirstStep = ({ setStep }) => {
       : ((subscriptionData.subscriptionState.state !== 'P') ?
         "Usted ya esta realizando una donación recurrente"
         :
-        "Usted ya tiene una subscripción pausada"
+        "Usted ya tiene una suscripción pausada"
         )}/>  
       {(selectedFrequency===1) ? 
       <>
@@ -68,8 +68,8 @@ const FirstStep = ({ setStep }) => {
       <>
       <ModifyDonationMessage 
         text={(subscriptionData.subscriptionState.state !=='P') ? 
-        "Vaya a ajustes para visualizar/modificar su suscripcion actual." 
-        :"Vaya a ajustes para renaudar su suscrición y continuar luchando contra la desnutrición infantil."}></ModifyDonationMessage>
+        "Vaya a ajustes para visualizar/modificar su suscripción actual." 
+        :"Vaya a ajustes para reanudar su suscripción y continuar luchando contra la desnutrición infantil."}></ModifyDonationMessage>
       <ModifyDonation/>  
       </>
       }
