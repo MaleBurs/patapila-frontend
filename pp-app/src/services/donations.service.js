@@ -1,5 +1,7 @@
 import axios from "axios";
-const API_URL = "https://pp-app-backend.herokuapp.com/api/payment/";
+const API_URL = "http://localhost:8080/api/payment/";
+const API_MP_URL = "http://localhost:8080/api/paymentmp/";
+
 const generateTransaction = (userId, amount, type) => {
   return axios.post(API_URL + "createTransaction", {
     userId,
@@ -7,6 +9,22 @@ const generateTransaction = (userId, amount, type) => {
     type
   });
 };
+const createAndPayTransaction = (userId, amount, type, name, lastname) => {
+  return axios.post(API_MP_URL + "createAndPayTransaction", {
+    userId,
+    amount,
+    type,
+    name,
+    lastname
+  });
+};
+
+const getPreference = async (id) => {
+  return axios.post(API_MP_URL + "getPreference", {
+      id,
+    });
+}
+
 const generateSubscription = (userId, amount, type, frequency, nextPaymentDate) => {
   return axios.post(API_URL + "createSubscription", {
     userId,
@@ -70,6 +88,8 @@ const DonationService = {
   modifySubscriptionState,
   modifySubscription,
   subscriptionsByMonth,
-  addReferred
+  addReferred,
+  createAndPayTransaction,
+  getPreference
 }
 export default DonationService;

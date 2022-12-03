@@ -6,7 +6,7 @@ import { useAmount } from "../../Context/AmountContext"
 import { useSubscriptionPeriod } from "../../Context/SubscriptionContext"
 
 const ModalWithDetails = (props) =>{
-  const { selectedAmount} = useAmount();
+  const { selectedAmount, payedAmount} = useAmount();
   const { selectedFrequency } = useFrequency();
   const { subsPeriod, paymentDay} = useSubscriptionPeriod();
 
@@ -31,12 +31,12 @@ const ModalWithDetails = (props) =>{
                 {/*body*/}
                 <div className="relative flex flex-col space-y-10">
                     <div className="font-Pop-M flex flex-wrap space-x-1 leading-relaxed font-Pop-R text-[15pt] text-medium tracking-[0.2px] purpleText">
-                      <p>Se </p><p>{props.action}</p>
-                      <p>de </p>
-                      <p className="underline decoration-[#eb8301] decoration-wavy underline-offset-4">${selectedAmount}</p>
+                      <p>{props.action}</p>
+                      <p className="underline decoration-[#eb8301] decoration-wavy underline-offset-4">${payedAmount}</p>
                       {
                       (selectedFrequency ===2) ?
                       <>
+                      <p className="underline decoration-[#eb8301] decoration-wavy underline-offset-4">${selectedAmount}</p>
                       <p>, que se cobra </p>
                       <p className="underline decoration-[#eb8301] decoration-wavy underline-offset-4">{subsPeriod.label},</p>
                       <p>con el próximo pago el día </p>

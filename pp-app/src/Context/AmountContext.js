@@ -6,6 +6,7 @@ const AmountContext = React.createContext()
 export function AmountContextProvider(props) {
   const [amounts, setAmounts] = useState(amountsValues)
   const [selectedAmount, setSelectedAmount] = useState(0)
+  const [payedAmount, setPayedAmount] = useState(0)
 
   useEffect(() => {
     setAmounts(amountsValues)
@@ -17,11 +18,13 @@ export function AmountContextProvider(props) {
       setAmounts,
       selectedAmount,
       setSelectedAmount,
+      payedAmount,
+      setPayedAmount,
       amountIndex: () => {
         return amounts.indexOf(selectedAmount)
       }
     }
-  }, [amounts, selectedAmount])
+  }, [amounts, selectedAmount, payedAmount])
 
   return (
     <AmountContext.Provider value={value}>

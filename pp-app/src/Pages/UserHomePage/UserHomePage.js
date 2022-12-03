@@ -9,7 +9,8 @@ import MilestonesProgress from "../../Components/Profile/MilestonesProgress";
 import LatestActivity from "../../Components/Profile/LatestActivty";
 
 
-const UserHome = () => {
+const UserHome = (props) => {
+  console.log(props);
   const currentUser = AuthService.getCurrentUser();
   const isAdmin = () => {
     return JSON.stringify((AuthService.getCurrentUser()).roles) === JSON.stringify(["ROLE_ADMIN"]);
