@@ -31,7 +31,7 @@ const Settings = () => {
         {(!isAdmin) ? 
         <SectionTitleIndicator title={"Bienvenida "+currentUser.name+" !"} subtitle="Gracias por ser parte de nuestra comunidad."/> 
         :
-        <SectionTitleIndicator title="AJUSTES" subtitle="Edita tu perfil o modifica tu subscripción."/>   
+        <SectionTitleIndicator title="AJUSTES" subtitle="Edita tu perfil o modifica tu suscripción."/>   
         }
         
         <TwoColumnsPage 
@@ -63,7 +63,7 @@ const Settings = () => {
             <AmountContextProvider>
                 <Card 
                 width=""
-                title="Modificar Subscripción" 
+                title="Modificar suscripción" 
                 content={<ChangeDonationFromProfileForm onClose={onCloseChangeDonationForm}/>}
                 popup={<ModifyStatePopUp></ModifyStatePopUp> }
                 /> 

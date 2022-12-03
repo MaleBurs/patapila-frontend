@@ -5,7 +5,7 @@ const ErrorMessage = (props) => {
   return (
     <>
     <div className="grid form-group justify-items-center pb-4">
-      <div className="alert redText alert-danger text-sm font-Pop-R justify-items-center" role="alert">
+      <div className="alert redText alert-danger text-xs font-Pop-R justify-items-center" role="alert">
         {props.message}
       </div>
     </div>

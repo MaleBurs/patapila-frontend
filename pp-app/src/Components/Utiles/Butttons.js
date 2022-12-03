@@ -1,16 +1,23 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import "../NavBars/navBar.css";
 import "../../App.css"
+import Loading from "./Loading";
 
-const SolidGreenButton = ({ text, color, margins, onClick}) => {
+const SolidGreenButton = ({ text, color, margins, onClick, loading}) => {
+  const [loadingState, setLoadingState] = useState(loading);
+  useEffect(() => {
+    setLoadingState(loading);
+  }, [loading])
+  
   return (
     <>   
             <div>
               <button
-                className={`group font-Pop-M relative flex w-full justify-center rounded-lg border border-transparent yellowBgHover py-3 px-4 uppercase text-sm text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${color} ${margins}`}
+                className={`group font-Pop-M relative flex flex-row space-x-3 w-full justify-center rounded-lg border border-transparent yellowBgHover py-3 px-4 uppercase text-sm text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${color} ${margins}`}
                 onClick = {onClick}
               >
-                {text}
+                <div>{text}</div>
+                {loadingState ? <Loading/> : null}
               </button >
             </div>
     </>

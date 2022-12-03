@@ -5,6 +5,7 @@ import AdminServices from '../../services/transactions.service'
 import AuthService from '../../services/auth.service';
 import { useState, useEffect } from 'react';
 import InformationTooltips from '../Utiles/InformationDisplayTooltip';
+import ModalWithConfirmation from '../Utiles/ModalWithConfirmation';
 
 export function OpenSideBarFromUser({value, row}){
   const {setSelectedUser, setShowSidebar} = useSelectionOnTable();
@@ -25,10 +26,13 @@ export function OpenSideBarFromUser({value, row}){
   );
 }
 export function StatusPillTransactions({ value, row }) {
+    const [showAcceptModal, setShowAcceptModal] = useState(false);
+    const [showRejectModal, setShowRejectModal] = useState(false);
     const status = value ? value.toLowerCase() : "unknown";
     const updateState = async (state) =>{
       await AdminServices.modifyTransactionState(row.original.id,state)
-      window.location.reload()}
+      window.location.reload()
+    }
 
     return (
       <div
@@ -51,8 +55,14 @@ export function StatusPillTransactions({ value, row }) {
         )}
         {(status ==="p") && (
         <>
-        <FontAwesomeIcon className='px-4' onClick={() => updateState("A")} icon={"fa fa-check"} color='#000' size={14} />
-        <FontAwesomeIcon onClick={() => updateState("R")} icon={"fa fa-ban"} color='#000' size={14} />
+        <FontAwesomeIcon className='px-4' onClick={() => setShowAcceptModal(true)} icon={"fa fa-check"} color='#000' size={14} />
+        <FontAwesomeIcon onClick={() => setShowRejectModal(true)} icon={"fa fa-ban"} color='#000' size={14} />
+        {
+          showAcceptModal && ( <ModalWithConfirmation onChange={()=>setShowAcceptModal(false)} title="¿Estás seguro de que quieres aceptar esta transacción?" content="Una vez aceptada, no podrás revertir el cambio." saveChanges={()=>{updateState("A"); setShowAcceptModal(false)}} cancelButton={"Cancelar"} saveButton={"Aceptar"}/>)
+        }
+        {
+          showRejectModal && ( <ModalWithConfirmation onChange={()=>setShowRejectModal(false)} title="¿Estás seguro de que quieres rechazar esta transacción?" content="Una vez rechazada, no podrás revertir el cambio." saveChanges={()=>{updateState("R"); setShowRejectModal(false)}} cancelButton={"Cancelar"} saveButton={"Rechazar"}/>)
+        }
         </>
       )}
       </div>
@@ -112,7 +122,7 @@ export function TransactionType({ value }) {
          {(value==="onlyTime") 
         ? 'donación de una única vez'
         : ((value==="recurrent") 
-        ? 'subscripción'
+        ? 'suscripción'
         : ""
         )}
         

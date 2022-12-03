@@ -8,6 +8,7 @@ import Modal from "../../Utiles/Modal";
 import ValidationFunctions from "../../../functions/validations"
 import BaseAutetificationForm from "./BaseAutentificationForm";
 import ActServices from "../../../services/activities.service";
+import Loading from "../../Utiles/Loading";
 
 export default function RegistrationForm(props) {
   const [showModal, setShowModal] = React.useState(false);
@@ -150,9 +151,10 @@ export default function RegistrationForm(props) {
   return (
     <>  
       {showModal ? (
-        <Modal value={showModal} onChange={closeModal} header={"Tu cuenta ha sido creada con exito!"} body={" Para formar parte de la comunidad y comenzar a tener un impacto, junto a Pata Pila, inicie sesión."} buttonText={"Ir a iniciar sesión"}></Modal>
+        <Modal value={showModal} onChange={closeModal} header={"Tu cuenta ha sido creada con éxito!"} body={" Para formar parte de la comunidad y comenzar a tener un impacto, junto a Pata Pila, inicie sesión."} buttonText={"Ir a iniciar sesión"}></Modal>
       ) : null}
       {!successful && (
+        <>
         <BaseAutetificationForm 
         textOnButton={"Registrarse"}
         inputs={inputs}
@@ -163,7 +165,8 @@ export default function RegistrationForm(props) {
         logo = {LogoLucha}
         validationOfSamePasswordActive
         extraStyles={props.extraStyles}
-      />
+        />
+        </>
      )}
     </>
   )

@@ -14,7 +14,7 @@ const Sidebar = ({displaySubscriptionInformation}) => {
     if (selectedUserInfotmation) setUserData([{title: "Nombre y Apellido", information: selectedUserInfotmation.name+' '+selectedUserInfotmation.lastname}, {title: "Id del usuario", information: selectedUserInfotmation.id},{title:"Email", information:selectedUserInfotmation.email}]);
     if (displaySubscriptionInformation && selectedUserSubs){  
     setSubscriptionData([
-      {title: "Id de la subscripción", information: selectedUserSubs.id}, 
+      {title: "Id de la suscripción", information: selectedUserSubs.id}, 
       {title: "Monto", information: selectedUserSubs.amount},
       {title: "Frecuencia", information: (selectedUserSubs.frequency === 1) 
                                           ? "1 vez al mes":
@@ -64,7 +64,7 @@ const Sidebar = ({displaySubscriptionInformation}) => {
               </div>
               { (displaySubscriptionInformation && selectedUserSubs) ?
               <div className="flex flex-col">
-                <div className="p-8 text-base w-full font-Pop-M greenBg border-2 text-white">Subscripción del Usuario</div>
+                <div className="p-8 text-base w-full font-Pop-M greenBg border-2 text-white">suscripción del Usuario</div>
                 <div className="p-6 grid grid-cols-2 gap-4">
                 {subscriptionData.map((data) => {
                     return (

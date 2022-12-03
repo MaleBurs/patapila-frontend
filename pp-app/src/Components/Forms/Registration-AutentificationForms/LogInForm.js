@@ -74,8 +74,8 @@ export default function Login(props) {
       textBeforeSeparationLine = "Olvidaste tu contraseña?"
       functionAfterSeparationLine={navigateToRegistrationPage}
       functionBeforeSeparationLine={navigateToChangePassword}
-      textAfterSeparationLine="¿No tenés cuenta?"
-      actionAfterSeparationLine= "Registrate"
+      textAfterSeparationLine="¿No tenes cuenta?"
+      actionAfterSeparationLine= "Regístrate"
       logo = {LogoCorazon}
       extraStyles="lg:w-1/4"
     />

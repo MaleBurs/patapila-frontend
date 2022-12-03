@@ -4,11 +4,16 @@ import InformationTooltips from "../Utiles/InformationDisplayTooltip";
 import { useCurrentUser } from "../../Context/CurrentUserContext";
 import AuthService from "../../services/auth.service";
 
-import AdminServices from "../../services/transactions.service";
 
 const UserInformationSection = () => {
   const {currentUser, profilePictureURL} = useCurrentUser();
-  const [lifeImpact, setLifeImpact] = useState(432);
+  const [lifeImpact, setLifeImpact] = useState(null);
+  const [registrationYear, setRegistrationYear] = useState(null);
+
+  useEffect(() => {
+    AuthService.getUserLifeImpact(currentUser.id).then(res=>setLifeImpact(res.data))
+    AuthService.findUserById(currentUser.id).then(res=>setRegistrationYear((new Date(res.data.createdAt)).getFullYear()))
+  }, [])
 
   return (
     <>
@@ -23,7 +28,7 @@ const UserInformationSection = () => {
             :null}
             <div className = "flex flex-col justify-center basis-8/10 flex z-10 space-y-1 md:space-y-3 lg:space-y-4 py-1">
                 <div className="z-10 font-Pop-SB tracking-[0.5px] text-base md:text-lg blackText">{currentUser.name} {currentUser.lastname}</div>
-                <div className="z-10 font-Pop-L blackText text-xs lg:text-sm break-normal">Me uni a pata pila en el año 2020, para conbatir la desnutrición infantil. Se que toda donación impacta en la salud física y psicologica de cada niño.</div>
+                <div className="z-10 font-Pop-L blackText text-xs lg:text-sm break-normal">Me uni a pata pila en el año {registrationYear}, para combatir la desnutrición infantil. Se que toda donación impacta en la salud física y psicológica de cada niño.</div>
             </div>
         </div> 
 
@@ -41,7 +46,7 @@ const UserInformationSection = () => {
 
                 <div className="flex flex-row space-x-1">
                 <div className="font-Pop-L text-xs md:text-sm text-start">Impacto de Vida</div>   
-                <InformationTooltips.BasicInfoTooltip content="Tu Impacto de Vida representa el total que donaste, gracias a una subscripción o a donaciones de una única vez, y el total de referidos a Para Pila, gracias a haber compartido tu link."/> 
+                <InformationTooltips.BasicInfoTooltip content="Tu Impacto de Vida representa el total que donaste, gracias a una suscripción o a donaciones de una única vez, y el total de referidos a Para Pila, gracias a haber compartido tu link."/> 
                 </div>
             </div>
         </div> 

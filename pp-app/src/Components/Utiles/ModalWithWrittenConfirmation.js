@@ -66,7 +66,7 @@ const ModalWithConfirmationAndDetails = (props) =>{
                 {/*body*/}
                 <div className="relative flex flex-col space-y-10">
                     <div className="font-Pop-M flex flex-wrap space-x-1 leading-relaxed font-Pop-R text-sm tracking-[0.2px] purpleText">
-                      <p className="normal-case">Se </p><p className="normal-case">{props.action}</p><p className="normal-case">una donacion de </p>
+                      <p className="normal-case">Se </p><p className="normal-case">{props.action}</p><p className="normal-case">una donación de </p>
                       <p className="normal-case underline decoration-[#eb8301] decoration-wavy underline-offset-4">${selectedAmount}</p>
                       <p className="normal-case">, que se cobra </p>
                       <p className="normal-case underline decoration-[#eb8301] decoration-wavy underline-offset-4">{subsPeriod.label},</p>
@@ -101,8 +101,8 @@ const ModalWithConfirmationAndDetails = (props) =>{
                   </div>
                 </div>
                 <div className="flex items-center flex-rows justify-between">
-                <button onClick={closeModal} className="mx-3 py-3 h-fit px-7 greyBg rounded-xl tracking-widest font-Pop-M uppercase font-medium text-gray-500 duration-700 hover:bg-gray-300 focus:bg-gray-300  hover:text-white focus:text-white text-xs">Cancelar</button>
-                <button onClick={null} text="Guardar Cambios" className="mx-3 py-3 h-fit px-7 bg-[#0F6938] text-white rounded-xl tracking-widest font-Pop-M uppercase font-medium duration-700 hover:bg-[#6c3333] focus:bg-[#6c3333]  text-xs">Guardar Cambios</button>
+                <button onClick={closeModal} className="mx-3 py-3 h-fit px-7 greyBg rounded-xl tracking-widest font-Pop-M uppercase font-medium text-gray-500 duration-700 hover:bg-gray-300 focus:bg-gray-300  hover:text-white focus:text-white text-xs">Volver atrás</button>
+                <button onClick={null} text="Guardar Cambios" className="mx-3 py-3 h-fit px-7 bg-[#0F6938] text-white rounded-xl tracking-widest font-Pop-M uppercase font-medium duration-700 hover:bg-[#6c3333] focus:bg-[#6c3333]  text-xs">Cancelar suscripción</button>
                 </div>
                 <CheckButton style={{ display: "none" }} ref={checkBtn} />
               </div>

@@ -1,11 +1,8 @@
 import "../NavBars/navBar.css"
 import "../../App.css"
-import { useAmount } from "../../Context/AmountContext"
-import { useSubscriptionPeriod } from "../../Context/SubscriptionContext"
 
-const ModalWithConfirmationAndDetails = (props) =>{
-  const { selectedAmount} = useAmount();
-  const { subsPeriod, paymentDay} = useSubscriptionPeriod();
+const ModalWithConfirmation= (props) =>{
+
     function closeModal(event) {
         props.onChange(event.target.userWantsToRegister);
     }
@@ -13,40 +10,25 @@ const ModalWithConfirmationAndDetails = (props) =>{
       props.saveChanges(event);
       closeModal(event);
     }
-    function calculateDate(){
-      if((typeof(paymentDay) === 'string')){
-        const [dateStr] = paymentDay.split('T');
-        const [year, month, day] = dateStr.split('-');
-        const date = day+'/'+month+'/'+year;
-        return date;
-      }else{
-        return paymentDay;
-      }
-    }
+
     return(
         <>
           <div
             className="darkGreyBg justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
           >
             <div className="relative w-auto my-6 mx-auto max-w-3xl p-16">
-              {/*content*/}
+              
               <div className="  space-y-9 p-12 rounded-lg relative flex flex-col w-auto bg-white outline-none focus:outline-none">
-                {/*header*/}
+                
                 <div className="flex items-start justify-between rounded-t">
                   <h3 className="font-Pop-SB text-base purpleText">
-                    {props.header}
+                    {props.title}
                   </h3>
                 </div>
-                {/*body*/}
+               
                 <div className="relative flex flex-col space-y-10">
                     <div className="font-Pop-M flex flex-wrap space-x-1 leading-relaxed font-Pop-R text-sm tracking-[0.2px] purpleText">
-                      <p>Se </p><p>{props.action}</p><p>una donación de </p>
-                      <p className="underline decoration-[#eb8301] decoration-wavy underline-offset-4">${selectedAmount}</p>
-                      <p>, que se cobra </p>
-                      <p className="underline decoration-[#eb8301] decoration-wavy underline-offset-4">{subsPeriod.label},</p>
-                      <p>con el próximo pago el día </p>
-                       <p className="underline decoration-[#eb8301] decoration-wavy underline-offset-4">{(calculateDate())}</p>
-                       <p>.</p>
+                      {props.content}
                     </div>
                   <p className="text-center font-Pop-R text-sm text-gray-400">
                    {props.body}
@@ -64,4 +46,4 @@ const ModalWithConfirmationAndDetails = (props) =>{
     );
 }
 
-export default ModalWithConfirmationAndDetails;
+export default ModalWithConfirmation;
