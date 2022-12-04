@@ -42,7 +42,7 @@ const columns =[
   }
 ]
 
-const TransactionTableInformation = {
+const OnlyTimePaymentsTableInformation = {
     columns
   }
-  export default TransactionTableInformation;
+  export default OnlyTimePaymentsTableInformation;

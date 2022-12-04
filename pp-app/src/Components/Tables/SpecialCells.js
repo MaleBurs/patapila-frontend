@@ -6,6 +6,12 @@ import AuthService from '../../services/auth.service';
 import { useState, useEffect } from 'react';
 import InformationTooltips from '../Utiles/InformationDisplayTooltip';
 import ModalWithConfirmation from '../Utiles/ModalWithConfirmation';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker'
+import TextField from '@mui/material/TextField'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import Select from 'react-select';
+import { usePaymentManagerContext } from '../../Context/PaymentManagerContext';
 
 export function OpenSideBarFromUser({value, row}){
   const {setSelectedUser, setShowSidebar} = useSelectionOnTable();
@@ -112,6 +118,154 @@ export function PaymentFrecuency({ value }) {
         )}
       </div>
     );
+};
+
+export function EditableAmmount({ value }) {
+  const [ selectedAmount, setSelectedAmount ] = useState(1)
+
+  const onChange = (event) => {
+    console.log(event)
+    var amount = parseInt(event.target.value)
+    amount = ((isNaN(amount) ) ? 0 : amount);
+    setSelectedAmount(amount)
+  }
+  useEffect(() => {
+    setSelectedAmount(value)
+  }, [value])
+  
+  return (
+    <div className='flex flex-col'>
+      {selectedAmount===0 ? <div className='text-xs z-10 ml-2 -mt-2 bg-white w-fit text-[#CC3300] font-Pop-L'>Debe ser mayor a cero</div> : null}
+      <input
+        type='text'
+        autoFocus
+        onChange={onChange}
+        value = {selectedAmount}
+        className={`text-xs text-gray-500 font-Pop-L rounded-xl border-gray-300 focus:outline-none focus:border-gray-300 focus:ring-0 py-2.5 ${selectedAmount===0 ? '-mt-2' : ''}`}>
+      </input>
+    </div>
+
+  );
+};
+
+export function EditableAmmountForNewPayment({ value }) {
+  const {newPaymentAmount, setNewPaymentAmount} = usePaymentManagerContext()
+
+  const onChange = (event) => {
+    var amount = parseInt(event.target.value)
+    amount = ((isNaN(amount) ) ? 0 : amount);
+    setNewPaymentAmount(amount)
+  }
+  
+  return (
+    <div className='flex flex-col'>
+      {newPaymentAmount===0 ? <div className='text-xs z-10 ml-2 -mt-2 bg-white w-fit text-[#CC3300] font-Pop-L'>Debe ser mayor a cero</div> : null}
+      <input
+        type='text'
+        autoFocus
+        onChange={onChange}
+        value = {newPaymentAmount}
+        className={`text-xs text-gray-500 font-Pop-L rounded-xl border-gray-300 focus:outline-none focus:border-gray-300 focus:ring-0 py-2.5 ${newPaymentAmount===0 ? '-mt-2' : ''}`}>
+      </input>
+    </div>
+
+  );
+};
+
+export function SelectUser({ value }) {
+  const {newPaymentUser, setNewPaymentUser, setNewPaymentUserOptions, newPaymentUserOptions} = usePaymentManagerContext()
+  const onChange = (e) => {
+    setNewPaymentUser(e);
+  };
+  useEffect(() => {
+    AuthService.findAllUsers().then(
+      (response)=> {
+        setNewPaymentUserOptions(Array.from(response.data, completeUser => ({value:completeUser.id , label:completeUser.email})))
+    });
+  }, [newPaymentUserOptions, setNewPaymentUserOptions])
+  
+  const colourStyles = {
+    control: (base, state) => ({
+      ...base,
+      background: "white",
+      backgroundColor: "white",
+      '&:hover': { borderColor: '#D1D5DB' }, 
+            border: '1px solid #D1D5DB',
+            borderRadius: '0.8rem', 
+            boxShadow: 'none', 
+  }),
+    option: (styles, { data, isDisabled, isFocused, isSelected}) => {
+      return {
+        ...styles,
+        color: isSelected ? "gray" : 'gray',
+      backgroundColor: isDisabled
+        ? "white"
+        : isSelected
+        ? "#f5f8f2"
+        : isFocused
+        ? "#f5f8f2"
+        : "white",
+      padding: 8,
+      cursor: isDisabled ? 'not-allowed' : 'default',
+      
+      };
+    },
+    placeholder: (styles) => ({ ...styles}),
+    singleValue:(styles, { data }) => ({
+      ...styles,
+      color: "gray",
+      padding: 2,
+    }),
+  };
+  
+  return (
+    <Select className="border-gray-300 bg-transparent placeholder-gray-600 focus:z-10 font-Pop-R text-xs focus:outline-none greenBorderWhenFocus" styles={colourStyles} 
+    options={newPaymentUserOptions}
+    value={newPaymentUser} 
+    placeholder="Usuario"
+    onChange={onChange}
+    isSearchable={false}/>
+  );
+};
+
+export function SelectableDate({ value, row }) {
+  const [paymentDay, setPaymentDay] = useState()
+  
+  return (
+    <div className="md:basis-1/2"> 
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DesktopDatePicker
+                      disabled = {false}
+                      inputFormat="YYYY-MM-DD"
+                      value={paymentDay}
+                      onChange={(newPaymentDay) => {
+                        setPaymentDay(newPaymentDay.format("YYYY-MM-DD"));
+                      }}
+                      inputProps={{readOnly: true}}
+                      className="border-red"
+                      renderInput={(params) => 
+                      <TextField {...params}
+                        className="myDatePicker"
+                        sx={{
+                           '.MuiInputBase-input': {
+                            padding: 1.5,
+                            marginLeft: 1,
+                            fontFamily: "Poppins-Light",
+                            color: "gray-500", 
+                            fontSize: "0.73rem",
+                            border: "none"
+                          
+
+                        },
+                        }}
+                      />}
+                      views = {["day"]}
+                      showDaysOutsideCurrentMonth
+                     
+                      />
+                  </LocalizationProvider>
+                </div>
+  );
 };
 
 export function TransactionType({ value }) {

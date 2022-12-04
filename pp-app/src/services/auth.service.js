@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "https://pp-app-backend.herokuapp.com/api/auth/";
+const API_URL = "http://localhost:8080/api/auth/";
 const register = (name,lastname, email, password) => {
   return axios.post(API_URL + "signup", {
     name,
@@ -61,10 +61,18 @@ const findUserById = async (id) => {
     }
 };
 
+const findAllUsers = async () => {
+  try {
+    const response = await axios.post(API_URL + "findAllUsers");
+    return response;
+  } catch (e) {
+      console.log(e);
+  }
+};
 
 const getUserMilestones = async (userId) => {
   try {
-    const response = await axios.post("https://pp-app-backend.herokuapp.com/api/milestone/getUserWithMilestones", {
+    const response = await axios.post("http://localhost:8080/api/milestone/getUserWithMilestones", {
       userId,
     });
     return response;
@@ -75,7 +83,7 @@ const getUserMilestones = async (userId) => {
 
 const getUserLifeImpact = async (userId) => {
   try {
-    const response = await axios.post("https://pp-app-backend.herokuapp.com/api/auth/getUserLifeImpact", {
+    const response = await axios.post("http://localhost:8080/api/auth/getUserLifeImpact", {
       userId,
     });
     return response;
@@ -94,6 +102,7 @@ const AuthService = {
   updatePasswordViaEmail,
   updatePasswordViaSettings,
   findUserById,
+  findAllUsers,
   getUserLifeImpact,
   getUserMilestones
 }

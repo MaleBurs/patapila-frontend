@@ -6,6 +6,7 @@ import Table from "../../Components/Tables/Table";
 import Sidebar from "../../Components/Utiles/SideBar";
 import { SelectionOnTableContexProvider } from "../../Context/SelectionsOnTable";
 import SectionTitleIndicator from "../../Components/Utiles/SectionTitleIndicator";
+
 const TableBasePage = (props) => {
   const currentUser = AuthService.getCurrentUser();
   return (
@@ -20,7 +21,7 @@ const TableBasePage = (props) => {
         <SectionTitleIndicator
           title={props.title}
           subtitle={props.subtitle}/>
-        <div className="px-6 md:px-12 lg:px-20 mt-10">  
+        <div className="px-6 md:px-12 lg:px-20 mt-10">     
           <Table columns={props.dataForColumns} functionToLoadData={props.functionToLoadData}></Table>
         </div>
       </div>

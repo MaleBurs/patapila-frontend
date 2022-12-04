@@ -1,7 +1,13 @@
 import axios from "axios";
-const API_URL = "https://pp-app-backend.herokuapp.com/api/payment/";
-const getTransactions = (limit, offset) => {
-  return axios.post(API_URL + "getTransactions", {
+const API_URL = "http://localhost:8080/api/payment/";
+const getOnlyTimeTransactions = (limit, offset) => {
+  return axios.post(API_URL + "getOnlyTimeTransactions", {
+    limit,
+    offset,
+  });
+};
+const getRecurrentTransactions = (limit, offset) => {
+  return axios.post(API_URL + "getRecurrentTransactions", {
     limit,
     offset,
   });
@@ -28,7 +34,8 @@ const modifyTransactionState =  (transactionId,state) => {
 }
 
 const AdminServices = {
-    getTransactions,
+    getRecurrentTransactions,
+    getOnlyTimeTransactions,
     getMonthIncome,
     getSubscriptions,
     modifyTransactionState

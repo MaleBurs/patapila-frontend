@@ -83,6 +83,16 @@
 }
 
 /*Border Color*/
+.myDatePicker fieldset.MuiOutlinedInput-notchedOutline {
+  border-color: rgb(212, 211, 214);
+  border-radius: 0.8rem;
+}
+
+.myDatePicker .Mui-focused fieldset.MuiOutlinedInput-notchedOutline {
+  border-color: rgb(212, 211, 214);
+  border-radius: 0.8rem;
+}
+
 .whiteBorder{
     border: 2.5px solid #FFFFFF !important;
 }

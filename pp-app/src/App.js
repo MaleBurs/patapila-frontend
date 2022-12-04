@@ -7,11 +7,12 @@ import AuthService from './services/auth.service';
 import { Routes, Route } from "react-router-dom";
 import RegistrationPage from './Pages/Registration-Autentification.js/RegistrationPage';
 import DonarPage from './Pages/Donations/Donar';
-import TransactionReportPage from './Pages/Admin Pages/TransactionsReportPage';
+import OneTimePaymentsReportPage from './Pages/Admin Pages/OneTimePaymentsReportPage';
 import DashboardPage from './Pages/Admin Pages/DashboardPage';
 import SubscriptionReportPage from './Pages/Admin Pages/SubscriptionReportPage';
 import RefferalsPage from './Pages/Registration-Autentification.js/RefferalsPage';
 import UserHome from './Pages/UserHomePage/UserHomePage';
+import PaymentManagerSubsPage from './Pages/Admin Pages/PaymentManagerSubsPage';
 
 export default function App() {
   return (
@@ -28,8 +29,9 @@ export default function App() {
           (
           (isAdmin())  ?
           <>
-          <Route exact path="/inicio" element={<TransactionReportPage></TransactionReportPage>} />
-          <Route exact path="/reporteTransacciones" element={<TransactionReportPage></TransactionReportPage>} />
+          <Route exact path="/inicio" element={<OneTimePaymentsReportPage></OneTimePaymentsReportPage>} />
+          <Route exact path="/reporteOnlyTimePayments" element={<OneTimePaymentsReportPage></OneTimePaymentsReportPage>} />
+          <Route exact path="/gestorDeCobrosSuscripciones" element={<PaymentManagerSubsPage></PaymentManagerSubsPage>} />
           <Route exact path="/reporteSubscripciones" element={<SubscriptionReportPage></SubscriptionReportPage>} />
           <Route exact path="/reportes" element={<DashboardPage></DashboardPage>} />
           <Route exact path="/settings" element={<UserSettings />} />

@@ -1,7 +1,8 @@
 
 const adminNavigation =[
   { name: 'Ajustes', path: "/settings"},
-  { name: 'Reporte Transacciones', path:"/reporteTransacciones"},
+  { name: 'Reporte Cobros Únicos', path:"/reporteOnlyTimePayments"},
+  { name: 'Gestor de Cobros de Suscripciones', path:"/gestorDeCobrosSuscripciones"},
   { name: 'Reporte Suscripciones', path:"/reporteSubscripciones"},
   { name: 'Dashboard', path:"/reportes"},
 ]
