@@ -29,6 +29,7 @@ export function StatusPillTransactions({ value, row }) {
     const updateState = async (state) =>{
       await AdminServices.modifyTransactionState(row.original.id,state)
       window.location.reload()}
+      console.log(row.id + status);
 
     return (
       <div

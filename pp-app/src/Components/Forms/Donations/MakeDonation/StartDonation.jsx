@@ -8,101 +8,29 @@ import ModalWithDetails from "../../../Utiles/ModalWithDetails";
 import { useNavigate } from "react-router-dom"
 import Messages from '../../Messages'
 import ActServices from '../../../../services/activities.service'
+import AdminServices from '../../../../services/transactions.service'
 
 const StartDonation = () => {
   const { selectedFrequency } = useFrequency();
-  const {selectedAmount, setPayedAmount, payedAmount} = useAmount();
+  const {selectedAmount} = useAmount();
   const { paymentDay, subsPeriod} = useSubscriptionPeriod();
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const currentUser = AuthService.getCurrentUser();
   const [showModalSuccess, setShowModalSuccess] = useState(false);
-  const [showModalFailure, setShowModalFailure] = useState(false);
-  const queryParameters = new URLSearchParams(window.location.search)
-  const status = queryParameters.get('status');
-  const preference_id = queryParameters.get('preference_id');
 
   const newSubscriptionEvenctDescription = (amount, frequency, nextPaymentDate) =>{
     return {title: "Te has subscipto!", description: "Has iniciado una subscripción de $"+amount+" que se cobra " + frequency + " y tiene como próxima fecha de pago "+nextPaymentDate+"."}
-  }
-  const newOneTimeDonationEvenctDescription = (amount) =>{
-    return {title: "Tu donación de única vez ha sido realizada con éxito!", description: "Has realizado una donación de $"+amount+"."}
-  }
-
-  const rejectedOneTimeDonationEvenctDescription = (amount) =>{
-    return {title: "Tu donación de única vez que fue rechazada!", description: "Tu donación de $"+amount+" fue rechazada."}
-  }
-
-  const pendingOneTimeDonationEvenctDescription = (amount) =>{
-    return {title: "Tu donación de única vez esta pendiente!", description: "Has realizado una donación de $"+amount+" que se encuentra pendiente de ser cobrada."}
   }
 
   useEffect(() => {
     setMessage("");
   }, [selectedFrequency])
 
-  useEffect(() => {
-    managePayment();
-  },[payedAmount]);
-
-  const managePayment = () => {
-    if(status !=undefined){
-      if(status == "approved"){
-        if(payedAmount !=0){
-          setShowModalSuccess(true);
-        }else{ 
-          DonationService.getPreference(preference_id).then(
-          (res) => {
-            setPayedAmount(res.data.response.items[0].unit_price);
-              ActServices.createActivity(newOneTimeDonationEvenctDescription(res.data.response.items[0].unit_price).title, newOneTimeDonationEvenctDescription(res.data.response.items[0].unit_price).description, currentUser.id). then(
-                (res)=> console.log(res)
-              )
-          },
-          (error) => {
-            console.log(error);
-            const resMessage =
-              (error.response &&
-                error.response.data &&
-                error.response.data.message) ||
-              error.message ||
-              error.toString();
-            setMessage(resMessage);
-          })
-      }
-      }else if(status == "rejected"){
-        if(payedAmount != 0){
-          setShowModalFailure(true)
-        }else{
-          DonationService.getPreference(preference_id).then(
-          (res) => {
-            setPayedAmount(res.data.response.items[0].unit_price);
-            ActServices.createActivity(rejectedOneTimeDonationEvenctDescription(res.data.response.items[0].unit_price).title, rejectedOneTimeDonationEvenctDescription(res.data.response.items[0].unit_price).description, currentUser.id). then(
-              (res)=> console.log(res)
-            )
-          },
-          (error) => {
-            console.log(error);
-            const resMessage =
-              (error.response &&
-                error.response.data &&
-                error.response.data.message) ||
-              error.message ||
-              error.toString();
-            setMessage(resMessage);
-          })
-      }}
-    }
-  }
 
   const closeModalSuccess = () => {
     setShowModalSuccess(false);
     navigate("/inicio");
-    window.location.reload();
-  };
-
-  const closeModalFailure = () => {
-    setShowModalFailure(false);
-    navigate("/donar");
     window.location.reload();
   };
 
@@ -169,9 +97,6 @@ const StartDonation = () => {
     
     {showModalSuccess ? (
       <ModalWithDetails value={showModalSuccess} onChange={closeModalSuccess} header={(selectedFrequency === 1) ? "Tu donación ha sido realizada con éxito!" : "Tu suscripción ha sido activada con éxito!"} action={(selectedFrequency === 1) ? "Se realizó una donación de " : "Se activó una suscripción de "} body={"Muchas gracias por realizar una donación para brindar atención nutricional a niños/as de la comunidad."} buttonText={"Continuar"}></ModalWithDetails>
-    ) : null}
-    {showModalFailure ? (
-      <ModalWithDetails value={showModalFailure} onChange={closeModalFailure} header={"El pago de tu donación ha sido rechazado!"} action={"Se rechazo el pago de una donación de "} body={"Tu donación no ha sido realizada. Prueba realizar una donación con otro monto para brindar atención nutricional a niños/as de la comunidad."} buttonText={"Continuar"}></ModalWithDetails>
     ) : null}
       <button onClick={submitDonation}
         className="rounded-xl p-3 h-auto w-full text-center greenBg yellowBgHover font-Pop-SB text-base text-white">

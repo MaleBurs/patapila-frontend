@@ -27,11 +27,19 @@ const modifyTransactionState =  (transactionId,state) => {
     });
 }
 
+const modifyTransactionStateByPreference =  (preferenceId,state) => {
+  return axios.post(API_URL + "modifyTransactionStateByPreference",{
+    preferenceId,  
+    state
+    });
+}
+
 const AdminServices = {
     getTransactions,
     getMonthIncome,
     getSubscriptions,
-    modifyTransactionState
+    modifyTransactionState,
+    modifyTransactionStateByPreference
   }
 
 export default AdminServices;
