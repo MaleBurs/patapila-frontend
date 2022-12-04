@@ -104,7 +104,7 @@ const DonationResult = () => {
                 {/*header*/}
                 <div className="flex items-start justify-between rounded-t">
                   <h3 className="font-Pop-SB text-[20pt] tracking-[0px] blackText">
-                    {(status == "approved")? "El pago de tu donación ha sido realizado con éxito!":"El pago de tu donación ha sido rechazado!"}
+                    {(status == "approved")? "El pago de tu donación de única vez ha sido realizado con éxito!":"El pago de tu donación de única vez ha sido rechazado!"}
                   </h3>
                 </div>
                 {/*body*/}
@@ -114,7 +114,7 @@ const DonationResult = () => {
                       <p className="underline decoration-[#eb8301] decoration-wavy underline-offset-4">${payedAmount}</p>
                       <p>.</p>
                     </div>
-                  <p className="text-center font-Pop-R text-lg text-gray-400">{(status == "approved")?"Muchas gracias por realizar una donación para brindar atención nutricional a niños/as de la comunidad.":"Tu donación no ha sido realizada. Prueba realizar una donación con otro monto para brindar atención nutricional a niños/as de la comunidad."}
+                  <p className="text-center font-Pop-R text-lg text-gray-400">{(status == "approved")?"Muchas gracias por realizar una donación para brindar atención nutricional a niños/as de la comunidad.":"Prueba realizar una donación con otro monto para brindar atención nutricional a niños/as de la comunidad."}
                   </p>
                 </div>
                 {/*footer*/}
