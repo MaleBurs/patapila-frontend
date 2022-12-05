@@ -1,13 +1,7 @@
-import { OpenSideBarFromUser } from './SpecialCells';
-import { NumberSearchFilter, DateRangeColumnFilter, dateBetweenFilterFn, AmountRangeColumnFilter, amountBetweenFilterFn } from './Filters'
+import { OpenSideBarFromUser } from '../TableUtils/SpecialCells';
+import { NumberSearchFilter, DateRangeColumnFilter, dateBetweenFilterFn, AmountRangeColumnFilter, amountBetweenFilterFn } from '../TableUtils/Filters'
 
 const columns =[
-  {
-    Header: "id",
-    accessor: 'id',
-    Filter: NumberSearchFilter,
-    filter: "rankedMatchSorter",
-  },
   {
     Header: "Usuario",
     accessor: 'userId',

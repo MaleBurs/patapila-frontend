@@ -3,12 +3,13 @@ import { useEffect } from 'react'
 import { useTable, useSortBy, usePagination, useRowSelect } from 'react-table'
 import { useRowSelectColumn } from '@lineup-lite/hooks';
 import { ChevronDoubleLeftIcon, ChevronLeftIcon, ChevronRightIcon, ChevronDoubleRightIcon } from '@heroicons/react/solid'
-import { Button, PageButton } from './Buttons'
-import { SortIcon, SortUpIcon, SortDownIcon } from './Icons'
-import "../../App.css"
-import {usePaymentManagerContext} from "../../Context/PaymentManagerContext"
+import { Button, PageButton } from '../TableUtils/Buttons'
+import { SortIcon, SortUpIcon, SortDownIcon } from '../TableUtils/Icons'
+import "../../../App.css"
+import {usePaymentManagerContext} from "../../../Context/PaymentManagerContext"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faChevronLeft} from '@fortawesome/free-solid-svg-icons';
+import PaymentManagerService from '../../../services/paymentManager.service';
 
 function TableToSelectubSugestions({ columns, functionToLoadData }) {
   
@@ -71,9 +72,10 @@ function TableToSelectubSugestions({ columns, functionToLoadData }) {
 
   const moveSelectedToEmmit = (e) =>{
     const selectedRows = Array.from((page.filter(row => row.isSelected)).map(row => row.original));
-    setSelectSugested(false);
-    console.log("las filas seleccionadas son", selectedRows)
-    //debería agregar estas a la tabla de cobros pendientes y sacarlas de esta
+    selectedRows.forEach(row => {
+      PaymentManagerService.createPaymentSubs(row.userId, row.amount, row.paymentDate).then(res=>{setSelectSugested(false);});
+      PaymentManagerService.deletePaymentSubsFromSuggested(row.id);
+    });
   }
 
   return (

@@ -2,7 +2,7 @@ import React from "react";
 import AuthService from "../../services/auth.service";
 import UserNavBar from "../../Components/NavBars/UserNavBar";
 import navigationOptions from "../../Components/NavBars/navigationOptions";
-import Table from "../../Components/Tables/Table";
+import Table from "../../Components/Tables/TableStructures/Table";
 import Sidebar from "../../Components/Utiles/SideBar";
 import { SelectionOnTableContexProvider } from "../../Context/SelectionsOnTable";
 import SectionTitleIndicator from "../../Components/Utiles/SectionTitleIndicator";

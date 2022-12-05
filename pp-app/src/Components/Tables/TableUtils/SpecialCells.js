@@ -1,17 +1,17 @@
 import { classNames } from './Utils'
-import { useSelectionOnTable} from '../../Context/SelectionsOnTable';
+import { useSelectionOnTable} from '../../../Context/SelectionsOnTable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import AdminServices from '../../services/transactions.service'
-import AuthService from '../../services/auth.service';
+import AdminServices from '../../../services/transactions.service'
+import AuthService from '../../../services/auth.service';
 import { useState, useEffect } from 'react';
-import InformationTooltips from '../Utiles/InformationDisplayTooltip';
-import ModalWithConfirmation from '../Utiles/ModalWithConfirmation';
+import InformationTooltips from '../../Utiles/InformationDisplayTooltip';
+import ModalWithConfirmation from '../../Utiles/ModalWithConfirmation';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker'
 import TextField from '@mui/material/TextField'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import Select from 'react-select';
-import { usePaymentManagerContext } from '../../Context/PaymentManagerContext';
+import { usePaymentManagerContext } from '../../../Context/PaymentManagerContext';
 
 export function OpenSideBarFromUser({value, row}){
   const {setSelectedUser, setShowSidebar} = useSelectionOnTable();
@@ -121,7 +121,7 @@ export function PaymentFrecuency({ value }) {
 };
 
 export function EditableAmmount({ value }) {
-  const [ selectedAmount, setSelectedAmount ] = useState(1)
+  const [ selectedAmount, setSelectedAmount ] = useState(value)
 
   const onChange = (event) => {
     console.log(event)
@@ -182,7 +182,7 @@ export function SelectUser({ value }) {
       (response)=> {
         setNewPaymentUserOptions(Array.from(response.data, completeUser => ({value:completeUser.id , label:completeUser.email})))
     });
-  }, [newPaymentUserOptions, setNewPaymentUserOptions])
+  }, [])
   
   const colourStyles = {
     control: (base, state) => ({
@@ -229,42 +229,81 @@ export function SelectUser({ value }) {
 };
 
 export function SelectableDate({ value, row }) {
-  const [paymentDay, setPaymentDay] = useState()
+  const [paymentDay, setPaymentDay] = useState(value)
+  return (
+    <div className="md:basis-1/2"> 
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DesktopDatePicker
+          disabled = {false}
+          inputFormat="YYYY-MM-DD"
+          value={paymentDay}
+          onChange={(newPaymentDay) => {
+            setPaymentDay(newPaymentDay.format("YYYY-MM-DD"));
+          }}
+          inputProps={{readOnly: true}}
+          className="border-red"
+          renderInput={(params) => 
+          <TextField {...params}
+            className="myDatePicker"
+            sx={{
+                '.MuiInputBase-input': {
+                padding: 1.5,
+                marginLeft: 1,
+                fontFamily: "Poppins-Light",
+                color: "gray-500", 
+                fontSize: "0.73rem",
+                border: "none"
+              
+
+            },
+            }}
+          />}
+          views = {["day"]}
+          showDaysOutsideCurrentMonth
+          
+          />
+      </LocalizationProvider>
+    </div>
+  );
+};
+
+export function SelectableDateForNewPayment({ value, row }) {
+  const {newPaymentDate, setNewPaymentDate} = usePaymentManagerContext()
   
   return (
     <div className="md:basis-1/2"> 
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DesktopDatePicker
-                      disabled = {false}
-                      inputFormat="YYYY-MM-DD"
-                      value={paymentDay}
-                      onChange={(newPaymentDay) => {
-                        setPaymentDay(newPaymentDay.format("YYYY-MM-DD"));
-                      }}
-                      inputProps={{readOnly: true}}
-                      className="border-red"
-                      renderInput={(params) => 
-                      <TextField {...params}
-                        className="myDatePicker"
-                        sx={{
-                           '.MuiInputBase-input': {
-                            padding: 1.5,
-                            marginLeft: 1,
-                            fontFamily: "Poppins-Light",
-                            color: "gray-500", 
-                            fontSize: "0.73rem",
-                            border: "none"
-                          
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DesktopDatePicker
+          disabled = {false}
+          inputFormat="YYYY-MM-DD"
+          value={newPaymentDate}
+          onChange={(newPaymentDay) => {
+            setNewPaymentDate(newPaymentDay.format("YYYY-MM-DD"));
+          }}
+          inputProps={{readOnly: true}}
+          className="border-red"
+          renderInput={(params) => 
+          <TextField {...params}
+            className="myDatePicker"
+            sx={{
+                '.MuiInputBase-input': {
+                padding: 1.5,
+                marginLeft: 1,
+                fontFamily: "Poppins-Light",
+                color: "gray-500", 
+                fontSize: "0.73rem",
+                border: "none"
+              
 
-                        },
-                        }}
-                      />}
-                      views = {["day"]}
-                      showDaysOutsideCurrentMonth
-                     
-                      />
-                  </LocalizationProvider>
-                </div>
+            },
+            }}
+          />}
+          views = {["day"]}
+          showDaysOutsideCurrentMonth
+          
+          />
+      </LocalizationProvider>
+    </div>
   );
 };
 

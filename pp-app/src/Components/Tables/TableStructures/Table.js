@@ -1,18 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react'
-import { useTable, useSortBy, usePagination } from 'react-table'
+import { useTable, useFilters, useGlobalFilter, useSortBy, usePagination } from 'react-table'
 import { ChevronDoubleLeftIcon, ChevronLeftIcon, ChevronRightIcon, ChevronDoubleRightIcon } from '@heroicons/react/solid'
-import { Button, PageButton } from './Buttons'
-import { SortIcon, SortUpIcon, SortDownIcon } from './Icons'
-import { EditableAmmountForNewPayment, SelectableDate, SelectUser } from './SpecialCells';
-import InformationTooltips from "../Utiles/InformationDisplayTooltip"
-import { usePaymentManagerContext } from '../../Context/PaymentManagerContext'
+import { Button, PageButton } from '../TableUtils/Buttons'
+import { SortIcon, SortUpIcon, SortDownIcon } from '../TableUtils/Icons'
+import FilterSelect from '../TableUtils/FilterSelect'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFilter, faChevronUp } from '@fortawesome/fontawesome-free-solid'
+import "../../../App.css"
+import { GlobalFilter } from '../TableUtils/Filters'
 
-import "../../App.css"
-
-function EditablePaymentSubsTable({ columns, functionToLoadData }) {
-  const {setSelectSugested, newPaymentAmount, setNewPaymentAmount, setNewPaymentUser,newPaymentUserOptions} = usePaymentManagerContext();
-  const [addNewRow, setAddNewRow] = React.useState(false)
+function Table({ columns, functionToLoadData }) {
   const skipPageResetRef = React.useRef()
   const emptyRows = [{
   id: "",
@@ -22,6 +20,7 @@ function EditablePaymentSubsTable({ columns, functionToLoadData }) {
   fechaPago: '',
   estado: ""}];
   const [data, setData] = React.useState(emptyRows)
+  const [showFilterPanel , setShowFilterPanel] = useState(false)
   const {
     getTableProps,
     getTableBodyProps,
@@ -36,7 +35,10 @@ function EditablePaymentSubsTable({ columns, functionToLoadData }) {
     nextPage,
     previousPage,
     setPageSize,
+    setAllFilters,
     state,
+    preGlobalFilteredRows,
+    setGlobalFilter,
     
   } = useTable({
     columns,
@@ -49,6 +51,8 @@ function EditablePaymentSubsTable({ columns, functionToLoadData }) {
     autoResetFilters: !skipPageResetRef.current,
     autoResetRowState: !skipPageResetRef.current,
   },
+    useFilters, 
+    useGlobalFilter,
     useSortBy,
     usePagination, 
   )
@@ -59,106 +63,49 @@ function EditablePaymentSubsTable({ columns, functionToLoadData }) {
     });
   }, [functionToLoadData]);
 
-  useEffect(() => {
-    setAddNewRow(false)
-  }, []);
-
-  useEffect(() => {
-    setNewPaymentAmount(1)
-  }, [setNewPaymentAmount, addNewRow]);
-
-  useEffect(() => {
-    setNewPaymentUser(newPaymentUserOptions[0]);
-  }, [addNewRow, setNewPaymentUser]);
-
   const handleMoreData = (e) =>{
     skipPageResetRef.current = true
     functionToLoadData(10,20).then(res=>{
       res? setData(data.concat(res.data)) : setData(emptyRows)
     });
     nextPage();
-  };
-
-  const addNewPayment = () =>{
-    if (newPaymentAmount !== 0) {
-      alert("Se tiene que agregar el nuevo pago")
-      addNewRow(false)
-    }
-  }
-
-  const emmitPayments = () =>{
-    var amounts = data.map((item) => item.amount);
-    console.log(data)
-    if(amounts.every(val=> val>0)) alert("Se tiene que emitir los pagos")
   }
 
   return (
     <div className='space-y-6'>
-      <div className='flex flex-col space-y-14'>
-        <div className='bg-white rounded-xl shadow-sm px-10 py-6 darkGrayBorder'>
-          
-          <div className="flex flex-row justify-start space-x-4"> 
-            <button onClick={()=> setAddNewRow(true)} className="bg-gray-400 text-sm font-Pop-R tracking-[0.2px] text-base text-white py-2 px-4 rounded-md">Nuevo Cobro</button>
-            <button onClick={()=>setSelectSugested(true)} className="flex flex-row bg-gray-300 text-sm font-Pop-R tracking-[0.2px] text-base text-white py-2 px-4 rounded-md">
-              Agregar Cobros Sugeridos
-              <InformationTooltips.InstructionTooltip tooltipContent="Dar click en 'Agregar Cobros Sugeridos' para agregar, visualizar y así modificar los cobros sugeridos por el sistema." size="h-3 w-3 -mt-3"/>
-            </button>
-          </div>
+      <div className="flex justify-between sm:gap-x-2">
+        <GlobalFilter
+          preGlobalFilteredRows={preGlobalFilteredRows}
+          globalFilter={state.globalFilter}
+          setGlobalFilter={setGlobalFilter}
+        />
 
+        {!showFilterPanel ?
+          <button className="justify-self-end lightgreyBgTranslucentHover rounded-3xl md:rounded-xl lg:basis-2/7 w-fit py-2 px-5 focus:ring-0">
+            <div className="justify-center flex z-50 space-x-4 overflow-hidden mx-auto lg:flex-row">
+                <FontAwesomeIcon icon={faFilter} color="gray" onClick={()=> setShowFilterPanel(true)}/>
+                </div>
+            </button>
+            :
+            <button className="justify-self-end lightgreyBgTranslucentHover rounded-3xl md:rounded-xl lg:basis-2/7 w-fit py-2 px-5 focus:ring-0">
+              <div className="justify-center flex z-50 space-x-4 overflow-hidden mx-auto lg:flex-row">
+                <FontAwesomeIcon icon={faChevronUp} color="gray" onClick={()=> setShowFilterPanel(false)}/>
+                </div>
+            </button>
+          }
+        
+      </div>
+      <div className='flex flex-col space-y-14'>
+        {showFilterPanel ?
+        <FilterSelect headerGroups={headerGroups} clearFilters={() => setAllFilters([])}/>
+        : null
+        }
+        <div className='bg-white rounded-xl shadow-sm px-10 py-6 darkGrayBorder'>
           {/* table */}
           <div className="mt-4 flex flex-col">
             <div className="-my-2 overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
               <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                 <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-
-                {addNewRow ?
-                <table {...getTableProps()} className="min-w-full divide-y divide-gray-200 mb-5">
-                    <thead className="lighterGreyBg">
-                      {headerGroups.map(headerGroup => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                          <th scope="col" className="group px-6 py-3 text-left text-sm font-Pop-R text-gray-500 uppercase">
-                          ID
-                          </th>
-                          <th scope="col" className="group px-6 py-3 text-left text-sm font-Pop-R text-gray-500 uppercase">
-                          Usuario
-                          </th>
-                          <th scope="col" className="group px-6 py-3 text-left text-sm font-Pop-R text-gray-500 uppercase">
-                          Monto
-                          </th>
-                          <th scope="col" className="group px-6 py-3 text-left text-sm font-Pop-R text-gray-500 uppercase flex flex-row">
-                            <div>Fecha de Cobro/Configuracón</div>
-                            <InformationTooltips.InstructionTooltip tooltipContent="Al crear un nuevo cobro la fecha de configuracón se settea igual a la fecha de cobro." size="h-3 w-3 -mt-3 justify-self-end"/>
-                          </th>
-                          <th scope="col" className="group px-6 py-3 text-left text-sm font-Pop-R text-gray-500 uppercase"></th>
-                        </tr>
-                      ))}
-                    </thead>
-                    <tbody
-                      {...getTableBodyProps()}
-                      className="bg-white divide-y divide-gray-200"
-                    >
-                      <tr>
-                        <td className="px-6 py-2 whitespace-nowrap" role="cell">
-                          <div className="text-xs text-gray-500 font-Pop-L">#</div>
-                        </td>
-                        <td className="px-6 py-2 whitespace-nowrap" role="cell">
-                            <SelectUser/>
-                        </td>
-                        <td className="px-6 py-2 whitespace-nowrap" role="cell">
-                            <EditableAmmountForNewPayment/>
-                        </td>
-                        <td className="px-6 py-2 whitespace-nowrap" role="cell">
-                            <SelectableDate/>
-                        </td>
-                        <div className='flex flex-row space-x-3 py-3'>
-                          <button onClick={addNewPayment} className="bg-gray-400 text-sm font-Pop-R tracking-[0.2px] text-base text-white py-2 px-4 rounded-md">Agregar</button>
-                          <button onClick={()=>setAddNewRow(false)} className="bg-gray-300 text-sm font-Pop-R tracking-[0.2px] text-base text-white py-2 px-4 rounded-md">Cancelar</button>
-                        </div>
-                      </tr>
-                    </tbody>
-                </table>
-                : null}
-
                   <table {...getTableProps()} className="min-w-full divide-y divide-gray-200">
                     <thead className="lighterGreyBg">
                       {headerGroups.map(headerGroup => (
@@ -183,17 +130,13 @@ function EditablePaymentSubsTable({ columns, functionToLoadData }) {
                               </div>
                             </th>
                           ))}
-                          <th
-                              scope="col"
-                              className="group px-6 py-3 text-left text-sm font-Pop-R text-gray-500 uppercase"
-                            ></th>
                         </tr>
                       ))}
                     </thead>
                     <tbody
                       {...getTableBodyProps()}
                       className="bg-white divide-y divide-gray-200"
-                    >   
+                    >
                       {page.map((row, i) => {  // new
                         prepareRow(row)
                         return (
@@ -212,11 +155,6 @@ function EditablePaymentSubsTable({ columns, functionToLoadData }) {
                                 </td>
                               )
                             })}
-                            <div className='flex flex-row'>
-                              <button className="text-base font-Pop-M py-4 px-4 text-[#7BA391] hover:text-[#CC3300] focus:text-[#CC3300] duration-3 duration-3">x</button>
-                              <button onClick={null} className="bg-gray-400 text-xs font-Pop-R tracking-[0.2px] text-base text-white py-1 px-2 rounded-md my-3 mx-2">Guardar</button>
-                            </div>
-                            {/* <button onClick={()=>triggerRowEdition(row)} className="text-sm text-gray-500 font-Pop-M py-1 px-4 text-[#7BA391]"> <FontAwesomeIcon icon={faEdit} color="#7BA391" className='' /></button> */}
                           </tr>
                         )
                       })}
@@ -290,13 +228,10 @@ function EditablePaymentSubsTable({ columns, functionToLoadData }) {
               </div>
             </div>
           </div>
-          <div className="flex flex-row justify-end"> 
-            <button onClick={emmitPayments} className="bg-[#7BA391] text-sm font-Pop-M tracking-[0.4px] text-base text-white py-3 px-4 rounded-md">Emitir Cobros</button>       
-          </div>
         </div>
       </div>
     </div>
   )
 }
 
-export default EditablePaymentSubsTable;
+export default Table;

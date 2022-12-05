@@ -1,15 +1,18 @@
-import React from "react";
-import SubsPaymentTableInformationToEmmit from "../../Components/Tables/SubsPaymentTableInformationToEmmit";
-import SubsPaymentsTableInformation from "../../Components/Tables/SubsPaymentsTableInformation"
+import React, { useEffect } from "react";
+import SubsPaymentTableInformationEmition from "./TablesInformation/SubsPaymentTableInformationEmition";
+import SubsPaymentsTableInformation from "../../Components/Tables/TablesInformation/SubsPaymentsTableInformation"
 import AdminServices from "../../services/transactions.service";
-import EditablePaymentSubsTable from "../../Components/Tables/EditablePaymentSubsTable";
-import TableToSelectubSugestions from "./TableToSelectubSugestions";
+import EditablePaymentSubsTable from "../../Components/Tables/TableStructures/EditablePaymentSubsTable";
+import TableToSelectubSugestions from "./TableStructures/TableToSelectubSugestions";
 import { usePaymentManagerContext } from "../../Context/PaymentManagerContext";
 import SectionSubtitleIndicator from "../Utiles/SectionSubtitleIndicator";
+import PaymentManagerService from "../../services/paymentManager.service";
 
 const EmmitPaymentSubs= () => {
   const {selectSugested} = usePaymentManagerContext();
   const getRecurrentTransactions = (min, max) => AdminServices.getRecurrentTransactions(min,max);
+  const getPaymentsPendingToEmmit = () => PaymentManagerService.getPaymentSubsNE();
+
   return (
     <>
     {selectSugested ?
@@ -27,7 +30,7 @@ const EmmitPaymentSubs= () => {
           title="Cobros a Emitir"
           subtitle="Cobros a emitir respecto a las suscripciones"/>
     <div className="px-6 md:px-12 lg:px-20 mt-10 space-y-4"> 
-        <EditablePaymentSubsTable columns={SubsPaymentTableInformationToEmmit.columns} functionToLoadData={getRecurrentTransactions}></EditablePaymentSubsTable>
+        <EditablePaymentSubsTable columns={SubsPaymentTableInformationEmition.columns} functionToLoadData={getPaymentsPendingToEmmit}></EditablePaymentSubsTable>
     </div>
     </>}
     </>

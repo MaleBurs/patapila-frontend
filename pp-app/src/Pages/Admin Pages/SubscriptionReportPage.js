@@ -1,5 +1,5 @@
 import React from "react";
-import SubscriptionTableInformation from "../../Components/Tables/SubscriptionTableInformation";
+import SubscriptionTableInformation from "../../Components/Tables/TablesInformation/SubscriptionTableInformation";
 import AdminServices from "../../services/transactions.service";
 import TableBasePage from "./TableBasePage";
 

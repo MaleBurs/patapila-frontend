@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAsyncDebounce } from 'react-table'
-import "../../App.css"
+import "../../../App.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/fontawesome-free-solid'
 

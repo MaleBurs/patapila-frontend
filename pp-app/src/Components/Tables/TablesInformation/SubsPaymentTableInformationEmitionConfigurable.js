@@ -1,5 +1,5 @@
-import { OpenSideBarFromUser, EditableAmmount, SelectableDate } from './SpecialCells';
-import { NumberSearchFilter, DateRangeColumnFilter, dateBetweenFilterFn, AmountRangeColumnFilter, amountBetweenFilterFn } from './Filters'
+import { OpenSideBarFromUser, EditableAmmount, SelectableDate } from '../TableUtils/SpecialCells';
+import { NumberSearchFilter, DateRangeColumnFilter, dateBetweenFilterFn, AmountRangeColumnFilter, amountBetweenFilterFn } from '../TableUtils/Filters'
 
 const columns =[
   {
@@ -24,20 +24,20 @@ const columns =[
   },
   {
     Header: "Fecha de Pago Configurada",
-    accessor: "paymentDate",
+    accessor: "configuredPaymentDate",
     Filter: DateRangeColumnFilter,
     filter: dateBetweenFilterFn
   },
   {
     Header: "Fecha de Cobro",
-    accessor: "realPaymentDate",
+    accessor: "paymentDate",
     Cell: SelectableDate,
     Filter: DateRangeColumnFilter,
     filter: dateBetweenFilterFn
   },
 ]
 
-const SubsPaymentTableInformationToEmmit = {
+const SubsPaymentTableInformationEmitionConfigurable = {
     columns
   }
-  export default SubsPaymentTableInformationToEmmit;
+  export default SubsPaymentTableInformationEmitionConfigurable;

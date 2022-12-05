@@ -1,5 +1,5 @@
-import { StatusPillSubscriptions, PaymentFrecuency, OpenSideBarFromUser } from './SpecialCells';
-import { SelectStateFilterSubscriptions, SelectPeriodicidadFilter, NumberSearchFilter, DateRangeColumnFilter, dateBetweenFilterFn, AmountRangeColumnFilter, amountBetweenFilterFn } from './Filters'
+import { StatusPillSubscriptions, PaymentFrecuency, OpenSideBarFromUser } from '../TableUtils/SpecialCells';
+import { SelectStateFilterSubscriptions, SelectPeriodicidadFilter, NumberSearchFilter, DateRangeColumnFilter, dateBetweenFilterFn, AmountRangeColumnFilter, amountBetweenFilterFn } from '../TableUtils/Filters'
 
 const columns =[
   {

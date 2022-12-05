@@ -6,6 +6,7 @@ export function PaymentManagerContextProvider (props) {
   const [selectSugested, setSelectSugested] = useState(false)
   const [newPaymentAmount, setNewPaymentAmount] = useState(0)
   const [newPaymentUser, setNewPaymentUser] = useState(null)
+  const [newPaymentDate, setNewPaymentDate] = useState(new Date())
   const [newPaymentUserOptions, setNewPaymentUserOptions] = useState([])
   useEffect(() => {
     setSelectSugested(false)
@@ -19,9 +20,11 @@ export function PaymentManagerContextProvider (props) {
         newPaymentUser,
         setNewPaymentUser,
         newPaymentUserOptions,
-        setNewPaymentUserOptions
+        setNewPaymentUserOptions,
+        newPaymentDate,
+        setNewPaymentDate
     }
-  }, [selectSugested, newPaymentAmount,newPaymentUser,newPaymentUserOptions])
+  }, [selectSugested, newPaymentAmount,newPaymentUser,newPaymentUserOptions,newPaymentDate])
 
   return (
     <PaymentManagerContext.Provider value={value}>

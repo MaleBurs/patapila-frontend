@@ -1,10 +1,10 @@
 import { useAsyncDebounce } from 'react-table'
-import "../../App.css"
+import "../../../App.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/fontawesome-free-solid'
-import Inputs from '../Utiles/Inputs'
+import Inputs from '../../Utiles/Inputs'
 import React, { useState, useEffect } from 'react';
-import Labels from '../Utiles/Labels'
+import Labels from '../../Utiles/Labels'
 
 const capitalizeFirst = str => {
   return str.charAt(0).toUpperCase() + str.slice(1);

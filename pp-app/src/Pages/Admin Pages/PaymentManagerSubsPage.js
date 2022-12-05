@@ -4,17 +4,17 @@ import navigationOptions from "../../Components/NavBars/navigationOptions";
 import SectionTitleIndicator from "../../Components/Utiles/SectionTitleIndicator";
 import SectionSubtitleIndicator from "../../Components/Utiles/SectionSubtitleIndicator";
 import AuthService from "../../services/auth.service";
-import SubsPaymentTableInformationEmmited from "../../Components/Tables/SubsPaymentTableInformationEmmited";
-import Table from "../../Components/Tables/Table";
-import AdminServices from "../../services/transactions.service";
+import SubsPaymentTableInformationEmition from "../../Components/Tables/TablesInformation/SubsPaymentTableInformationEmition";
+import Table from "../../Components/Tables/TableStructures/Table";
 import { SelectionOnTableContexProvider } from "../../Context/SelectionsOnTable";
 import Sidebar from "../../Components/Utiles/SideBar";
 import { PaymentManagerContextProvider } from "../../Context/PaymentManagerContext";
 import EmmitPaymentSubs from "../../Components/Tables/EmmitPaymentsSubs";
+import PaymentManagerService from "../../services/paymentManager.service";
 
 const PaymentManagerSubsPage = () => {
   const currentUser = AuthService.getCurrentUser();
-  const getRecurrentTransactions = (min, max) => AdminServices.getRecurrentTransactions(min,max);
+  const getEmitedPayments = () => PaymentManagerService.getPaymentSubsE();
   return (
     <SelectionOnTableContexProvider>
     <PaymentManagerContextProvider>
@@ -30,12 +30,12 @@ const PaymentManagerSubsPage = () => {
         <Sidebar/>
    
         <EmmitPaymentSubs></EmmitPaymentSubs>
-
+        
         <SectionSubtitleIndicator 
           title="Cobros Emitidos para Suscripciones de Usuarios"
           subtitle="Reporte historico de los cobros emitidos para las suscripciones de usuarios"/>
         <div className="px-6 md:px-12 lg:px-20 mt-10">  
-          <Table columns={SubsPaymentTableInformationEmmited.columns} functionToLoadData={getRecurrentTransactions}></Table>
+          <Table columns={SubsPaymentTableInformationEmition.columns} functionToLoadData={getEmitedPayments}></Table>
         </div>
       </div>
       </>

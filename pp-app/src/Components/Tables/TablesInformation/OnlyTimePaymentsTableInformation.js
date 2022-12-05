@@ -1,5 +1,5 @@
-import { StatusPillTransactions, TransactionType, OpenSideBarFromUser } from './SpecialCells';
-import { SelectModoFilter, SelectStateFilter, NumberSearchFilter, DateRangeColumnFilter, dateBetweenFilterFn, AmountRangeColumnFilter, amountBetweenFilterFn } from './Filters'
+import { StatusPillTransactions, TransactionType, OpenSideBarFromUser } from '../TableUtils/SpecialCells';
+import { SelectModoFilter, SelectStateFilter, NumberSearchFilter, DateRangeColumnFilter, dateBetweenFilterFn, AmountRangeColumnFilter, amountBetweenFilterFn } from '../TableUtils/Filters'
 
 const columns =[
   {

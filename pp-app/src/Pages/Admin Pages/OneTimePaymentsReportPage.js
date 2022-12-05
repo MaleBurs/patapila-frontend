@@ -1,5 +1,5 @@
 import React from "react";
-import OnlyTimePaymentsTableInformation from "../../Components/Tables/OnlyTimePaymentsTableInformation";
+import OnlyTimePaymentsTableInformation from "../../Components/Tables/TablesInformation/OnlyTimePaymentsTableInformation";
 import AdminServices from "../../services/transactions.service";
 import TableBasePage from "./TableBasePage";
 
