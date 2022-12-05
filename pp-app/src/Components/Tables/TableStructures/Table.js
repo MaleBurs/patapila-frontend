@@ -12,6 +12,7 @@ import { GlobalFilter } from '../TableUtils/Filters'
 
 function Table({ columns, functionToLoadData }) {
   const skipPageResetRef = React.useRef()
+  const [offset, setOffset] = useState(0)
   const emptyRows = [{
   id: "",
   userId: "",
@@ -56,19 +57,22 @@ function Table({ columns, functionToLoadData }) {
     useSortBy,
     usePagination, 
   )
+
   useEffect(() => {
     skipPageResetRef.current = false
     functionToLoadData(20,0).then(res=>{
       res? setData(res.data) : setData();
     });
+    setOffset(20)
   }, [functionToLoadData]);
 
   const handleMoreData = (e) =>{
     skipPageResetRef.current = true
-    functionToLoadData(10,20).then(res=>{
+    functionToLoadData(10,offset).then(res=>{
       res? setData(data.concat(res.data)) : setData(emptyRows)
     });
     nextPage();
+    setOffset(offset+10)
   }
 
   return (

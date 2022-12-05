@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useTable, useSortBy, usePagination, useRowSelect } from 'react-table'
 import { useRowSelectColumn } from '@lineup-lite/hooks';
 import { ChevronDoubleLeftIcon, ChevronLeftIcon, ChevronRightIcon, ChevronDoubleRightIcon } from '@heroicons/react/solid'
@@ -12,7 +12,7 @@ import GoBackSection from '../../Utiles/GoBackSection';
 import Loading from '../../Utiles/Loading';
 
 function TableToSelectubSugestions({ columns, functionToLoadData }) {
-  
+  const [offset, setOffset] = useState(0)
   const skipPageResetRef = React.useRef()
   const {setSelectSugested} = usePaymentManagerContext();
   const emptyRows = [{
@@ -60,14 +60,16 @@ function TableToSelectubSugestions({ columns, functionToLoadData }) {
     functionToLoadData(20,0).then(res=>{
       res? setData(res.data) : setData();
     });
+    setOffset(20)
   }, [functionToLoadData]);
 
   const handleMoreData = (e) =>{
     skipPageResetRef.current = true
-    functionToLoadData(10,20).then(res=>{
+    functionToLoadData(10,offset).then(res=>{
       res? setData(data.concat(res.data)) : setData(emptyRows)
     });
     nextPage();
+    setOffset(offset+10)
   }
 
   const moveSelectedToEmmit = (e) =>{
