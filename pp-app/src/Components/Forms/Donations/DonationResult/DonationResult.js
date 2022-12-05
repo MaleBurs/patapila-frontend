@@ -24,7 +24,7 @@ const DonationResult = () => {
   }
 
   const pendingOneTimeDonationEvenctDescription = (amount) =>{
-    return {title: "Tu donación de única vez esta pendiente!", description: "Has realizado una donación de $"+amount+" que se encuentra pendiente de ser cobrada."}
+    return {title: "Tu donación de única vez esta pendiente!", description: "Has realizado una donación de $"+amount+" que se encuentra pendiente de ser pagada."}
   }
 
   useEffect(() => {
@@ -87,7 +87,28 @@ const DonationResult = () => {
             console.log(resMessage);
           })
           AdminServices.modifyTransactionStateByPreference(preference_id, "R").then((res)=>console.log(res))
-      }}
+      }}else if(status == "pending"){
+        if(payedAmount == 0){
+          DonationService.getPreference(preference_id).then(
+          (res) => {
+            console.log(res)
+            setPayedAmount(res.data.response.items[0].unit_price);
+            ActServices.createActivity(pendingOneTimeDonationEvenctDescription(res.data.response.items[0].unit_price).title, pendingOneTimeDonationEvenctDescription(res.data.response.items[0].unit_price).description, currentUser.id). then(
+              (res)=> console.log(res)
+            )
+          },
+          (error) => {
+            console.log(error);
+            const resMessage =
+              (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+              error.message ||
+              error.toString();
+            console.log(resMessage);
+          })
+      }
+      }
     }
   }
 
@@ -104,18 +125,17 @@ const DonationResult = () => {
                 {/*header*/}
                 <div className="flex items-start justify-between rounded-t">
                   <h3 className="font-Pop-SB text-[20pt] tracking-[0px] blackText">
-                    {(status == "approved")? "El pago de tu donación de única vez ha sido realizado con éxito!":"El pago de tu donación de única vez ha sido rechazado!"}
+                    {(status == "approved")? "El pago de tu donación de única vez ha sido realizado con éxito!":((status == "pending")? "El pago de tu donación de única vez esta pendiente!":"El pago de tu donación de única vez ha sido rechazado!")}
                   </h3>
                 </div>
                 {/*body*/}
                 <div className="relative flex flex-col space-y-10">
                     <div className="font-Pop-M flex flex-wrap space-x-1 leading-relaxed font-Pop-R text-[15pt] text-medium tracking-[0.2px] purpleText">
-                      <p>{(status == "approved")? "Se aprobó el pago de una donación de ":"Se rechazó el pago de una donación de "}</p>
+                      <p>{(status == "approved")? "Se aprobó el pago de tu donación de ":((status == "pending")? "Esta pendiente el pago de tu donación de ":"Se rechazó el pago de tu donación de ")}</p>
                       <p className="underline decoration-[#eb8301] decoration-wavy underline-offset-4">${payedAmount}</p>
                       <p>.</p>
                     </div>
-                  <p className="text-center font-Pop-R text-lg text-gray-400">{(status == "approved")?"Muchas gracias por realizar una donación para brindar atención nutricional a niños/as de la comunidad.":"Prueba realizar una donación con otro monto para brindar atención nutricional a niños/as de la comunidad."}
-                  </p>
+                  <p className="text-center font-Pop-R text-lg text-gray-400">{(status == "approved")?"Muchas gracias por realizar una donación para brindar atención nutricional a niños/as de la comunidad.":((status == "pending")?"Realiza el pago de tu donación en efectivo para brindar atención nutricional a niños/as de la comunidad.":"Prueba realizar una donación con otro monto para brindar atención nutricional a niños/as de la comunidad.")}</p>
                 </div>
                 {/*footer*/}
                 <div className="flex items-center justify-end">
