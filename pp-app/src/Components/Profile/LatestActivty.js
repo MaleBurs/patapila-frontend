@@ -10,6 +10,7 @@ const LatestActivity = () => {
     ActServices.getUserActivities(currentUser.id).then(
       (res)=> setActivities(res.data)
     )
+    console.log("ACT",activities)
 }, [currentUser.id])
   return (
     <>

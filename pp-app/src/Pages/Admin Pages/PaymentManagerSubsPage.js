@@ -20,12 +20,12 @@ const PaymentManagerSubsPage = () => {
     <PaymentManagerContextProvider>
     <>
     <div className="space-y-10 mx-auto z-10 pb-8 sm:pb-16 md:pb-20 lg:pb-28 xl:pb-32 h-screen bg-cover place-content-center">
-      <UserNavBar navigation={navigationOptions.adminNavigation} currentUser={currentUser}/>
+      <UserNavBar navigation={navigationOptions.adminNavigation} currentUser={currentUser} activateAdminNotifications/>
       {currentUser ? (
       <>
       <div className="almostWhiteBg">
         <SectionTitleIndicator
-          title="Gestion de los Cobros de las Suscripciones"
+          title="Gestión de los Cobros de las Suscripciones"
           subtitle="Gestiona los cobros sugeridos y administra nuevos cobros"/>
         <Sidebar/>
    
@@ -33,7 +33,7 @@ const PaymentManagerSubsPage = () => {
         
         <SectionSubtitleIndicator 
           title="Cobros Emitidos para Suscripciones de Usuarios"
-          subtitle="Reporte historico de los cobros emitidos para las suscripciones de usuarios"/>
+          subtitle="Reporte histórico de los cobros emitidos para las suscripciones de usuarios"/>
         <div className="px-6 md:px-12 lg:px-20 mt-10">  
           <Table columns={SubsPaymentTableInformationEmition.columns} functionToLoadData={getEmitedPayments}></Table>
         </div>

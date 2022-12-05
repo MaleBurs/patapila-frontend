@@ -7,9 +7,12 @@ import TableToSelectubSugestions from "./TableStructures/TableToSelectubSugestio
 import { usePaymentManagerContext } from "../../Context/PaymentManagerContext";
 import SectionSubtitleIndicator from "../Utiles/SectionSubtitleIndicator";
 import PaymentManagerService from "../../services/paymentManager.service";
+import GoBackSection from "../Utiles/GoBackSection";
+import SimplestTable from "./TableStructures/SimplestTable";
+import SubsPaymentTableInformationEmitionConfigurable from "./TablesInformation/SubsPaymentTableInformationEmitionConfigurable";
 
 const EmmitPaymentSubs= () => {
-  const {selectSugested} = usePaymentManagerContext();
+  const {selectSugested, editPayment, setEditPayment} = usePaymentManagerContext();
   const getRecurrentTransactions = (min, max) => AdminServices.getRecurrentTransactions(min,max);
   const getPaymentsPendingToEmmit = () => PaymentManagerService.getPaymentSubsNE();
 
@@ -29,9 +32,20 @@ const EmmitPaymentSubs= () => {
     <SectionSubtitleIndicator 
           title="Cobros a Emitir"
           subtitle="Cobros a emitir respecto a las suscripciones"/>
-    <div className="px-6 md:px-12 lg:px-20 mt-10 space-y-4"> 
+    <div className="px-6 md:px-12 lg:px-20 mt-10 space-y-4">
+        {editPayment ?
+        <GoBackSection
+        content={
+          <>
+            <SimplestTable columns={SubsPaymentTableInformationEmitionConfigurable.columns}></SimplestTable>
+          </>
+        }
+        closeSection={() => {setEditPayment(false)}}
+        ></GoBackSection>
+        :
         <EditablePaymentSubsTable columns={SubsPaymentTableInformationEmition.columns} functionToLoadData={getPaymentsPendingToEmmit}></EditablePaymentSubsTable>
-    </div>
+        }
+        </div>
     </>}
     </>
   );

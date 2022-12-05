@@ -1,5 +1,6 @@
 import axios from "axios";
 const API_URL = "http://localhost:8080/api/payment/";
+const API_URL_NOTIFICATIONS = "http://localhost:8080/api/notification/";
 
 
 const createPaymentSubs =  (user, amount, date) => {
@@ -22,20 +23,49 @@ const deletePaymentSubsFromSuggested =  (id) => {
   });
 }
 
-const getPaymentSubs =  (user, amount, date) => {
+const getPaymentSubs =  () => {
   return axios.post(API_URL + "getPaymentSubs", {});
 }
 
-const getPaymentSubsNE =  (user, amount, date) => {
+const getPaymentSubsNE =  () => {
   return axios.post(API_URL + "getPaymentSubsNE", {});
 }
 
-const getPaymentSubsE =  (user, amount, date) => {
+const getPaymentSubsE =  () => {
   return axios.post(API_URL + "getPaymentSubsE", {});
 }
 
 const emmitPaymentSubs =  (id) => {
   return axios.post(API_URL + "emmitPaymentSubs",{
+    id,
+  });
+}
+
+const modifyPaymentSubs =  (amount, paymentDate, id) => {
+  return axios.post(API_URL + "modifyPaymentSubs",{
+    amount,
+    paymentDate,
+    id,
+  });
+}
+
+const getNotifications =  () => {
+  return axios.post(API_URL_NOTIFICATIONS + "getNotifications",{
+  });
+}
+const createNotification =  (title, description) => {
+  return axios.post(API_URL_NOTIFICATIONS + "createNotification",{
+    title,
+    description,
+  });
+}
+const deleteNotification =  (id) => {
+  return axios.post(API_URL_NOTIFICATIONS + "deleteNotification",{
+    id,
+  });
+}
+const readNotifications =  (id) => {
+  return axios.post(API_URL_NOTIFICATIONS + "readNotifications",{
     id,
   });
 }
@@ -48,7 +78,12 @@ const PaymentManagerService = {
   getPaymentSubsNE,
   getPaymentSubsE,
   deletePaymentSubsFromSuggested,
-  emmitPaymentSubs
+  emmitPaymentSubs,
+  modifyPaymentSubs,
+  getNotifications,
+  createNotification,
+  deleteNotification,
+  readNotifications,
 }
 
 export default PaymentManagerService;

@@ -1,39 +1,35 @@
-import { OpenSideBarFromUser, EditableAmmount, SelectableDate } from '../TableUtils/SpecialCells';
-import { NumberSearchFilter, DateRangeColumnFilter, dateBetweenFilterFn, AmountRangeColumnFilter, amountBetweenFilterFn } from '../TableUtils/Filters'
+import { OpenSideBarFromUserPayentEdition, EditableAmmountPayentEdition, SelectableDatePayentEdition } from '../TableUtils/SpecialCells';
 
 const columns =[
   {
     Header: "id",
+    Cell: "defaultRenderer",
+    Description:"",
     accessor: 'id',
-    Filter: NumberSearchFilter,
-    filter: "rankedMatchSorter",
   },
   {
     Header: "Usuario",
+    Cell: <OpenSideBarFromUserPayentEdition/>,
+    Description:"",
     accessor: 'userId',
-    Cell: OpenSideBarFromUser,
-    Filter: NumberSearchFilter,
-    filter: "rankedMatchSorter",
   },
   {
     Header: "Monto",
-    accessor: 'amount',
-    Cell: EditableAmmount,
-    Filter: AmountRangeColumnFilter,
-    filter: amountBetweenFilterFn,
+    Cell: <EditableAmmountPayentEdition/>,
+    Description:"",
+    accessor: "amount",
   },
   {
     Header: "Fecha de Pago Configurada",
+    Cell: "defaultRenderer",
+    Description:"",
     accessor: "configuredPaymentDate",
-    Filter: DateRangeColumnFilter,
-    filter: dateBetweenFilterFn
   },
   {
     Header: "Fecha de Cobro",
+    Cell: <SelectableDatePayentEdition/>,
+    Description:"",
     accessor: "paymentDate",
-    Cell: SelectableDate,
-    Filter: DateRangeColumnFilter,
-    filter: dateBetweenFilterFn
   },
 ]
 

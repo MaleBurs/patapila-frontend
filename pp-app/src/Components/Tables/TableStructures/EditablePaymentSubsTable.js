@@ -1,21 +1,20 @@
 import React from 'react'
 import { useEffect } from 'react'
-import { useTable, useSortBy, usePagination } from 'react-table'
+import { useTable, useSortBy, usePagination, useRowSelect } from 'react-table'
 import { ChevronDoubleLeftIcon, ChevronLeftIcon, ChevronRightIcon, ChevronDoubleRightIcon } from '@heroicons/react/solid'
 import { Button, PageButton } from '../TableUtils/Buttons'
 import { SortIcon, SortUpIcon, SortDownIcon } from '../TableUtils/Icons'
-import { EditableAmmountForNewPayment, SelectableDateForNewPayment, SelectUser } from '../TableUtils/SpecialCells';
 import InformationTooltips from "../../Utiles/InformationDisplayTooltip"
 import { usePaymentManagerContext } from '../../../Context/PaymentManagerContext'
 import PaymentManagerService from '../../../services/paymentManager.service'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
 import SubsNewPaymentTableInformation from '../TablesInformation/SubsNewPaymentTableInformation'
-
+import Loading from '../../Utiles/Loading'
 import "../../../App.css"
 
 function EditablePaymentSubsTable({ columns, functionToLoadData }) {
-  const {setSelectSugested, newPaymentAmount, setNewPaymentAmount, newPaymentUser, setNewPaymentUser,newPaymentUserOptions, newPaymentDate, setNewPaymentDate} = usePaymentManagerContext();
+  const {setSelectSugested, setEditionRow, setEditPayment, newPaymentAmount, setNewPaymentAmount, newPaymentUser, setNewPaymentUser,newPaymentUserOptions, newPaymentDate, setNewPaymentDate} = usePaymentManagerContext();
   const [addNewRow, setAddNewRow] = React.useState(false)
   const skipPageResetRef = React.useRef()
   const emptyRows = [{
@@ -99,13 +98,14 @@ function EditablePaymentSubsTable({ columns, functionToLoadData }) {
     }
   }
 
-  const triggerRowEdition = () =>{
-    console.log("triggerRowEdition");
+  const triggerRowEdition = (row) =>{
+    setEditPayment(true);
+    setEditionRow(row.original);
+    console.log(row)
   }
 
   const emmitPayments = () =>{
     var amounts = data.map((item) => item.amount);
-    console.log(data)
     if(amounts.every(val=> val>0)) {
       data.forEach((item) => {
         PaymentManagerService.emmitPaymentSubs(item.id).then(res=>{setAddNewRow(false)});
@@ -210,7 +210,9 @@ function EditablePaymentSubsTable({ columns, functionToLoadData }) {
                                 </span>
                               </div>
                             </th>
-                          ))}
+                          ))
+                          
+                          }
                           <th
                               scope="col"
                               className="group px-6 py-3 text-left text-sm font-Pop-R text-gray-500 uppercase"
@@ -221,8 +223,9 @@ function EditablePaymentSubsTable({ columns, functionToLoadData }) {
                     <tbody
                       {...getTableBodyProps()}
                       className="bg-white divide-y divide-gray-200"
-                    >   
-                      {page.map((row, i) => {  // new
+                    >  
+                    {data.length > 0 && data[0].id !== "" &&
+                      page.map((row, i) => {  // new
                         prepareRow(row)
                         return (
                           <tr {...row.getRowProps()}>
@@ -246,9 +249,21 @@ function EditablePaymentSubsTable({ columns, functionToLoadData }) {
                             </td>
                           </tr>
                         )
-                      })}
+                      })
+                    }
                     </tbody>
                   </table>
+                  {data.length > 0 && data[0].id === "" ?
+                     <div className='w-full text-center py-8 font-Pop-R text-sm text-gray-400'>
+                      <Loading/>
+                     </div>
+                    : null
+                  }
+                  {data.length > 0 ?
+                    null
+                    :
+                    <div className='w-full text-center py-8 font-Pop-R text-sm text-gray-400'>No hay Cobros a Emitir. Agregue cobros sugeridos o realize un nuevo cobro.</div>
+                  }
                 </div>
               </div>
             </div>
@@ -256,8 +271,8 @@ function EditablePaymentSubsTable({ columns, functionToLoadData }) {
           {/* Pagination */}
           <div className="py-3 flex items-center justify-between">
             <div className="flex-1 flex justify-between sm:hidden">
-              <Button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</Button>
-              <Button onClick={() => nextPage()} disabled={!canNextPage}>Next</Button>
+              <Button onClick={() => previousPage()} disabled={!canPreviousPage}>Anterior</Button>
+              <Button onClick={() => nextPage()} disabled={!canNextPage}>Siguiente</Button>
             </div>
             <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
               <div className="flex gap-x-2 items-baseline space-x-4">
@@ -295,14 +310,14 @@ function EditablePaymentSubsTable({ columns, functionToLoadData }) {
                     onClick={() => previousPage()}
                     disabled={!canPreviousPage}
                   >
-                    <span className="sr-only">Previous</span>
+                    <span className="sr-only">Anterior</span>
                     <ChevronLeftIcon className="h-3 w-3 text-gray-400" aria-hidden="true" />
                   </PageButton>
                   <PageButton
                     onClick={() => handleMoreData()}
                     disabled={!canNextPage
                     }>
-                    <span className="sr-only">Next</span>
+                    <span className="sr-only">Siguiente</span>
                     <ChevronRightIcon className="h-3 w-3 text-gray-400" aria-hidden="true" />
                   </PageButton>
                   <PageButton

@@ -11,6 +11,7 @@ const SubscriptionReportPage = () => {
       subtitle="Reporte histórico de las suscripciones realizadas"
       dataForColumns={SubscriptionTableInformation.columns}
       functionToLoadData={getSubscriptionsForTable}
+      activateAdminNotifications={true}
     />
   );
 };

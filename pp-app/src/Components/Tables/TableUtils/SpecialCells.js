@@ -31,6 +31,27 @@ export function OpenSideBarFromUser({value, row}){
     </button>
   );
 }
+
+export function OpenSideBarFromUserPayentEdition(){
+  const {editionRow} = usePaymentManagerContext();
+  const {setSelectedUser, setShowSidebar} = useSelectionOnTable();
+  const [user, setUser] = useState(editionRow.userID)
+  useEffect(() => {
+    AuthService.findUserById(parseInt(editionRow.userId)).then(res=>setUser(res.data))
+  }, [editionRow.userId])
+  
+  return(
+    <button 
+      className="text-xs flex flex-row text-gray-500 font-Pop-L hover:decoration-gray-500 hover:underline hover:underline-offset-4" 
+      onClick={()=>{setShowSidebar(true); setSelectedUser(editionRow.userId)}}>
+      <div>{user ? user.email : editionRow.userId}</div>
+      {(editionRow.userId ==='0') ? 
+        <div className='ml-1'><InformationTooltips.InstructionTooltip size="h-2 w-2" tooltipContent="Haz click aquí o en cualquier email para obtener más información acerca de el usuario."/></div>
+        : <></>}
+    </button>
+  );
+}
+
 export function StatusPillTransactions({ value, row }) {
     const [showAcceptModal, setShowAcceptModal] = useState(false);
     const [showRejectModal, setShowRejectModal] = useState(false);
@@ -120,18 +141,20 @@ export function PaymentFrecuency({ value }) {
     );
 };
 
-export function EditableAmmount({ value }) {
-  const [ selectedAmount, setSelectedAmount ] = useState(value)
+export function EditableAmmountPayentEdition({ }) {
+  const {editionRow, setEditionRow} = usePaymentManagerContext();
+  const [ selectedAmount, setSelectedAmount ] = useState(editionRow.amount)
 
   const onChange = (event) => {
     console.log(event)
     var amount = parseInt(event.target.value)
     amount = ((isNaN(amount) ) ? 0 : amount);
     setSelectedAmount(amount)
+    setEditionRow({...editionRow, amount: amount})
   }
   useEffect(() => {
-    setSelectedAmount(value)
-  }, [value])
+    setSelectedAmount(editionRow.amount)
+  }, [editionRow.amount])
   
   return (
     <div className='flex flex-col'>
@@ -148,7 +171,7 @@ export function EditableAmmount({ value }) {
   );
 };
 
-export function EditableAmmountForNewPayment({ value }) {
+export function EditableAmmountForNewPayment({ }) {
   const {newPaymentAmount, setNewPaymentAmount} = usePaymentManagerContext()
 
   const onChange = (event) => {
@@ -172,7 +195,7 @@ export function EditableAmmountForNewPayment({ value }) {
   );
 };
 
-export function SelectUser({ value }) {
+export function SelectUser({ }) {
   const {newPaymentUser, setNewPaymentUser, setNewPaymentUserOptions, newPaymentUserOptions} = usePaymentManagerContext()
   const onChange = (e) => {
     setNewPaymentUser(e);
@@ -228,8 +251,9 @@ export function SelectUser({ value }) {
   );
 };
 
-export function SelectableDate({ value, row }) {
-  const [paymentDay, setPaymentDay] = useState(value)
+export function SelectableDatePayentEdition({ }) {
+  const {editionRow, setEditionRow} = usePaymentManagerContext();
+  const [paymentDay, setPaymentDay] = useState(editionRow.paymentDate)
   return (
     <div className="md:basis-1/2"> 
       <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -239,6 +263,7 @@ export function SelectableDate({ value, row }) {
           value={paymentDay}
           onChange={(newPaymentDay) => {
             setPaymentDay(newPaymentDay.format("YYYY-MM-DD"));
+            setEditionRow({...editionRow, paymentDate: newPaymentDay.format("YYYY-MM-DD")})
           }}
           inputProps={{readOnly: true}}
           className="border-red"
@@ -267,7 +292,7 @@ export function SelectableDate({ value, row }) {
   );
 };
 
-export function SelectableDateForNewPayment({ value, row }) {
+export function SelectableDateForNewPayment({}) {
   const {newPaymentDate, setNewPaymentDate} = usePaymentManagerContext()
   
   return (

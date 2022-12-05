@@ -29,9 +29,21 @@ const BasicInfoTooltip = (props) => {
   );
 };
 
+const Alert = (props) => {
+  return ( 
+    <>
+    <Button className={`flex self-end shadow-none m-0 p-0 ${props.size}`} class={`flex self-end ${props.size}`} data-tooltip-target="tooltip-right" data-tooltip-placement="right" type="button" >
+        <span class={`animate-ping absolute inline-flex rounded-full bg-[#eb8301] opacity-75 ${props.size}`}></span>
+        <span class={`relative inline-flex rounded-full bg-[#eb8301] ${props.size}`}></span>
+    </Button>
+    </>              
+  );
+};
+
 const InformationTooltips ={
   InstructionTooltip,
-  BasicInfoTooltip
+  BasicInfoTooltip,
+  Alert
 }
 
 export default InformationTooltips;

@@ -167,8 +167,8 @@ function Table({ columns, functionToLoadData }) {
           {/* Pagination */}
           <div className="py-3 flex items-center justify-between">
             <div className="flex-1 flex justify-between sm:hidden">
-              <Button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</Button>
-              <Button onClick={() => nextPage()} disabled={!canNextPage}>Next</Button>
+              <Button onClick={() => previousPage()} disabled={!canPreviousPage}>Anterior</Button>
+              <Button onClick={() => nextPage()} disabled={!canNextPage}>Siguiente</Button>
             </div>
             <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
               <div className="flex gap-x-2 items-baseline space-x-4">
@@ -206,14 +206,14 @@ function Table({ columns, functionToLoadData }) {
                     onClick={() => previousPage()}
                     disabled={!canPreviousPage}
                   >
-                    <span className="sr-only">Previous</span>
+                    <span className="sr-only">Anterior</span>
                     <ChevronLeftIcon className="h-3 w-3 text-gray-400" aria-hidden="true" />
                   </PageButton>
                   <PageButton
                     onClick={() => handleMoreData()}
                     disabled={!canNextPage
                     }>
-                    <span className="sr-only">Next</span>
+                    <span className="sr-only">Siguiente</span>
                     <ChevronRightIcon className="h-3 w-3 text-gray-400" aria-hidden="true" />
                   </PageButton>
                   <PageButton

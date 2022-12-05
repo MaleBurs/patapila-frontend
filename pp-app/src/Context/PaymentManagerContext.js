@@ -4,12 +4,16 @@ const PaymentManagerContext = React.createContext()
 
 export function PaymentManagerContextProvider (props) {
   const [selectSugested, setSelectSugested] = useState(false)
+  const [editPayment, setEditPayment] = useState(false)
   const [newPaymentAmount, setNewPaymentAmount] = useState(0)
   const [newPaymentUser, setNewPaymentUser] = useState(null)
   const [newPaymentDate, setNewPaymentDate] = useState(new Date())
   const [newPaymentUserOptions, setNewPaymentUserOptions] = useState([])
+  const [editionRow, setEditionRow] = useState(null)
   useEffect(() => {
     setSelectSugested(false)
+    setEditPayment(false)
+    setEditionRow(null)
   }, [])
   const value = useMemo(() => {
     return {
@@ -22,9 +26,13 @@ export function PaymentManagerContextProvider (props) {
         newPaymentUserOptions,
         setNewPaymentUserOptions,
         newPaymentDate,
-        setNewPaymentDate
+        setNewPaymentDate,
+        editPayment,
+        setEditPayment,
+        editionRow,
+        setEditionRow,
     }
-  }, [selectSugested, newPaymentAmount,newPaymentUser,newPaymentUserOptions,newPaymentDate])
+  }, [selectSugested, newPaymentAmount,newPaymentUser,newPaymentUserOptions,newPaymentDate, editPayment, editionRow])
 
   return (
     <PaymentManagerContext.Provider value={value}>

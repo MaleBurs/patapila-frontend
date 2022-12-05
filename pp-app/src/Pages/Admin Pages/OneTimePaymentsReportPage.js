@@ -11,6 +11,7 @@ const OneTimePaymentsReportPage = () => {
       subtitle="Reporte histórico de los cobros emitidos por donaciones de una única vez."
       dataForColumns={OnlyTimePaymentsTableInformation.columns}
       functionToLoadData={getOnlyTimeTransactions}
+      activateAdminNotifications={true}
     />
   );
 };
