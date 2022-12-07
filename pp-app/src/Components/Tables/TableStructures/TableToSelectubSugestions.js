@@ -55,6 +55,7 @@ function TableToSelectubSugestions({ columns, functionToLoadData }) {
     useRowSelect,
     useRowSelectColumn
   )
+
   useEffect(() => {
     skipPageResetRef.current = false
     functionToLoadData(20,0).then(res=>{
@@ -120,7 +121,7 @@ function TableToSelectubSugestions({ columns, functionToLoadData }) {
                         {...getTableBodyProps()}
                         className="bg-white divide-y divide-gray-200"
                       >
-                        {data.length > 0 && data[0].user &&
+                        {data.length > 0 && data[0].id &&
                         page.map((row, i) => {  // new
                           prepareRow(row)
                           return (
@@ -145,13 +146,13 @@ function TableToSelectubSugestions({ columns, functionToLoadData }) {
                         }
                       </tbody>
                     </table>
-                    {data.length > 0 && data[0].user ?
+                    {data.length > 0 && data[0].id === "" ?
                      <div className='w-full text-center py-8 font-Pop-R text-sm text-gray-400'>
                       <Loading/>
                      </div>
                     : null
                   }
-                    {data.length > 0 ?
+                    {data.length > 0 && data[0]!==emptyRows ?
                       null
                       :
                       <div className='w-full text-center py-8 font-Pop-R text-sm text-gray-400'>No hay Cobros Sugeridos</div>
