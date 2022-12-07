@@ -39,10 +39,10 @@ export default function UserNavBar(props) {
     PaymentManagerService.getNotifications().then((response) => {
       setNotifications(response.data);
     }).catch();
-  }, []);
+  },[]);
 
   useEffect(() => {
-    if(notifications.length > 0 || notifications.filter((notification) => notification.reed === "NR").length > 0){
+    if(notifications.filter((notification) => notification.read === "NR").length > 0){
       setHasNotificationBeenSeen(true);
     }
   }, [notifications])
@@ -57,6 +57,9 @@ export default function UserNavBar(props) {
   const deleteNotification = (notification ) => {
     PaymentManagerService.deleteNotification(notification.id).then().catch();
     navigate("/gestorDeCobrosSuscripciones");
+    PaymentManagerService.getNotifications().then((response) => {
+      setNotifications(response.data);
+    }).catch();
   }
 
   return (
