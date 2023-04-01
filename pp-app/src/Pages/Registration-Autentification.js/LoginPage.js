@@ -14,6 +14,7 @@ import CorazonSinColor from "../../Components/Images/CorazonSinColor.png";
 import { SectionTextAndLogo } from "../../Components/Utiles/SectionTextAndLogo";
 import { datosDeImpacto } from "../../Values/datosDeImpacto";
 import { useNavigate } from "react-router-dom"
+import { PieDePaginaInformativo } from "../../Components/Utiles/PieDePaginaInformativo";
 
 export default function LoginPage() {
 
@@ -82,11 +83,10 @@ export default function LoginPage() {
         backgoundColor="bg-[#e7e6e6]"
         buttonFunction={() => navigate("/signup")}
       />
-
+      <div className="flex flex-col">
+        <div className="h-16 bg-[#e7e6e6]"></div>
+        <PieDePaginaInformativo/>
+      </div>
     </>
   )
 }
-
-
-
-

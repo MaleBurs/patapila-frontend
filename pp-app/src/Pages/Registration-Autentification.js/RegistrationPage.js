@@ -11,7 +11,7 @@ import { TextBubble } from "../../Components/Utiles/TextBubble"
 import { SectionWithPictureWithInformation } from "../../Components/Utiles/SectionWithPictureWithInformation";
 import CorazonSinColor from "../../Components/Images/CorazonSinColor.png";
 import ManoConPlata from "../../Components/Images/ManoConPlata.png";
-
+import { PieDePaginaInformativo } from "../../Components/Utiles/PieDePaginaInformativo";
 
 export default function RegistrationPage() {
   return (
@@ -43,7 +43,7 @@ export default function RegistrationPage() {
       bgImage="imageBgNiñoMirada"
       content={
         <div className="mx-10 mt-32 flex flex-col items-center">
-          <div className="font-Pop-B tracking-[0.7px] text-balck text-4xl mb-10">
+          <div className="font-Pop-B tracking-[0.7px] text-[#2e2a25] text-4xl mb-10">
             Dos Maneras de Donar
           </div>
           <div className="flex flex-row"> 
@@ -78,6 +78,7 @@ export default function RegistrationPage() {
           </div>
         </div>
       }/>
+      <PieDePaginaInformativo/>
     </>
   )
 }

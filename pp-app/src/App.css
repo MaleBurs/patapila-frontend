@@ -153,6 +153,10 @@
     transition: 0.7s;
     background-color: #0F6938;
 }
+.greenColorHover:hover, .greenColorHover:focus{
+    transition: 0.7s;
+    color: #0F6938;
+}
 .lightgreyBgTranslucentHover:focus, .lightgreyBgTranslucentHover:hover {
     background-color:  #f3f1f1;
 }
