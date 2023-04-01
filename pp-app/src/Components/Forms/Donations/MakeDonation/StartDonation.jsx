@@ -8,6 +8,7 @@ import ModalWithDetails from "../../../Utiles/ModalWithDetails";
 import { useNavigate } from "react-router-dom"
 import Messages from '../../Messages'
 import ActServices from '../../../../services/activities.service'
+import {textos} from "./MakeDonationTexts"
 
 const StartDonation = ({ setStep }) => {
   const { selectedFrequency } = useFrequency();
@@ -37,11 +38,11 @@ const StartDonation = ({ setStep }) => {
 
   const isFormValid = () =>{
     if (selectedFrequency === 2 && (paymentDay===null || paymentDay=== undefined)){
-      setMessage("Para activar una suscripción debe seleccionar la fecha del primer pago.");
+      setMessage(textos.restriccionFechaPago);
       return false
     }
     if (selectedAmount < 1 || selectedAmount===undefined){
-      setMessage("El monto a donar debe ser de al menos $1.");
+      setMessage(textos.restriccionMontoDonacion);
       return false
     }
     return true

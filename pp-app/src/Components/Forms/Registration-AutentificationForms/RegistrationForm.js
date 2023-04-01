@@ -8,7 +8,7 @@ import Modal from "../../Utiles/Modal";
 import ValidationFunctions from "../../../functions/validations"
 import BaseAutetificationForm from "./BaseAutentificationForm";
 import ActServices from "../../../services/activities.service";
-import Loading from "../../Utiles/Loading";
+import {textos} from './Registration-AuthentificationTexts';
 
 export default function RegistrationForm(props) {
   const [showModal, setShowModal] = React.useState(false);
@@ -156,12 +156,12 @@ export default function RegistrationForm(props) {
       {!successful && (
         <>
         <BaseAutetificationForm 
-        textOnButton={"Registrarse"}
+        textOnButton={textos.registrarseNoConjugado}
         inputs={inputs}
         submitFunction={handleRegister}
         functionAfterSeparationLine={navigateToLogInPage}
-        textAfterSeparationLine="¿Ya tienes una cuenta?"
-        actionAfterSeparationLine= "Inicia sesión"
+        textAfterSeparationLine={textos.tenesCuenta}
+        actionAfterSeparationLine= {textos.iniSesion}
         logo = {LogoLucha}
         validationOfSamePasswordActive
         extraStyles={props.extraStyles}

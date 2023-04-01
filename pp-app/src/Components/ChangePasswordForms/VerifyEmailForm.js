@@ -10,6 +10,7 @@ import Input from "react-validation/build/input";
 import { useNavigate } from "react-router-dom";
 import ValidationFunctions from "../../functions/validations";
 import Messages from "../Forms/Messages";
+import textos from "./changePasswordFormsTexts";
 
 
 export default function VerifyEmailForm(props) {
@@ -65,12 +66,12 @@ export default function VerifyEmailForm(props) {
 
           <div className="grid justify-items-center mb-4">
                 <div className="gray-300 titleText text-[18pt] font-semibold text-center">
-                  ¿Tienes problemas para iniciar sesión?
+                  {textos.problemaInicioSesion}
                 </div>
           </div>
           <div className="grid justify-items-center mb-10">
                 <div className="text-slate-600 text-center infoText text-[11pt]">
-                Ingresa tu correo electrónico y te enviaremos un enlace para que recuperes el acceso a tu cuenta.
+                {textos.instruccionCambioContraseña}
                 </div>
           </div>
           <Form className="" ref={form}>
@@ -87,14 +88,14 @@ export default function VerifyEmailForm(props) {
                 />       
            </div>
     
-            <Buttons.SolidGreenButton text={"Enviar enlace"} color={"greenBg"} margins={"my-5 md:my-7"} onClick={handleEmailChangeRequest}/> 
+            <Buttons.SolidGreenButton text={textos.enviar} color={"greenBg"} margins={"my-5 md:my-7"} onClick={handleEmailChangeRequest}/> 
 
             <div className="flex flex-rows justify-center mt-4 mb-5 md:mb-10">
                 <div className="gray-300 relevantText  text-[11pt] md:text-[12pt]">
-                  ¿No tienes una cuenta?
+                  {textos.sinCuenta}
                 </div>
                 <button className="ml-3 mb-3 yellowText greenTextHover relevantText text-[12pt] md:text-[12pt] font-semibold" onClick={navigateToRegistrationPage} >
-                  Regístrate
+                  {textos.registrarse}
                 </button>
             </div> 
             {message && (

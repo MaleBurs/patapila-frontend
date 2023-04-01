@@ -39,11 +39,11 @@ export function MonthlySubscriptionStateContextProvider(props) {
     var amount = 0;
     var newMonthData ={};
     for(const item of res.data){
-      if(item.state=="A"){
+      if(item.state==="A"){
         a=a+1;
-      }else if(item.state=="P"){
+      }else if(item.state==="P"){
         p=p+1;
-      }else if(item.state=="C"){
+      }else if(item.state==="C"){
         c=c+1
       }
     }
@@ -63,7 +63,7 @@ export function MonthlySubscriptionStateContextProvider(props) {
   const valueInMonthlyData = (value) => {
     if(monthlyData.length>0){
       for(const md of monthlyData){
-        if (md.value == value) return true;
+        if (md.value === value) return true;
       }
     }
     return false;

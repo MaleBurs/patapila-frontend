@@ -13,11 +13,11 @@ const  PictureWithText = ({ picture, title, text }) => {
                 alt="title"
           />
         </div>
-        <div className="basis-1/2 font-Pop-SB text-white text-[20pt] tracking-[0px] mx-10 lg:mx-30">
+        <div className="basis-1/2 font-Pop-SB text-white text-2xl tracking-[0px] mx-10 lg:mx-30">
           <div className="mt-5">
             {title}
           </div>
-          <div className="font-medium tracking-[0.2px] text-[15pt] text-white font-Pop-R mt-8 text-justify">
+          <div className="font-medium tracking-[0.2px] text-lg text-white font-Pop-R mt-8 text-justify">
            {text}
           </div>
         </div>

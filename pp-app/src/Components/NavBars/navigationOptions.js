@@ -1,11 +1,3 @@
-
-const adminNavigation =[
-  { name: 'Ajustes', path: "/settings"},
-  { name: 'Reporte Transacciones', path:"/reporteTransacciones"},
-  { name: 'Reporte Suscripciones', path:"/reporteSubscripciones"},
-  { name: 'Dashboard', path:"/reportes"},
-]
-
 const userNavigation =[
   { name: "Donar", path:"/donar"},
   { name: "Inicio", path:"/inicio"},
@@ -13,7 +5,6 @@ const userNavigation =[
 ]
 
 const navigationOptions = {
-  adminNavigation,
   userNavigation,
 }
 

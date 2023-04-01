@@ -7,7 +7,6 @@ import CheckButton from "react-validation/build/button";
 import { useSubscriptionPeriod } from "../../Context/SubscriptionContext"
 import Input from "react-validation/build/input";
 import ValidationFunctions from "../../functions/validations";
-import Messages from "../Forms/Messages"
 
 const ModalWithConfirmationAndDetails = (props) =>{
   const form = useRef();

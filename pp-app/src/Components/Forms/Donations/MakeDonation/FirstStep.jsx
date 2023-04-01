@@ -12,10 +12,12 @@ import SelectPaymentDay from '../SelectPaymentDay'
 import StepTitle from './StepTitle';
 import { useSubscriptionPeriod } from '../../../../Context/SubscriptionContext'
 import SubscriptionImpactForSelectedAmount from '../SubscriptionImpactForSelectedAmount'
+import {textos} from './MakeDonationTexts'
+
 const determineExplanationTextForPaymentDay = (subsPeriod) => {
   return ((subsPeriod.value === "1") ?
-    "¿Qué día del mes quiere que se realize el pago?"
-    :"¿Qué día quiere comenzar a donar?")
+    textos.diaMes
+    : textos.primerDonacionDia)
   }
 
 const FirstStep = ({ setStep }) => {
@@ -27,11 +29,11 @@ const FirstStep = ({ setStep }) => {
     <>
     <StepTitle 
       titleText={!(subscriptionData) || (selectedFrequency===1) ? 
-      'Únase a la lucha contra la desnutrición infantil' 
+      textos.invitacionLucha 
       : ((subscriptionData.subscriptionState.state !== 'P') ?
-        "Usted ya esta realizando una donación recurrente"
+        textos.donaRecurrentemente
         :
-        "Usted ya tiene una suscripción pausada"
+        textos.subsPausada
         )}/>  
       {(selectedFrequency===1) ? 
       <>
@@ -68,8 +70,8 @@ const FirstStep = ({ setStep }) => {
       <>
       <ModifyDonationMessage 
         text={(subscriptionData.subscriptionState.state !=='P') ? 
-        "Vaya a ajustes para visualizar/modificar su suscripción actual." 
-        :"Vaya a ajustes para reanudar su suscripción y continuar luchando contra la desnutrición infantil."}></ModifyDonationMessage>
+        textos.instrModSusc
+        : textos.instRenaudar }></ModifyDonationMessage>
       <ModifyDonation/>  
       </>
       }

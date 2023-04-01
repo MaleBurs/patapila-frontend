@@ -21,10 +21,10 @@ export default function NavBar(props) {
               <nav className="bg-transparent container sm:h-10 fix mx-auto top-0 left-0" aria-label="Global">
                 <div className="mt-6 mx-auto flex flex-row justify-around lg:mx-8">
                     <div className="flex flex-row justify-between w-full mx-3 lg:mx-0 lg:basis-2/5">
-                        <div className='mt-3'>
+                        <div className='mt-1'>
                             <a href="https://patapila.org/index.php">
                             <img
-                                className="h-auto w-[160px]"
+                                className="h-auto w-[220px]"
                                 src="https://patapila.org/assets/img/logo_3.svg"
                                 alt="Pata Pila Logo"
                             />

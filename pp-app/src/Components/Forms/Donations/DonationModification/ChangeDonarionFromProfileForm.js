@@ -19,6 +19,7 @@ import Messages from "../../Messages";
 import CustomAmountInput from './CustomAmountInput'
 import ActServices from "../../../../services/activities.service";
 import AuthService from "../../../../services/auth.service";
+import { textos } from "./DonationModificationTexts";
 
 const determineExplanationTextForPaymentDay = (subsPeriod, userWantsToModifySubs) => {
   return(userWantsToModifySubs ? 
@@ -27,7 +28,7 @@ const determineExplanationTextForPaymentDay = (subsPeriod, userWantsToModifySubs
         :"¿Qué día quiere donar?")
       : "Fecha del Próximo Pago")
 }
-const ChangeDonationFromProfileForm = (props) =>{
+const ChangeDonationFromProfileForm = () =>{
   const {userWantsToModifySubs, setIfUserWantsToModifySubs} = useSubModContext();
   const {subscriptionData} = useCurrentUser();
   const [showModalWithConfirmation, setShowModalWithConfirmation] = useState(false);
@@ -74,11 +75,11 @@ const ChangeDonationFromProfileForm = (props) =>{
 }
   const isFormValid = () =>{
     if (paymentDay===null || paymentDay=== undefined){
-      setMessage("Para realizar una donación recurrente debe ingresar la fecha de pago");
+      setMessage(textos.restriccionFechaPago);
       return false
     }
     if (selectedAmount < 1 || selectedAmount===undefined){
-      setMessage("El monto ingresado a donar debe de ser al menos $1");
+      setMessage(textos.restriccionMontoDonacion);
       return false
     }
     return true
@@ -115,17 +116,17 @@ const ChangeDonationFromProfileForm = (props) =>{
       value={showModalWithConfirmation} 
       onChange={closeModalWithConfirmation} 
       header={(subscriptionData.subscriptionState.state !== 'P') ?
-      "¿Estás seguro de que deseas modificar tu donación recurrente?"  :  "¿Estás seguro de que deseas reanudar tu donación recurrente?"
-          } 
-      body={(subscriptionData.subscriptionState.state !== 'P') ? "Si guardas los cambios, tu donación actual se modificará."
-              :   "Si guardas los cambios, tu donación recurrente se reanudará."} 
+        textos.confirmacionModifciacion : textos.confirmacionReanudacion
+        } 
+      body={(subscriptionData.subscriptionState.state !== 'P') ? textos.queSucedeAlModificar
+              :  textos.queSucedeAlRenaudar} 
       saveChanges={(subscriptionData.subscriptionState.state !== 'P') ? modifyDonation : handleResetDonation}
       action= {(subscriptionData.subscriptionState.state !== 'P') ? "modificará" : "reanudará"} cancelButton="Volver atrás" saveButton="Guardar cambios"></ModalWithConfirmationAndDetails>
     ) : null}
     {showModal ? (
       <Modal value={showModal} onChange={closeModal} header={(subscriptionData.subscriptionState.state !== 'P') ?
-      "Tu donación recurrente ha sido modificada con éxito!"  :  "Tu donación recurrente ha sido activada con éxito!"
-          }body={""} buttonText={"Continuar"}></Modal>
+      textos.modificacionOk : textos.activacionOk
+      }body={""} buttonText={"Continuar"}></Modal>
     ) : null}
     <div className="p-6 md:p-6 lg:py-8 lg:px-11">
     <div className='flex flex-col space-y-8 md:space-y-6'>
@@ -159,7 +160,7 @@ const ChangeDonationFromProfileForm = (props) =>{
         <>
         <div className="flex flex-col space-y-6">
           <Buttons.IndicationButton  text={"Reanudar Donación"} customStyle={"w-full text-white greenBg yellowBgHover "} onClick={()=>{setShowModalWithConfirmation(true)}}></Buttons.IndicationButton>
-          <div className="font-Pop-R text-lg text-gray-400 basis-1/2" >Su donación se encuentra pausada, esto significa que no se realizará ninguna pago hasta que usted reactive su suscripción </div> 
+          <div className="font-Pop-R text-lg text-gray-400 basis-1/2" >{textos.pausada}</div> 
         </div>
         </>
         )}

@@ -1,3 +1,15 @@
 .imageBg{
     background-image: url("../../Components/Images/ImagenHijoYMadre.jpg");
 }
+
+.imageBgPiesitos{
+    background-image: url("../../Components/Images/Piesitos.jpg");
+}
+
+.imageBgSonrisa{
+    background-image: url("../../Components/Images/ImagenNinaSonriendo.jpg");
+}
+
+.imageBgNiñoMirada{
+    background-image: url("../../Components/Images/NiñoMirada.jpg");
+}

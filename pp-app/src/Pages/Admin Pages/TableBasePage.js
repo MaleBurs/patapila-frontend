@@ -1,7 +1,6 @@
 import React from "react";
 import AuthService from "../../services/auth.service";
-import UserNavBar from "../../Components/NavBars/UserNavBar";
-import navigationOptions from "../../Components/NavBars/navigationOptions";
+import AdminNavBar from "../../Components/NavBars/AdminNavBar";
 import Table from "../../Components/Tables/Table";
 import Sidebar from "../../Components/Utiles/SideBar";
 import { SelectionOnTableContexProvider } from "../../Context/SelectionsOnTable";
@@ -11,8 +10,8 @@ const TableBasePage = (props) => {
   return (
     <SelectionOnTableContexProvider>
     <>
+    <AdminNavBar></AdminNavBar>
     <div className="space-y-10 mx-auto z-10 pb-8 sm:pb-16 md:pb-20 lg:pb-28 xl:pb-32 h-screen bg-cover place-content-center">
-      <UserNavBar navigation={navigationOptions.adminNavigation} currentUser={currentUser}/>
       {currentUser ? (
       <>
       <div className="almostWhiteBg">

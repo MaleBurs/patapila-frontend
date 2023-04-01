@@ -7,6 +7,7 @@ import React from 'react';
 import ImagePageContainer from "./ImagePageContainer";
 import AuthService from "../../services/auth.service";
 import { useEffect, useState } from "react";
+import { navigationInformative } from '../navigationInformative'
 
 export default function RefferalsPage() {
   const params = useParams();
@@ -20,12 +21,7 @@ export default function RefferalsPage() {
       <ImagePageContainer content={
         <>
         <NavBar 
-        navigation={[
-          { name: '¿Por qué desnutrición?', href: 'https://patapila.org/desnutricion.php' },
-          { name: 'Nuestro Trabajo', href: 'https://patapila.org/impacto.php' },
-          { name: 'Sobre Nosotros', href: 'https://patapila.org/nosotros.php' },
-          { name: 'Involucrate', href: 'https://patapila.org/involucrate.php' },
-        ]}
+        navigation={navigationInformative}
         />
         <div className="flex flex-row px-24">
           <div className=" basis-1/2 mt-20 text-end font-Pop-SB text-white text-[20pt] tracking-[0px] mx-10 lg:mx-30">

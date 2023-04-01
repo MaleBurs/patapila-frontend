@@ -39,7 +39,7 @@ const required = (value) => {
   };
 
   const vcancel = (value) => {
-    if (value != "Cancelar") {
+    if (value !== "Cancelar") {
       return (
         <div className="alert redText alert-danger text-sm my-2 mx-3" role="alert">
           La palabra ingresada es incorrecta.

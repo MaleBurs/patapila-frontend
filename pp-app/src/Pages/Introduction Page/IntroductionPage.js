@@ -5,15 +5,7 @@ import LoginButton from '../../Components/Registration Buttons/loginButton'
 import "../../Fonts/Poppins-Bold.ttf"
 import "../../Components/NavBar/navBar.css"
 import "./IntroductionPage.css"
-
-const navigation = [
-
-
-  { name: '¿Por qué desnutrición?', href: 'https://patapila.org/desnutricion.php' },
-  { name: 'Nuestro Trabajo', href: 'https://patapila.org/impacto.php' },
-  { name: 'Sobre Nosotros', href: 'https://patapila.org/nosotros.php' },
-  { name: 'Involucrarte', href: 'https://patapila.org/involucrate.php' },
-]
+import { navigationInformative } from '../navigationInformative'
 
 export default function IntroductionPage() {
   return (
@@ -42,7 +34,7 @@ export default function IntroductionPage() {
                     </div>
                   </div>
                   <div className="hidden md:ml-10 md:block md:pr-4 md:pt-8">
-                  {navigation.map((item) => (
+                  {navigationInformative.map((item) => (
                     <a key={item.name} href={item.href} className='navBarText'>
                       {item.name}
                     </a>

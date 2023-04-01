@@ -9,7 +9,7 @@ export default function TotalAmountModule(props) {
 
   const getValue = () => {
     for (const md of monthlyData){
-      if(md.value == month){
+      if(md.value === month){
         return md.amount
       }
     }

@@ -5,6 +5,7 @@ import LogoCorazon from "../../Images/LogoCorazon.png";
 import AuthService from "../../../services/auth.service";
 import ValidationFunctions from "../../../functions/validations";
 import BaseAutetificationForm from "./BaseAutentificationForm";
+import {textos} from './Registration-AuthentificationTexts';
 
 export default function Login(props) {
   const [email, setMail] = useState("");
@@ -68,16 +69,16 @@ export default function Login(props) {
   return (
     <>
     <BaseAutetificationForm 
-      textOnButton="Iniciar Sesión"
+      textOnButton= {textos.iniSesion}
       inputs={inputs}
       submitFunction={handleLogin}
-      textBeforeSeparationLine = "Olvidaste tu contraseña?"
+      textBeforeSeparationLine = {textos.olvidasteContraseña}
       functionAfterSeparationLine={navigateToRegistrationPage}
       functionBeforeSeparationLine={navigateToChangePassword}
-      textAfterSeparationLine="¿No tenes cuenta?"
-      actionAfterSeparationLine= "Regístrate"
+      textAfterSeparationLine={textos.noTenesCuenta}
+      actionAfterSeparationLine= {textos.registrarse}
       logo = {LogoCorazon}
-      extraStyles="lg:w-1/4"
+      extraStyles="md:w-3/4 lg:w-full"
     />
     </>
   );

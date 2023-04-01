@@ -11,6 +11,7 @@ import { useAmount } from  '../../../../Context/AmountContext'
 import {useSubscriptionPeriod} from  '../../../../Context/SubscriptionContext'
 import ActServices from "../../../../services/activities.service";
 import AuthService from "../../../../services/auth.service";
+import { textos } from './DonationModificationTexts';
 
 const ModifyStatePopUp = ( ) => {
   
@@ -19,7 +20,7 @@ const ModifyStatePopUp = ( ) => {
     const [showModalWithWrittenConfirmation, setShowModalWithWrittenConfirmation] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const { selectedAmount} = useAmount()
-    const { subsPeriod, paymentDay} = useSubscriptionPeriod()
+    const { subsPeriod } = useSubscriptionPeriod()
     const [cancellationRequest, setCancellationRequest] = useState(false);
     const currentUser = AuthService.getCurrentUser();
 
@@ -86,21 +87,21 @@ const ModifyStatePopUp = ( ) => {
     {showModalWithConfirmation ? (
     <ModalWithConfirmationAndDetails 
     value={showModalWithConfirmation} onChange={closeModalWithConfirmation} header={
-      "¿Estás seguro de que deseas pausar tu suscripción?"
-          } body={"Si guardas los cambios, tu suscripción actual se pausará."} saveChanges={handlePausedSubs}
+      textos.confirmacionPausa
+          } body={textos.queSucedeAlPausar} saveChanges={handlePausedSubs}
     action={ "pausará"} saveButton="Guardar cambios" cancelButton="Volver atrás"></ModalWithConfirmationAndDetails>
     ) : null}
     { showModalWithWrittenConfirmation ? (
       <ModalWithWrittenConfirmation 
     value={showModalWithConfirmation} onChange={closeModalWithWrittenConfirmation} header={"¿Estás seguro de que deseas cancelar tu donación recurrente?"
-          } body={"Si guardas los cambios, tu suscripción se cancelará."} saveChanges={handleCancelledSubs}
+          } body={textos.queSucedeAlCancelar} saveChanges={handleCancelledSubs}
     action={"cancelará"}></ModalWithWrittenConfirmation>
     ) : null
 
     }
     {showModal ? (
       <Modal value={showModal} onChange={closeModal} header={(!cancellationRequest) ?
-      "Tu suscripción ha sido pausada con éxito!"  :  "Tu suscripción ha sido cancelada con éxito!"
+      textos.pausadaOk  :  textos.canceladaOk
           }body={""} buttonText={"Continuar"}></Modal>
     ) : null}
         <Popover className={"grid relative"}>
@@ -112,11 +113,11 @@ const ModifyStatePopUp = ( ) => {
             <Popover.Panel className={"absolute top-0 right-0 mt-4 p-3 rounded-lg almostWhiteBg grayBorder space-y-2"}>
                 <div className="space-y-2">
                 <button onClick={()=>{setCancellationRequest(true);setShowModalWithWrittenConfirmation(true)}} className='w-full text-left z-50 relative text-gray-400 duration-700 font-Pop-M hover:text-gray-500 focus:text-gray-500 tracking-[0.5px] grayBottomBorder block px-1 py-2 text-xs'>
-                    Cancelar suscripción
+                    {textos.opcionCancelar}
                 </button>
                 {(subscriptionData.subscriptionState.state !== 'P') ?
                 <button onClick={()=>{setShowModalWithConfirmation(true)}} className='w-full text-left z-50 relative text-gray-400 duration-700 hover:text-gray-500 focus:text-gray-500 font-Pop-M tracking-[0.5px] block px-1 py-2 text-xs'>
-                    Pausar suscripción
+                    {textos.opcionPausar}
                 </button>
                 : null
                 }

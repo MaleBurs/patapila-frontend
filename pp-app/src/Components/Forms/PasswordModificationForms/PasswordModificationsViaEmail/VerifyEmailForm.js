@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import ValidationFunctions from "../../../../functions/validations";
 import Messages from "../../Messages";
 import "../../../../App.css"
+import { textos } from "../PasswordModificationTexts";
 export default function VerifyEmailForm(props) {
   const form = useRef();
   const checkBtn = useRef();
@@ -62,12 +63,12 @@ export default function VerifyEmailForm(props) {
 
           <div className="grid justify-items-center mb-4">
                 <div className="gray-300 font-Pop-SB tracking-[0.5px] uppercase text-base text-center">
-                  ¿Tienes problemas para iniciar sesión?
+                  {textos.problemaInicioSesion}
                 </div>
           </div>
           <div className="grid justify-items-center mb-10">
                 <div className="text-slate-600 text-center font-Pop-M tracking-[0.5px] text-sm">
-                Ingresa tu correo electrónico y te enviaremos un enlace para que recuperes el acceso a tu cuenta.
+                {textos.solucion}
                 </div>
           </div>
           <Form className="" ref={form}>
@@ -88,10 +89,10 @@ export default function VerifyEmailForm(props) {
 
             <div className="flex flex-rows justify-center mb-5 md:mb-10">
                 <div className="gray-300 font-Pop-R tracking-[0.5px] text-sm">
-                  ¿No tienes una cuenta?
+                  {textos.noCuenta}
                 </div>
                 <button className="ml-3 mb-3 yellowText greenTextHover font-Pop-SB tracking-[0.5px] text-sm" onClick={navigateToRegistrationPage} >
-                  Regístrate
+                  {textos.registrarse}
                 </button>
             </div> 
             {message && (
