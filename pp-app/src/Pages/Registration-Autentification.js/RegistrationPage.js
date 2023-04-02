@@ -67,7 +67,7 @@ export default function RegistrationPage() {
               src={ManoConPlata}
               alt="title" />
               
-              <button onClick={()=>window.location.replace("https://donar.patapila.org/comunidad")} className="font-Pop-M text-lg text-white uppercase rounded-lg yellowBg greenBgHover w-fit px-6 py-3">
+              <button onClick={()=>window.location.replace("http://donar.patapila.org/comunidad")} className="font-Pop-M text-lg text-white uppercase rounded-lg yellowBg greenBgHover w-fit px-6 py-3">
               Dona
               </button>
               <div className="font-Pop-M text-base text-white tracking-[0.7px] px-16 text-center">

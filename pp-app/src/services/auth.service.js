@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "https://localhost:8080/api/auth/";
+const API_URL = "http://localhost:8080/api/auth/";
 const register = (name,lastname, email, password) => {
   return axios.post(API_URL + "signup", {
     name,
@@ -64,7 +64,7 @@ const findUserById = async (id) => {
 
 const getUserMilestones = async (userId) => {
   try {
-    const response = await axios.post("https://localhost:8080/api/milestone/getUserWithMilestones", {
+    const response = await axios.post("http://localhost:8080/api/milestone/getUserWithMilestones", {
       userId,
     });
     return response;
@@ -75,7 +75,7 @@ const getUserMilestones = async (userId) => {
 
 const getUserLifeImpact = async (userId) => {
   try {
-    const response = await axios.post("https://localhost:8080/api/auth/getUserLifeImpact", {
+    const response = await axios.post("http://localhost:8080/api/auth/getUserLifeImpact", {
       userId,
     });
     return response;
