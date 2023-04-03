@@ -8,6 +8,7 @@ import "./IntroductionPage.css"
 import { navigationInformative } from '../navigationInformative'
 
 export default function IntroductionPage() {
+  
   return (
     <div className="relative overflow-hidden greenBackground">
       <div className="mx-auto max-w-7xl">

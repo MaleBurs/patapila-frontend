@@ -3,7 +3,7 @@ import ManoConCorazon from "../../Components/Images/ManoConCorazon.png";
 import InformationTooltips from "../Utiles/InformationDisplayTooltip";
 import { useCurrentUser } from "../../Context/CurrentUserContext";
 import AuthService from "../../services/auth.service";
-
+import DonationService from "../../services/donations.service";
 
 const UserInformationSection = () => {
   const {currentUser, profilePictureURL} = useCurrentUser();
@@ -11,7 +11,7 @@ const UserInformationSection = () => {
   const [registrationYear, setRegistrationYear] = useState(null);
 
   useEffect(() => {
-    AuthService.getUserLifeImpact(currentUser.id).then(res=>setLifeImpact(res.data))
+    DonationService.amountDonatedByRefferals(currentUser.id).then(res=>setLifeImpact(res.data.total + currentUser.totalAmountDonated))
     AuthService.findUserById(currentUser.id).then(res=>setRegistrationYear((new Date(res.data.createdAt)).getFullYear()))
   }, [])
 

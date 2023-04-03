@@ -62,6 +62,11 @@ const subscriptionsByMonth = async (month,year) => {
   }
 }
 
+const amountDonatedByRefferals = (userId) => {
+  return axios.post(API_URL + "amountDonatedByRefferals", {
+    userId,
+  });
+};
 
 const DonationService = {
   generateTransaction,
@@ -70,6 +75,7 @@ const DonationService = {
   modifySubscriptionState,
   modifySubscription,
   subscriptionsByMonth,
-  addReferred
+  addReferred,
+  amountDonatedByRefferals
 }
 export default DonationService;
