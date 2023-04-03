@@ -12,6 +12,7 @@ import DashboardPage from './Pages/Admin Pages/DashboardPage';
 import SubscriptionReportPage from './Pages/Admin Pages/SubscriptionReportPage';
 import RefferalsPage from './Pages/Registration-Autentification.js/RefferalsPage';
 import UserHome from './Pages/UserHomePage/UserHomePage';
+import PaginaAgradecimiento from './Pages/Donations/PaginaAgradecimiento';
 
 export default function App() {
   return (
@@ -38,6 +39,7 @@ export default function App() {
           <>
           <Route exact path="/inicio" element={<UserHome />} />
           <Route exact path="/donar" element={<DonarPage/>} />
+          <Route exact path="/gracias" element={<PaginaAgradecimiento/>} /> 
           </>
           )
           : <></>

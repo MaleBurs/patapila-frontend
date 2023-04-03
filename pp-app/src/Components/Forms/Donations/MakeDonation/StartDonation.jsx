@@ -32,8 +32,8 @@ const StartDonation = ({ setStep }) => {
 
   const closeModal = () => {
     setShowModal(false);
-    navigate("/inicio");
-    window.location.reload();
+    navigate("/gracias");
+    //window.location.reload();
   };
 
   const isFormValid = () =>{
