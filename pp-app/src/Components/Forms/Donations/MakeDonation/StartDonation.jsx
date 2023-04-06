@@ -53,7 +53,7 @@ const StartDonation = ({ setStep }) => {
     setMessage("");
     if (isFormValid()) {
       if(selectedFrequency === 2){
-      DonationService.generateSubscription(currentUser.id, selectedAmount, selectedFrequency, subsPeriod.value, paymentDay).then(
+      DonationService.generateSubscription(currentUser.id, selectedAmount, selectedFrequency, Number(subsPeriod.value), paymentDay).then(
         () => {
           setShowModal(true);
           ActServices.createActivity(newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay).title, newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay).description, currentUser.id). then(
