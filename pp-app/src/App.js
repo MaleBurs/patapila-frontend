@@ -13,6 +13,7 @@ import SubscriptionReportPage from './Pages/Admin Pages/SubscriptionReportPage';
 import RefferalsPage from './Pages/Registration-Autentification.js/RefferalsPage';
 import UserHome from './Pages/UserHomePage/UserHomePage';
 import PaginaAgradecimiento from './Pages/Donations/PaginaAgradecimiento';
+import UserDonationHistoryPage from './Pages/UserHomePage/UserDonationHistoryPage';
 
 export default function App() {
   return (
@@ -25,7 +26,6 @@ export default function App() {
           <Route exact path={"/signup"} element={<RegistrationPage/>} />
           <Route exact path="/ChangePasswordPage" element={<ChangePasswordPage />} />
           <Route exact path="/resetPassword/:token" element={<PasswordResetPage />} />
-          <Route exact path="/settings" element={<UserSettings />} />
           {(AuthService.getCurrentUser()) ?
           (
           (isAdmin())  ?
@@ -34,12 +34,15 @@ export default function App() {
           <Route exact path="/reporteTransacciones" element={<TransactionReportPage></TransactionReportPage>} />
           <Route exact path="/reporteSubscripciones" element={<SubscriptionReportPage></SubscriptionReportPage>} />
           <Route exact path="/reportes" element={<DashboardPage></DashboardPage>} />
+          <Route exact path="/settings" element={<UserSettings />} />
           </>
           :
           <>
           <Route exact path="/inicio" element={<UserHome />} />
           <Route exact path="/donar" element={<DonarPage/>} />
           <Route exact path="/gracias" element={<PaginaAgradecimiento/>} /> 
+          <Route exact path="/historialDonaciones" element={<UserDonationHistoryPage/>} />
+          <Route exact path="/settings" element={<UserSettings />} />
           </>
           )
           : <></>

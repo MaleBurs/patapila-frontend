@@ -1,24 +1,25 @@
-import React, {useEffect, useState} from "react";
-import ManoConCorazon from "../../Components/Images/ManoConCorazon.png";
-import InformationTooltips from "../Utiles/InformationDisplayTooltip";
+import React from "react";
 import { useCurrentUser } from "../../Context/CurrentUserContext";
-import AuthService from "../../services/auth.service";
-import DonationService from "../../services/donations.service";
+import LogoCorazon from "../../Components/Images/LogoCorazon.png";
+import logoHerramienta from "../../Components/Images/logoHerramienta.png";
+import { useNavigate } from "react-router-dom";
 
-const UserInformationSection = () => {
+const UserInformationSection = (props) => {
   const {currentUser, profilePictureURL} = useCurrentUser();
-  const [lifeImpact, setLifeImpact] = useState(null);
-  const [registrationYear, setRegistrationYear] = useState(null);
+/*   const [lifeImpact, setLifeImpact] = useState(null);
+  const [registrationYear, setRegistrationYear] = useState(null); */
+  const navigate = useNavigate();
 
-  useEffect(() => {
+/*   useEffect(() => {
     DonationService.amountDonatedByRefferals(currentUser.id).then(res=>setLifeImpact(res.data.total + currentUser.totalAmountDonated))
     AuthService.findUserById(currentUser.id).then(res=>setRegistrationYear((new Date(res.data.createdAt)).getFullYear()))
-  }, [])
+  }, []) */
 
   return (
     <>
-    <div className = "flex flex-col space-y-4 md:space-y-0 md:flex-row z-10 px-6 md:px-12 lg:px-32 basis-1/3 bg-[#F6F7F3] border border-[#E3E7DA] py-6 md:py-10 lg:py-8 mt-6 md:mt-14">
-        <div className="basis-2/3 flex flex-row space-x-5 md:space-x-6 lg:space-x-10 items-center ">
+    <div className = "flex flex-col space-y-4 md:space-y-0 md:flex-row z-10 basis-1/3 border border-[#e7e6e6] mt-6 md:mt-14 divide-x divide-[#e7e6e6]">
+       
+        <div className="py-6 pl-6 md:pl-12 lg:pl-32 pr-12 basis-1/2 flex flex-row space-x-5 md:space-x-6 lg:space-x-10 items-center">
             {profilePictureURL ? 
             <img
                 className="object-cover h-24 w-24 md:h-28 md:w-28 lg:h-32 lg:w-32 rounded "
@@ -26,28 +27,41 @@ const UserInformationSection = () => {
                 alt="ProfilePhoto"
             />
             :null}
-            <div className = "flex flex-col justify-center basis-8/10 flex z-10 space-y-1 md:space-y-3 lg:space-y-4 py-1">
-                <div className="z-10 font-Pop-SB tracking-[0.5px] text-base md:text-lg blackText">{currentUser.name} {currentUser.lastname}</div>
-                <div className="z-10 font-Pop-L blackText text-xs lg:text-sm break-normal">Me uni a pata pila en el año {registrationYear}, para combatir la desnutrición infantil. Se que toda donación impacta en la salud física y psicológica de cada niño.</div>
+            <div className = "flex flex-col justify-center items-start basis-8/10 flex z-10 space-y-1 md:space-y-3 lg:space-y-4 py-1">
+                {props.backToHome &&
+                <button onClick={()=>navigate("/inicio")} className="font-Pop-L text-xs text-gray-500"> &#60; <span className="underline">Volver al inicio</span> </button>
+                }
+                <div className="z-10 font-Pop-M tracking-[0.5px] text-sm md:text-lg blackText">Hola, {currentUser.name}</div>
+                <div className="z-10 font-Pop-L blackText text-xs break-normal">{props.description}</div>
             </div>
         </div> 
-
-        <div className = "basis-1/3 md:justify-end flex">
-            <div className="flex flex-col justify-center z-10 space-y-1 py-1">
-                
-                <div className="flex flex-row items-center justify-center space-x-4">
-                <div className="font-Pop-R text-xl md:text-2xl text-center ">{lifeImpact}</div>
-                <img
-                    className="object-cover h-10 w-10 md:h-14 md:w-14 "
-                    src={ManoConCorazon}
-                    alt="ProfilePhoto"
-                />
-                </div>
-
-                <div className="flex flex-row space-x-1">
-                <div className="font-Pop-L text-xs md:text-sm text-start">Impacto de Vida</div>   
-                <InformationTooltips.BasicInfoTooltip content="Tu Impacto de Vida representa el total que donaste, gracias a una suscripción o a donaciones de una única vez, y el total de referidos a Para Pila, gracias a haber compartido tu link."/> 
-                </div>
+    
+        <div className = "bg-[#F6F7F3] pt-6 pb-10 pr-6 md:pr-12 lg:pr-32 basis-1/2 md:justify-end items-start flex flex-row space-x-10">
+            <div className="flex flex-col justify-center items-center z-10 py-1">
+                <button onClick={()=>navigate("/historialDonaciones")} className={`rounded-full w-fit ${props.select==="impacto" ? "bg-[#fdfcfc] border-[#e7e6e6] border" : "hover:bg-[#fdfcfc] hover:border-[#e7e6e6] hover:border"}`}>
+                    <img
+                        className="object-cover h-10 w-10 md:h-20 md:w-20 "
+                        src={LogoCorazon}
+                        alt="ProfilePhoto"
+                    />
+                </button>
+                <div className="flex flex-col space-y-1">
+                    <div className="font-Pop-R text-xs text-center underline">Mi Impacto</div> 
+                    <div className="font-Pop-L text-[10.5px] text-center w-32" >Ver mis donaciones y mi impacto de vida.</div>
+                </div>  
+            </div>
+            <div className="flex flex-col justify-center items-center z-10 py-1">
+                <button onClick={()=>navigate("/settings")} className={`rounded-full w-fit ${props.select==="ajustes" ? "bg-[#fdfcfc] border-[#e7e6e6] border " : "hover:bg-[#fdfcfc] hover:border-[#e7e6e6] hover:border"}`}>
+                    <img
+                        className="object-cover h-10 w-10 md:h-20 md:w-20 "
+                        src={logoHerramienta}
+                        alt="ProfilePhoto"
+                    />
+                </button>
+                <div className="flex flex-col space-y-1">
+                    <div className="font-Pop-R text-xs text-center underline">Ajustes</div> 
+                    <div className="font-Pop-L text-[10.5px] text-center w-32" >Administra la configuracion de tu perfil.</div>
+                </div>  
             </div>
         </div> 
     </div> 

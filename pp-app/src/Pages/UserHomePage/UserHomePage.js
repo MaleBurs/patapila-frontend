@@ -8,6 +8,7 @@ import CopyLinkSection from "../../Components/Profile/CopyLinkSection";
 import MilestonesProgress from "../../Components/Profile/MilestonesProgress";
 import LatestActivity from "../../Components/Profile/LatestActivty";
 import InvitationToDonate from "../../Components/Profile/InvitationToDonate";
+import { PieDePaginaInformativo } from "../../Components/Utiles/PieDePaginaInformativo";
 
 const UserHome = () => {
   const currentUser = AuthService.getCurrentUser();
@@ -25,7 +26,10 @@ const UserHome = () => {
         <UserNavBar navigation={navigationOptions.userNavigation} currentUser={currentUser}/>}
         <CurrentUserContextProvider>
 
-          <UserInformationSection></UserInformationSection>
+          <UserInformationSection
+            description="Bienvenido a tu perfil, una página de recaudación de fondos que puedes personalizar y compartir. ¡Todas las donaciones realizadas en tu perfil aumentarán tu Impacto de Vida!"
+            backToHome={false}
+          ></UserInformationSection>
           
           <div className="flex flex-col md:flex-row px-10 md:px-12 lg:px-32 md:space-x-5 lg:space-x-16 bg-[#f6f7f36b]">
             <div className="md:basis-3/5">
@@ -37,7 +41,9 @@ const UserHome = () => {
               <LatestActivity/>
             </div>
           </div>
-        
+
+          <div className="h-32 bg-[#f6f7f36b]"></div>
+          <PieDePaginaInformativo/>
         </CurrentUserContextProvider>
         </>
       ) : (
