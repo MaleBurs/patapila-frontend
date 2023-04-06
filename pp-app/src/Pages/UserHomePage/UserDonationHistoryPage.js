@@ -9,7 +9,6 @@ import { PieDePaginaInformativo } from "../../Components/Utiles/PieDePaginaInfor
 import DonationService from "../../services/donations.service";
 import ManoConCorazon from "../../Components/Images/ManoConCorazon.png";
 import ImpactChart from "../../Components/Profile/DoughnutChartImpact";
-import { Carrousel } from "./Carrousel";
 
 const UserDonationHistoryPage = () => {
   const currentUser = AuthService.getCurrentUser();
@@ -45,7 +44,7 @@ const UserDonationHistoryPage = () => {
             select="impacto"
           ></UserInformationSection>
           
-          <div className="flex flex-col md:flex-row px-10 md:px-12 lg:px-32 md:space-x-5 lg:space-x-16 bg-[#f6f7f36b] w-screen">
+          <div className="flex flex-row md:flex-row px-10 md:px-12 lg:px-32 md:space-x-5 lg:space-x-16 bg-[#f6f7f36b] w-screen">
             
             <div className="md:basis-1/2 flex flex-col py-12 space-y-10 container">
               <div className="flex flex-col space-y-3">   
@@ -55,10 +54,8 @@ const UserDonationHistoryPage = () => {
                   <div className="font-Pop-R text-lg">Has Brindado Atención Nutricional a aproximadamente {(lifeImpact/980).toFixed(0)} Niños</div>
                 </div>
                 <div className="flex flex-row "><div className="border-b-2 border-[#f4dcbf] basis-1/4 justify-start"></div></div>
-                <div className="font-Pop-L text-[10.5px]">Se calcula que ha llevado un plan nutricional por año a 1 persona. Su Impacto de por vida reconoce todas sus contribuciones: cada peso donado, recaudado o entregado a través de una afiliación a La Comunidad que usted haya recomendado.</div>
+                <div className="font-Pop-L text-[10.5px]">Su Impacto de por vida reconoce todas sus contribuciones: cada peso donado, recaudado o entregado a través de una afiliación a La Comunidad que usted haya recomendado.</div>
               </div>
-
-              {/* {Carrousel()} */}
             </div>
 
             <div className="p-5 h-fit flex flex-col space-y-5 md:basis-1/2 bg-white my-12 border border-[#e7e6e6] divide-y divide-[#e7e6e6] divide-dashed basis-1/4 rounded-md">
