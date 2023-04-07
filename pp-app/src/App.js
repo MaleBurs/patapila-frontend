@@ -1,4 +1,4 @@
-import UserSettings from './Pages/UserHomePage/UserSettingsPage';
+import UserSettingsPage from './Pages/UserHomePage/UserSettingsPage';
 import LoginPage from './Pages/Registration-Autentification.js/LoginPage';
 import ChangePasswordPage from './Pages/ChangeViaMailPasswordPages/PasswordResetEmailPage';
 import PasswordResetPage from './Pages/ChangeViaMailPasswordPages/PasswordResetPage';
@@ -34,7 +34,7 @@ export default function App() {
           <Route exact path="/reporteTransacciones" element={<TransactionReportPage></TransactionReportPage>} />
           <Route exact path="/reporteSubscripciones" element={<SubscriptionReportPage></SubscriptionReportPage>} />
           <Route exact path="/reportes" element={<DashboardPage></DashboardPage>} />
-          <Route exact path="/settings" element={<UserSettings />} />
+          <Route exact path="/settings" element={<UserSettingsPage />} />
           </>
           :
           <>
@@ -42,7 +42,7 @@ export default function App() {
           <Route exact path="/donar" element={<DonarPage/>} />
           <Route exact path="/gracias" element={<PaginaAgradecimiento/>} /> 
           <Route exact path="/historialDonaciones" element={<UserDonationHistoryPage/>} />
-          <Route exact path="/settings" element={<UserSettings />} />
+          <Route exact path="/settings" element={<UserSettingsPage />} />
           </>
           )
           : <></>

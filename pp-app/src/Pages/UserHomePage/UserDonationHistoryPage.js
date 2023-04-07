@@ -12,20 +12,22 @@ import ImpactChart from "../../Components/Profile/DoughnutChartImpact";
 
 const UserDonationHistoryPage = () => {
   const currentUser = AuthService.getCurrentUser();
-  const [lifeImpact, setLifeImpact] = useState(null);
-  const [donatedByRefferals, setDonatedByRefferals] = useState(null);
+  const [lifeImpact, setLifeImpact] = useState(0);
+  const [donatedByRefferals, setDonatedByRefferals] = useState(0);
 
   useEffect(() => {
-    DonationService.amountDonatedByRefferals(currentUser.id).then(res=>setDonatedByRefferals(res.data.total))
-  }, [])
+    DonationService.amountDonatedByRefferals(currentUser.id).then(
+      res=>{
+        setDonatedByRefferals(res.data.total);
+        var total = (res.data.total == null) ? 0 : res.data.total;
+        setLifeImpact(currentUser.totalAmountDonated + total);
+      }
+    )
+  }, [currentUser])
 
   const isAdmin = () => {
     return JSON.stringify((AuthService.getCurrentUser()).roles) === JSON.stringify(["ROLE_ADMIN"]);
   };
-
-  useEffect(() => {
-    DonationService.amountDonatedByRefferals(currentUser.id).then(res=>setLifeImpact(res.data.total + currentUser.totalAmountDonated))
-  }, [currentUser])
 
   return (
     <>
@@ -44,17 +46,23 @@ const UserDonationHistoryPage = () => {
             select="impacto"
           ></UserInformationSection>
           
-          <div className="flex flex-row md:flex-row px-10 md:px-12 lg:px-32 md:space-x-5 lg:space-x-16 bg-[#f6f7f36b] w-screen">
+          <div className="flex flex-row md:flex-row px-10 md:px-12 lg:px-32 md:space-x-5 lg:space-x-16 bg-[#f6f7f36b]">
             
             <div className="md:basis-1/2 flex flex-col py-12 space-y-10 container">
               <div className="flex flex-col space-y-3">   
                 <div className="font-Pop-L uppercase text-xs">Impacto de Vida</div>
                 <div className="flex flex-row space-x-3">
-                  <img src={ManoConCorazon} className="w-14 h-14"/>  
-                  <div className="font-Pop-R text-lg">Has Brindado Atención Nutricional a aproximadamente {(lifeImpact/980).toFixed(0)} Niños</div>
+                  <img src={ManoConCorazon} className="w-14 h-14" alt="mano con corazon"/>  
+                  <div className="font-Pop-R text-lg">
+                    {((lifeImpact/980).toFixed(0) === 0) ?
+                    "Todavía no has Podido Brindar Atención Nutricional a Ningún Niño"
+                    :
+                    "Has Brindado Atención Nutricional a aproximadamente" + (lifeImpact/980).toFixed(0) + "Niños"
+                    }
+                  </div>
                 </div>
                 <div className="flex flex-row "><div className="border-b-2 border-[#f4dcbf] basis-1/4 justify-start"></div></div>
-                <div className="font-Pop-L text-[10.5px]">Su Impacto de por vida reconoce todas sus contribuciones: cada peso donado, recaudado o entregado a través de una afiliación a La Comunidad que usted haya recomendado.</div>
+                <div className="font-Pop-L text-xs">Su Impacto de por vida reconoce todas sus contribuciones: cada peso donado, recaudado o entregado a través de una afiliación a La Comunidad que usted haya recomendado.</div>
               </div>
             </div>
 

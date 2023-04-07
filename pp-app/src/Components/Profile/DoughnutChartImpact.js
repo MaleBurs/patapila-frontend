@@ -8,21 +8,43 @@ import AuthService from '../../services/auth.service';
 export default function ImpactChart() {
   const [donatedByRefferals, setDonatedByRefferals] = useState(null);
   const currentUser = AuthService.getCurrentUser();
+  const [data, setData] = useState([])
+  const [bgColor, setBgColor] = useState([])
 
   useEffect(() => {
-    DonationService.amountDonatedByRefferals(currentUser.id).then(res=>setDonatedByRefferals(res.data.total))
-  }, [])
+
+    const setBgColorAndDataToDefault = () => {
+      setData([1]);
+      setBgColor(['rgba(231, 230, 230)']);
+    };
+
+    const setBgColorAndDataToCorrect = () => {
+      setData([currentUser.totalAmountDonated, donatedByRefferals]);
+      setBgColor([
+        'rgba(244, 220, 191)',
+        'rgba(108, 51, 51)',
+      ]);
+    };
+
+    DonationService.amountDonatedByRefferals(currentUser.id).then(
+      res=>{
+        setDonatedByRefferals(res.data.total);
+        (res.data.total === 0 && currentUser.totalAmountDonated === 0) ?
+          setBgColorAndDataToDefault()
+          :
+          setBgColorAndDataToCorrect()
+      }
+    )
+  }, [currentUser.id, currentUser.totalAmountDonated])
+
   useEffect(() => {
     let config = {
       type: "doughnut",
       data: {
         datasets: [
           {
-            data: [currentUser.totalAmountDonated, donatedByRefferals],
-            backgroundColor: [
-              'rgba(244, 220, 191)',
-              'rgba(108, 51, 51)',
-            ],            
+            data: data,
+            backgroundColor:bgColor,            
           },
         ],
       },
@@ -39,6 +61,7 @@ export default function ImpactChart() {
     let ctx = document.getElementById("doughnut").getContext('2d');
     ctx.height = 10;
     window.myBar = new Chart(ctx, config);
+    
   }, [donatedByRefferals]);
   return (
     <>

@@ -27,7 +27,7 @@ const PaginaAgradecimiento = () => {
               <DonacionExitosa/>
               <Impacto categories={categories}/>
             </div>
-            <button onClick={()=>navigate("/inicio")} className="purpleBgHover bg-[#6c3333] text-white rounded py-2 px-4 font-Pop-M uppercase text-sm tracking-[0.4px] text-center">Ir a ver mi impacto</button>
+            <button onClick={()=>navigate("/historialDonaciones")} className="purpleBgHover bg-[#6c3333] text-white rounded py-2 px-4 font-Pop-M uppercase text-sm tracking-[0.4px] text-center">Ir a ver mi impacto</button>
           </div>
         </div>
       ) : (

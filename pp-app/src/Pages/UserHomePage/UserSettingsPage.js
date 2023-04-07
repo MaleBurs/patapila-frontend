@@ -1,11 +1,11 @@
 import React from "react";
 import AuthService from "../../services/auth.service";
-import Settings from "../../Components/Settings/Settings";
+import UserSettings from "../../Components/Settings/UserSettings";
 import UserNavBar from "../../Components/NavBars/UserNavBar";
 import navigationOptions from "../../Components/NavBars/navigationOptions";
 import { CurrentUserContextProvider} from "../../Context/CurrentUserContext";
 
-const UserSettings = () => {
+const UserSettingsPage = () => {
   const currentUser = AuthService.getCurrentUser();
   const isAdmin = () => {
     return JSON.stringify((AuthService.getCurrentUser()).roles) === JSON.stringify(["ROLE_ADMIN"]);
@@ -20,7 +20,7 @@ const UserSettings = () => {
           :
         <UserNavBar navigation={navigationOptions.userNavigation} currentUser={currentUser}/>}
         <CurrentUserContextProvider>
-        <Settings></Settings>
+        <UserSettings/>
         </CurrentUserContextProvider>
         </>
       ) : (
@@ -31,4 +31,4 @@ const UserSettings = () => {
     </>
   );
 };
-export default UserSettings;
+export default UserSettingsPage;
