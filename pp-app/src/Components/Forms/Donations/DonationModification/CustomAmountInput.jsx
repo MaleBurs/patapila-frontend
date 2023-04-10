@@ -20,19 +20,21 @@ const CustomAmountInput = () => {
   },[subscriptionData.amount, setSelectedAmount])
   
   return (
-    <div className={`inline-block w-full px-4 block flex flex-row justify-around font-Pop-M purpleText rounded-md uppercase h-auto py-2 md:py-1 focus:purpleBorder border-[1px] ${useSubModContext ? "border-gray-300":"border-gray-100"}`}>
-      <div className='self-center md:basis-1/8 text-sm md:text-base'>
+    <div className="w-full px-4 flex flex-row justify-around font-Pop-M purpleText rounded-md uppercase py-2 md:py-1 focus:purpleBorder border-[1px] border-[#e7e6e6]">
+      <div className='self-center text-sm'>
           $
       </div>
+      <div>
       <input
         type='text'
         disabled={!userWantsToModifySubs}
         autoFocus
         onChange={onChange}
         value = {selectedAmount}
-        className='shrink md:basis-3/4 self-center border-none focus:outline-none focus:border-transparent focus:ring-0 text-sm md:text-base '>
+        className='w-56 self-center border-none focus:outline-none focus:border-transparent focus:ring-0 text-sm md:text-lg'>
       </input>
-      <div className='self-center md:basis-1/8 text-sm'>
+      </div>
+      <div className='self-center text-sm'>
           {(selectedFrequency === 1)  ? "ARS" : "ARS/MES"}
       </div>
     </div>

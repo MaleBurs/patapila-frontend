@@ -3,7 +3,7 @@ import { isEmail } from "validator";
 const required = (value) => {
     if (!value) {
       return (
-        <div className="alert redText alert-danger text-base my-2 mx-1" role="alert">
+        <div className="alert redText text-[10.5px] my-2 mx-1" role="alert">
           ¡Este campo es obligatorio!
         </div>
       );
@@ -12,7 +12,7 @@ const required = (value) => {
   const validEmail = (value) => {
     if (!isEmail(value)) {
       return (
-        <div className="alert redText alert-danger text-base my-2 mx-0" role="alert">
+        <div className="alert redText text-[10.5px] my-2 mx-0" role="alert">
         Mail no válido.
         </div>
       );
@@ -21,7 +21,7 @@ const required = (value) => {
   const vstrings = (value) => {
     var regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
     if(!regName.test(value)){
-       <div className="alert redText alert-danger text-base my-2 mx-1" role="alert">
+       <div className="alert redText text-[10.5px] my-2 mx-1" role="alert">
           Debe ser solamente texto, no puede contener otro tipo de caracteres.
         </div>
     }else{
@@ -31,7 +31,7 @@ const required = (value) => {
   const vpassword = (value) => {
     if (value.length < 6 || value.length > 20) {
       return (
-        <div className="alert redText alert-danger text-sm my-2 mx-1 " role="alert">
+        <div className="alert redText text-[10.5px] my-2 mx-1 " role="alert">
           La contraseña  debe tener como mínimo 10 caracteres y como máximo 20.
         </div>
       );
@@ -41,7 +41,7 @@ const required = (value) => {
   const vcancel = (value) => {
     if (value !== "Cancelar") {
       return (
-        <div className="alert redText alert-danger text-sm my-2 mx-3" role="alert">
+        <div className="alert redText text-[10.5px] my-2 mx-3" role="alert">
           La palabra ingresada es incorrecta.
         </div>
       );

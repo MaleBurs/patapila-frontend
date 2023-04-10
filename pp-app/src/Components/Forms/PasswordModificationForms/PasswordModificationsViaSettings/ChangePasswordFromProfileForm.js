@@ -105,43 +105,43 @@ const ChangePasswordFromProfileForm = (props) => {
 
       <Form className="px-11 py-8 blackText flex flex-col space-y-6" onSubmit={handlePasswordChange} ref={form}>
 
-        <div className="tracking-wide font-Pop-SB uppercase blackText text-sm">Cambiar contraseña </div>
+        <div className="font-Pop-R tracking-widest text-xs uppercase blackText"> Modificar contraseña </div>
         <div className="space-y-4 rounded-md mb-[-5px] flex-rows "> 
-          <div className= "relative flex flex-row justify-between bg-transparent h-auto block w-full rounded-xl border border-gray-300 px-2 focus:z-10 focus:outline-none greenBorderWhenFocus form-control">
+          <div className= " pr-4 relative flex flex-row justify-between bg-transparent h-auto block w-full rounded-md border border-[#e7e6e6] focus:z-10 focus:outline-none greenBorderWhenFocus form-control">
             <Input
               type={(!passwordShown) ? "password" : "text"}
-              className="bg-transparent block w-full border-transparent py-2 text-gray-900 placeholder-red focus:border-transparent focus:ring-0 font-Pop-R text-sm focus:outline-none"
+              className="bg-transparent block w-full border-transparent py-3 text-gray-900 placeholder-red focus:border-transparent focus:ring-0 font-Pop-L text-xs tracking-wide focus:outline-none"
               name="oldpassword"
               value={oldpassword}
               placeholder="Contraseña antigua"
               onChange={onChangeOldPassword}
               validations={[ValidationFunctions.required]}
             />
-            <span className="pt-2 px-2"><FontAwesomeIcon onClick={togglePassword} icon={passwordShown? "fa-solid fa-eye-slash": "fa-solid fa-eye"} color='#000'size={14} /></span>
+           <span className="pt-3 self-start"> <FontAwesomeIcon onClick={togglePassword} icon={passwordShown? "fa-solid fa-eye-slash": "fa-solid fa-eye"} color='#000'size="2xs" /></span>
           </div>  
-          <div className= "relative flex flex-row justify-between bg-transparent h-auto block w-full rounded-xl border border-gray-300 px-2 focus:z-10 focus:outline-none greenBorderWhenFocus form-control">
+          <div className= "items-center pr-4 relative flex flex-row justify-between bg-transparent h-auto block w-full rounded-md border border-[#e7e6e6] focus:z-10 focus:outline-none greenBorderWhenFocus form-control">
             <Input
                 type={(!newPasswordShown) ? "password" : "text"}
-                className="bg-transparent block w-full border-transparent py-2 text-gray-900 placeholder-red focus:border-transparent focus:ring-0 font-Pop-R text-sm focus:outline-none"
+                className="bg-transparent block w-full border-transparent py-3 text-gray-900 placeholder-red focus:border-transparent focus:ring-0 font-Pop-L text-xs tracking-wide focus:outline-none"
                 name="password"
                 value={password}
                 placeholder="Contraseña nueva"
                 onChange={onChangePassword}
                 validations={[ValidationFunctions.required, ValidationFunctions.vpassword]}
             />
-            <span className="pt-2 px-2"><FontAwesomeIcon onClick={toggleNewPassword} icon={newPasswordShown? "fa-solid fa-eye-slash": "fa-solid fa-eye"} color='#000'size={14} /></span>
+            <span className="pt-3 self-start"><FontAwesomeIcon onClick={toggleNewPassword} icon={newPasswordShown? "fa-solid fa-eye-slash": "fa-solid fa-eye"} color='#000'size={14} /></span>
           </div>
-          <div className= "relative flex flex-row justify-between bg-transparent h-auto block w-full rounded-xl border border-gray-300 px-2 focus:z-10 focus:outline-none greenBorderWhenFocus form-control">
+          <div className= "items-center pr-4 relative flex flex-row justify-between bg-transparent h-auto block w-full rounded-md border border-[#e7e6e6] focus:z-10 focus:outline-none greenBorderWhenFocus form-control">
             <Input
               type={(!password2Shown) ? "password" : "text"}
-              className="bg-transparent block w-full border-transparent py-2 text-gray-900 placeholder-red focus:border-transparent focus:ring-0 font-Pop-R text-sm focus:outline-none"
+              className="bg-transparent block w-full border-transparent py-3 text-gray-900 placeholder-red focus:border-transparent focus:ring-0 font-Pop-L text-xs tracking-wide focus:outline-none"
               name="password2"
               value={password2}
               placeholder="Confirmar contraseña"
               onChange={onChangePassword2}
               validations={[ValidationFunctions.required]}
             />
-            <span className="pt-2 px-2"><FontAwesomeIcon onClick={togglePassword2} icon={password2Shown? "fa-solid fa-eye-slash": "fa-solid fa-eye"} color='#000'size={14} /></span>
+            <span className="pt-3 self-start"><FontAwesomeIcon onClick={togglePassword2} icon={password2Shown? "fa-solid fa-eye-slash": "fa-solid fa-eye"} color='#000'size={14} /></span>
           </div>
         </div>
 
@@ -152,9 +152,9 @@ const ChangePasswordFromProfileForm = (props) => {
           <Messages.ConfirmationMessage message={confirmationMessage}/>
         )}
 
-        <div className="flex flex-rows justify-between pt-4">
-          <button onClick={closeForm} className="mx-3 py-3 h-fit px-7 greyBg rounded-xl tracking-widest font-Pop-M uppercase text-gray-500 duration-700 hover:bg-gray-300 focus:bg-gray-300  hover:text-white focus:text-white text-sm">Volver atrás</button>
-          <button onClick={null} className="mx-3 py-3 h-fit px-7 bg-[#0F6938] text-white rounded-xl tracking-widest font-Pop-M uppercase duration-700 hover:bg-[#6c3333] focus:bg-[#6c3333]  text-sm">Guardar Cambios</button>
+        <div className="flex flex-rows justify-between">
+          <button onClick={closeForm} className="px-5 w-fit greyBg rounded-md tracking-widest font-Pop-M uppercase text-gray-500 duration-700 hover:bg-gray-300 focus:bg-gray-300  hover:text-white focus:text-white text-sm">Cancelar</button>
+          <button onClick={null} className="px-4 w-fit font-Pop-M purpleBgHover uppercase tracking-widest text-sm py-3 rounded-md bg-[#6c3333] text-white">Guardar Cambios</button>
         </div>
 
         <CheckButton style={{ display: "none" }} ref={checkBtn} />

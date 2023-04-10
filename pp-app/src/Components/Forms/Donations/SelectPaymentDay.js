@@ -14,7 +14,7 @@ const SelectPaymentDay = (props) => {
 
     return (
       <div className="space-y-3">
-      <div className="font-Pop-R text-sm text-gray-400">
+      <div className="font-Pop-R text-xs tracking-widest text-gray-500">
         {props.explanationText}     
       </div>
       <div className="md:flex md:flex-row">
@@ -37,8 +37,8 @@ const SelectPaymentDay = (props) => {
                             marginLeft: 1,
                             fontFamily: "Poppins-Medium",
                             color: "#6c3333", 
-                            fontSize: "0.85rem",
-                            letterSpacing: 0.5,
+                            fontSize: "0.75rem",
+                            letterSpacing: ".1em",
                         },
                         }}
                       />}

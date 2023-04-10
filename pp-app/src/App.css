@@ -120,12 +120,13 @@
 .purpleBg{
     background-color: #6c3333;
 }
-.purpleBgHover:hover, .purpleBgHover:focus{
+.purpleBgHover:hover {
     background-color: #6c333349;
     transition: 2s;
 }
 .lightGreyBg{
     background-color: #e7e6e6;
+    transition: 2s;
 }
 .lighterGreyBg{
     background-color: #e7e6e61c;

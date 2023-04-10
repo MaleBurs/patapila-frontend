@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { Popover } from '@headlessui/react';
 import DonationService from '../../../../services/donations.service';
 import { useCurrentUser } from '../../../../Context/CurrentUserContext';
@@ -105,9 +105,10 @@ const ModifyStatePopUp = ( ) => {
           }body={""} buttonText={"Continuar"}></Modal>
     ) : null}
         <Popover className={"grid relative"}>
-            <Popover.Button className="focus:ring-0 justify-self-end lightgreyBgTranslucentHover rounded-3xl md:rounded-xl lg:basis-2/7 w-fit px-5">
-            <div className="justify-center flex z-50 space-x-4 overflow-hidden mx-auto lg:flex-row">
-                <FontAwesomeIcon icon={faEllipsisV} />
+            <Popover.Button className="focus:ring-0 justify-self-end lightgreyBgTranslucentHover rounded-3xl md:rounded-3xl w-fit ">
+            <div className="flex flex-row items-center justify-around rounded-3xl w-fit border-2 font-Pop-L text-xs tracking-widest border-[#0F6938] text-[#0F6938] py-1 px-4 space-x-3">
+                <div>Activa </div>
+                <FontAwesomeIcon icon={faAngleDown} style={{color: "#0F6938",}} />
             </div>
             </Popover.Button>
             <Popover.Panel className={"absolute top-0 right-0 mt-4 p-3 rounded-lg almostWhiteBg grayBorder space-y-2"}>

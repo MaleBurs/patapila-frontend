@@ -29,7 +29,7 @@ const IndicationButton = ({ text,customStyle, onClick}) => {
     <>   
             <div>
               <button
-                className={`py-2 px-6 md:px-8 lg:px-10 duration-700 rounded-xl tracking-widest font-Pop-M uppercase text-sm duration-700 hover:text-white focus:text-white ${customStyle}`}
+                className={`py-3 px-6 md:px-8 lg:px-10 duration-700 rounded-md tracking-widest font-Pop-R uppercase text-sm duration-700 hover:text-white focus:text-white ${customStyle}`}
                 onClick = {onClick}
               >
                 {text}

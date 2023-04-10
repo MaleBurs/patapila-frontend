@@ -149,17 +149,17 @@ const ChangeDonationFromProfileForm = () =>{
         <DashedLine></DashedLine>
         <SubscriptionAmountImpactMessage></SubscriptionAmountImpactMessage>
         <div className="flex flex-row justify-between space-x-6 w-full">
-          <Buttons.IndicationButton text={"Volver Atrás"} onClick={()=>{setIfUserWantsToModifySubs(false); setMessage("")}} customStyle={"w-full basis-1/2 text-gray-500 greyBg w-full text-gray-500 hover:bg-gray-300 focus:bg-gray-300 "}></Buttons.IndicationButton>
-          <Buttons.IndicationButton  text={"Modificar"} customStyle={"basis-1/2 text-white greenBg yellowBgHover w-full"} onClick={()=>{setShowModalWithConfirmation(true)}}></Buttons.IndicationButton>
+          <Buttons.IndicationButton text={"Cancelar"} onClick={()=>{setIfUserWantsToModifySubs(false); setMessage("")}} customStyle={"w-full basis-1/2 text-gray-500 greyBg w-full text-gray-500 hover:bg-gray-300 focus:bg-gray-300 "}></Buttons.IndicationButton>
+          <Buttons.IndicationButton  text={"Modificar"} customStyle={"basis-1/2 text-white bg-[#6c3333] purpleBgHover w-full"} onClick={()=>{setShowModalWithConfirmation(true)}}></Buttons.IndicationButton>
         </div>
       </div>
       :
         ((subscriptionData.subscriptionState.state !== 'P') ?
-        <Buttons.IndicationButton  text={"Modificar Donación"} customStyle={"w-full text-white greenBg yellowBgHover "} onClick={()=>setIfUserWantsToModifySubs(true)}></Buttons.IndicationButton>
+        <Buttons.IndicationButton  text={"Modificar Donación"} customStyle={"w-full text-white bg-[#6c3333] purpleBgHover "} onClick={()=>setIfUserWantsToModifySubs(true)}></Buttons.IndicationButton>
         :
         <>
         <div className="flex flex-col space-y-6">
-          <Buttons.IndicationButton  text={"Reanudar Donación"} customStyle={"w-full text-white greenBg yellowBgHover "} onClick={()=>{setShowModalWithConfirmation(true)}}></Buttons.IndicationButton>
+          <Buttons.IndicationButton  text={"Reanudar Donación"} customStyle={"w-full text-white bg-[#6c3333] purpleBgHover "} onClick={()=>{setShowModalWithConfirmation(true)}}></Buttons.IndicationButton>
           <div className="font-Pop-R text-lg text-gray-400 basis-1/2" >{textos.pausada}</div> 
         </div>
         </>

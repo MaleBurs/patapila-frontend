@@ -50,6 +50,15 @@ const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
 
+const updatedCurrentUserInLocalStorage = async (userId) => {
+  const response = await axios
+    .post(API_URL + "getCurrentUser", { userId });
+  if (response) {
+    localStorage.setItem("user", JSON.stringify(response.data));
+  }
+  return response.data;
+};
+
 const findUserById = async (id) => {
     try {
       const response = await axios.post(API_URL + "findUserById", {
@@ -84,6 +93,27 @@ const getUserLifeImpact = async (userId) => {
   }
 };
 
+const updateUserInformation = async (name, lastname, userId) => {
+  try {
+    const response = await axios.post(API_URL + "updateUserInformation", {
+      name,
+      lastname,
+      userId,
+    });
+    return response;
+  } catch (e) {
+      console.log(e);
+  }
+};
+
+const changeUserEmail = async (email, oldPassword, userId) => {
+  return await axios.post(API_URL + "changeUserEmail", {
+      email,
+      oldPassword,
+      userId,
+    });
+};
+
 
 const AuthService = {
   register,
@@ -95,6 +125,9 @@ const AuthService = {
   updatePasswordViaSettings,
   findUserById,
   getUserLifeImpact,
-  getUserMilestones
+  getUserMilestones,
+  updateUserInformation,
+  updatedCurrentUserInLocalStorage,
+  changeUserEmail,
 }
 export default AuthService;

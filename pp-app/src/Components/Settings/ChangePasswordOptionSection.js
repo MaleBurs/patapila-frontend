@@ -15,7 +15,7 @@ const ChangePasswordOptionSection = (props) => {
         </div>
     ): (
         <>
-            <ChangePasswordFromProfileForm onClose={onCloseChangePasswordForm}></ChangePasswordFromProfileForm>
+            <ChangePasswordFromProfileForm  onClose={onCloseChangePasswordForm}></ChangePasswordFromProfileForm>
         </>
     )}
     </>

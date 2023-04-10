@@ -21,8 +21,8 @@ const SubscriptionPeriod = ( ) => {
       <SelectSubscriptionPeriod/>
       :
       <div className="flex flex-row md:space-x-6">
-         <div className="font-Pop-R text-sm text-gray-400 basis-1/2" >Usted realiza una donación: </div> 
-         <div className="font-Pop-M text-sm purpleText basis-1/2 text-end" >{subsPeriod.label}</div>
+         <div className="font-Pop-R text-xs tracking-widest text-gray-500 basis-1/2" >Su donación se realiza: </div> 
+         <div className="font-Pop-SB text-xs purpleText tracking-widest basis-1/2 text-end" >{subsPeriod.label}</div>
       </div>
       }
       </>

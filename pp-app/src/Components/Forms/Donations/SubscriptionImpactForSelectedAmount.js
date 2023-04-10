@@ -12,7 +12,7 @@ const SubscriptionImpactForSelectedAmount = () => {
 
   return (
     <>
-    <div className='text-center font-Pop-R text-sm text-gray-400'>
+    <div className='text-center font-Pop-L text-sm tracking-wide text-gray-500'>
     {
     defineImpact(selectedAmount,amountImpact)
     }
@@ -31,12 +31,12 @@ function defineImpact(selectedAmount,amountImpact) {
 }
 
 function defineImpactIfAmountIsCero() {
-    return "Brindas atención nutricional a niños/as."
+    return "Todavía no estas brindando atención nutricional a algún niños/as."
 }
 
 function defineImpactIfAmountIsNotCero(amountImpact) {
     return (amountImpact) ?
-        `Brindas atención nutricional a ${amountImpact} niños/as.`
+        `Estas brindando atención nutricional a ${amountImpact} niños/as.`
         :
-        `Brindas atención nutricional a niños/as.`
+        `Estas brindando atención nutricional a niños/as.`
 }
