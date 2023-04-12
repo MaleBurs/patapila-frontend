@@ -18,9 +18,10 @@ const SelectPaymentDay = (props) => {
         {props.explanationText}     
       </div>
       <div className="md:flex md:flex-row">
-            <div className="md:basis-1/2"> 
+            <div className="md:basis-1/2 rounded-md border border-[#e7e6e6]"> 
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DesktopDatePicker
+                      className="date-picker myDatePicker"
                       disabled = {props.disabled}
                       disablePast
                       inputFormat="YYYY-MM-DD"
@@ -35,7 +36,7 @@ const SelectPaymentDay = (props) => {
                            '.MuiInputBase-input': {
                             padding: 1.3,
                             marginLeft: 1,
-                            fontFamily: "Poppins-Medium",
+                            fontFamily: "Poppins-SemiB",
                             color: "#6c3333", 
                             fontSize: "0.75rem",
                             letterSpacing: ".1em",

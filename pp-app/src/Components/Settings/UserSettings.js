@@ -16,6 +16,8 @@ import UserInformationSection from "../Profile/UserInformationSection";
 import TwoColumnsPage from "../Utiles/TwoColumnsPage";
 import ValidationFunctions from "../../functions/validations";
 import ImageService from "../../services/images.service";
+import 'react-phone-number-input/style.css';
+import { TextInput, DatePicker, PhoneNumberInput } from "./MyInputs";
 
 const UserSettings = () => {
   const [setRequestToChangeDonation] = useState(false);
@@ -131,14 +133,42 @@ function bringUserInformation(name, onChangeName, lastname, onChangeLastname) {
           value: name,
           onChange: onChangeName,
           validations: [ValidationFunctions.vstrings, ValidationFunctions.required],
+          component: TextInput,
         },
         {
           title: "Apellido",
           value: lastname,
           onChange: onChangeLastname,
           validations: [ValidationFunctions.vstrings, ValidationFunctions.required],
+          component: TextInput,
         },
       ]
     },
+    {
+      title: "Cumpleaños",
+      content: [
+        {
+          title:"YYYY-MM-DD",
+          value: "",
+          onChange: () => {},
+          validations: [],
+          component: DatePicker,
+        }
+      ],
+    },
+    {
+      title: "Celular",
+      content: [
+        {
+          title: "Celular",
+          value: "",
+          onChange: () => {},
+          validations: [],
+          component: PhoneNumberInput,
+        },
+      ]  
+    }
   ];
 }
+
+

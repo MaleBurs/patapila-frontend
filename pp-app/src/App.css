@@ -167,3 +167,64 @@
     position: relative;
     white-space: nowrap;
 }
+
+/*Date Picker*/
+
+.myDatePicker fieldset.MuiOutlinedInput-notchedOutline {
+    border-color: transparent !important;
+    width: 100% !important;
+}
+.myDatePicker .MuiOutlinedInput-notchedOutline:hover {
+    border-color: transparent !important;
+    width: 100% !important;
+  }
+.myDatePicker .MuiOutlinedInput-input {
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+.myDatePicker .Mui-focused .MuiOutlinedInput-input {
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+.myDatePicker .MuiInput-underline:before {
+    border-bottom-color: transparent !important;
+}
+.myDatePicker .MuiInput-underline:after {
+    border-bottom-color: transparent !important;
+}
+.myDatePicker {
+    width: 96%;
+}
+.myDatePicker .MuiSvgIcon-root {
+    color: "#e7e6e6";
+}
+  
+/*Phone Number Input*/
+.PhoneInput {
+    --PhoneInputCountryFlag-borderColor: transparent;
+    --PhoneInputCountryFlag-borderColor--focus: transparent;
+    --PhoneInputCountrySelectArrow-color: #a3a3a3;
+  }
+  
+:root {
+--PhoneInputInput-borderColor: transparent;
+}
+.PhoneInputInput {
+    border: none !important;
+    color: #3f3f3f !important;
+    font-size: 0.875rem !important;
+    font-family: "Poppins-Light" !important;
+    letter-spacing: 0.075em;
+}
+
+.PhoneInputInput:focus {
+    border: none !important;
+    box-shadow: none;
+}
+.PhoneInputInput::placeholder {
+    color: #a3a3a3;
+}
+
+/* Country select menu styles */
+
+  

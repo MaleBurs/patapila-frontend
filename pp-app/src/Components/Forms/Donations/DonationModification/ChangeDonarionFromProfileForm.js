@@ -160,7 +160,7 @@ const ChangeDonationFromProfileForm = () =>{
         <>
         <div className="flex flex-col space-y-6">
           <Buttons.IndicationButton  text={"Reanudar Donación"} customStyle={"w-full text-white bg-[#6c3333] purpleBgHover "} onClick={()=>{setShowModalWithConfirmation(true)}}></Buttons.IndicationButton>
-          <div className="font-Pop-R text-lg text-gray-400 basis-1/2" >{textos.pausada}</div> 
+          <div className="font-Pop-L text-xs text-center text-gray-400 basis-1/2" >{textos.pausada}</div> 
         </div>
         </>
         )}
