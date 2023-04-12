@@ -1,10 +1,11 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import {
   Button,
   Tooltip
 } from "@material-tailwind/react";
+import DonorServices from "../../services/donor.service";
 import { useCurrentUser } from "../../Context/CurrentUserContext";
 
 export async function copyTextToClipboard(text) {
@@ -17,12 +18,16 @@ export async function copyTextToClipboard(text) {
 
 const CopyLinkSection = () => {
   const {currentUser} = useCurrentUser();
-  const [isLinkCopied, setIsLinkCopied] = React.useState(false);
-  const generateUserLink = () =>{
-    return "https://patapila-frontend.vercel.app/signup/"+currentUser.id;
-  }
+  const [publicProfileURL, setPublicProfileURL] = useState("");
+  const [isLinkCopied, setIsLinkCopied] = useState(false);
+
+  useEffect(() => {
+    DonorServices.getpublicProfileURL(currentUser.id).then(
+      (res)=> {setPublicProfileURL(res.data.url)}
+    )
+}, [currentUser.id])
   const copyLink = () => {
-    copyTextToClipboard(generateUserLink())
+    copyTextToClipboard(publicProfileURL)
       .then(() => {
         setIsLinkCopied(true);
       })
