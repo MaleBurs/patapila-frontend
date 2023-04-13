@@ -28,30 +28,41 @@ const UserSettings = () => {
   const [lastname, setLastname] = useState(currentUser.lastname);
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [birthday, setBirthday] = useState(null);
+  const [celphone, setCelphone] = useState('');
 
-  const onChangeName = (e) => {
-    const name = e.target.value;
-    setName(name);
-  };
-  const onChangeLastname = (e) => {
-    const lastname = e.target.value;
-    setLastname(lastname);
-  };
+  const onChangeName = (e) => setName(e.target.value);
+  const onChangeLastname = (e) => setLastname(e.target.value);
+  const onChangeCelphone = (newCelphone) => setCelphone(newCelphone);
+  const onChangeBirthday = (newDate) => setBirthday(newDate);
+  
   const changeLoadingState = () =>{
     setLoading(current => !current);
   }
 
-  const userInformation = bringUserInformation(name, onChangeName, lastname, onChangeLastname);
+  const userInformation = bringUserInformation(name, onChangeName, lastname, onChangeLastname, birthday, onChangeBirthday, celphone, onChangeCelphone);
 
   function handleDataChange({ setMessage }) {
     changeLoadingState();
+    /*Lo MEJOR sería cambiar esto y ver si se cambio el name o el lastname para hacer este llamado*/
     AuthService.updateUserInformation(name, lastname, currentUser.id).then(
       () => {
+        /*VER SI se cambio la foto para hacer esto, creo que no se va a poder, hacerlo siempre*/
         AuthService.updatedCurrentUserInLocalStorage(currentUser.id).then(
           setCurrentUser(AuthService.getCurrentUser())
         );
         ImageService.upload(file).then(() => { window.location.reload(); });
-        //window.location.reload();
+
+        /*Validar si se ingreso una nueva de cumpleaños y si es distinta a la anterioir, 
+        si se ingreso, actualizarla directamente en el back*/
+
+        /*Validar si se ingreso un telephono y si es diferente al anterior, si es el caso
+        VALIDAR el telefono con las funciones:
+        import { isValidPhoneNumber, isPossiblePhoneNumber  } from 'react-phone-number-input'
+          -isPossiblePhoneNumber(phoneNumber)
+          -isValidPhoneNumber(phoneNumber)
+        y actualizar el back*/
+        
         changeLoadingState();
       },
       (error) => {
@@ -123,7 +134,7 @@ const UserSettings = () => {
 };
 export default UserSettings;
 
-function bringUserInformation(name, onChangeName, lastname, onChangeLastname) {
+function bringUserInformation(name, onChangeName, lastname, onChangeLastname, birthday, onChangeBirthday, celphone, onChangeCelphone ) {
   return [
     {
       title: "Nombre Completo",
@@ -149,8 +160,8 @@ function bringUserInformation(name, onChangeName, lastname, onChangeLastname) {
       content: [
         {
           title:"YYYY-MM-DD",
-          value: "",
-          onChange: () => {},
+          value: birthday,
+          onChange: onChangeBirthday,
           validations: [],
           component: DatePicker,
         }
@@ -161,8 +172,8 @@ function bringUserInformation(name, onChangeName, lastname, onChangeLastname) {
       content: [
         {
           title: "Celular",
-          value: "",
-          onChange: () => {},
+          value: celphone,
+          onChange: onChangeCelphone,
           validations: [],
           component: PhoneNumberInput,
         },

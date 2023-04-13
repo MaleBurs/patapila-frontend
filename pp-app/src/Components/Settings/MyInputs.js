@@ -20,16 +20,15 @@ export function TextInput(props) {
   );
 }
 export function DatePicker(props) {
-  const [birthday, setBirthday] = useState(null);
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DesktopDatePicker
         className="date-picker myDatePicker"
         disableFuture
         inputFormat="YYYY-MM-DD"
-        value={birthday}
-        onChange={(birthday) => {
-          setBirthday(birthday.format("YYYY-MM-DD"));
+        value={props.value}
+        onChange={(newDate) => {
+          props.onChange(newDate.format("YYYY-MM-DD"));
         }}
         inputProps={{ readOnly: true }}
         renderInput={(params) => <TextField {...params}
@@ -49,11 +48,10 @@ export function DatePicker(props) {
   );
 }
 export function PhoneNumberInput(props) {
-  const [value, setValue] = useState(props.value || "");
   const [defaultCountry, setDefaultCountry] = useState("AR");
 
   function handleOnChange(newValue) {
-    setValue(newValue);
+    props.onChange(newValue);
     if (setDefaultCountry) {
       setDefaultCountry(formatPhoneNumberIntl(newValue));
     }
@@ -68,7 +66,7 @@ export function PhoneNumberInput(props) {
         defaultCountry={defaultCountry}
         flags={flags}
         placeholder="011 6725-9823"
-        value={value}
+        value={props.value}
         onChange={handleOnChange}
       />
       <div className="">
