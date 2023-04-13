@@ -4,16 +4,16 @@ import AuthService from "./auth.service";
 const upload = async(file) => {
     const fd = new FormData()
     fd.append('file', file)
-    return axios.post(`https://localhost:8080/profile/picture/${AuthService.getCurrentUser().id}`, fd)
+    return axios.post(`http://localhost:8080/profile/picture/${AuthService.getCurrentUser().id}`, fd)
 }
 
 const getImageUrl = async() => {
-    const { data } = await axios.get(`https://localhost:8080/profile/picture/${AuthService.getCurrentUser().id}`, { responseType: 'blob' })
+    const { data } = await axios.get(`http://localhost:8080/profile/picture/${AuthService.getCurrentUser().id}`, { responseType: 'blob' })
     const blob = new Blob([data], { type: 'image' })
     return URL.createObjectURL(blob)
 }
 const getMilestoneUrl = async(milestoneId) => {
-    const { data } = await axios.get(`https://localhost:8080/milestone/picture/${milestoneId}`, { responseType: 'blob' })
+    const { data } = await axios.get(`http://localhost:8080/milestone/picture/${milestoneId}`, { responseType: 'blob' })
     const blob = new Blob([data], { type: 'image' })
     return URL.createObjectURL(blob)
 }

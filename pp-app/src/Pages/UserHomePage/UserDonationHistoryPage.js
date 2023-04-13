@@ -54,10 +54,10 @@ const UserDonationHistoryPage = () => {
                 <div className="flex flex-row space-x-3">
                   <img src={ManoConCorazon} className="w-14 h-14" alt="mano con corazon"/>  
                   <div className="font-Pop-R text-lg">
-                    {((lifeImpact/980).toFixed(0) === 0) ?
-                    "Todavía no has Podido Brindar Atención Nutricional a Ningún Niño"
+                    {((lifeImpact/980).toFixed(0) == 0) ?
+                    "Todavía no has podido Brindar atención nutricional a ningún niño"
                     :
-                    "Has Brindado Atención Nutricional a aproximadamente" + (lifeImpact/980).toFixed(0) + "Niños"
+                    "Has brindado atención nutricional a aproximadamente " + (lifeImpact/980).toFixed(0) + "niños"
                     }
                   </div>
                 </div>
