@@ -21,8 +21,8 @@ const ModifyStatePopUp = (props) => {
       },
       P:{
         title: "Pausada",
-        colorStyle: "text-[#f4dcbf] border-[#f4dcbf]",
-        color: "#f4dcbf",
+        colorStyle: "text-[#eb8301] border-[#eb8301]",
+        color: "#eb8301",
         pausedOption: false,
         activeOption: true,
       },
