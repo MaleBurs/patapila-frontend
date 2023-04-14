@@ -61,7 +61,7 @@ export function PhoneNumberInput(props) {
   return (
     <div className="py-2 px-4">
       <PhoneInput
-        maxLength={11}
+        maxLength={13}
         className="MyPhoneInput"
         menuClass="phone-input-menu"
         defaultCountry={defaultCountry}
