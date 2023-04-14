@@ -9,15 +9,14 @@ import Loading from "../../Utiles/Loading";
 const InformationColumn = (props) => {
   const form = useRef();
   const checkBtn = useRef();
-  const [message, setMessage] = useState("");
   const [loadingState, setLoadingState] = useState(props.loading);
 
   const startSubmition = (e) => {
     e.preventDefault();
-    setMessage("");
+    props.onChangeMessage("");
     form.current.validateAll();
     if (checkBtn.current.context._errors.length === 0) {
-      props.submitFunction({setMessage});
+      props.submitFunction();
     }
   }
 
@@ -50,8 +49,8 @@ const InformationColumn = (props) => {
             )
         })}
         
-        {message && (
-          <Messages.ErrorMessage message={message}/>
+        {props.message && (
+          <Messages.ErrorMessage message={props.message}/>
         )}
         
         <div className="self-end">

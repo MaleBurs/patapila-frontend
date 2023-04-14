@@ -30,6 +30,7 @@ const UserSettings = () => {
   const [loading, setLoading] = useState(false);
   const [birthday, setBirthday] = useState(null);
   const [celphone, setCelphone] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onChangeName = (e) => setName(e.target.value);
   const onChangeLastname = (e) => setLastname(e.target.value);
@@ -42,7 +43,7 @@ const UserSettings = () => {
 
   const userInformation = bringUserInformation(name, onChangeName, lastname, onChangeLastname, birthday, onChangeBirthday, celphone, onChangeCelphone);
 
-  function handleDataChange({ setMessage }) {
+  function handleDataChange() {
     changeLoadingState();
     /*Lo MEJOR sería cambiar esto y ver si se cambio el name o el lastname para hacer este llamado*/
     AuthService.updateUserInformation(name, lastname, currentUser.id).then(
@@ -70,7 +71,7 @@ const UserSettings = () => {
           error.response.data.message) ||
           error.message ||
           error.toString();
-        setMessage(resMessage);
+          setErrorMessage(resMessage);
       }
     );
   }
@@ -94,7 +95,7 @@ const UserSettings = () => {
             content={
                 <>
                 <UploadProfileImage file={file} setFile={setFile}/>
-                <InformationColumn information={userInformation} submitFunction={handleDataChange} loading={()=>loading}/>
+                <InformationColumn message={errorMessage} onChangeMessage={setErrorMessage} information={userInformation} submitFunction={handleDataChange} loading={()=>loading}/>
                 </>
             }
             />
