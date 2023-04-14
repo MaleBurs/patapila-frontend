@@ -74,7 +74,7 @@ export function PhoneNumberInput(props) {
         onChange={handleOnChange}
       />
       <div className="">
-        {flags[defaultCountry]}
+        {flags[country]}
       </div>
     </div>
   );
