@@ -62,7 +62,6 @@ const UserSettings = () => {
           -isPossiblePhoneNumber(phoneNumber)
           -isValidPhoneNumber(phoneNumber)
         y actualizar el back*/
-        
         changeLoadingState();
       },
       (error) => {
@@ -174,7 +173,7 @@ function bringUserInformation(name, onChangeName, lastname, onChangeLastname, bi
           title: "Celular",
           value: celphone,
           onChange: onChangeCelphone,
-          validations: [],
+          validations: [ValidationFunctions.vPossiblePhoneNumber, ValidationFunctions.vValidPhoneNumber],
           component: PhoneNumberInput,
         },
       ]  

@@ -51,6 +51,7 @@ export function PhoneNumberInput(props) {
   const [defaultCountry, setDefaultCountry] = useState("AR");
 
   function handleOnChange(newValue) {
+    console.log(newValue)
     props.onChange(newValue);
     if (setDefaultCountry) {
       setDefaultCountry(formatPhoneNumberIntl(newValue));
