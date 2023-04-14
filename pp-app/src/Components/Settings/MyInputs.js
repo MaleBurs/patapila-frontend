@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import PhoneInput, { formatPhoneNumberIntl  } from "react-phone-number-input";
 import flags from "react-phone-number-input/flags";
+import { isValidPhoneNumber, isPossiblePhoneNumber  } from 'react-phone-number-input'
 
 export function TextInput(props) {
   return (
@@ -48,13 +49,14 @@ export function DatePicker(props) {
   );
 }
 export function PhoneNumberInput(props) {
-  const [defaultCountry, setDefaultCountry] = useState("AR");
+  const [country, setCountry] = useState("AR");
+  const defaultCountry = "AR";
 
   function handleOnChange(newValue) {
     console.log(newValue)
     props.onChange(newValue);
-    if (setDefaultCountry) {
-      setDefaultCountry(formatPhoneNumberIntl(newValue));
+    if (setCountry) {
+      setCountry(formatPhoneNumberIntl(newValue));
     }
   }
 
@@ -65,6 +67,7 @@ export function PhoneNumberInput(props) {
         className="MyPhoneInput"
         menuClass="phone-input-menu"
         defaultCountry={defaultCountry}
+        country={country}
         flags={flags}
         placeholder="011 6725-9823"
         value={props.value}
