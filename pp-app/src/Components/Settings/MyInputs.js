@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import PhoneInput, { formatPhoneNumberIntl  } from "react-phone-number-input";
 import flags from "react-phone-number-input/flags";
-import { isValidPhoneNumber, isPossiblePhoneNumber  } from 'react-phone-number-input'
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 
 export function TextInput(props) {
   return (
@@ -76,6 +76,28 @@ export function PhoneNumberInput(props) {
       <div className="">
         {flags[country]}
       </div>
+    </div>
+  );
+}
+
+export function CountryCitySelector(props) {
+  return (
+    <div className="flex flex-row py-1">
+      <CountryDropdown
+      value={props.value.country}
+      onChange={(val) => {props.onChange.onChangeCountry(val); props.onChange.onChangeCity("")}}
+      classes="CountryDropDown"
+      style={{ width: '50%', color: `${props.value.country==="" ? "#e7e6e6" : "#3f3f3f"}`}}
+      defaultOptionLabel="País"
+      />
+    
+      <RegionDropdown
+      country={props.value.country} 
+      value={props.value.city}
+      onChange={(val) => props.onChange.onChangeCity(val)} 
+      style={{ width: '50%', color: `${props.value.city==="" ? "#e7e6e6" : "#3f3f3f"}`}}
+      classes="CityDropDown"
+      defaultOptionLabel="Ciudad"/>
     </div>
   );
 }

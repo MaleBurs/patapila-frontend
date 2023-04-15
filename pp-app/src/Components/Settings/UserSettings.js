@@ -17,7 +17,7 @@ import TwoColumnsPage from "../Utiles/TwoColumnsPage";
 import ValidationFunctions from "../../functions/validations";
 import ImageService from "../../services/images.service";
 import 'react-phone-number-input/style.css';
-import { TextInput, DatePicker, PhoneNumberInput } from "./MyInputs";
+import { TextInput, DatePicker, PhoneNumberInput, CountryCitySelector } from "./MyInputs";
 
 const UserSettings = () => {
   const [setRequestToChangeDonation] = useState(false);
@@ -30,18 +30,22 @@ const UserSettings = () => {
   const [loading, setLoading] = useState(false);
   const [birthday, setBirthday] = useState(null);
   const [celphone, setCelphone] = useState('');
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const onChangeName = (e) => setName(e.target.value);
   const onChangeLastname = (e) => setLastname(e.target.value);
   const onChangeCelphone = (newCelphone) => setCelphone(newCelphone);
   const onChangeBirthday = (newDate) => setBirthday(newDate);
+  const onChangeCity = (newCity) => setCity(newCity);
+  const onChangeCountry = (newCountry) => setCountry(newCountry);
   
   const changeLoadingState = () =>{
     setLoading(current => !current);
   }
 
-  const userInformation = bringUserInformation(name, onChangeName, lastname, onChangeLastname, birthday, onChangeBirthday, celphone, onChangeCelphone);
+  const userInformation = bringUserInformation(name, onChangeName, lastname, onChangeLastname, birthday, onChangeBirthday, celphone, onChangeCelphone, country, onChangeCountry, city, onChangeCity);
 
   function handleDataChange() {
     changeLoadingState();
@@ -134,7 +138,7 @@ const UserSettings = () => {
 };
 export default UserSettings;
 
-function bringUserInformation(name, onChangeName, lastname, onChangeLastname, birthday, onChangeBirthday, celphone, onChangeCelphone ) {
+function bringUserInformation(name, onChangeName, lastname, onChangeLastname, birthday, onChangeBirthday, celphone, onChangeCelphone, country, onChangeCountry, city, onChangeCity ) {
   return [
     {
       title: "Nombre Completo",
@@ -174,8 +178,26 @@ function bringUserInformation(name, onChangeName, lastname, onChangeLastname, bi
           title: "Celular",
           value: celphone,
           onChange: onChangeCelphone,
-          validations: [ValidationFunctions.vPossiblePhoneNumber, ValidationFunctions.vValidPhoneNumber],
+          validations: [],
           component: PhoneNumberInput,
+        },
+      ]  
+    },
+    {
+      title: "Lugar de Residencia",
+      content: [
+        {
+          title: "País",
+          value: {
+            country: country,
+            city: city,
+          },
+          onChange: {
+            onChangeCountry: onChangeCountry,
+            onChangeCity: onChangeCity,
+          },
+          validations: [],
+          component: CountryCitySelector,
         },
       ]  
     }

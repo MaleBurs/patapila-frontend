@@ -226,5 +226,42 @@
 }
 
 /* Country select menu styles */
+.CountryDropDown {
+    border: none !important;
+    font-size: 0.875rem !important;
+    font-family: "Poppins-Light" !important;
+    letter-spacing: 0.075em;
+    padding-left: 2;
+}
+.CountryDropDown:hover {
+    border: none !important;
+    box-shadow: none;
+}
+.CountryDropDown:focus {
+    border: none !important;
+    box-shadow: none;
+}
+.CountryDropDown::placeholder {
+    color: #a3a3a3;
+}
+.CountryDropDown .defaultOptionLabel{
+    color: red
+}
 
-  
+.CityDropDown {
+    border: none !important;
+    font-size: 0.875rem !important;
+    font-family: "Poppins-Light" !important;
+    letter-spacing: 0.075em;
+}
+.CityDropDown:hover {
+    border: none !important;
+    box-shadow: none;
+}
+.CityDropDown:focus {
+    border: none !important;
+    box-shadow: none;
+}
+.CityDropDown::placeholder {
+    color: #a3a3a3;
+}
