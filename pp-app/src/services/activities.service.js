@@ -6,6 +6,11 @@ const getUserActivities = (id) => {
     id
   });
 };
+const getUserLatesActivities = (id) => {
+  return axios.post(API_URL + "getUserLatesActivities", {
+    id
+  });
+};
 const createActivity =  (title, description, userId) => {
   return axios.post(API_URL + "createActivity",{
     title, 
@@ -17,6 +22,7 @@ const createActivity =  (title, description, userId) => {
 const ActServices = {
     getUserActivities,
     createActivity,
+    getUserLatesActivities
   }
 
 export default ActServices;

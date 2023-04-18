@@ -7,7 +7,7 @@ const LatestActivity = () => {
   const currentUser = AuthService.getCurrentUser();
   const [activities, setActivities] = useState([]);
   useEffect(() => {
-    ActServices.getUserActivities(currentUser.id).then(
+    ActServices.getUserLatesActivities(currentUser.id).then(
       (res)=> setActivities(res.data)
     )
 }, [currentUser.id])

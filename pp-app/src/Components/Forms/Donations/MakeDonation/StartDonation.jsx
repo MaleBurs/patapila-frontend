@@ -23,7 +23,7 @@ const StartDonation = ({ setStep }) => {
     return {title: "Te has suscrito!", description: "Has iniciado una suscripción de $"+amount+" que se cobra " + frequency + " y tiene como próxima fecha de pago "+nextPaymentDate+"."}
   }
   const newOneTimeDonationEvenctDescription = (amount) =>{
-    return {title: "Has realizado una donación de única vez!", description: "Has realizado una donación de $"+amount+"."}
+    return {title: "Has realizado una donación!", description: "Has realizado una donación de $"+amount+"."}
   }
 
   useEffect(() => {

@@ -81,7 +81,7 @@ export default function LoginPage() {
         activeButton={true}
         buttonText="Quiero Unirme"
         backgoundColor="bg-[#e7e6e6]"
-        buttonFunction={() => navigate("/signup")}
+        buttonFunction={() => {navigate("/signup");window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });}}
       />
       <div className="flex flex-col">
         <div className="h-16 bg-[#e7e6e6]"></div>
