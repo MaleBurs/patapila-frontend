@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeartPulse } from "@fortawesome/free-solid-svg-icons";
 import AuthService from "../../services/auth.service";
 import ImageService from "../../services/images.service";
-import Handhake from "../Images/Handshake.png"
 
 const MileStoneModal = (props) =>{
     function closeModal() {
@@ -11,7 +10,7 @@ const MileStoneModal = (props) =>{
     }
     return(
         <>
-          <div className="darkGreyBg justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <div key={props.id + " " + props.title} className="darkGreyBg justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-auto my-6 mx-auto max-w-3xl p-10">
 
               <div className="space-y-4 md:space-y-9 px-6 md:px-8 lg:px-12 py-6 rounded-md relative flex flex-col w-auto bg-white outline-none focus:outline-none">
@@ -41,30 +40,28 @@ const MileStoneModal = (props) =>{
 
 const MilestonesBox = (props) => {
     const [modal, setModal] = React.useState(false);
-    const [milestoneImage, setMilestoneImage] = React.useState("");
+    const [icon, setIcon]= React.useState('')
     useEffect(() => {
-        ImageService.getMilestoneUrl(props.id)
-        .then(res => 
-          res? setMilestoneImage(res) : setMilestoneImage(Handhake));
-    }, [props.id])
+        setIcon(ImageService.convertBinaryImageToUsableImage(props.icon))
+    }, [props.icon]); 
     return (
       <>  
         {modal ?
             <MileStoneModal 
                 onCloseModal={()=>setModal(false)}
-                image={milestoneImage}
+                image={icon}
                 title={props.title}
                 description={props.description}
                 createdAt={props.createdAt}/>
             : null}               
-            <li class="mb-10 ml-7 md:ml-8 lg:ml-10 bg-white">
+            <li class="mb-10 ml-7 md:ml-8 lg:ml-10 bg-white" key={props.id}>
             <span class="flex absolute -left-4 justify-center items-center w-8 h-8 bg-blue-200 rounded-full ring-8 ring-[#f6f7f36b] greenBg">
                 <FontAwesomeIcon icon={faHeartPulse} className="h-4 w-4" color="white"/>
             </span>
             <div className="flex flex-row space-x-4 border border-gray-200 rounded-xl px-2 md:px-5 py-4">
                 <img
                     className="object-cover h-20 w-20 md:h-24 md:w-24 rounded "
-                    src={milestoneImage}
+                    src={icon}
                     alt="MilestoneImage"
                 />
                 <div className="flex flex-col justify-center">
@@ -81,7 +78,7 @@ const MilestonesProgress = () => {
   const [milestones, setMilestones] = React.useState([]);
   const currentUser = AuthService.getCurrentUser();
   useEffect(() => {
-    AuthService.getUserMilestones(currentUser.id).then(resp=> setMilestones(resp.data.milestones));
+    AuthService.getUserMilestones(currentUser.id).then(resp=> {setMilestones(resp.data.milestones)});
   }, [currentUser.id]);
   return (
     <>
@@ -96,6 +93,7 @@ const MilestonesProgress = () => {
                 title={milestone.title}
                 description={milestone.description}
                 createdAt={milestone.createdAt}
+                icon={milestone.icon}
                 />
                 </>
             ))

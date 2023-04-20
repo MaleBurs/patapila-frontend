@@ -6,14 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const UserInformationSection = (props) => {
   const {currentUser, profilePictureURL} = useCurrentUser();
-/*   const [lifeImpact, setLifeImpact] = useState(null);
-  const [registrationYear, setRegistrationYear] = useState(null); */
   const navigate = useNavigate();
-
-/*   useEffect(() => {
-    DonationService.amountDonatedByRefferals(currentUser.id).then(res=>setLifeImpact(res.data.total + currentUser.totalAmountDonated))
-    AuthService.findUserById(currentUser.id).then(res=>setRegistrationYear((new Date(res.data.createdAt)).getFullYear()))
-  }, []) */
 
   return (
     <>

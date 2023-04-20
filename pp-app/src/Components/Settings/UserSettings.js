@@ -52,7 +52,7 @@ const UserSettings = () => {
 
   function handleDataChange() {
     changeLoadingState();
-    if(name!=currentUser.name || lastname!=currentUser.lastname){
+    if(name!==currentUser.name || lastname!==currentUser.lastname){
       AuthService.updateUserInformation(name, lastname, currentUser.id).then(
         () => {
           /*VER SI se cambio la foto para hacer esto, creo que no se va a poder, hacerlo siempre*/
@@ -73,7 +73,7 @@ const UserSettings = () => {
       );
     }
 
-    if(birthday!=currentUser.birthday || celphone!=currentUser.celphone || country!=currentUser.country || city!=currentUser.city){
+    if(birthday!==currentUser.birthday || celphone!==currentUser.celphone || country!==currentUser.country || city!==currentUser.city){
       if(celphone){
         if(!isPossiblePhoneNumber(celphone)){
           setErrorMessage("La longitud del numero de celular no es valida.");
