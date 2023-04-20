@@ -8,6 +8,9 @@ import {useSubscriptionPeriod} from  '../../../../Context/SubscriptionContext'
 import ActServices from "../../../../services/activities.service";
 import AuthService from "../../../../services/auth.service";
 import { textos } from './DonationModificationTexts';
+import ActivarDonacion from "../../../Images/Activar donación.png";
+import PausarDonacion from "../../../Images/Pausar donación.png";
+import CancelarDonacion from "../../../Images/Cancelar donación.png";
 
 const ModifyStatePopUp = (props) => {
 
@@ -156,18 +159,21 @@ const ModifyStatePopUp = (props) => {
                 <div className='flex flex-row w-full items-center justify-center space-x-5 mt-8'>
 
                   {currentState.pausedOption &&
-                    <button onClick={()=>{setChoosedCancelled(false); setChoosedPaused(true); setChoosedActive(false)}} className={`rounded-md p-8 flex flex-col space-y-4 basis-1/2 items-center duration-700 border ${choosedPaused ? 'blackText border-solid border-gray-400': 'text-gray-500 hover:border-solid hover:border-[#e4e4e4] border-[#e7e6e6] border-dashed'}`}>
-                      <div className='font-Pop-R text-base tracking-widest'>Pausar la Suscripción</div>
-                      <div className='font-Pop-L text-xs tracking-wide'>No se realizará ningún cargo en la tarjeta, mientras la suscripción se encuentre pausada.</div>
+                    <button onClick={()=>{setChoosedCancelled(false); setChoosedPaused(true); setChoosedActive(false)}} className={`rounded-md p-8 flex flex-col basis-1/2 items-center duration-700 border ${choosedPaused ? 'blackText border-solid border-gray-400': 'text-gray-500 hover:border-solid hover:border-[#e4e4e4] border-[#e7e6e6] border-dashed'}`}>
+                      <img src={PausarDonacion} alt="pausar" className='w-24 h-auto'/>
+                      <div className='font-Pop-R text-sm tracking-widest mt-4'>Pausar la Suscripción</div>
+                      <div className='font-Pop-L text-xs tracking-wide mt-2'>No se realizará ningún cargo en la tarjeta, mientras la suscripción se encuentre pausada.</div>
                   </button>}
                   {currentState.activeOption &&
-                    <button onClick={()=>{setChoosedCancelled(false); setChoosedPaused(false); setChoosedActive(true)}} className={`rounded-md p-8 flex flex-col space-y-4 basis-1/2 items-center duration-700 border ${choosedActive ? 'blackText border-solid border-gray-400': 'text-gray-500 hover:border-solid hover:border-[#e4e4e4] border-[#e7e6e6] border-dashed'}`}>
-                      <div className='font-Pop-R text-base tracking-widest '>Reanudar Suscripción</div>
-                      <div className='font-Pop-L text-xs tracking-wide'>Se volerá a activa la suscripción que se encontraba pausada ¡Gracias por su ayuda!</div>
+                    <button onClick={()=>{setChoosedCancelled(false); setChoosedPaused(false); setChoosedActive(true)}} className={`rounded-md p-8 flex flex-col basis-1/2 items-center duration-700 border ${choosedActive ? 'blackText border-solid border-gray-400': 'text-gray-500 hover:border-solid hover:border-[#e4e4e4] border-[#e7e6e6] border-dashed'}`}>
+                      <img src={ActivarDonacion} alt="activar" className='w-24 h-auto'/>
+                      <div className='font-Pop-R text-sm tracking-widest mt-4'>Reanudar Suscripción</div>
+                      <div className='font-Pop-L text-xs tracking-wide mt-2'>Se volerá a activa la suscripción que se encontraba pausada ¡Gracias por su ayuda!</div>
                   </button>}
-                  <button onClick={()=>{setChoosedCancelled(true); setChoosedPaused(false); setChoosedActive(false)}} className={`rounded-md p-8 flex flex-col space-y-4 basis-1/2 items-center duration-700 border ${choosedCancelled ? 'blackText border-solid border-gray-400': 'text-gray-500 hover:border-solid hover:border-[#e4e4e4] border-[#e7e6e6] border-dashed'}`}>
-                      <div className='font-Pop-R text-base tracking-widest '>Cancelar Suscripción</div>
-                      <div className='font-Pop-L text-xs tracking-wide'>Se desactivará tu suscripcion definitivamemte. Podrás seguir accediendo a tu cuenta.</div>
+                  <button onClick={()=>{setChoosedCancelled(true); setChoosedPaused(false); setChoosedActive(false)}} className={`rounded-md p-8 flex flex-col basis-1/2 items-center duration-700 border ${choosedCancelled ? 'blackText border-solid border-gray-400': 'text-gray-500 hover:border-solid hover:border-[#e4e4e4] border-[#e7e6e6] border-dashed'}`}>
+                      <img src={CancelarDonacion} alt="cancelar" className='w-24 h-auto'/>
+                      <div className='font-Pop-R text-sm tracking-widest mt-4'>Cancelar Suscripción</div>
+                      <div className='font-Pop-L text-xs tracking-wide mt-2'>Se desactivará tu suscripcion definitivamemte. Podrás seguir accediendo a tu cuenta.</div>
                   </button>
  
                 </div>
