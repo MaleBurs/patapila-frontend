@@ -1,5 +1,4 @@
 import { isEmail } from "validator";
-import { isValidPhoneNumber, isPossiblePhoneNumber  } from 'react-phone-number-input'
 
 const required = (value) => {
     if (!value) {
@@ -48,24 +47,6 @@ const required = (value) => {
       );
       }
   }
-
-  const vPossiblePhoneNumber = (value) => {
-    console.log("possible"+isValidPhoneNumber(value));
-    if(!isPossiblePhoneNumber(value)){
-      <div className="alert redText text-[10.5px] my-2 mx-1" role="alert">
-      La longitud del numero de celular no es valida.
-    </div>
-   }
-  }
-
-  const vValidPhoneNumber = (value) => {
-    console.log("valid" +isValidPhoneNumber(value));
-    if(!isValidPhoneNumber(value)){
-      <div className="alert redText text-[10.5px] my-2 mx-1" role="alert">
-      La longitud del numero de celular no es valida.
-    </div>
-   }
-  }
   
   
 const ValidationFunctions = {
@@ -74,8 +55,6 @@ const ValidationFunctions = {
     vpassword,
     vstrings,
     vcancel,
-    vPossiblePhoneNumber,
-    vValidPhoneNumber
   }
 
 export default ValidationFunctions;

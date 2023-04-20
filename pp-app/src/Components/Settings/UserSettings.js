@@ -17,7 +17,10 @@ import TwoColumnsPage from "../Utiles/TwoColumnsPage";
 import ValidationFunctions from "../../functions/validations";
 import ImageService from "../../services/images.service";
 import 'react-phone-number-input/style.css';
+
 import { TextInput, DatePicker, PhoneNumberInput, CountryCitySelector } from "./MyInputs";
+import { isPossiblePhoneNumber } from "react-phone-number-input";
+
 
 const UserSettings = () => {
   const [setRequestToChangeDonation] = useState(false);
@@ -49,35 +52,37 @@ const UserSettings = () => {
 
   function handleDataChange() {
     changeLoadingState();
-    /*Lo MEJOR sería cambiar esto y ver si se cambio el name o el lastname para hacer este llamado*/
-    AuthService.updateUserInformation(name, lastname, currentUser.id).then(
-      () => {
-        /*VER SI se cambio la foto para hacer esto, creo que no se va a poder, hacerlo siempre*/
-        AuthService.updatedCurrentUserInLocalStorage(currentUser.id).then(
-          setCurrentUser(AuthService.getCurrentUser())
-        );
-        ImageService.upload(file).then(() => { window.location.reload(); });
+    if(name!=currentUser.name || lastname!=currentUser.lastname){
+      AuthService.updateUserInformation(name, lastname, currentUser.id).then(
+        () => {
+          /*VER SI se cambio la foto para hacer esto, creo que no se va a poder, hacerlo siempre*/
+          AuthService.updatedCurrentUserInLocalStorage(currentUser.id).then(
+            setCurrentUser(AuthService.getCurrentUser())
+          );
+          ImageService.upload(file).then(() => { window.location.reload(); });
+          changeLoadingState();
+        },
+        (error) => {
+          const resMessage = (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+            error.message ||
+            error.toString();
+            setErrorMessage(resMessage);
+        }
+      );
+    }
 
-        /*Validar si se ingreso una nueva de cumpleaños y si es distinta a la anterioir, 
-        si se ingreso, actualizarla directamente en el back*/
-
-        /*Validar si se ingreso un telephono y si es diferente al anterior, si es el caso
-        VALIDAR el telefono con las funciones:
-        import { isValidPhoneNumber, isPossiblePhoneNumber  } from 'react-phone-number-input'
-          -isPossiblePhoneNumber(phoneNumber)
-          -isValidPhoneNumber(phoneNumber)
-        y actualizar el back*/
-        changeLoadingState();
-      },
-      (error) => {
-        const resMessage = (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-          error.message ||
-          error.toString();
-          setErrorMessage(resMessage);
+    if(birthday!=currentUser.birthday || celphone!=currentUser.celphone || country!=currentUser.country || city!=currentUser.city){
+      if(celphone){
+        if(!isPossiblePhoneNumber(celphone)){
+          setErrorMessage("La longitud del numero de celular no es valida.");
+          return;
+        }
       }
-    );
+        //llamada al back para actualizar la fecha de cumpleaños y celular
+        //actualizar el local storage
+    }
   }
   
   return (
