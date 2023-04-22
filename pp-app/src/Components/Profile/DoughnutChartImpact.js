@@ -10,6 +10,7 @@ export default function ImpactChart() {
   const currentUser = AuthService.getCurrentUser();
   const [data, setData] = useState([])
   const [bgColor, setBgColor] = useState([])
+  const mustReload = React.createRef();
 
   useEffect(() => {
 
@@ -18,8 +19,8 @@ export default function ImpactChart() {
       setBgColor(['rgba(231, 230, 230)']);
     };
 
-    const setBgColorAndDataToCorrect = () => {
-      setData([currentUser.totalAmountDonated, donatedByRefferals]);
+    const setBgColorAndDataToCorrect = (total) => {
+      setData([currentUser.totalAmountDonated, total]);
       setBgColor([
         'rgba(244, 220, 191)',
         'rgba(108, 51, 51)',
@@ -32,12 +33,13 @@ export default function ImpactChart() {
         (res.data.total === 0 && currentUser.totalAmountDonated === 0) ?
           setBgColorAndDataToDefault()
           :
-          setBgColorAndDataToCorrect()
+          setBgColorAndDataToCorrect(res.data.total);
       }
     )
   }, [currentUser.id, currentUser.totalAmountDonated])
 
   useEffect(() => {
+
     let config = {
       type: "doughnut",
       data: {
@@ -65,7 +67,7 @@ export default function ImpactChart() {
   }, [donatedByRefferals]);
   return (
     <>
-      <canvas id="doughnut"></canvas>
+      <canvas id="doughnut" ref={mustReload}></canvas>
     </>
   );
 }

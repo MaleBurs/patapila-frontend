@@ -26,6 +26,7 @@ const UserDonationHistoryPage = () => {
         setDonatedByRefferals(res.data.total);
         var total = (res.data.total == null) ? 0 : res.data.total;
         setLifeImpact(currentUser.totalAmountDonated + total);
+        
       }
     )
   }, [currentUser])
