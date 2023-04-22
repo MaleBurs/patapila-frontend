@@ -68,7 +68,7 @@ const ModifyStatePopUp = (props) => {
     const handleCancelledSubs = () =>{
         DonationService.modifySubscriptionState(subscriptionData.id, 'C').then(
             () => {
-              ActServices.createActivity(cancelledSubscriptionEvenctDescription(selectedAmount,subsPeriod.label).title, cancelledSubscriptionEvenctDescription(selectedAmount,subsPeriod.label).description, currentUser.id). then(
+              ActServices.createActivity(7, cancelledSubscriptionEvenctDescription(selectedAmount,subsPeriod.label).description, currentUser.id). then(
                 (res)=> console.log(res)
               )
             },
@@ -85,7 +85,7 @@ const ModifyStatePopUp = (props) => {
     const handlePausedSubs = () =>{
         DonationService.modifySubscriptionState(subscriptionData.id, 'P').then(
             () => {
-              ActServices.createActivity(pausedSubscriptionEvenctDescription(selectedAmount,subsPeriod.label).title, pausedSubscriptionEvenctDescription(selectedAmount,subsPeriod.label).description, currentUser.id). then(
+              ActServices.createActivity(8, pausedSubscriptionEvenctDescription(selectedAmount,subsPeriod.label).description, currentUser.id). then(
                 (res)=> console.log(res)
               )
             },
@@ -102,7 +102,7 @@ const ModifyStatePopUp = (props) => {
     const handleResetDonation = () =>{
       DonationService.modifySubscriptionState(subscriptionData.id, 'A').then(
           () => {
-            ActServices.createActivity(resetSubscriptionEvenctDescription(selectedAmount,subsPeriod.label,paymentDay).title, resetSubscriptionEvenctDescription(selectedAmount,subsPeriod.label,paymentDay).description, currentUser.id). then(
+            ActServices.createActivity(5, resetSubscriptionEvenctDescription(selectedAmount,subsPeriod.label,paymentDay).description, currentUser.id). then(
               (res)=> console.log(res)
             )
           },

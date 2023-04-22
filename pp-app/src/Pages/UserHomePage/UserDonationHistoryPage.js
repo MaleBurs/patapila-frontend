@@ -11,6 +11,7 @@ import ManoConCorazon from "../../Components/Images/ManoConCorazon.png";
 import ImpactChart from "../../Components/Profile/DoughnutChartImpact";
 import YoDono from "../../Components/Images/YoDono.png";
 import ActServices from "../../services/activities.service";
+import ImageService from "../../services/images.service";
 
 const UserDonationHistoryPage = () => {
   const currentUser = AuthService.getCurrentUser();
@@ -35,7 +36,7 @@ const UserDonationHistoryPage = () => {
 
   useEffect(() => {
     ActServices.getUserActivities(currentUser.id).then(
-      (res)=> setActivities(res.data)
+      (res)=> {setActivities(res.data)}
     )
 }, [currentUser.id])
 
@@ -139,9 +140,10 @@ const UserDonationHistoryPage = () => {
                 <div className="flex flex-col space-y-6 p-10">
                 {activities.map((activity) => (
                   <>
-                    <div key={activity.id} className="flex flex-row items-center space-x-5">  
+                    <div key={activity.id} className="flex flex-row items-center space-x-5">
+                      <img className="h-12 w-auto" src={ImageService.convertBinaryImageToUsableImage(activity.activityTyped.icon)} alt="icono de actividad"/>  
                       <div className="flex flex-col space-y-2 basis-2/3">
-                        <div className="text-xs font-Pop-R tracking-widest purpleText">{activity.title}</div>
+                        <div className="text-xs font-Pop-R tracking-widest purpleText">{activity.activityTyped.title}</div>
                         <div className="text-[11.5px] font-Pop-L tracking-wide text-gray-700">{activity.description}</div>
                       </div>        
                       <div className="text-[13px] font-Pop-L basis-1/3 text-center tracking-widest text-gray-500">{convertToFormattedDate(activity.createdAt.split('T')[0])}</div>  

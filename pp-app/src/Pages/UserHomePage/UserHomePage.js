@@ -6,7 +6,6 @@ import { CurrentUserContextProvider} from "../../Context/CurrentUserContext";
 import UserInformationSection from "../../Components/Profile/UserInformationSection";
 import CopyLinkSection from "../../Components/Profile/CopyLinkSection";
 import MilestonesProgress from "../../Components/Profile/MilestonesProgress";
-import LatestActivity from "../../Components/Profile/LatestActivty";
 import InvitationToDonate from "../../Components/Profile/InvitationToDonate";
 import { PieDePaginaInformativo } from "../../Components/Utiles/PieDePaginaInformativo";
 
@@ -31,7 +30,10 @@ const UserHome = () => {
             </div>
             <div className="md:basis-2/5 flex flex-col space-y-4">
               <CopyLinkSection/>
-              <LatestActivity/>
+              <div className="flex flex-col space-y-2 p-8 border border-[#e7e6e6] rounded-md">
+                <div className="font-Pop-R text-sm text-gray-700 tracking-widest">Descripción de PataPila:</div>
+                <div className="font-Pop-L text-xs text-gray-500 tracking-wide text-justify leading-4">Somos una Asociación Civil sin fines de lucro que vive y trabaja junto a comunidades en situación de vulnerabilidad del norte salteño. Nuestros ejes de trabajo son la prevención de la desnutrición infantil, la promoción humana, la educación integral y el desarrollo comunitario.</div>
+              </div>
             </div>
           </div>
 

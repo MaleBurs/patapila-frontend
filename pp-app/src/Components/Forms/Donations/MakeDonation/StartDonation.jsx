@@ -56,7 +56,7 @@ const StartDonation = ({ setStep }) => {
       DonationService.generateSubscription(currentUser.id, selectedAmount, selectedFrequency, Number(subsPeriod.value), paymentDay).then(
         () => {
           setShowModal(true);
-          ActServices.createActivity(newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay).title, newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay).description, currentUser.id). then(
+          ActServices.createActivity(2, newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay).description, currentUser.id). then(
             (res)=> console.log(res)
           )
         },
@@ -73,7 +73,7 @@ const StartDonation = ({ setStep }) => {
         DonationService.generateTransaction(currentUser.id, selectedAmount,"onlyTime").then(
           () => {
             setShowModal(true);
-            ActServices.createActivity(newOneTimeDonationEvenctDescription(selectedAmount).title, newOneTimeDonationEvenctDescription(selectedAmount).description, currentUser.id). then(
+            ActServices.createActivity(3, newOneTimeDonationEvenctDescription(selectedAmount).description, currentUser.id). then(
               (res)=> console.log(res)
             )
           },

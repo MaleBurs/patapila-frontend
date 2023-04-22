@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faCircleCheck} from "@fortawesome/free-solid-svg-icons";
 import { aQueAyudas } from "../../Values/aQueAyudas";
+import { CurrentUserContextProvider } from "../../Context/CurrentUserContext";
 
 const PaginaAgradecimiento = () => {
   const currentUser = AuthService.getCurrentUser();
@@ -14,6 +15,7 @@ const PaginaAgradecimiento = () => {
   const categories = aQueAyudas
   return (
     <>
+      <CurrentUserContextProvider>
       <div className="mx-auto relative z-10 pb-8 sm:pb-16 md:pb-20 lg:pb-28 xl:pb-32 h-screen bg-cover place-content-center">
       <UserNavBar navigation={navigationOptions.userNavigation}/>
       {currentUser ? (
@@ -33,7 +35,8 @@ const PaginaAgradecimiento = () => {
       ) : (
       <></>
     )} 
-    </div> 
+    </div>
+    </CurrentUserContextProvider> 
     </>
   );
 };

@@ -59,7 +59,7 @@ const ChangeDonationFromProfileForm = () =>{
     DonationService.modifySubscriptionState(subscriptionData.id, 'A').then(
         () => {
           setShowModal(true);
-          ActServices.createActivity(resetSubscriptionEvenctDescription(selectedAmount,subsPeriod.label,paymentDay).title, resetSubscriptionEvenctDescription(selectedAmount,subsPeriod.label,paymentDay).description, currentUser.id). then(
+          ActServices.createActivity(5 , resetSubscriptionEvenctDescription(selectedAmount,subsPeriod.label,paymentDay).description, currentUser.id). then(
             (res)=> console.log(res)
           )
         },
@@ -93,7 +93,7 @@ const ChangeDonationFromProfileForm = () =>{
         () => {
           setShowModal(true);
           setIfUserWantsToModifySubs(false);
-          ActServices.createActivity(modificationSubscriptionEvenctDescription(selectedAmount,subsPeriod.label,paymentDay).title, modificationSubscriptionEvenctDescription(selectedAmount,subsPeriod.label,paymentDay).description, currentUser.id). then(
+          ActServices.createActivity(6, modificationSubscriptionEvenctDescription(selectedAmount,subsPeriod.label,paymentDay).title, modificationSubscriptionEvenctDescription(selectedAmount,subsPeriod.label,paymentDay).description, currentUser.id). then(
             (res)=> console.log(res)
           )
         },

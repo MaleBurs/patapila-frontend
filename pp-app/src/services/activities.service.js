@@ -11,9 +11,9 @@ const getUserLatesActivities = (id) => {
     id
   });
 };
-const createActivity =  (title, description, userId) => {
+const createActivity =  (activityTypeId, description, userId) => {
   return axios.post(API_URL + "createActivity",{
-    title, 
+    activityTypeId, 
     description, 
     userId
     });
