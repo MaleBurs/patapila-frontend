@@ -31,7 +31,7 @@ const UserHome = () => {
             <div className="md:basis-2/5 flex flex-col space-y-4">
               <CopyLinkSection/>
               <div className="flex flex-col space-y-2 p-8 border border-[#e7e6e6] rounded-md">
-                <div className="font-Pop-R text-sm text-gray-700 tracking-widest">Descripción de PataPila:</div>
+                <div className="font-Pop-R text-sm text-gray-700 tracking-widest">¿Quiénes Somos?</div>
                 <div className="font-Pop-L text-xs text-gray-500 tracking-wide text-justify leading-4">Somos una Asociación Civil sin fines de lucro que vive y trabaja junto a comunidades en situación de vulnerabilidad del norte salteño. Nuestros ejes de trabajo son la prevención de la desnutrición infantil, la promoción humana, la educación integral y el desarrollo comunitario.</div>
               </div>
             </div>
