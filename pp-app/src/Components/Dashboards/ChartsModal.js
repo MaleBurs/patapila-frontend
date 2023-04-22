@@ -10,7 +10,7 @@ export default function ChartModal(props) {
         <button onClick={()=>{setShowBarChart(false); setShowPieChart(false)}} className="font-Pop-SB text-lg text-gray-500 text-end px-10 hover:ease-in-out duration-300">X</button>
         <div className='flex flex-row space-x-8'>  
             <div className="flex p-7 flex-[0_0_auto] self-center">
-              <div class="chart-container" style={props.chartContainerStyle}> 
+              <div className="chart-container" style={props.chartContainerStyle}> 
                   {props.chart}
               </div>
             </div>

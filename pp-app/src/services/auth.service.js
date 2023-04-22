@@ -1,4 +1,6 @@
 import axios from "axios";
+import ImageService from "./images.service";
+
 const API_URL = "http://localhost:8080/api/auth/";
 const register = (name,lastname, email, password) => {
   return axios.post(API_URL + "signup", {
@@ -29,6 +31,8 @@ const login = (email, password) => {
     })
     .then((response) => {
       if (response.data.email) {
+        response.data.profilePicture ? ImageService.saveCompressedVersionToLocalStorage(response.data.profilePicture) : localStorage.setItem("compressedImage", null);
+        delete response.data.profilePicture;
         localStorage.setItem("user", JSON.stringify(response.data));
       }
       return response.data;
@@ -45,15 +49,20 @@ const logout = () => {
     return response.data;
   });
 };
-
 const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
+};
+
+const getUserProfilePhoto = () => {
+  return localStorage.getItem("compressedImage");
 };
 
 const updatedCurrentUserInLocalStorage = async (userId) => {
   const response = await axios
     .post(API_URL + "getCurrentUser", { userId });
   if (response) {
+    ImageService.saveCompressedVersionToLocalStorage(response.data.profilePicture);
+    delete response.data.profilePicture;
     localStorage.setItem("user", JSON.stringify(response.data));
   }
   return response.data;
@@ -114,12 +123,12 @@ const changeUserEmail = async (email, oldPassword, userId) => {
     });
 };
 
-
 const AuthService = {
   register,
   login,
   logout,
   getCurrentUser,
+  getUserProfilePhoto,
   sendMailTokenToResetPassword,
   updatePasswordViaEmail,
   updatePasswordViaSettings,

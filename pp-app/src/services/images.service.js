@@ -1,5 +1,5 @@
 import axios from "axios";
-import AuthService from "./auth.service";
+import { Buffer } from 'buffer';
 
 async function createFileFromPath(path) {
     const response = await fetch(path);
@@ -10,24 +10,6 @@ async function createFileFromPath(path) {
     const file = new File([blob], path.substring(path.lastIndexOf('/') + 1), { type });
     return file;
 }
-
-const upload = async(file) => {
-    const fd = new FormData()
-    fd.append('file', file)
-    return axios.post(`http://localhost:8080/profile/picture/${AuthService.getCurrentUser().id}`, fd)
-}
-
-const getImageUrl = async() => {
-    const { data } = await axios.get(`http://localhost:8080/profile/picture/${AuthService.getCurrentUser().id}`, { responseType: 'blob' })
-    const blob = new Blob([data], { type: 'image' })
-    return URL.createObjectURL(blob)
-}
-const getMilestoneUrl = async(milestoneId) => {
-    const { data } = await axios.get(`http://localhost:8080/milestone/picture/${milestoneId}`, { responseType: 'blob' })
-    const blob = new Blob([data], { type: 'image' })
-    return URL.createObjectURL(blob)
-}
-
 
 // Upload an image
 const uploadImage = async (path) => {
@@ -71,14 +53,59 @@ const convertBinaryImageToUsableImage = (buffer) => {
     return imgSrc;
 }
 
+const convertBiggerBinaryImageToUsableImage = (buffer) => {
+    const uint8Array = new Uint8Array(buffer.data);
+    const blob = new Blob([uint8Array], { type: 'image/png' });
+    const blobUrl = URL.createObjectURL(blob);
+    return blobUrl;
+}
+  
+
+const setUserProfilePicture = async (id, file) =>{ 
+    const formData = new FormData();
+    formData.append('image', file);
+    formData.append('id', id);
+    const response = await axios.post('http://localhost:8080/api/auth/setUserProfilePicture', formData, {
+        headers: {
+        'Content-Type': 'multipart/form-data',
+        },
+    });
+    return response.data;
+}
+
+
+function saveCompressedVersionToLocalStorage(profilePicture) {
+    const dataURL = Buffer.from(profilePicture.data).toString('base64');
+  
+    const img = new Image();
+    img.src = `data:image/${profilePicture.type};base64,${dataURL}`;
+  
+    img.addEventListener('load', () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = 100; // Set the desired width
+      canvas.height = 100; // Set the desired height
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      const compressedDataUrl = canvas.toDataURL(`image/${profilePicture.type}`, 0.5); // Set the desired compression level (0-1)
+  
+      try {
+        localStorage.setItem('compressedImage', compressedDataUrl);
+        console.log('Compressed image saved to local storage.');
+      } catch (e) {
+        console.error('Error saving compressed image to local storage:', e);
+      }
+    });
+  }
+  
+
 
 const ImageService = {
-    upload,
-    getImageUrl,
-    getMilestoneUrl,
     getImage,
     uploadImage,
-    convertBinaryImageToUsableImage
+    convertBinaryImageToUsableImage,
+    convertBiggerBinaryImageToUsableImage,
+    setUserProfilePicture,
+    saveCompressedVersionToLocalStorage
 }
 
 export default ImageService;

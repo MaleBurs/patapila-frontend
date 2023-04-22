@@ -39,10 +39,6 @@ const UserDonationHistoryPage = () => {
     )
 }, [currentUser.id])
 
-  const isAdmin = () => {
-    return JSON.stringify((AuthService.getCurrentUser()).roles) === JSON.stringify(["ROLE_ADMIN"]);
-  };
-
   function convertToFormattedDate(d){
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     const date = new Date(d);
@@ -54,11 +50,8 @@ const UserDonationHistoryPage = () => {
       <div className="mx-auto relative z-10 pb-8 sm:pb-16 md:pb-20 lg:pb-28 xl:pb-32 h-screen bg-cover place-content-center">
       {(currentUser) ? (
       <>
-      {(isAdmin())  ?
-        <UserNavBar navigation={navigationOptions.adminNavigation} currentUser={currentUser}/>
-          :
-        <UserNavBar navigation={navigationOptions.userNavigation} currentUser={currentUser}/>}
         <CurrentUserContextProvider>
+        <UserNavBar navigation={navigationOptions.userNavigation}/>
 
           <UserInformationSection
             description="Explorá tu impacto en la comunidad, y el efecto que tiene cada donación en la vida de las personas que más lo necesitan."
@@ -101,11 +94,11 @@ const UserDonationHistoryPage = () => {
                   </div>
                   <div className="flex flex-col space-y-1 mx-10">
                     <div className="font-Pop-L text-xs text-gray-700 flex flex-row space-x-2">
-                      <span class="inline-flex rounded-full bg-[#f4dcbf] h-3 w-3"></span>
+                      <span className="inline-flex rounded-full bg-[#f4dcbf] h-3 w-3"></span>
                       <div>${currentUser.totalAmountDonated} donados</div>
                     </div>
                     <div className="font-Pop-L text-xs text-gray-700 flex flex-row space-x-2">
-                      <span class="inline-flex rounded-full bg-[#6c3333] h-3 w-3"></span>
+                      <span className="inline-flex rounded-full bg-[#6c3333] h-3 w-3"></span>
                       <div>${donatedByRefferals} donados entre {currentUser.referralsQuantity} referidos</div>
                     </div>
                   </div>

@@ -25,9 +25,9 @@ const MileStoneModal = (props) =>{
                         <div className="font-Pop-M uppercase text-xs text-center greenBg text-white rounded-xl p-1">Meta alcanzada</div>
                     </div>
                     <div className="flex flex-col justify-center space-y-4">
-                        <div class="mb-1 text-lg md:text-xl font-Pop-M text-gray-900 text-center blackText"> {props.title} </div>
+                        <div className="mb-1 text-lg md:text-xl font-Pop-M text-gray-900 text-center blackText"> {props.title} </div>
                         <div className="text-center font-Pop-L text-xs md:text-sm px-4 md:px-8 lg:px-14">{props.description}</div>
-                        <div class="block mb-2 text-xs font-Pop-L leading-none text-gray-500 text-center">Ganado el {props.createdAt.split('T')[0]}.</div>
+                        <div className="block mb-2 text-xs font-Pop-L leading-none text-gray-500 text-center">Ganado el {props.createdAt.split('T')[0]}.</div>
                     </div>
                 </div>
               </div>
@@ -54,8 +54,8 @@ const MilestonesBox = (props) => {
                 description={props.description}
                 createdAt={props.createdAt}/>
             : null}               
-            <li class="mb-10 ml-7 md:ml-8 lg:ml-10 bg-white" key={props.id}>
-            <span class="flex absolute -left-4 justify-center items-center w-8 h-8 bg-blue-200 rounded-full ring-8 ring-[#f6f7f36b] greenBg">
+            <li className="mb-10 ml-7 md:ml-8 lg:ml-10 bg-white" key={props.id}>
+            <span className="flex absolute -left-4 justify-center items-center w-8 h-8 bg-blue-200 rounded-full ring-8 ring-[#f6f7f36b] greenBg">
                 <FontAwesomeIcon icon={faHeartPulse} className="h-4 w-4" color="white"/>
             </span>
             <div className="flex flex-row space-x-4 border border-gray-200 rounded-xl px-2 md:px-5 py-4">
@@ -65,8 +65,8 @@ const MilestonesBox = (props) => {
                     alt="MilestoneImage"
                 />
                 <div className="flex flex-col justify-center">
-                    <h3 class="mb-1 text-sm lg:text-base font-Pop-R text-gray-900"> Has alcanzado un hito <span onClick={()=>setModal(true)} className="hover:underline focus:underline underline-offset-2">{props.title}</span></h3>
-                    <div class="block mb-2 text-xs lg:text-sm font-Pop-L leading-none text-gray-400">Ganado el {props.createdAt.split('T')[0]}.</div>
+                    <h3 className="mb-1 text-sm lg:text-base font-Pop-R text-gray-900"> Has alcanzado un hito <span onClick={()=>setModal(true)} className="hover:underline focus:underline underline-offset-2">{props.title}</span></h3>
+                    <div className="block mb-2 text-xs lg:text-sm font-Pop-L leading-none text-gray-400">Ganado el {props.createdAt.split('T')[0]}.</div>
                 </div>
             </div>
         </li>   

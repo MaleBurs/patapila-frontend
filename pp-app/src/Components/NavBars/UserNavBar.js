@@ -11,25 +11,25 @@ import Buttons from "../Utiles/Butttons";
 import LogoPataPila_Colores from "../Images/LogoPataPila_Colores.jpg";
 import avatar from "../Images/avatar.jpeg";
 import ImageService from '../../services/images.service';
+import {useCurrentUser} from '../../Context/CurrentUserContext';
 
 export default function UserNavBar(props) {
+  const {currentUser, profilePicture} = useCurrentUser();
   const [imgSrc, setImgSrc] = useState(avatar);
   const navigate = useNavigate();
-  const userName = props.currentUser.name;
-  const userLastName = props.currentUser.lastname;
+  const userName = currentUser.name;
+  const userLastName = currentUser.lastname;
 
   const logOut = () => {
     AuthService.logout();
+    localStorage.clear();
     navigate("/login");
     window.location.reload();
   };
 
-  useEffect(() => {
-    ImageService.getImageUrl().then((url) => {
-      setImgSrc(url);
-    }).catch();
-  }, []);
-
+ useEffect(() => {
+    profilePicture ? setImgSrc(profilePicture) : setImgSrc(avatar);
+  }, [profilePicture]); 
 
   return (
     <>

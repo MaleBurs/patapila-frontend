@@ -52,15 +52,24 @@ const UserSettings = () => {
 
   function handleDataChange() {
     changeLoadingState();
+    if (file) {
+      ImageService.setUserProfilePicture(currentUser.id, file).then( ()=>{
+        changeLoadingState()
+        AuthService.updatedCurrentUserInLocalStorage(currentUser.id).then(()=>{
+          setCurrentUser(AuthService.getCurrentUser())
+          console.log("se actualizo el almacenamiento local")
+          window.location.reload()
+        })
+      })
+    } else changeLoadingState();
+    /*VER SI se cambio la foto para hacer esto, creo que no se va a poder, hacerlo siempre*/
     if(name!==currentUser.name || lastname!==currentUser.lastname){
       AuthService.updateUserInformation(name, lastname, currentUser.id).then(
         () => {
-          /*VER SI se cambio la foto para hacer esto, creo que no se va a poder, hacerlo siempre*/
+          
           AuthService.updatedCurrentUserInLocalStorage(currentUser.id).then(
             setCurrentUser(AuthService.getCurrentUser())
           );
-          ImageService.upload(file).then(() => { window.location.reload(); });
-          changeLoadingState();
         },
         (error) => {
           const resMessage = (error.response &&
@@ -71,8 +80,8 @@ const UserSettings = () => {
             setErrorMessage(resMessage);
         }
       );
-    }
-
+      changeLoadingState();
+    }else changeLoadingState();
     if(birthday!==currentUser.birthday || celphone!==currentUser.celphone || country!==currentUser.country || city!==currentUser.city){
       if(celphone){
         if(!isPossiblePhoneNumber(celphone)){
@@ -82,7 +91,8 @@ const UserSettings = () => {
       }
         //llamada al back para actualizar la fecha de cumpleaños y celular
         //actualizar el local storage
-    }
+        changeLoadingState();
+    }else changeLoadingState();
   }
   
   return (

@@ -3,14 +3,15 @@ import "../../App.css"
 import { useCurrentUser } from "../../Context/CurrentUserContext";
 
 const UploadProfileImage = (props) => {
-  const { profilePictureURL } = useCurrentUser();
+  const { profilePicture } = useCurrentUser();
   const [imgSrc, setImgSrc] = useState(null);
 
   useEffect(() => {
-    setImgSrc(profilePictureURL);
-  }, [profilePictureURL]);
+    setImgSrc(profilePicture);
+  }, [profilePicture]);
 
   const fileChanged = (event) => {
+    /*Debería de poner el cosito de Loading */
     props.setFile(event.target.files[0])
     setImgSrc(URL.createObjectURL(event.target.files[0]))
   }
@@ -29,7 +30,7 @@ const UploadProfileImage = (props) => {
             <input 
               type="file"
               name="avatar"
-              accept="image/png, image/jpeg"
+              accept="image/png, image/jpeg, image/jpg"
               onChange={fileChanged} className="hidden"
               id="dropzone-file"></input>
           </div>

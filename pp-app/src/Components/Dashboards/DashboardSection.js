@@ -41,7 +41,7 @@ const DashboardSection = () => {
                 title="estado de las subscripciones" 
                 subtitle={datesValues[0].options[month - 1].label + " de " + year}
                 content={
-                    <div class="flex flex-col">
+                    <div className="flex flex-col">
                     <div className="p-2 self-end"><InformationTooltips.InstructionTooltip size="h-3 w-3" tooltipContent="Haz click en cualquier gráfico para expandirlo" /></div>
                     <PieChartModule label={PieChartLabel}></PieChartModule>
                     </div>}

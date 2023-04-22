@@ -15,7 +15,7 @@ const PaginaAgradecimiento = () => {
   return (
     <>
       <div className="mx-auto relative z-10 pb-8 sm:pb-16 md:pb-20 lg:pb-28 xl:pb-32 h-screen bg-cover place-content-center">
-      <UserNavBar navigation={navigationOptions.userNavigation} currentUser={currentUser}/>
+      <UserNavBar navigation={navigationOptions.userNavigation}/>
       {currentUser ? (
         <div className="flex flex-row py-14 justify-center space-x-5">
           <div className="flex flex-col basis-1/4 border rounded-md border-[#e7e6e6]">

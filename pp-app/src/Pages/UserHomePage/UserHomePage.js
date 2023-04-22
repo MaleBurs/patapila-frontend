@@ -12,20 +12,13 @@ import { PieDePaginaInformativo } from "../../Components/Utiles/PieDePaginaInfor
 
 const UserHome = () => {
   const currentUser = AuthService.getCurrentUser();
-  const isAdmin = () => {
-    return JSON.stringify((AuthService.getCurrentUser()).roles) === JSON.stringify(["ROLE_ADMIN"]);
-  };
   return (
     <>
       <div className="mx-auto relative z-10 pb-8 sm:pb-16 md:pb-20 lg:pb-28 xl:pb-32 h-screen bg-cover place-content-center">
       {(currentUser) ? (
       <>
-      {(isAdmin())  ?
-        <UserNavBar navigation={navigationOptions.adminNavigation} currentUser={currentUser}/>
-          :
-        <UserNavBar navigation={navigationOptions.userNavigation} currentUser={currentUser}/>}
         <CurrentUserContextProvider>
-
+          <UserNavBar navigation={navigationOptions.userNavigation}/>
           <UserInformationSection
             description="Bienvenido a tu perfil, una página de recaudación de fondos que puedes personalizar y compartir. ¡Todas las donaciones realizadas en tu perfil aumentarán tu Impacto de Vida!"
             backToHome={false}
@@ -46,9 +39,8 @@ const UserHome = () => {
           <PieDePaginaInformativo/>
         </CurrentUserContextProvider>
         </>
-      ) : (
-      <></>
-    )}
+      ) : (<></>)
+    }
     </div> 
     </>
   );

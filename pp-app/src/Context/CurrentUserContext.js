@@ -9,25 +9,19 @@ const CurrentUserContext = React.createContext()
 export function CurrentUserContextProvider (props) {
   const currentUser = AuthService.getCurrentUser();
   const [subscriptionData, setSubscriptionData] = useState(null);
-  const [profilePictureURL, setProfilePictureURL] = useState(null);
+  const profilePicture = AuthService.getUserProfilePhoto();
 
   useEffect(() => {
     DonationService.getSubscription(currentUser.id).then(res=>{res? setSubscriptionData(res.data) : setSubscriptionData(null)});
   }, [currentUser.id])
 
-  useEffect(() => {
-    ImageService.getImageUrl().then((url) => {
-      url ? setProfilePictureURL(url) : setProfilePictureURL(null)
-    })
-  }, []);
-
   const value = useMemo(() => {
     return {
         currentUser,
         subscriptionData,
-        profilePictureURL,
+        profilePicture,
     }
-  }, [currentUser, subscriptionData, profilePictureURL])
+  }, [currentUser, subscriptionData, profilePicture])
 
   return (
     <CurrentUserContext.Provider value={value}>
