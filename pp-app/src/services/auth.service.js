@@ -54,8 +54,8 @@ const getCurrentUser = () => {
 };
 
 const getUserProfilePhoto = () => {
-  return localStorage.getItem("compressedImage")==!null
-   ? localStorage.getItem("compressedImage") : null;
+  return localStorage.getItem("compressedImage")===null
+   ?  null :  localStorage.getItem("compressedImage") ;
 };
 
 const updatedCurrentUserInLocalStorage = async (userId) => {

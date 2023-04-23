@@ -2,7 +2,6 @@ import React, { useState, useMemo } from 'react'
 import AuthService from '../services/auth.service'
 import DonationService from '../services/donations.service'
 import { useEffect } from 'react'
-import ImageService from '../services/images.service'
 
 const CurrentUserContext = React.createContext()
 

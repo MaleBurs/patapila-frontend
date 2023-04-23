@@ -7,7 +7,7 @@ const UploadProfileImage = (props) => {
   const [imgSrc, setImgSrc] = useState(null);
 
   useEffect(() => {
-    setImgSrc(profilePicture);
+    profilePicture!=="null"? setImgSrc(profilePicture): setImgSrc(null);
   }, [profilePicture]);
 
   const fileChanged = (event) => {

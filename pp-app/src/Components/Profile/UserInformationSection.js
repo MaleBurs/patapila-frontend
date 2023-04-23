@@ -13,7 +13,7 @@ const UserInformationSection = (props) => {
     <div className = "flex flex-col space-y-4 md:space-y-0 md:flex-row z-10 basis-1/3 border border-[#e7e6e6] mt-6 md:mt-14 divide-x divide-[#e7e6e6]">
        
         <div className="py-6 pl-6 md:pl-12 lg:pl-32 pr-12 basis-1/2 flex flex-row space-x-5 md:space-x-6 lg:space-x-10 items-center">
-            {profilePicture ? 
+            {profilePicture!=="null" ? 
             <img
                 className="object-cover h-24 w-24 md:h-28 md:w-28 lg:h-32 lg:w-32 rounded "
                 src={profilePicture}

@@ -28,7 +28,7 @@ export default function UserNavBar(props) {
   };
 
  useEffect(() => {
-    profilePicture ? setImgSrc(profilePicture) : setImgSrc(avatar);
+    profilePicture !=="null" ? setImgSrc(profilePicture) : setImgSrc(avatar);
   }, [profilePicture]); 
 
   return (
