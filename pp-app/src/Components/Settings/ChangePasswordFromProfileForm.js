@@ -6,7 +6,7 @@ import "../../Components/LogInForm/LogIn.css";
 import React, { useState, useRef } from "react";
 import Form from "react-validation/build/form";
 import CheckButton from "react-validation/build/button";
-import "../ChangePasswordForms/changePassword.css";
+import "../Forms/PasswordModificationForms/changePassword.css";
 import AuthService from "../../services/auth.service";
 import Input from "react-validation/build/input";
 import { useParams } from 'react-router-dom';

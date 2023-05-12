@@ -60,13 +60,13 @@ const MilestonesBox = (props) => {
             </span>
             <div className="flex flex-row space-x-4 border border-gray-200 rounded-xl px-2 md:px-5 py-4">
                 <img
-                    className="object-cover h-20 w-20 md:h-24 md:w-24 rounded "
+                    className="object-cover h-20 w-20 rounded "
                     src={icon}
                     alt="MilestoneImage"
                 />
-                <div className="flex flex-col justify-center">
-                    <h3 className="mb-1 text-sm lg:text-base font-Pop-R text-gray-900"> Has alcanzado un hito <span onClick={()=>setModal(true)} className="hover:underline focus:underline underline-offset-2">{props.title}</span></h3>
-                    <div className="block mb-2 text-xs lg:text-sm font-Pop-L leading-none text-gray-400">Ganado el {props.createdAt.split('T')[0]}.</div>
+                <div className="flex flex-col justify-center space-y-2">
+                    <h3 className="mb-1 text-sm tracking-widest font-Pop-R text-gray-900"> Has alcanzado un hito <span onClick={()=>setModal(true)} className="duration-1000 hover:underline focus:underline underline-offset-2">{props.title}</span></h3>
+                    <div className="block mb-2 tracking-wider text-xs font-Pop-L leading-none text-gray-400">Ganado el {props.createdAt.split('T')[0]}.</div>
                 </div>
             </div>
         </li>   

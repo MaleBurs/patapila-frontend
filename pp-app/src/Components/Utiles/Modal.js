@@ -1,6 +1,5 @@
 import "../NavBars/navBar.css"
 import "../../App.css"
-import Buttons from "./Butttons"
 
 const Modal = (props) =>{
     function closeModal(event) {
@@ -11,24 +10,20 @@ const Modal = (props) =>{
           <div
             className="darkGreyBg justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
           >
-            <div className="relative w-auto my-6 mx-auto max-w-3xl p-10">
+            <div className="relative w-auto my-6 mx-auto max-w-2xl p-10">
               {/*content*/}
-              <div className="  space-y-9 p-12 rounded-lg relative flex flex-col w-auto bg-white outline-none focus:outline-none">
+              <div className="space-y-5 p-12 rounded-md relative flex flex-col w-fit bg-white outline-none focus:outline-none">
                 {/*header*/}
-                <div className="flex items-start justify-between rounded-t">
-                  <h3 className="font-Pop-SB text-base tracking-[0px] blackText">
+                <div className="font-Pop-M text-lg tracking-widest purpleText">
                     {props.header}
-                  </h3>
                 </div>
                 {/*body*/}
-                <div className="relative flex-auto">
-                  <p className="leading-relaxed font-Pop-R text-sm text-medium tracking-[0.2px] blackText">
-                   {props.body}
-                  </p>
+                <div className="leading-relaxed font-Pop-L text-sm tracking-wider text-gray-700">
+                  {props.body}
                 </div>
                 {/*footer*/}
                 <div className="flex items-center justify-end">
-                  <Buttons.SolidGreenButton text={props.buttonText} color={"greenBg"} margins={"mr-1 mb-1"} onClick={closeModal}/>
+                  <button onClick={closeModal} className="mt-5 font-Pop-R tracking-widest text-sm text-white greenBg duration-1000 hover:bg-[#6c3333] uppercase py-3 px-4 rounded-md">{props.buttonText}</button>
                 </div>
               </div>
             </div>

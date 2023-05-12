@@ -87,7 +87,7 @@ const ChangeEmail = (props) => {
     <>
 
       {showModal ? (
-        <Modal value={showModal} onChange={closeModal} header={"Tu mail ha sido cambiado con exito!"} body={""} buttonText={"Continuar"}></Modal>
+        <Modal value={showModal} onChange={closeModal} header={"Has cambiado tu mail!"} body={"Tu mail ha sido actualizado con éxito. Hacé click en continuar para volver a los ajustes de cuenta."} buttonText={"Continuar"}></Modal>
       ) : null}
 
       <Form className="px-11 py-8 blackText flex flex-col space-y-6" onSubmit={handlePasswordChange} ref={form}>

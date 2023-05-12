@@ -23,7 +23,7 @@ export default function RegistrationPage() {
         <NavBar 
         navigation={navigationInformative}
         />
-        <div className="flex flex-col space-y-10 lg:flex-row justify-around">
+        <div className="flex flex-col lg:flex-row justify-around">
           <TextBubble title="Unite a La Comunidad" text="No importa la edad que tengas, dónde vivas o cuánto podes dar. Está al alcance de tus manos ayudar a terminar con la crisis de la desnutrición infantil y podes tomar acción ahora mismo. Regístarte para ser parte de la Comunidad."/>
           <RegistrationForm extraStyles="md:w-3/4 lg:w-full"></RegistrationForm>
         </div>
