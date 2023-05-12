@@ -25,11 +25,11 @@ const UserDonationHistoryPage = () => {
       res=>{
         setDonatedByRefferals(res.data.total);
         var total = (res.data.total == null) ? 0 : res.data.total;
-        setLifeImpact(currentUser.totalAmountDonated + total);
-        
+        setLifeImpact(currentUser.totalAmountDonated + total);    
       }
     )
   }, [currentUser])
+
 
   useEffect(() => {
     AuthService.findUserById(currentUser.id).then(res=>setRegistrationYear((new Date(res.data.createdAt)).getFullYear()))
@@ -87,7 +87,7 @@ const UserDonationHistoryPage = () => {
                 <div className="flex flex-col space-y-5">
                   <div className="flex flex-row">
                     <div className="chart-container" style={{position: 'relative', width:'25vh'}}>
-                      <ImpactChart/>
+                      <ImpactChart donatedByUser={currentUser.totalAmountDonated} donatedByRefferals={donatedByRefferals}/>
                     </div>
                     <div className="flex flex-col mt-5 -ml-5">
                         <div className="font-Pop-R text-lg text-start">${lifeImpact}</div>

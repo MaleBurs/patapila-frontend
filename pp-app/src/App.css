@@ -113,6 +113,18 @@
 .image {
     background-image: url("./Components/Images/ImagenHijoYMadre.jpg");
 }
+.imageNinaSweaterRojo {
+    background-image: url("./Components/Images/NinaSweaterRojo.jpg");
+}
+.imageNinoPiso {
+    background-image: url("./Components/Images/NiñoPiso.jpg");
+}
+.imageBalanza {
+    background-image: url("./Components/Images/Balanza.jpg");
+}
+.imageDosNinas{
+    background-image: url("./Components/Images/Dosninas.jpg");
+}
 /*Background Color*/
 .greenBg{
     background-color: #0F6938;

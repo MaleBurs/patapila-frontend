@@ -1,15 +1,12 @@
 import React from 'react';
 import Chart from 'chart.js';
 import { useEffect, useState} from 'react';
-import DonationService from '../../services/donations.service';
-import AuthService from '../../services/auth.service';
 
 
-export default function ImpactChart() {
+export default function ImpactChart(props) {
   const [donatedByRefferals, setDonatedByRefferals] = useState(null);
-  const currentUser = AuthService.getCurrentUser();
-  const [data, setData] = useState([])
-  const [bgColor, setBgColor] = useState([])
+  const [data, setData] = useState([1]);
+  const [bgColor, setBgColor] = useState(null);
   const mustReload = React.createRef();
 
   useEffect(() => {
@@ -19,24 +16,21 @@ export default function ImpactChart() {
       setBgColor(['rgba(231, 230, 230)']);
     };
 
-    const setBgColorAndDataToCorrect = (total) => {
-      setData([currentUser.totalAmountDonated, total]);
+    const setBgColorAndDataToCorrect = () => {
+      setData([props.donatedByRefferals, props.donatedByUser]);
       setBgColor([
         'rgba(244, 220, 191)',
         'rgba(108, 51, 51)',
       ]);
     };
 
-    DonationService.amountDonatedByRefferals(currentUser.id).then(
-      res=>{
-        setDonatedByRefferals(res.data.total);
-        (res.data.total === 0 && currentUser.totalAmountDonated === 0) ?
-          setBgColorAndDataToDefault()
-          :
-          setBgColorAndDataToCorrect(res.data.total);
-      }
-    )
-  }, [currentUser.id, currentUser.totalAmountDonated])
+    setDonatedByRefferals(props.donatedByRefferals);
+    (props.donatedByRefferals === 0 && props.donatedByUser === 0) ?
+      setBgColorAndDataToDefault()
+      :
+      setBgColorAndDataToCorrect();
+        
+  }, [props.donatedByRefferals, props.donatedByUser])
 
   useEffect(() => {
 
