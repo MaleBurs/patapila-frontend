@@ -14,6 +14,7 @@ import RefferalsPage from './Pages/Registration-Autentification.js/RefferalsPage
 import UserHome from './Pages/UserHomePage/UserHomePage';
 import PaginaAgradecimiento from './Pages/Donations/PaginaAgradecimiento';
 import UserDonationHistoryPage from './Pages/UserHomePage/UserDonationHistoryPage';
+import UserPublicProfilePage from './Pages/UserHomePage/UserPublicProfilePage';
 
 export default function App() {
   return (
@@ -43,6 +44,7 @@ export default function App() {
           <Route exact path="/gracias" element={<PaginaAgradecimiento/>} /> 
           <Route exact path="/historialDonaciones" element={<UserDonationHistoryPage/>} />
           <Route exact path="/settings" element={<UserSettingsPage />} />
+          <Route exact path="/miPerfil" element={<UserPublicProfilePage />} />
           </>
           )
           : <></>

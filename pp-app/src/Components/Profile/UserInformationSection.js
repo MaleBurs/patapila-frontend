@@ -41,7 +41,7 @@ const UserInformationSection = (props) => {
                 </button>
                 <div className="flex flex-col space-y-1">
                     <div className="font-Pop-R text-xs text-center underline">Mi Impacto</div> 
-                    <div className="font-Pop-L text-[10.5px] text-center w-32" >Ver mis donaciones y mi impacto de vida.</div>
+                    <div className="font-Pop-L text-[10.5px] text-center w-32" >Ver tus donaciones y tu impacto de vida.</div>
                 </div>  
             </div>
 
@@ -54,8 +54,8 @@ const UserInformationSection = (props) => {
                     />
                 </button>
                 <div className="flex flex-col space-y-1">
-                    <div className="font-Pop-R text-xs text-center underline">Mi Perfil</div> 
-                    <div className="font-Pop-L text-[10.5px] text-center w-32" >Ver y configurar mi perfil público, para compartirlo con amigos.</div>
+                    <div className="font-Pop-R text-xs text-center underline">Tu Perfil</div> 
+                    <div className="font-Pop-L text-[10.5px] text-center w-32" >Ver y configurar tu perfil público, para compartirlo con amigos.</div>
                 </div>  
             </div>    
 
@@ -69,7 +69,7 @@ const UserInformationSection = (props) => {
                 </button>
                 <div className="flex flex-col space-y-1">
                     <div className="font-Pop-R text-xs text-center underline">Ajustes</div> 
-                    <div className="font-Pop-L text-[10.5px] text-center w-32" >Administra la configuracion de tu perfil.</div>
+                    <div className="font-Pop-L text-[10.5px] text-center w-32" >Administra la configuracion de tu cuenta.</div>
                 </div>  
             </div>
         </div> 

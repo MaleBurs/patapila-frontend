@@ -10,7 +10,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Buttons from "../Utiles/Butttons";
 import LogoPataPila_Colores from "../Images/LogoPataPila_Colores.jpg";
 import avatar from "../Images/avatar.jpeg";
-import ImageService from '../../services/images.service';
 import {useCurrentUser} from '../../Context/CurrentUserContext';
 
 export default function UserNavBar(props) {
