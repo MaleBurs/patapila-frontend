@@ -13,7 +13,7 @@ const SolidGreenButton = ({ text, color, margins, onClick, loading}) => {
     <>   
             <div>
               <button
-                className={`group font-Pop-M relative flex flex-row space-x-3 w-full justify-center rounded-lg border border-transparent yellowBgHover py-3 px-4 uppercase text-sm text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${color} ${margins}`}
+                className={`group font-Pop-M relative flex flex-row space-x-3 w-full justify-center rounded-md border border-transparent yellowBgHover py-2 px-4 uppercase text-sm text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${color} ${margins}`}
                 onClick = {onClick}
               >
                 <div>{text}</div>

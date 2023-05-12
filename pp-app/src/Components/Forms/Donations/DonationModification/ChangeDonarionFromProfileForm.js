@@ -11,8 +11,7 @@ import { useSubModContext } from "../../../../Context/SubscriptionModificationCo
 import Buttons from "../../../Utiles/Butttons";
 import { useCurrentUser } from "../../../../Context/CurrentUserContext";
 import DonationService from "../../../../services/donations.service";
-import ModalWithConfirmationAndDetails from "../../../Utiles/ModalWithConfirmationAndDetails";
-import Modal from "../../../Utiles/Modal";
+import ConfirmSubscriptionModificationModal from "../../../Utiles/ConfirmSubscriptionModificationModal";
 import SubscriptionAmountImpactMessage from "./SubscriptionAmountImpactMessage";
 import SubscriptionImpactForSelectedAmount from "../SubscriptionImpactForSelectedAmount";
 import Messages from "../../Messages";
@@ -32,7 +31,6 @@ const ChangeDonationFromProfileForm = () =>{
   const {userWantsToModifySubs, setIfUserWantsToModifySubs} = useSubModContext();
   const {subscriptionData} = useCurrentUser();
   const [showModalWithConfirmation, setShowModalWithConfirmation] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const { selectedAmount} = useAmount()
   const { subsPeriod, paymentDay} = useSubscriptionPeriod()
   const currentUser = AuthService.getCurrentUser();
@@ -50,17 +48,14 @@ const ChangeDonationFromProfileForm = () =>{
     setShowModalWithConfirmation(false);
   };
 
-  const closeModal = () => {
-    setShowModal(false);
-    window.location.reload();
-  };
-
   const handleResetDonation = () =>{
     DonationService.modifySubscriptionState(subscriptionData.id, 'A').then(
         () => {
-          setShowModal(true);
           ActServices.createActivity(5 , resetSubscriptionEvenctDescription(selectedAmount,subsPeriod.label,paymentDay).description, currentUser.id). then(
-            (res)=> console.log(res)
+            (res)=> 
+            {console.log(res);
+            window.location.reload();
+            }
           )
         },
         (error) => {
@@ -90,8 +85,8 @@ const ChangeDonationFromProfileForm = () =>{
     setMessage("");
     if (isFormValid()) {
       DonationService.modifySubscription(subscriptionData.id, selectedAmount, parseInt(subsPeriod.value), paymentDay).then(
-        () => {
-          setShowModal(true);
+        (res) => {
+          console.log(res);
           setIfUserWantsToModifySubs(false);
           ActServices.createActivity(6, modificationSubscriptionEvenctDescription(selectedAmount,subsPeriod.label,paymentDay).title, modificationSubscriptionEvenctDescription(selectedAmount,subsPeriod.label,paymentDay).description, currentUser.id). then(
             (res)=> console.log(res)
@@ -112,7 +107,7 @@ const ChangeDonationFromProfileForm = () =>{
   return(
     <>
     {showModalWithConfirmation ? (
-      <ModalWithConfirmationAndDetails 
+      <ConfirmSubscriptionModificationModal 
       value={showModalWithConfirmation} 
       onChange={closeModalWithConfirmation} 
       header={(subscriptionData.subscriptionState.state !== 'P') ?
@@ -121,12 +116,7 @@ const ChangeDonationFromProfileForm = () =>{
       body={(subscriptionData.subscriptionState.state !== 'P') ? textos.queSucedeAlModificar
               :  textos.queSucedeAlRenaudar} 
       saveChanges={(subscriptionData.subscriptionState.state !== 'P') ? modifyDonation : handleResetDonation}
-      action= {(subscriptionData.subscriptionState.state !== 'P') ? "modificará" : "reanudará"} cancelButton="Volver atrás" saveButton="Guardar cambios"></ModalWithConfirmationAndDetails>
-    ) : null}
-    {showModal ? (
-      <Modal value={showModal} onChange={closeModal} header={(subscriptionData.subscriptionState.state !== 'P') ?
-      textos.modificacionOk : textos.activacionOk
-      }body={""} buttonText={"Continuar"}></Modal>
+      action= {(subscriptionData.subscriptionState.state !== 'P') ? "Ahora tu suscripción será" : "Se reanudará tu suscripción"} cancelButton="Cancelar" saveButton={(subscriptionData.subscriptionState.state !== 'P') ? "Actualizar" : "Reanudar"}></ConfirmSubscriptionModificationModal>
     ) : null}
     <div className="p-6 md:p-6 lg:py-8 lg:px-11">
     <div className='flex flex-col space-y-8 md:space-y-6'>

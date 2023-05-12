@@ -4,7 +4,7 @@ import { useAmount } from '../../../../Context/AmountContext'
 import { useSubscriptionPeriod } from '../../../../Context/SubscriptionContext'
 import DonationService from '../../../../services/donations.service'
 import AuthService from '../../../../services/auth.service'
-import ModalWithDetails from "../../../Utiles/ModalWithDetails";
+import DonationMadeModal from "../../../Utiles/DonationMadeModal";
 import { useNavigate } from "react-router-dom"
 import Messages from '../../Messages'
 import ActServices from '../../../../services/activities.service'
@@ -33,7 +33,6 @@ const StartDonation = ({ setStep }) => {
   const closeModal = () => {
     setShowModal(false);
     navigate("/gracias");
-    //window.location.reload();
   };
 
   const isFormValid = () =>{
@@ -95,7 +94,7 @@ const StartDonation = ({ setStep }) => {
     <>
     
     {showModal ? (
-      <ModalWithDetails value={showModal} onChange={closeModal} header={(selectedFrequency === 1) ? "Tu donación ha sido realizada con éxito!" : "Tu suscripción ha sido activada con éxito!"} action={(selectedFrequency === 1) ? "realizó una donación" : "activó una suscripción"} body={"Muchas gracias por realizar una donación para brindar atención nutricional a niños/as de la comunidad."} buttonText={"Continuar"}></ModalWithDetails>
+      <DonationMadeModal value={showModal} onChange={closeModal} header={(selectedFrequency === 1) ? "¡Tu donación ha sido realizada con éxito!" : "¡Tu suscripción ha sido activada con éxito!"} action={(selectedFrequency === 1) ? "realizado una donación" : "activado una suscripción"} body={"Gracias a tu ayuda podemos brindar atención nutricional a los niños de la comunidad."} buttonText={"Queremos darte las gracias!"}></DonationMadeModal>
     ) : null}
       <button onClick={submitDonation}
         className="rounded-xl p-3 h-auto w-full text-center greenBg yellowBgHover font-Pop-SB text-base text-white">

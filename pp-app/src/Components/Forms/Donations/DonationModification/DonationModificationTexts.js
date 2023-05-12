@@ -1,7 +1,7 @@
 const restriccionFechaPago = "Para realizar una donación recurrente debe ingresar la fecha de pago.";
 const restriccionMontoDonacion = "El monto ingresado a donar debe de ser al menos $1";
-const confirmacionModifciacion = "¿Estás seguro de que deseas modificar tu donación recurrente?";
-const confirmacionReanudacion = "¿Estás seguro de que deseas reanudar tu donación recurrente?";
+const confirmacionModifciacion = "¿Estás seguro de que deseas modificar tu suscripción?";
+const confirmacionReanudacion = "¿Estás seguro de que deseas reanudar tu suscripcion?";
 const confirmacionPausa = "¿Estás seguro de que deseas pausar tu suscripción?"
 const queSucedeAlModificar = "Si guardas los cambios, tu donación actual se modificará.";
 const queSucedeAlRenaudar = "Si guardas los cambios, tu donación recurrente se reanudará."
