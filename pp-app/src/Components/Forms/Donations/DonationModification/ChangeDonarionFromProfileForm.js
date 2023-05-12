@@ -11,7 +11,7 @@ import { useSubModContext } from "../../../../Context/SubscriptionModificationCo
 import Buttons from "../../../Utiles/Butttons";
 import { useCurrentUser } from "../../../../Context/CurrentUserContext";
 import DonationService from "../../../../services/donations.service";
-import ConfirmSubscriptionModificationModal from "../../../Utiles/ConfirmSubscriptionModificationModal";
+import ConfirmSubscriptionModificationModal from "../../../Utiles/Modal/ConfirmSubscriptionModificationModal";
 import SubscriptionAmountImpactMessage from "./SubscriptionAmountImpactMessage";
 import SubscriptionImpactForSelectedAmount from "../SubscriptionImpactForSelectedAmount";
 import Messages from "../../Messages";

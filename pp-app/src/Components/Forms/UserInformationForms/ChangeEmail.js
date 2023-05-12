@@ -3,7 +3,7 @@ import Form from "react-validation/build/form";
 import CheckButton from "react-validation/build/button";
 import AuthService from "../../../services/auth.service";
 import Input from "react-validation/build/input";
-import Modal from "../../Utiles/Modal"
+import Modal from "../../Utiles/Modal/Modal"
 import ValidationFunctions from "../../../functions/validations";
 import "../../../App.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

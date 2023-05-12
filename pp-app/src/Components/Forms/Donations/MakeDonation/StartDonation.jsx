@@ -4,7 +4,7 @@ import { useAmount } from '../../../../Context/AmountContext'
 import { useSubscriptionPeriod } from '../../../../Context/SubscriptionContext'
 import DonationService from '../../../../services/donations.service'
 import AuthService from '../../../../services/auth.service'
-import DonationMadeModal from "../../../Utiles/DonationMadeModal";
+import DonationMadeModal from "../../../Utiles/Modal/DonationMadeModal";
 import { useNavigate } from "react-router-dom"
 import Messages from '../../Messages'
 import ActServices from '../../../../services/activities.service'

@@ -1,10 +1,10 @@
-import "../NavBars/navBar.css"
-import "../../App.css"
-import { useFrequency } from  '../../Context/FrequencyContext'
-import Buttons from "./Butttons"
-import { useAmount } from "../../Context/AmountContext"
-import { useSubscriptionPeriod } from "../../Context/SubscriptionContext"
-import ManoConCorazon from "../Images/ManoConCorazon.png"
+import "../../NavBars/navBar.css"
+import "../../../App.css"
+import { useFrequency } from  '../../../Context/FrequencyContext'
+import Buttons from "../Butttons"
+import { useAmount } from "../../../Context/AmountContext"
+import { useSubscriptionPeriod } from "../../../Context/SubscriptionContext"
+import ManoConCorazon from "../../Images/ManoConCorazon.png"
 
 const DonationMadeModal = (props) =>{
   const { selectedAmount} = useAmount();

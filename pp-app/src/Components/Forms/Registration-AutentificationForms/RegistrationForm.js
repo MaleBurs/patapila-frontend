@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import AuthService from "../../../services/auth.service";
 import DonationService from "../../../services/donations.service";
-import Modal from "../../Utiles/Modal";
+import Modal from "../../Utiles/Modal/Modal";
 import ValidationFunctions from "../../../functions/validations"
 import BaseAutetificationForm from "./BaseAutentificationForm";
 import ActServices from "../../../services/activities.service";

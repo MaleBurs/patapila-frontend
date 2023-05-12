@@ -1,5 +1,5 @@
-import "../NavBars/navBar.css"
-import "../../App.css"
+import "../../NavBars/navBar.css"
+import "../../../App.css"
 
 const Modal = (props) =>{
     function closeModal(event) {

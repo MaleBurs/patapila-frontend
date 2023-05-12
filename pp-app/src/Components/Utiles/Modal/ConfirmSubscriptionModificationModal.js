@@ -1,7 +1,7 @@
-import "../NavBars/navBar.css"
-import "../../App.css"
-import { useAmount } from "../../Context/AmountContext"
-import { useSubscriptionPeriod } from "../../Context/SubscriptionContext"
+import "../../NavBars/navBar.css"
+import "../../../App.css"
+import { useAmount } from "../../../Context/AmountContext"
+import { useSubscriptionPeriod } from "../../../Context/SubscriptionContext"
 
 const ConfirmSubscriptionModificationModal = (props) =>{
   const { selectedAmount} = useAmount();

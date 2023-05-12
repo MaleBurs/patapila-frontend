@@ -5,7 +5,7 @@ import AdminServices from '../../services/transactions.service'
 import AuthService from '../../services/auth.service';
 import { useState, useEffect } from 'react';
 import InformationTooltips from '../Utiles/InformationDisplayTooltip';
-import ModalWithConfirmation from '../Utiles/ModalWithConfirmation';
+import ModalWithConfirmation from '../Utiles/Modal/ModalWithConfirmation';
 
 export function OpenSideBarFromUser({value, row}){
   const {setSelectedUser, setShowSidebar} = useSelectionOnTable();
