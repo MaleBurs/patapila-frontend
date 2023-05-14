@@ -79,9 +79,6 @@ const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
 
-const getUserPersonalInf = () => {
-  return JSON.parse(localStorage.getItem("userPersonalInf"));
-};
 
 
 const getUserProfilePhoto = () => {
@@ -89,11 +86,15 @@ const getUserProfilePhoto = () => {
    ?  null :  localStorage.getItem("compressedImage") ;
 };
 
-const updatedCurrentUserInLocalStorage = async (userId) => {
+const updatedCurrentUserInLocalStorage = async (id) => {
   const response = await axios
-    .post(API_URL + "getCurrentUser", { userId });
+    .post(API_URL + "findUserById", { id });
   if (response) {
-    ImageService.saveCompressedVersionToLocalStorage(response.data.profilePicture);
+    if (response.data.profilePicture) {
+      ImageService.saveCompressedVersionToLocalStorage(response.data.profilePicture);
+    } else {
+      localStorage.setItem("compressedImage", null);
+    }
     delete response.data.profilePicture;
     localStorage.setItem("user", JSON.stringify(response.data));
   }
@@ -170,6 +171,5 @@ const AuthService = {
   updateUserInformation,
   updatedCurrentUserInLocalStorage,
   changeUserEmail,
-  getUserPersonalInf
 }
 export default AuthService;

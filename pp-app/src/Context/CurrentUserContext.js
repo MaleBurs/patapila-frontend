@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import AuthService from '../services/auth.service'
+import PersonalInformationServices from '../services/userPersonalInformation.service'
 import DonationService from '../services/donations.service'
 import { useEffect } from 'react'
 import PublicProfileInformationServices from '../services/publicProfileInformation.service'
@@ -14,7 +15,7 @@ export function CurrentUserContextProvider (props) {
   const profilePicture = AuthService.getUserProfilePhoto();
   const publicProfileConfig = PublicProfileConfigurationServices.getPublicProfileConfig();
   const publicProfileInf = PublicProfileInformationServices.getPublicProfileInf();
-  const userPersonalInf = AuthService.getUserPersonalInf();
+  const userPersonalInf = PersonalInformationServices.getUserPersonalInf();
 
   useEffect(() => {
     DonationService.getSubscription(currentUser.id).then(res=>{res? setSubscriptionData(res.data) : setSubscriptionData(null)});

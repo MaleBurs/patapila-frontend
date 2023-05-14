@@ -16,6 +16,7 @@ import UserInformationSection from "../Profile/UserInformationSection";
 import TwoColumnsPage from "../Utiles/TwoColumnsPage";
 import ValidationFunctions from "../../functions/validations";
 import ImageService from "../../services/images.service";
+import PersonalInformationServices from "../../services/userPersonalInformation.service";
 import 'react-phone-number-input/style.css';
 
 import { TextInput, DatePicker, PhoneNumberInput, CountryCitySelector } from "./MyInputs";
@@ -52,48 +53,74 @@ const UserSettings = () => {
   const userInformation = bringUserInformation(name, onChangeName, lastname, onChangeLastname, birthday, onChangeBirthday, celphone, onChangeCelphone, country, onChangeCountry, city, onChangeCity);
 
   function handleDataChange() {
+    let completedOperations = 0;
+    const totalOperations = (file ? 1 : 0) + (name !== currentUser.name || lastname !== currentUser.lastname ? 1 : 0) + (birthday !== currentUser.birthday || celphone !== currentUser.celphone || country !== currentUser.country || city !== currentUser.city ? 1 : 0);
+  
     changeLoadingState();
     if (file) {
-      ImageService.setUserProfilePicture(currentUser.id, file).then( ()=>{
-        changeLoadingState()
-        AuthService.updatedCurrentUserInLocalStorage(currentUser.id).then(()=>{
-          setCurrentUser(AuthService.getCurrentUser())
-          console.log("se actualizo el almacenamiento local")
-          window.location.reload()
-        })
-      })
-    } else changeLoadingState();
-    
-    if(name!==currentUser.name || lastname!==currentUser.lastname){
+      ImageService.setUserProfilePicture(currentUser.id, file).then(() => {
+        AuthService.updatedCurrentUserInLocalStorage(currentUser.id).then(() => {
+          setCurrentUser(AuthService.getCurrentUser());
+          completedOperations++;
+          if (completedOperations === totalOperations) {
+            window.location.reload();
+          }
+        });
+      });
+    }
+    if (name !== currentUser.name || lastname !== currentUser.lastname) {
       AuthService.updateUserInformation(name, lastname, currentUser.id).then(
         () => {
-          AuthService.updatedCurrentUserInLocalStorage(currentUser.id).then(
-            setCurrentUser(AuthService.getCurrentUser())
-          );
+          AuthService.updatedCurrentUserInLocalStorage(currentUser.id).then(() => {
+            setCurrentUser(AuthService.getCurrentUser());
+            completedOperations++;
+            if (completedOperations === totalOperations) {
+              window.location.reload();
+            }
+          });
         },
         (error) => {
-          const resMessage = (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
+          const resMessage =
+            (error.response && error.response.data && error.response.data.message) ||
             error.message ||
             error.toString();
-            setErrorMessage(resMessage);
+          setErrorMessage(resMessage);
         }
       );
-      changeLoadingState();
-    }else changeLoadingState();
-    
-    if(birthday!==currentUser.birthday || celphone!==currentUser.celphone || country!==currentUser.country || city!==currentUser.city){
-      if(celphone){
-        if(!isPossiblePhoneNumber(celphone)){
+    }
+  
+    if (birthday !== currentUser.birthday || celphone !== currentUser.celphone || country !== currentUser.country || city !== currentUser.city) {
+      if (celphone) {
+        if (!isPossiblePhoneNumber(celphone)) {
           setErrorMessage("La longitud del numero de celular no es valida.");
           return;
         }
       }
-        //llamada al back para actualizar la fecha de cumpleaños y celular
-        //actualizar el local storage
-        changeLoadingState();
-    }else changeLoadingState();
+      PersonalInformationServices.updateUserPersonalInformation(currentUser.id, city, country, birthday, celphone).then(
+        () => {
+          PersonalInformationServices.updateUserPersonalInformationInLocalStorage(currentUser.id).then(
+            () => {
+              setCurrentUser(PersonalInformationServices.getUserPersonalInf());
+              completedOperations++;
+              if (completedOperations === totalOperations) {
+                window.location.reload();
+              }
+            });
+        },
+        (error) => {
+          const resMessage =
+            (error.response && error.response.data && error.response.data.message) ||
+            error.message ||
+            error.toString();
+          setErrorMessage(resMessage);
+        }
+      );
+    }
+  
+    if (!file && !name && !lastname && birthday === currentUser.birthday && celphone === currentUser.celphone && country === currentUser.country && city === currentUser.city) {
+      changeLoadingState();
+      return;
+    }
   }
   
   return (
