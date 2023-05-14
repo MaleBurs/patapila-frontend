@@ -2,6 +2,9 @@ import React, { useState, useMemo } from 'react'
 import AuthService from '../services/auth.service'
 import DonationService from '../services/donations.service'
 import { useEffect } from 'react'
+import PublicProfileInformationServices from '../services/publicProfileInformation.service'
+import PublicProfileConfigurationServices from '../services/publicProfileConfiguration.service'
+
 
 const CurrentUserContext = React.createContext()
 
@@ -9,8 +12,8 @@ export function CurrentUserContextProvider (props) {
   const currentUser = AuthService.getCurrentUser();
   const [subscriptionData, setSubscriptionData] = useState(null);
   const profilePicture = AuthService.getUserProfilePhoto();
-  const publicProfileConfig = AuthService.getPublicProfileConfig();
-  const publicProfileInf = AuthService.getPublicProfileInf();
+  const publicProfileConfig = PublicProfileConfigurationServices.getPublicProfileConfig();
+  const publicProfileInf = PublicProfileInformationServices.getPublicProfileInf();
   const userPersonalInf = AuthService.getUserPersonalInf();
 
   useEffect(() => {

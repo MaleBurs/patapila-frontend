@@ -83,13 +83,6 @@ const getUserPersonalInf = () => {
   return JSON.parse(localStorage.getItem("userPersonalInf"));
 };
 
-const getPublicProfileConfig = () => {
-  return JSON.parse(localStorage.getItem("publicProfileConfig"));
-};
-
-const getPublicProfileInf = () => {
-  return JSON.parse(localStorage.getItem("publicProfileInf"));
-};
 
 const getUserProfilePhoto = () => {
   return localStorage.getItem("compressedImage")===null
@@ -177,8 +170,6 @@ const AuthService = {
   updateUserInformation,
   updatedCurrentUserInLocalStorage,
   changeUserEmail,
-  getPublicProfileConfig,
-  getPublicProfileInf,
   getUserPersonalInf
 }
 export default AuthService;

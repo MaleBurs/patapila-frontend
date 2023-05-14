@@ -13,6 +13,7 @@ import YoDono from "../../Components/Images/YoDono.png";
 import ActServices from "../../services/activities.service";
 import ImageService from "../../services/images.service";
 import {CompartirPerfilButton } from "../../Components/Utiles/CopyLinkButton"
+import PublicProfileInformationServices from "../../services/publicProfileInformation.service";
 
 const UserDonationHistoryPage = () => {
   const [lifeImpact, setLifeImpact] = useState(0);
@@ -20,7 +21,7 @@ const UserDonationHistoryPage = () => {
   const [registrationYear, setRegistrationYear] = useState(null);
   const [activities, setActivities] = useState([]);
   const currentUser = AuthService.getCurrentUser();
-  const publicProfileInf = AuthService.getPublicProfileInf();
+  const publicProfileInf = PublicProfileInformationServices.getPublicProfileInf();
 
   useEffect(() => {
     DonationService.amountDonatedByRefferals(currentUser.id).then(

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import AuthService from "../../services/auth.service";
 import { PieDePaginaInformativo } from "../../Components/Utiles/PieDePaginaInformativo";
 import UserNavBar from "../../Components/NavBars/UserNavBar";
@@ -10,11 +10,14 @@ import YoDono from "../../Components/Images/YoDono.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faNetworkWired, faChevronUp, faChevronDown, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import opcionesFotosCabecera from "../../Values/opcionesDeFotosCabecera";
+import Loading from "../../Components/Utiles/Loading";
+import PublicProfileConfigurationServices from "../../services/publicProfileConfiguration.service";
+import PublicProfileInformationServices from "../../services/publicProfileInformation.service";
 
 const UserPublicProfilePage = () => {
   const [modal, setModal] = React.useState(false);
   const currentUser = AuthService.getCurrentUser();
-  const publicProfileInf = AuthService.getPublicProfileInf();
+  const publicProfileInf = PublicProfileInformationServices.getPublicProfileInf();
 
   return (
     <>
@@ -74,7 +77,7 @@ const UserPublicProfilePage = () => {
 export default UserPublicProfilePage;
 
 const EditPubliProfileModal = (props) =>{
-  const { publicProfileInf, publicProfileConfig} = useCurrentUser();
+  const { publicProfileInf, publicProfileConfig, currentUser} = useCurrentUser();
   const [showSelectPictureModal, setShowSelectPictureModal] = React.useState(false);
   const [picture, setPicture] = React.useState(opcionesFotosCabecera[publicProfileInf.chosenCoverPhotoId-1]);
   const [biografía, setBiografía] = React.useState(publicProfileInf.biography);
@@ -89,8 +92,47 @@ const EditPubliProfileModal = (props) =>{
   const [showAmountDonatedByReferrals, setShowAmountDonatedByReferrals] = React.useState(publicProfileConfig.showReferralsTotalAmountDonated);
   const [openSocialNetworkLayer, setOpenSocialNetworkLayer] = React.useState(false);
   const [openPrivacyLayer, setOpenPrivacyLayer] = React.useState(false);
+  const [loading, setLoading] = useState(false);
+  const changeLoadingState = () =>{
+    setLoading(current => !current);
+  }
   function closeModal() {
       props.onCloseModal();
+  }
+
+  async function guardarConfiguracion(){
+    changeLoadingState();
+    if(thereWasAChangeOnConfigs()){
+      const result1 = await PublicProfileConfigurationServices.updatePublicProfileConfiguration(
+        currentUser.id, showLifeImpact, showRefferals, showAmountDonated, showAmountDonatedByReferrals);
+      if(result1) PublicProfileConfigurationServices.updatedPublicProfileConfigurationInLocalStorage(currentUser.id);
+      
+    }
+    if(thereWasAChangeOnPublicProfileInformation()){
+      const result2 = await PublicProfileInformationServices.updatePublicProfileInformation(
+        currentUser.id, linkedin, facebook, twitter, instagram, title, biografía, picture.id);
+      if(result2) PublicProfileInformationServices.updatedPublicProfileConfigurationInLocalStorage(currentUser.id);
+    }
+
+    changeLoadingState();
+
+
+    function thereWasAChangeOnPublicProfileInformation() {
+      return picture.id !== publicProfileInf.chosenCoverPhotoId ||
+        biografía !== publicProfileInf.biography ||
+        title !== publicProfileInf.headerText ||
+        linkedin !== publicProfileInf.linkedInProfile ||
+        facebook !== publicProfileInf.facebookProfile ||
+        twitter !== publicProfileInf.twitterProfile ||
+        instagram !== publicProfileInf.instagramProfile;
+    }
+
+    function thereWasAChangeOnConfigs() {
+      return showLifeImpact !== publicProfileConfig.showLifeImpact ||
+        showRefferals !== publicProfileConfig.showReferralsQuantity ||
+        showAmountDonated !== publicProfileConfig.showTotalAmountDonated ||
+        showAmountDonatedByReferrals !== publicProfileConfig.showReferralsTotalAmountDonated;
+    }
   }
 
   return(
@@ -99,7 +141,7 @@ const EditPubliProfileModal = (props) =>{
          {showSelectPictureModal && <SelectPictureModal picture={picture} setPicture={setPicture} onCloseModal={()=>setShowSelectPictureModal(false)} />}
           <div className="my-6 p-10 flex flex-row justify-center">
 
-            <div className="basis-2/3 space-y-4 md:space-y-9 mt-96 px-6 md:px-8 lg:px-12 py-6 rounded-md flex flex-col w-auto bg-white outline-none focus:outline-none">
+            <div className="absolute top-10 mb-10 w-3/5 space-y-4 md:space-y-9 px-6 md:px-8 lg:px-12 py-6 rounded-md flex flex-col w-auto bg-white outline-none focus:outline-none">
               <button className="w-full text-end font-Pop-B" onClick={closeModal}>X</button>             
               <div className="pb-4 md:pb-8 flex flex-col">
 
@@ -114,7 +156,6 @@ const EditPubliProfileModal = (props) =>{
                     <div className="px-3 -mt-8"><button onClick={()=>setShowSelectPictureModal(true)} className="uppercase underline tracking-widest text-white font-Pop-M text-[11px]">Cambiar foto de portada</button></div>
                   </div>
                 </div>
-
                 
                 <div className="flex flex-col justify-start items-start w-full space-y-2 mt-12">
                   <div className="font-Pop-R text-xs uppercase text-gray-600">Frase cabecera</div>
@@ -136,7 +177,7 @@ const EditPubliProfileModal = (props) =>{
                 
                 <div className="flex flex-col justify-start items-start w-full space-y-2 mt-6">
                   <div className="font-Pop-R text-xs uppercase text-gray-600">Link a tu perfil público</div>
-                    <div className="border border-[#e7e6e6] bg-[#f6f7f36b] text-xs font-Pop-L tracking-widest rounded-md p-3 text-gray-700">www.patapila/signup/{publicProfileInf.publicProfileUrl} </div>   
+                    <div className="border border-[#e7e6e6] bg-[#f6f7f36b] text-xs font-Pop-L tracking-widest rounded-md py-3 px-5 text-gray-700">www.patapila/signup/{publicProfileInf.publicProfileUrl} </div>   
                 </div>
 
                 <div className="flex flex-col divide-y divide-[#e7e6e6] border border-[#e7e6e6] rounded-md mt-6 px-4 text-gray-600">
@@ -168,7 +209,7 @@ const EditPubliProfileModal = (props) =>{
                       name="linkedin"
                       onChange={(e)=>{e.target.value.length<20 && setInstagram(e.target.value)}}
                       value={instagram}
-                      placeholder="Nombre de usuario"
+                      placeholder="Link a tu Instagram"
                       className="py-3 rounded-md w-full resize-y text-xs font-Pop-L tracking-wide border-[#e7e6e6] focus:border-[#e7e6e6] focus:ring-0"/>
                     </div>
                     <div className="flex flex-col justify-start items-start w-full space-y-2 mt-6">
@@ -178,7 +219,7 @@ const EditPubliProfileModal = (props) =>{
                       name="twitter"
                       onChange={(e)=>{e.target.value.length<20 && setTwitter(e.target.value)}}
                       value={twitter}
-                      placeholder="Nombre de usuario"
+                      placeholder="Link a tu Twitter"
                       className="py-3 rounded-md w-full resize-y text-xs font-Pop-L tracking-wide border-[#e7e6e6] focus:border-[#e7e6e6] focus:ring-0"/>
                     </div>
                     <div className="flex flex-col justify-start items-start w-full space-y-2 mt-6">
@@ -188,7 +229,7 @@ const EditPubliProfileModal = (props) =>{
                       name="linkedin"
                       onChange={(e)=>{e.target.value.length<20 && setFacebook(e.target.value)}}
                       value={facebook}
-                      placeholder="Nombre de Usuario"
+                      placeholder="Link a tu Facebook"
                       className="py-3 rounded-md w-full resize-y text-xs font-Pop-L tracking-wide border-[#e7e6e6] focus:border-[#e7e6e6] focus:ring-0"/>
                     </div>
                   </div>
@@ -208,53 +249,53 @@ const EditPubliProfileModal = (props) =>{
                   </div>
                   {openPrivacyLayer &&
                   <div className="flex flex-col divide-y divide-[#e7e6e6]">
-                    <div className="flex flex-row items-center">
+                    <div className="flex flex-row items-center justify-between">
                       <div className="flex flex-col space-y-2 p-4">
                         <div className="font-Pop-R text-sm text-gray-700">Impacto de Vida</div>
                         <div className="font-Pop-L text-[11px] text-gray-600">Si usted activa el imapcto de vida, cuando comparta su perfil, este valor se mostrará.</div>
                       </div>
                       <div className="p-4">
                         <label className="relative inline-flex items-center cursor-pointer h-fit">
-                          <input type="checkbox" value="" className="sr-only peer" defaultChecked={true} onClick={()=>setShowLifeImpact(!showLifeImpact)}/>
+                          <input type="checkbox" value="" className="sr-only peer" defaultChecked={showLifeImpact} onClick={()=>setShowLifeImpact(!showLifeImpact)}/>
                           <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-gray-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#0F6938]"></div>
                         </label>
                       </div>
                     </div>
 
-                    <div className="flex flex-row items-center">
+                    <div className="flex flex-row items-center justify-between">
                       <div className="flex flex-col space-y-2 p-4">
                         <div className="font-Pop-R text-sm text-gray-700">Total Donado</div>
                         <div className="font-Pop-L text-[11px] text-gray-600">Si usted activa el total donado, cuando comparta su perfil, este valor se mostrará.</div>
                       </div>
                       <div className="p-4">
                         <label className="relative inline-flex items-center cursor-pointer h-fit">
-                          <input type="checkbox" value="" className="sr-only peer" defaultChecked={true} onClick={()=>setShowAmountDonated(!showAmountDonated)}/>
+                          <input type="checkbox" value="" className="sr-only peer" defaultChecked={showAmountDonated} onClick={()=>setShowAmountDonated(!showAmountDonated)}/>
                           <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-gray-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#0F6938]"></div>
                         </label>
                       </div>
                     </div>
 
-                    <div className="flex flex-row items-center">
+                    <div className="flex flex-row items-center justify-between">
                       <div className="flex flex-col space-y-2 p-4">
                         <div className="font-Pop-R text-sm text-gray-700">Cantidad de Referidos</div>
                         <div className="font-Pop-L text-[11px] text-gray-600">Si usted activa la cantidad de referidos, cuando comparta su perfil, este valor se mostrará.</div>
                       </div>
                       <div className="p-4">
                         <label className="relative inline-flex items-center cursor-pointer h-fit">
-                          <input type="checkbox" value="" className="sr-only peer" defaultChecked={true} onClick={()=>setShowRefferals(!showRefferals)}/>
+                          <input type="checkbox" value="" className="sr-only peer" defaultChecked={showRefferals} onClick={()=>setShowRefferals(!showRefferals)}/>
                           <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-gray-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#0F6938]"></div>
                         </label>
                       </div>
                     </div>
 
-                    <div className="flex flex-row items-center">
+                    <div className="flex flex-row items-center justify-between">
                       <div className="flex flex-col space-y-2 p-4">
                         <div className="font-Pop-R text-sm text-gray-700">Total Donado por Referidos</div>
                         <div className="font-Pop-L text-[11px] text-gray-600">Si usted activa el total donado por los usuarios referidos, cuando comparta su perfil, este valor se mostrará.</div>
                       </div>
                       <div className="p-4">
                         <label className="relative inline-flex items-center cursor-pointer h-fit">
-                          <input type="checkbox" value="" className="sr-only peer" defaultChecked={true} onClick={()=>setShowAmountDonatedByReferrals(!showAmountDonatedByReferrals)}/>
+                          <input type="checkbox" value="" className="sr-only peer" defaultChecked={showAmountDonatedByReferrals} onClick={()=>setShowAmountDonatedByReferrals(!showAmountDonatedByReferrals)}/>
                           <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-gray-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#0F6938]"></div>
                         </label>
                       </div>
@@ -262,6 +303,16 @@ const EditPubliProfileModal = (props) =>{
                   </div>
                   }
                 </div>
+
+                <div className="self-end">
+                  <button
+                    className="mt-9 flex flex-row space-x-3 items-center w-fit font-Pop-M purpleBgHover uppercase tracking-widest text-xs py-3 rounded-md px-4 bg-gray-100 text-gray-600"
+                    onClick={()=> guardarConfiguracion()}
+                  >
+                    <div>Guardar Cambios</div>
+                    {loading ? <Loading/> : null}
+                  </button >
+                </div> 
                    
               </div>
             </div>
