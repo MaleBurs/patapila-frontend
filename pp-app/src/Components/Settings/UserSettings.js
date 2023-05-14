@@ -63,11 +63,10 @@ const UserSettings = () => {
         })
       })
     } else changeLoadingState();
-    /*VER SI se cambio la foto para hacer esto, creo que no se va a poder, hacerlo siempre*/
+    
     if(name!==currentUser.name || lastname!==currentUser.lastname){
       AuthService.updateUserInformation(name, lastname, currentUser.id).then(
         () => {
-          
           AuthService.updatedCurrentUserInLocalStorage(currentUser.id).then(
             setCurrentUser(AuthService.getCurrentUser())
           );
@@ -83,6 +82,7 @@ const UserSettings = () => {
       );
       changeLoadingState();
     }else changeLoadingState();
+    
     if(birthday!==currentUser.birthday || celphone!==currentUser.celphone || country!==currentUser.country || city!==currentUser.city){
       if(celphone){
         if(!isPossiblePhoneNumber(celphone)){
