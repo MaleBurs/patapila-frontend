@@ -22,8 +22,9 @@ export const CopyLinkButton = () => {
   const [isLinkCopied, setIsLinkCopied] = useState(false);
 
   useEffect(() => {
+    /*Vamos a tener que traer de Public Profile Information la partesita de atrás*/
     DonorServices.getpublicProfileURL(currentUser.id).then(
-      (res) => { setPublicProfileURL(res.data.url); }
+      (res) => { setPublicProfileURL("https://patapila-frontend.vercel.app/signup/"+res.data.url); }
     );
   }, [currentUser.id]);
   const copyLink = () => {
