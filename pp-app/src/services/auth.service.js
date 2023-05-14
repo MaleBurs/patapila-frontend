@@ -27,30 +27,40 @@ const updatePasswordViaSettings= (id,oldpassword, password) => {
     password,
   });
 };
-const login = (email, password) => {
-  return axios
-    .post(API_URL + "signin", {
+const login = async (email, password) => {
+  try {
+    const response = await axios.post(API_URL + "signin", {
       email,
       password,
-    })
-    .then((response) => {
-      if (response.data.email) {
-        response.data.profilePicture ? ImageService.saveCompressedVersionToLocalStorage(response.data.profilePicture) : localStorage.setItem("compressedImage", null);
-        delete response.data.profilePicture;
-        localStorage.setItem("user", JSON.stringify(response.data));
-        PublicProfileConfigurationServices.getPublicProfileConfiguration(response.data.id).then((userPublicProfileConfig) => {
-          localStorage.setItem("publicProfileConfig", JSON.stringify(userPublicProfileConfig.data));
-        });
-        PublicProfileInformationServices.getPublicProfileInformation(response.data.id).then((userPublicProfileInfo) => {
-          localStorage.setItem("publicProfileInf", JSON.stringify(userPublicProfileInfo.data));
-        });
-        PersonalInformationServices.getUserPersonalInformation(response.data.id).then((userPersonalInformation) => {
-          localStorage.setItem("userPersonalInf", JSON.stringify(userPersonalInformation.data));
-        } );
-      }
-      return response.data;
     });
+
+    if (response.data.email) {
+      if (response.data.profilePicture) {
+        ImageService.saveCompressedVersionToLocalStorage(response.data.profilePicture);
+      } else {
+        localStorage.setItem("compressedImage", null);
+      }
+
+      delete response.data.profilePicture;
+      localStorage.setItem("user", JSON.stringify(response.data));
+
+      const userPublicProfileConfig = await PublicProfileConfigurationServices.getPublicProfileConfiguration(response.data.id);
+      localStorage.setItem("publicProfileConfig", JSON.stringify(userPublicProfileConfig.data));
+
+      const userPublicProfileInfo = await PublicProfileInformationServices.getPublicProfileInformation(response.data.id);
+      localStorage.setItem("publicProfileInf", JSON.stringify(userPublicProfileInfo.data));
+
+      const userPersonalInformation = await PersonalInformationServices.getUserPersonalInformation(response.data.id);
+      localStorage.setItem("userPersonalInf", JSON.stringify(userPersonalInformation.data));
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };
+
 const sendMailTokenToResetPassword = (email) => {
   return axios.post(API_URL + "sendMailTokenToResetPassword", {
       email,
