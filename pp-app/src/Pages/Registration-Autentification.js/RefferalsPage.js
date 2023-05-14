@@ -15,6 +15,10 @@ import YoDono from "../../Components/Images/YoDono.png";
 import { PieDePaginaInformativo } from "../../Components/Utiles/PieDePaginaInformativo";
 import ImpactChart from "../../Components/Profile/DoughnutChartImpact";
 import { faFacebookF, faInstagram, faLinkedinIn, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import ComunidadFoto from "../../Components/Images/ComunidadFoto.jpg";
+import LogoLaComunidad from "../../Components/Images/LogoLaComunidad.png";
+import { SectionWithPictureWithInformation } from "../../Components/Utiles/SectionWithPictureWithInformation";
+import { DosManerasDeDonarSection } from "./DosManerasDeDonarSection";
 
 export default function RefferalsPage() {
   const params = useParams();
@@ -95,11 +99,22 @@ export default function RefferalsPage() {
         <img src={YoDono} alt="Yo Dono" className="w-40 h-60 z-10 place-self-end -mb-10" />
 
       </div>
-      <div className="flex flex-col">
-        <div className="h-20 bg-[#f6f7f36b]"></div>
-        <PieDePaginaInformativo/>
-      </div>
-      
+      <SectionWithPictureWithInformation 
+        picture={ComunidadFoto} 
+        logo={LogoLaComunidad}
+        heather=""
+        text="Es un grupo de personas comprometidas y apasionadas, que donan para acabar con la problemática de la desnutrición infantil."
+        activeButton={true}
+        buttonText="Quiero Unirme"
+        backgoundColor="bg-[#e7e6e6]"
+        buttonFunction={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+      />
+      <ImagePageContainer 
+      bgImage="imageBgNiñoMirada"
+      content={
+        <DosManerasDeDonarSection/>
+      }/>
+      <PieDePaginaInformativo/>
     </>
     :
     <></>} 
