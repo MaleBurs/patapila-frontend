@@ -27,7 +27,7 @@ const UserDonationHistoryPage = () => {
       res=>{
         setDonatedByRefferals(res.data.total);
         var total = (res.data.total == null) ? 0 : res.data.total;
-        setLifeImpact(currentUser.totalAmountDonated + total);    
+        setLifeImpact( publicProfileInf.totalAmountDonated+ total);    
       }
     )
   }, [currentUser])
@@ -75,7 +75,7 @@ const UserDonationHistoryPage = () => {
                       {((lifeImpact/980).toFixed(0) === 0) ?
                       "Todavía no has podido Brindar atención nutricional a ningún niño"
                       :
-                      "Has brindado atención nutricional a aproximadamente " + (lifeImpact/980).toFixed(0) + "niños"
+                      "Has brindado atención nutricional a aproximadamente " + (lifeImpact/980).toFixed(0) + " niños"
                       }
                     </div>
                   </div>
