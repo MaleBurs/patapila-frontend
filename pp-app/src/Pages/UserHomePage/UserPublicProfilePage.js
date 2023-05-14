@@ -9,12 +9,12 @@ import { CopyLinkButton } from "../../Components/Utiles/CopyLinkButton";
 import YoDono from "../../Components/Images/YoDono.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faNetworkWired, faChevronUp, faChevronDown, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import NiñoPiso from "../../Components/Images/NiñoPiso.jpg"
 import opcionesFotosCabecera from "../../Values/opcionesDeFotosCabecera";
 
 const UserPublicProfilePage = () => {
   const [modal, setModal] = React.useState(false);
   const currentUser = AuthService.getCurrentUser();
+  const publicProfileInf = AuthService.getPublicProfileInf();
 
   return (
     <>
@@ -36,14 +36,24 @@ const UserPublicProfilePage = () => {
 
             <div className="-space-x-24 flex flex-row items-center h-fit w-full">
               <div className="py-14 basis-3/5 flex flex-row -space-x-40">
-                <img src={NiñoPiso} alt="Niño en el piso" className="rounded-lg w-full"/>
+                <img src={opcionesFotosCabecera[publicProfileInf.chosenCoverPhotoId-1].imagen} alt="Niño en el piso" className="rounded-lg w-full"/>
               </div>
               <div className="border border-[#e7e6e6] rounded-md bg-white h-fit px-8 pt-10 pb-16 basis-2/5 flex flex-col">
                 <button className="place-self-end mb-5 mr-2" onClick={()=>setModal(true)} >
                   <FontAwesomeIcon icon={faPen} style={{color: "#cecdcd",}} size="sm" />
                 </button>
-                <div className="font-Pop-M text-lg tacking-widest text-center purpleText">Ayudemos a reducir la cantidad niños que pasan hambre!</div>
-                <div className="my-7 font-Pop-L text-[11.5px] text-gray-500 text-justify tracking-wide leading-4">Me uní a la comunidad de Pata Pila para ayudar a acabar con la desnutrición infantil. Por favor, considera unirte a mí para apoyar a Pata Pila. El 100% de tu donación se destina a acabar con la desnutrición infantil en Argentina.</div>
+                <div className="font-Pop-M text-lg tacking-widest text-center purpleText">
+                  {publicProfileInf.headerText === "" ?
+                  "Ayudemos a reducir la cantidad niños que pasan hambre!"
+                  : publicProfileInf.headerText
+                  }
+                </div>
+                <div className="my-7 font-Pop-L text-[11.5px] text-gray-500 text-justify tracking-wide leading-4">
+                  {
+                  publicProfileInf.biography === "" ?
+                  "Me uní a la comunidad de Pata Pila para ayudar a acabar con la desnutrición infantil. Por favor, considera unirte a mí para apoyar a Pata Pila. El 100% de tu donación se destina a acabar con la desnutrición infantil en Argentina."
+                  : publicProfileInf.biography
+                }</div>
                 <CopyLinkButton/>
               </div>
             </div>
@@ -64,20 +74,19 @@ const UserPublicProfilePage = () => {
 export default UserPublicProfilePage;
 
 const EditPubliProfileModal = (props) =>{
-  const currentUser = useCurrentUser();
+  const { publicProfileInf, publicProfileConfig} = useCurrentUser();
   const [showSelectPictureModal, setShowSelectPictureModal] = React.useState(false);
-  const [picture, setPicture] = React.useState({imagen:NiñoPiso, id:2});
-  const [biografía, setBiografía] = React.useState("");
-  const [url, setUrl] = React.useState("");
-  const [title, setTitle] = React.useState("");
-  const [linkedin, setLinkedin] = React.useState("");
-  const [facebook, setFacebook] = React.useState("");
-  const [twitter, setTwitter] = React.useState("");
-  const [instagram, setInstagram] = React.useState("");
-  const [showLifeImpact, setShowLifeImpact] = React.useState(false);
-  const [showRefferals, setShowRefferals] = React.useState(false);
-  const [showAmountDonated, setShowAmountDonated] = React.useState(false);
-  const [showAmountDonatedByReferrals, setShowAmountDonatedByReferrals] = React.useState(false);
+  const [picture, setPicture] = React.useState(opcionesFotosCabecera[publicProfileInf.chosenCoverPhotoId-1]);
+  const [biografía, setBiografía] = React.useState(publicProfileInf.biography);
+  const [title, setTitle] = React.useState(publicProfileInf.headerText);
+  const [linkedin, setLinkedin] = React.useState(publicProfileInf.linkedInProfile);
+  const [facebook, setFacebook] = React.useState(publicProfileInf.facebookProfile);
+  const [twitter, setTwitter] = React.useState(publicProfileInf.twitterProfile);
+  const [instagram, setInstagram] = React.useState(publicProfileInf.instagramProfile);
+  const [showLifeImpact, setShowLifeImpact] = React.useState(publicProfileConfig.showLifeImpact);
+  const [showRefferals, setShowRefferals] = React.useState(publicProfileConfig.showReferralsQuantity);
+  const [showAmountDonated, setShowAmountDonated] = React.useState(publicProfileConfig.showTotalAmountDonated);
+  const [showAmountDonatedByReferrals, setShowAmountDonatedByReferrals] = React.useState(publicProfileConfig.showReferralsTotalAmountDonated);
   const [openSocialNetworkLayer, setOpenSocialNetworkLayer] = React.useState(false);
   const [openPrivacyLayer, setOpenPrivacyLayer] = React.useState(false);
   function closeModal() {
@@ -127,16 +136,7 @@ const EditPubliProfileModal = (props) =>{
                 
                 <div className="flex flex-col justify-start items-start w-full space-y-2 mt-6">
                   <div className="font-Pop-R text-xs uppercase text-gray-600">Link a tu perfil público</div>
-                  <div className="flex flex-row">
-                    <div className="border-y border-l border-[#e7e6e6] bg-[#f6f7f36b] text-xs font-Pop-L tracking-widest rounded-l-md p-3 text-gray-700">www.patapila/</div> 
-                    <input
-                    type="text" 
-                    name="url"
-                    onChange={(e)=>{e.target.value.length<20 && setUrl(e.target.value)}}
-                    value={url}
-                    placeholder={currentUser.currentUser.name+currentUser.currentUser.lastname}
-                    className="py-3 rounded-r-md w-full resize-y text-xs font-Pop-L tracking-wide border-[#e7e6e6] focus:border-[#e7e6e6] focus:ring-0"/>
-                  </div> 
+                    <div className="border border-[#e7e6e6] bg-[#f6f7f36b] text-xs font-Pop-L tracking-widest rounded-md p-3 text-gray-700">www.patapila/signup/{publicProfileInf.publicProfileUrl} </div>   
                 </div>
 
                 <div className="flex flex-col divide-y divide-[#e7e6e6] border border-[#e7e6e6] rounded-md mt-6 px-4 text-gray-600">
@@ -214,9 +214,9 @@ const EditPubliProfileModal = (props) =>{
                         <div className="font-Pop-L text-[11px] text-gray-600">Si usted activa el imapcto de vida, cuando comparta su perfil, este valor se mostrará.</div>
                       </div>
                       <div className="p-4">
-                        <label class="relative inline-flex items-center cursor-pointer h-fit">
-                          <input type="checkbox" value="" class="sr-only peer" defaultChecked={true} onClick={()=>setShowLifeImpact(!showLifeImpact)}/>
-                          <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-gray-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#0F6938]"></div>
+                        <label className="relative inline-flex items-center cursor-pointer h-fit">
+                          <input type="checkbox" value="" className="sr-only peer" defaultChecked={true} onClick={()=>setShowLifeImpact(!showLifeImpact)}/>
+                          <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-gray-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#0F6938]"></div>
                         </label>
                       </div>
                     </div>
@@ -227,9 +227,9 @@ const EditPubliProfileModal = (props) =>{
                         <div className="font-Pop-L text-[11px] text-gray-600">Si usted activa el total donado, cuando comparta su perfil, este valor se mostrará.</div>
                       </div>
                       <div className="p-4">
-                        <label class="relative inline-flex items-center cursor-pointer h-fit">
-                          <input type="checkbox" value="" class="sr-only peer" defaultChecked={true} onClick={()=>setShowAmountDonated(!showAmountDonated)}/>
-                          <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-gray-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#0F6938]"></div>
+                        <label className="relative inline-flex items-center cursor-pointer h-fit">
+                          <input type="checkbox" value="" className="sr-only peer" defaultChecked={true} onClick={()=>setShowAmountDonated(!showAmountDonated)}/>
+                          <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-gray-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#0F6938]"></div>
                         </label>
                       </div>
                     </div>
@@ -240,9 +240,9 @@ const EditPubliProfileModal = (props) =>{
                         <div className="font-Pop-L text-[11px] text-gray-600">Si usted activa la cantidad de referidos, cuando comparta su perfil, este valor se mostrará.</div>
                       </div>
                       <div className="p-4">
-                        <label class="relative inline-flex items-center cursor-pointer h-fit">
-                          <input type="checkbox" value="" class="sr-only peer" defaultChecked={true} onClick={()=>setShowRefferals(!showRefferals)}/>
-                          <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-gray-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#0F6938]"></div>
+                        <label className="relative inline-flex items-center cursor-pointer h-fit">
+                          <input type="checkbox" value="" className="sr-only peer" defaultChecked={true} onClick={()=>setShowRefferals(!showRefferals)}/>
+                          <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-gray-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#0F6938]"></div>
                         </label>
                       </div>
                     </div>
@@ -253,9 +253,9 @@ const EditPubliProfileModal = (props) =>{
                         <div className="font-Pop-L text-[11px] text-gray-600">Si usted activa el total donado por los usuarios referidos, cuando comparta su perfil, este valor se mostrará.</div>
                       </div>
                       <div className="p-4">
-                        <label class="relative inline-flex items-center cursor-pointer h-fit">
-                          <input type="checkbox" value="" class="sr-only peer" defaultChecked={true} onClick={()=>setShowAmountDonatedByReferrals(!showAmountDonatedByReferrals)}/>
-                          <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-gray-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#0F6938]"></div>
+                        <label className="relative inline-flex items-center cursor-pointer h-fit">
+                          <input type="checkbox" value="" className="sr-only peer" defaultChecked={true} onClick={()=>setShowAmountDonatedByReferrals(!showAmountDonatedByReferrals)}/>
+                          <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-gray-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#0F6938]"></div>
                         </label>
                       </div>
                     </div>

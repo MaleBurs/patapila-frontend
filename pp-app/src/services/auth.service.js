@@ -1,13 +1,17 @@
 import axios from "axios";
 import ImageService from "./images.service";
+import PublicProfileConfigurationServices from "./publicProfileConfiguration.service";
+import PublicProfileInformationServices from "./publicProfileInformation.service";
+import PersonalInformationServices from "./userPersonalInformation.service";
 
 const API_URL = "http://localhost:8080/api/auth/";
-const register = (name,lastname, email, password) => {
+const register = (name,lastname, email, password, role) => {
   return axios.post(API_URL + "signup", {
     name,
     lastname,
     email,
     password,
+    role
   });
 };
 const updatePasswordViaEmail = (token, password) => {
@@ -34,6 +38,15 @@ const login = (email, password) => {
         response.data.profilePicture ? ImageService.saveCompressedVersionToLocalStorage(response.data.profilePicture) : localStorage.setItem("compressedImage", null);
         delete response.data.profilePicture;
         localStorage.setItem("user", JSON.stringify(response.data));
+        PublicProfileConfigurationServices.getPublicProfileConfiguration(response.data.id).then((userPublicProfileConfig) => {
+          localStorage.setItem("publicProfileConfig", JSON.stringify(userPublicProfileConfig.data));
+        });
+        PublicProfileInformationServices.getPublicProfileInformation(response.data.id).then((userPublicProfileInfo) => {
+          localStorage.setItem("publicProfileInf", JSON.stringify(userPublicProfileInfo.data));
+        });
+        PersonalInformationServices.getUserPersonalInformation(response.data.id).then((userPersonalInformation) => {
+          localStorage.setItem("userPersonalInf", JSON.stringify(userPersonalInformation.data));
+        } );
       }
       return response.data;
     });
@@ -45,12 +58,27 @@ const sendMailTokenToResetPassword = (email) => {
 };
 const logout = () => {
   localStorage.removeItem("user");
+  localStorage.removeItem("publicProfileConfig");
+  localStorage.removeItem("publicProfileInf");
+  localStorage.removeItem("userPersonalInf");
   return axios.post(API_URL + "signout").then((response) => {
     return response.data;
   });
 };
 const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
+};
+
+const getUserPersonalInf = () => {
+  return JSON.parse(localStorage.getItem("userPersonalInf"));
+};
+
+const getPublicProfileConfig = () => {
+  return JSON.parse(localStorage.getItem("publicProfileConfig"));
+};
+
+const getPublicProfileInf = () => {
+  return JSON.parse(localStorage.getItem("publicProfileInf"));
 };
 
 const getUserProfilePhoto = () => {
@@ -139,5 +167,8 @@ const AuthService = {
   updateUserInformation,
   updatedCurrentUserInLocalStorage,
   changeUserEmail,
+  getPublicProfileConfig,
+  getPublicProfileInf,
+  getUserPersonalInf
 }
 export default AuthService;

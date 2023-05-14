@@ -23,6 +23,7 @@ import { isPossiblePhoneNumber } from "react-phone-number-input";
 
 
 const UserSettings = () => {
+  const {userPersonalInf} = useCurrentUser();
   const [setRequestToChangeDonation] = useState(false);
   const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
   const onCloseChangeDonationForm = () => setRequestToChangeDonation(false);
@@ -31,10 +32,10 @@ const UserSettings = () => {
   const [lastname, setLastname] = useState(currentUser.lastname);
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [birthday, setBirthday] = useState(null);
-  const [celphone, setCelphone] = useState('');
-  const [country, setCountry] = useState("");
-  const [city, setCity] = useState("");
+  const [birthday, setBirthday] = useState(userPersonalInf.dateOfBirth);
+  const [celphone, setCelphone] = useState(userPersonalInf.phoneNumber);
+  const [country, setCountry] = useState(userPersonalInf.country);
+  const [city, setCity] = useState(userPersonalInf.city);
   const [errorMessage, setErrorMessage] = useState("");
 
   const onChangeName = (e) => setName(e.target.value);

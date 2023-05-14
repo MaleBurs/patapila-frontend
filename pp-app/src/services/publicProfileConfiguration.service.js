@@ -17,9 +17,9 @@ const getPublicProfileConfiguration = (userId) => {
     });
 };
 
-const updatePublicProfileConfigurationServices = {
+const PublicProfileConfigurationServices = {
     updatePublicProfileConfiguration,
     getPublicProfileConfiguration
 }
 
-export default updatePublicProfileConfigurationServices;
+export default PublicProfileConfigurationServices;

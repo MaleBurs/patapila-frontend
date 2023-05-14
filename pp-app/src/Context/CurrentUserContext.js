@@ -9,6 +9,9 @@ export function CurrentUserContextProvider (props) {
   const currentUser = AuthService.getCurrentUser();
   const [subscriptionData, setSubscriptionData] = useState(null);
   const profilePicture = AuthService.getUserProfilePhoto();
+  const publicProfileConfig = AuthService.getPublicProfileConfig();
+  const publicProfileInf = AuthService.getPublicProfileInf();
+  const userPersonalInf = AuthService.getUserPersonalInf();
 
   useEffect(() => {
     DonationService.getSubscription(currentUser.id).then(res=>{res? setSubscriptionData(res.data) : setSubscriptionData(null)});
@@ -19,8 +22,11 @@ export function CurrentUserContextProvider (props) {
         currentUser,
         subscriptionData,
         profilePicture,
+        publicProfileConfig,
+        publicProfileInf,
+        userPersonalInf
     }
-  }, [currentUser, subscriptionData, profilePicture])
+  }, [currentUser, subscriptionData, profilePicture, publicProfileConfig, publicProfileInf, userPersonalInf])
 
   return (
     <CurrentUserContext.Provider value={value}>

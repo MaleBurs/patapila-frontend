@@ -23,7 +23,7 @@ export default function UserNavBar(props) {
     AuthService.logout();
     localStorage.clear();
     navigate("/login");
-    window.location.reload();
+    //window.location.reload();
   };
 
  useEffect(() => {

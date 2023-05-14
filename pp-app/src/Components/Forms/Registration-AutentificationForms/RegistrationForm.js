@@ -77,7 +77,7 @@ export default function RegistrationForm(props) {
     setSuccessful(false);
     if (validateSamePassword({setMessage})) {
 
-      AuthService.register(name, lastname, email, password).then(
+      AuthService.register(name, lastname, email, password, "user").then(
         (response) => {
           setMessage(response.data.message);
           setSuccessful(true);

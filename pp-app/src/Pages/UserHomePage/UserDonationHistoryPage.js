@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import AuthService from "../../services/auth.service";
 import UserNavBar from "../../Components/NavBars/UserNavBar";
 import navigationOptions from "../../Components/NavBars/navigationOptions";
-import { CurrentUserContextProvider} from "../../Context/CurrentUserContext";
+import { CurrentUserContextProvider, useCurrentUser} from "../../Context/CurrentUserContext";
 import UserInformationSection from "../../Components/Profile/UserInformationSection";
 import { PieDePaginaInformativo } from "../../Components/Utiles/PieDePaginaInformativo";
 import DonationService from "../../services/donations.service";
@@ -12,13 +12,15 @@ import ImpactChart from "../../Components/Profile/DoughnutChartImpact";
 import YoDono from "../../Components/Images/YoDono.png";
 import ActServices from "../../services/activities.service";
 import ImageService from "../../services/images.service";
+import {CompartirPerfilButton } from "../../Components/Utiles/CopyLinkButton"
 
 const UserDonationHistoryPage = () => {
-  const currentUser = AuthService.getCurrentUser();
   const [lifeImpact, setLifeImpact] = useState(0);
   const [donatedByRefferals, setDonatedByRefferals] = useState(0);
   const [registrationYear, setRegistrationYear] = useState(null);
   const [activities, setActivities] = useState([]);
+  const currentUser = AuthService.getCurrentUser();
+  const publicProfileInf = AuthService.getPublicProfileInf();
 
   useEffect(() => {
     DonationService.amountDonatedByRefferals(currentUser.id).then(
@@ -87,7 +89,7 @@ const UserDonationHistoryPage = () => {
                 <div className="flex flex-col space-y-5">
                   <div className="flex flex-row">
                     <div className="chart-container" style={{position: 'relative', width:'25vh'}}>
-                      <ImpactChart donatedByUser={currentUser.totalAmountDonated} donatedByRefferals={donatedByRefferals}/>
+                      <ImpactChart donatedByUser={publicProfileInf.totalAmountDonated} donatedByRefferals={donatedByRefferals}/>
                     </div>
                     <div className="flex flex-col mt-5 -ml-5">
                         <div className="font-Pop-R text-lg text-start">${lifeImpact}</div>
@@ -97,11 +99,11 @@ const UserDonationHistoryPage = () => {
                   <div className="flex flex-col space-y-1 mx-10">
                     <div className="font-Pop-L text-xs text-gray-700 flex flex-row space-x-2">
                       <span className="inline-flex rounded-full bg-[#f4dcbf] h-3 w-3"></span>
-                      <div>${currentUser.totalAmountDonated} donados</div>
+                      <div>${publicProfileInf.totalAmountDonated} donados</div>
                     </div>
                     <div className="font-Pop-L text-xs text-gray-700 flex flex-row space-x-2">
                       <span className="inline-flex rounded-full bg-[#6c3333] h-3 w-3"></span>
-                      <div>${donatedByRefferals} donados entre {currentUser.referralsQuantity} referidos</div>
+                      <div>${donatedByRefferals} donados entre {publicProfileInf.referralsQuantity} referidos</div>
                     </div>
                   </div>
                 </div>
@@ -109,7 +111,7 @@ const UserDonationHistoryPage = () => {
                 <div className="flex flex-col py-5 space-y-4">
                   <div className="text-[11px] font-Pop-L">Aumente su impacto de por vida donando o compartiendo su perfil y pidiendo a sus amigos que apoyen a nuestra causa.</div>
                   <div className="flex flex-row space-x-4">
-                    <button className="px-3 py-2 bg-[#6c3333] text-xs font-Pop-R text-white uppercase rounded-md"> Compartir Perfil</button>
+                    <CompartirPerfilButton/>
                     <button className="px-3 py-2 yellowBg text-xs font-Pop-R text-white uppercase rounded-md"> Donar </button>
                   </div>
                 </div>
@@ -134,7 +136,7 @@ const UserDonationHistoryPage = () => {
                     </div>
                     <div className="basis-1/3 flex flex-col text-center space-y-1">
                       <div className="font-Pop-L text-xs tracking-wide text-gray-700">Has donado</div>
-                      <div className="font-Pop-R text-xl tracking-widest purpleText">${currentUser.totalAmountDonated}</div>
+                      <div className="font-Pop-R text-xl tracking-widest purpleText">${publicProfileInf.totalAmountDonated}</div>
                     </div>
                 </div>
 

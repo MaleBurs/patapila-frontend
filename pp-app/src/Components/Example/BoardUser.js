@@ -24,9 +24,9 @@ const BoardUser = () => {
   }, []);
   const logOut = () => {
     AuthService.logout();
-
+    localStorage.clear();
     navigate("/login");
-    window.location.reload();
+    //window.location.reload();
   };
 
   return (
