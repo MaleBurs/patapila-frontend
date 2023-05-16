@@ -203,7 +203,7 @@ function bringUserInformation(name, onChangeName, lastname, onChangeLastname, bi
       ]
     },
     {
-      title: "Cumpleaños",
+      title: "Fecha de nacimiento",
       content: [
         {
           title:"YYYY-MM-DD",

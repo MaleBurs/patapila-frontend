@@ -7,6 +7,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import PhoneInput, { formatPhoneNumberIntl  } from "react-phone-number-input";
 import flags from "react-phone-number-input/flags";
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
+import { parsePhoneNumber } from 'libphonenumber-js';
 
 export function TextInput(props) {
   return (
@@ -49,14 +50,19 @@ export function DatePicker(props) {
   );
 }
 export function PhoneNumberInput(props) {
-  const [country, setCountry] = useState("AR");
+  const [country, setCountry] = useState(parsePhoneNumber(props.value).country);
+  const [number, setNumber]= useState(props.value);
+  // console.log(number);
+  // console.log(country)
   const defaultCountry = "AR";
 
   function handleOnChange(newValue) {
     console.log(newValue)
     props.onChange(newValue);
     if (setCountry) {
-      setCountry(formatPhoneNumberIntl(newValue));
+      setCountry(parsePhoneNumber(newValue).country);
+      setNumber(parsePhoneNumber(newValue).nationalNumber);
+      console.log(country)
     }
   }
 
@@ -66,16 +72,16 @@ export function PhoneNumberInput(props) {
         maxLength={13}
         className="MyPhoneInput"
         menuClass="phone-input-menu"
-        defaultCountry={defaultCountry}
-        country={country}
-        flags={flags}
+        // defaultCountry={defaultCountry}
+        // country={country || defaultCountry}
+        // flags={flags}
         placeholder="011 6725-9823"
-        value={props.value}
+        value={number}
         onChange={handleOnChange}
       />
-      <div className="">
+      {/* <div className="">
         {flags[country]}
-      </div>
+      </div> */}
     </div>
   );
 }
