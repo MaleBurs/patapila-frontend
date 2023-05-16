@@ -23,7 +23,7 @@ export default function App() {
         <Routes>
           <Route exact path={"/"} element={<LoginPage />} />
           <Route exact path={"/login"} element={<LoginPage />} />
-          <Route exact path={"/signup/:refferalId"} element={<RefferalsPage/>} />
+          <Route exact path={"/signup/:refferalURL"} element={<RefferalsPage/>} />
           <Route exact path={"/signup"} element={<RegistrationPage/>} />
           <Route exact path="/ChangePasswordPage" element={<ChangePasswordPage />} />
           <Route exact path="/resetPassword/:token" element={<PasswordResetPage />} />

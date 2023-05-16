@@ -124,16 +124,6 @@ const getUserMilestones = async (userId) => {
   }
 };
 
-const getUserLifeImpact = async (userId) => {
-  try {
-    const response = await axios.post("http://localhost:8080/api/auth/getUserLifeImpact", {
-      userId,
-    });
-    return response;
-  } catch (e) {
-      console.log(e);
-  }
-};
 
 const updateUserInformation = async (name, lastname, userId) => {
   try {
@@ -166,7 +156,6 @@ const AuthService = {
   updatePasswordViaEmail,
   updatePasswordViaSettings,
   findUserById,
-  getUserLifeImpact,
   getUserMilestones,
   updateUserInformation,
   updatedCurrentUserInLocalStorage,

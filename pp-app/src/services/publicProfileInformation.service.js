@@ -18,6 +18,11 @@ const getPublicProfileInformation = (userId) => {
         userId,
     });
   };
+const getPublicProfileInformationByUserURL = (userURL) => {
+  return axios.post(API_URL + "getPublicProfileInformationByUserURL", {
+      userURL,
+  });
+};
 const updatedPublicProfileConfigurationInLocalStorage = async (userId) => {
   const response = await axios.post(API_URL + "getPublicProfileInformation", { userId });
   if (response) {
@@ -33,7 +38,8 @@ const PublicProfileInformationServices = {
     updatePublicProfileInformation,
     getPublicProfileInformation,
     updatedPublicProfileConfigurationInLocalStorage,
-    getPublicProfileInf
+    getPublicProfileInf,
+    getPublicProfileInformationByUserURL
 }
 
 export default PublicProfileInformationServices;
