@@ -53,7 +53,7 @@ const ChangeDonationFromProfileForm = () =>{
         () => {
           ActServices.createActivity(5 , resetSubscriptionEvenctDescription(selectedAmount,subsPeriod.label,paymentDay).description, currentUser.id). then(
             (res)=> 
-            {console.log(res);
+            {
             window.location.reload();
             }
           )
@@ -65,7 +65,6 @@ const ChangeDonationFromProfileForm = () =>{
               error.response.data.message) ||
             error.message ||
             error.toString();
-          console.log(resMessage);
         })
 }
   const isFormValid = () =>{
@@ -86,7 +85,6 @@ const ChangeDonationFromProfileForm = () =>{
     if (isFormValid()) {
       DonationService.modifySubscription(subscriptionData.id, selectedAmount, parseInt(subsPeriod.value), paymentDay).then(
         (res) => {
-          console.log(res);
           setIfUserWantsToModifySubs(false);
           ActServices.createActivity(6, modificationSubscriptionEvenctDescription(selectedAmount,subsPeriod.label,paymentDay).title, modificationSubscriptionEvenctDescription(selectedAmount,subsPeriod.label,paymentDay).description, currentUser.id). then(
             (res)=> console.log(res)

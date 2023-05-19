@@ -8,6 +8,7 @@ import PhoneInput, { formatPhoneNumberIntl  } from "react-phone-number-input";
 import flags from "react-phone-number-input/flags";
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import { parsePhoneNumber } from 'libphonenumber-js';
+import { form } from "react-validation/build/form";
 
 export function TextInput(props) {
   return (
@@ -49,42 +50,50 @@ export function DatePicker(props) {
     </LocalizationProvider>
   );
 }
+
 export function PhoneNumberInput(props) {
-  const [country, setCountry] = useState(parsePhoneNumber(props.value).country);
-  const [number, setNumber]= useState(props.value);
-  // console.log(number);
-  // console.log(country)
-  const defaultCountry = "AR";
+  const [number, setNumber] = useState(props.value);
+
+  function isNumber(value) {
+    return !isNaN(Number(value));
+  }
 
   function handleOnChange(newValue) {
-    console.log(newValue)
-    props.onChange(newValue);
-    if (setCountry) {
-      setCountry(parsePhoneNumber(newValue).country);
-      setNumber(parsePhoneNumber(newValue).nationalNumber);
-      console.log(country)
-    }
+    const formattedNumber = formatPhoneNumber(newValue);
+    setNumber(formattedNumber)
+    props.onChange(formattedNumber);
   }
 
   return (
     <div className="py-2 px-4">
-      <PhoneInput
-        maxLength={13}
-        className="MyPhoneInput"
-        menuClass="phone-input-menu"
-        // defaultCountry={defaultCountry}
-        // country={country || defaultCountry}
-        // flags={flags}
-        placeholder="011 6725-9823"
-        value={number}
-        onChange={handleOnChange}
-      />
-      {/* <div className="">
-        {flags[country]}
-      </div> */}
+      <div className="MyPhoneInput flex flex-row items-center space-x-1">
+        <img src="https://flagpedia.net/data/flags/normal/ar.png" alt="Argentina" className="w-7 h-5 rounded-sm" />
+        <input
+          type="text"
+          maxLength={17}
+          className="border-none hover:border-none focus:border-none focus:ring-0 focus:outline-none w-full text-sm font-Pop-L text-gray-900 tracking-widest"
+          placeholder="+54 11 6725-9823"
+          value={number}
+          onChange={(e) => handleOnChange(e.target.value)}
+        />
+      </div>
     </div>
   );
+
+  function formatPhoneNumber(newValue) {
+    let newChar = newValue.charAt(newValue.length - 1);
+    let formattedNumber = newValue;
+    if (isNumber(newChar)) {
+      if (formattedNumber.startsWith("54")) {
+        formattedNumber = formattedNumber.replace(/(\d{2})(\d{2})(\d{4})(\d{4})/, "+$1 $2 $3-$4");
+      }else{
+        formattedNumber = formattedNumber.replace(/(\d{2})(\d{4})(\d{4})/, "+54 $1 $2-$3");
+      }
+    }else formattedNumber = formattedNumber.slice(0, -1);
+    return formattedNumber;
+  }
 }
+
 
 export function CountryCitySelector(props) {
   return (

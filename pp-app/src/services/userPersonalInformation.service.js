@@ -20,12 +20,9 @@ const getUserPersonalInformation = (userId) => {
 const updateUserPersonalInformationInLocalStorage = async (userId) => {
     const response = await axios
       .post(API_URL + "getUserPersonalInformation", { userId });
-    console.log("userPersonalInfoRespone"+response.data);
-    console.log("antes"+localStorage.getItem("userPersonalInf"));
     if (response) {
       localStorage.setItem("userPersonalInf", JSON.stringify(response.data));
     }
-    console.log("luego"+localStorage.getItem("userPersonalInf"));
     return response.data;
   };
 

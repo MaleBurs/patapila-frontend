@@ -72,7 +72,6 @@ const ModifyStatePopUp = (props) => {
           () => {
             ActServices.createActivity(7, cancelledSubscriptionEvenctDescription(selectedAmount, subsPeriod.label).description, currentUser.id).then(
               (res) => {
-                console.log(res);
                 resolve(); // Resolve the promise when the operation is completed
               }
             );
@@ -82,7 +81,6 @@ const ModifyStatePopUp = (props) => {
               (error.response && error.response.data && error.response.data.message) ||
               error.message ||
               error.toString();
-            console.log(resMessage);
             reject(error); // Reject the promise if there is an error
           }
         );
@@ -94,7 +92,6 @@ const ModifyStatePopUp = (props) => {
           () => {
             ActServices.createActivity(8, pausedSubscriptionEvenctDescription(selectedAmount, subsPeriod.label).description, currentUser.id).then(
               (res) => {
-                console.log(res);
                 resolve();
               }
             );
@@ -104,7 +101,6 @@ const ModifyStatePopUp = (props) => {
               (error.response && error.response.data && error.response.data.message) ||
               error.message ||
               error.toString();
-            console.log(resMessage);
             reject(error);
           }
         );
@@ -117,7 +113,6 @@ const ModifyStatePopUp = (props) => {
           () => {
             ActServices.createActivity(5, resetSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay).description, currentUser.id).then(
               (res) => {
-                console.log(res);
                 resolve();
               }
             );

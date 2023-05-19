@@ -3,9 +3,6 @@ import {useMonthlySubscriptionStateContext} from  '../../Context/MonthlySubscrip
 
 export default function TotalAmountModule(props) {
   const { month, monthlyData } = useMonthlySubscriptionStateContext();
-  useEffect(() => {
-    console.log("data del mes", monthlyData)
-  }, [monthlyData])
 
   const getValue = () => {
     for (const md of monthlyData){
