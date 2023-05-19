@@ -65,71 +65,88 @@ const ModifyStatePopUp = (props) => {
       setChoosedActive(false);
     };
 
-    const handleCancelledSubs = () =>{
+
+    const handleCancelledSubs = async () => {
+      return new Promise((resolve, reject) => {
         DonationService.modifySubscriptionState(subscriptionData.id, 'C').then(
-            () => {
-              ActServices.createActivity(7, cancelledSubscriptionEvenctDescription(selectedAmount,subsPeriod.label).description, currentUser.id). then(
-                (res)=> console.log(res)
-              )
-            },
-            (error) => {
-              const resMessage =
-                (error.response &&
-                  error.response.data &&
-                  error.response.data.message) ||
-                error.message ||
-                error.toString();
-              console.log(resMessage);
-            })
-    }
-    const handlePausedSubs = () =>{
-        DonationService.modifySubscriptionState(subscriptionData.id, 'P').then(
-            () => {
-              ActServices.createActivity(8, pausedSubscriptionEvenctDescription(selectedAmount,subsPeriod.label).description, currentUser.id). then(
-                (res)=> console.log(res)
-              )
-            },
-            (error) => {
-              const resMessage =
-                (error.response &&
-                  error.response.data &&
-                  error.response.data.message) ||
-                error.message ||
-                error.toString();
-              console.log(resMessage);
-            })
-    }
-    const handleResetDonation = () =>{
-      DonationService.modifySubscriptionState(subscriptionData.id, 'A').then(
           () => {
-            ActServices.createActivity(5, resetSubscriptionEvenctDescription(selectedAmount,subsPeriod.label,paymentDay).description, currentUser.id). then(
-              (res)=> console.log(res)
-            )
+            ActServices.createActivity(7, cancelledSubscriptionEvenctDescription(selectedAmount, subsPeriod.label).description, currentUser.id).then(
+              (res) => {
+                console.log(res);
+                resolve(); // Resolve the promise when the operation is completed
+              }
+            );
           },
           (error) => {
             const resMessage =
-              (error.response &&
-                error.response.data &&
-                error.response.data.message) ||
+              (error.response && error.response.data && error.response.data.message) ||
               error.message ||
               error.toString();
             console.log(resMessage);
-          })
-  }
-
-    const handleNextStep = () =>{
+            reject(error); // Reject the promise if there is an error
+          }
+        );
+      });
+    };
+    const handlePausedSubs = async () => {
+      return new Promise((resolve, reject) => {
+        DonationService.modifySubscriptionState(subscriptionData.id, 'P').then(
+          () => {
+            ActServices.createActivity(8, pausedSubscriptionEvenctDescription(selectedAmount, subsPeriod.label).description, currentUser.id).then(
+              (res) => {
+                console.log(res);
+                resolve();
+              }
+            );
+          },
+          (error) => {
+            const resMessage =
+              (error.response && error.response.data && error.response.data.message) ||
+              error.message ||
+              error.toString();
+            console.log(resMessage);
+            reject(error);
+          }
+        );
+      });
+    };
+    
+    const handleResetDonation = async () => {
+      return new Promise((resolve, reject) => {
+        DonationService.modifySubscriptionState(subscriptionData.id, 'A').then(
+          () => {
+            ActServices.createActivity(5, resetSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay).description, currentUser.id).then(
+              (res) => {
+                console.log(res);
+                resolve();
+              }
+            );
+          },
+          (error) => {
+            const resMessage =
+              (error.response && error.response.data && error.response.data.message) ||
+              error.message ||
+              error.toString();
+            console.log(resMessage);
+            reject(error);
+          }
+        );
+      });
+    };
+  
+    const handleNextStep = async() =>{
       if(choosedCancelled){
-        handleCancelledSubs()
+        await handleCancelledSubs();
         setShowModal(false);
         window.location.reload();
       }else if (choosedPaused){
-        handlePausedSubs()
+        await handlePausedSubs();
         setShowModal(false);
         window.location.reload();
       } else if (choosedActive){
         handleResetDonation();
-        setShowModal(false);
-        window.location.reload();
+          setShowModal(false);
+          window.location.reload();
       }
     }
     
