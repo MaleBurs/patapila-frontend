@@ -44,14 +44,18 @@ const login = async (email, password) => {
       delete response.data.profilePicture;
       localStorage.setItem("user", JSON.stringify(response.data));
 
-      const userPublicProfileConfig = await PublicProfileConfigurationServices.getPublicProfileConfiguration(response.data.id);
-      localStorage.setItem("publicProfileConfig", JSON.stringify(userPublicProfileConfig.data));
+      console.log(response.data)
 
-      const userPublicProfileInfo = await PublicProfileInformationServices.getPublicProfileInformation(response.data.id);
-      localStorage.setItem("publicProfileInf", JSON.stringify(userPublicProfileInfo.data));
+      if(response.data.roles.includes("ROLE_USER")){
+        const userPublicProfileConfig = await PublicProfileConfigurationServices.getPublicProfileConfiguration(response.data.id);
+        localStorage.setItem("publicProfileConfig", JSON.stringify(userPublicProfileConfig.data));
 
-      const userPersonalInformation = await PersonalInformationServices.getUserPersonalInformation(response.data.id);
-      localStorage.setItem("userPersonalInf", JSON.stringify(userPersonalInformation.data));
+        const userPublicProfileInfo = await PublicProfileInformationServices.getPublicProfileInformation(response.data.id);
+        localStorage.setItem("publicProfileInf", JSON.stringify(userPublicProfileInfo.data));
+
+        const userPersonalInformation = await PersonalInformationServices.getUserPersonalInformation(response.data.id);
+        localStorage.setItem("userPersonalInf", JSON.stringify(userPersonalInformation.data));
+      }
     }
 
     return response.data;
