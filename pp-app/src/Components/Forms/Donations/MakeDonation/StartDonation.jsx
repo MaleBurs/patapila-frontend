@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom"
 import Messages from '../../Messages'
 import ActServices from '../../../../services/activities.service'
 import {textos} from "./MakeDonationTexts"
+import PublicProfileInformationServices from '../../../../services/publicProfileInformation.service'
+import Loading from "../../../Utiles/Loading";
 
 const StartDonation = ({ setStep }) => {
   const { selectedFrequency } = useFrequency();
@@ -18,6 +20,7 @@ const StartDonation = ({ setStep }) => {
   const navigate = useNavigate();
   const currentUser = AuthService.getCurrentUser();
   const [showModal, setShowModal] = useState(false);
+  const [loadingState, setLoadingState] = useState(false);
 
   const newSubscriptionEvenctDescription = (amount, frequency, nextPaymentDate) =>{
     return {title: "Te has suscrito!", description: "Has iniciado una suscripción de $"+amount+" que se cobra " + frequency + " y tiene como próxima fecha de pago "+nextPaymentDate+"."}
@@ -69,12 +72,15 @@ const StartDonation = ({ setStep }) => {
           setMessage(resMessage);
         })
         }else{
+        setLoadingState(true);
         DonationService.generateTransaction(currentUser.id, selectedAmount,"onlyTime").then(
           () => {
             setShowModal(true);
             ActServices.createActivity(3, newOneTimeDonationEvenctDescription(selectedAmount).description, currentUser.id). then(
               (res)=> console.log(res)
             )
+            PublicProfileInformationServices.updatedPublicProfileConfigurationInLocalStorage(currentUser.id);
+            setLoadingState(false);
           },
           (error) => {
             const resMessage =
@@ -84,6 +90,7 @@ const StartDonation = ({ setStep }) => {
               error.message ||
               error.toString();
             setMessage(resMessage);
+            setLoadingState(false);
           }
       );
     } 
@@ -97,8 +104,9 @@ const StartDonation = ({ setStep }) => {
       <DonationMadeModal value={showModal} onChange={closeModal} header={(selectedFrequency === 1) ? "¡Tu donación ha sido realizada con éxito!" : "¡Tu suscripción ha sido activada con éxito!"} action={(selectedFrequency === 1) ? "realizado una donación" : "activado una suscripción"} body={"Gracias a tu ayuda podemos brindar atención nutricional a los niños de la comunidad."} buttonText={"Queremos darte las gracias!"}></DonationMadeModal>
     ) : null}
       <button onClick={submitDonation}
-        className="rounded-xl p-3 h-auto w-full text-center greenBg yellowBgHover font-Pop-SB text-base text-white">
-        {(selectedFrequency === 1)  ? "Donar" : "Donar periódicamente"}
+        className="rounded-xl  flex flex-row space-x-2 justify-center p-3 h-auto w-full text-center greenBg yellowBgHover font-Pop-SB text-base text-white">
+        <span>{(selectedFrequency === 1)  ? "Donar" : "Activar Suscripción"}</span>
+        {loadingState ? <Loading/> : null}
       </button>
        {message && (
         <Messages.ErrorMessage message={message}/>

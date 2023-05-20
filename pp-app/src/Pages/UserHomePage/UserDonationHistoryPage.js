@@ -99,11 +99,11 @@ const UserDonationHistoryPage = () => {
                   </div>
                   <div className="flex flex-col space-y-1 mx-10">
                     <div className="font-Pop-L text-xs text-gray-700 flex flex-row space-x-2">
-                      <span className="inline-flex rounded-full bg-[#f4dcbf] h-3 w-3"></span>
+                      <span className="inline-flex rounded-full bg-[#6c3333] h-3 w-3"></span>
                       <div>${publicProfileInf.totalAmountDonated} donados</div>
                     </div>
                     <div className="font-Pop-L text-xs text-gray-700 flex flex-row space-x-2">
-                      <span className="inline-flex rounded-full bg-[#6c3333] h-3 w-3"></span>
+                      <span className="inline-flex rounded-full bg-[#f4dcbf] h-3 w-3"></span>
                       <div>${donatedByRefferals} donados entre {publicProfileInf.referralsQuantity} referidos</div>
                     </div>
                   </div>
