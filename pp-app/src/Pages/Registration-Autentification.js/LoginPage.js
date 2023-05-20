@@ -3,7 +3,7 @@ import NavBar from '../../Components/NavBars/NavBar'
 import LogInForm from "../../Components/Forms/Registration-AutentificationForms/LogInForm"
 import "../../App.css";
 import "./loginPage.css";
-import React from 'react';
+import React, {useEffect}from 'react';
 import ImagePageContainer from "./ImagePageContainer";
 import { navigationInformative } from '../navigationInformative'
 import { TextBubble } from "../../Components/Utiles/TextBubble";
@@ -20,6 +20,11 @@ export default function LoginPage() {
 
   const categories = datosDeImpacto
   const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.clear()
+  }, [])
+  
 
   return (
     <>

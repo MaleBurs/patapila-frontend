@@ -4,7 +4,7 @@ import RegistrationForm from "../../Components/Forms/Registration-Autentificatio
 import "../../App.css"
 import ComunidadFoto from "../../Components/Images/ComunidadFoto.jpg";
 import LogoLaComunidad from "../../Components/Images/LogoLaComunidad.png";
-import React from 'react';
+import React, {useEffect} from 'react';
 import ImagePageContainer from "./ImagePageContainer";
 import { navigationInformative } from '../navigationInformative'
 import { TextBubble } from "../../Components/Utiles/TextBubble"
@@ -13,6 +13,9 @@ import { PieDePaginaInformativo } from "../../Components/Utiles/PieDePaginaInfor
 import { DosManerasDeDonarSection } from "./DosManerasDeDonarSection";
 
 export default function RegistrationPage() {
+  useEffect(() => {
+    localStorage.clear()
+  }, [])
   return (
     <>  
       <ImagePageContainer 
