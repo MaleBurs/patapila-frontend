@@ -93,7 +93,7 @@ export default function RefferalsPage() {
                       refferalUserInformation.publicProfileConfiguration.showReferralsTotalAmountDonated ? 
                       "-ml-5":"ml-3"}`}>
                         {refferalUserInformation.publicProfileConfiguration.showLifeImpact &&<div className="font-Pop-R text-lg text-start">${refferalUserInformation.lifeImpact}</div>}
-                        <div className="font-Pop-L text-xs text-start italic">Impacto de Vida de <span className="underline decoration-gray-400 underline-offset-2" >Paula</span></div>   
+                        <div className="font-Pop-L text-xs text-start italic">Impacto de Vida de <span className="underline decoration-gray-400 underline-offset-2" >{refferalUser.name}</span></div>   
                     </div>
                   </div>
                   <div className="flex flex-col space-y-1 mx-3">

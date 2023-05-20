@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, navigate} from "react";
 import AuthService from "../../services/auth.service";
 import UserNavBar from "../../Components/NavBars/UserNavBar";
 import navigationOptions from "../../Components/NavBars/navigationOptions";
@@ -14,9 +14,11 @@ import ActServices from "../../services/activities.service";
 import ImageService from "../../services/images.service";
 import {CompartirPerfilButton } from "../../Components/Utiles/CopyLinkButton"
 import PublicProfileInformationServices from "../../services/publicProfileInformation.service";
+import { useNavigate } from "react-router-dom";
 
 const UserDonationHistoryPage = () => {
   const [lifeImpact, setLifeImpact] = useState(0);
+  const navigate = useNavigate();
   const [donatedByRefferals, setDonatedByRefferals] = useState(0);
   const [registrationYear, setRegistrationYear] = useState(null);
   const [activities, setActivities] = useState([]);
@@ -113,7 +115,7 @@ const UserDonationHistoryPage = () => {
                   <div className="text-[11px] font-Pop-L">Aumente su impacto de por vida donando o compartiendo su perfil y pidiendo a sus amigos que apoyen a nuestra causa.</div>
                   <div className="flex flex-row space-x-4">
                     <CompartirPerfilButton/>
-                    <button className="px-3 py-2 yellowBg text-xs font-Pop-R text-white uppercase rounded-md"> Donar </button>
+                    <button className="px-3 py-2 yellowBg text-xs font-Pop-R text-white uppercase rounded-md" onClick={()=>navigate("/donar")}> Donar </button>
                   </div>
                 </div>
 
