@@ -81,7 +81,8 @@ export default function RefferalsPage() {
                 <div className="flex flex-col space-y-5">
                   <div className="flex flex-row -ml-10">
                     {refferalUserInformation.publicProfileConfiguration.showTotalAmountDonated &&
-                    refferalUserInformation.publicProfileConfiguration.showReferralsTotalAmountDonated ?
+                    refferalUserInformation.publicProfileConfiguration.showReferralsTotalAmountDonated &&
+                    refferalUserInformation.publicProfileConfiguration.showLifeImpact ?
                     <div className="chart-container" style={{position: 'relative', width:'20vh'}}>
                       <ImpactChart donatedByRefferals={refferalUserInformation.referralsTotalAmountDonated} donatedByUser={refferalUserInformation.totalAmountDonated}/>
                     </div>
@@ -92,18 +93,20 @@ export default function RefferalsPage() {
                       ${refferalUserInformation.publicProfileConfiguration.showTotalAmountDonated &&
                       refferalUserInformation.publicProfileConfiguration.showReferralsTotalAmountDonated ? 
                       "-ml-5":"ml-3"}`}>
-                        {refferalUserInformation.publicProfileConfiguration.showLifeImpact &&<div className="font-Pop-R text-lg text-start">${refferalUserInformation.lifeImpact}</div>}
-                        <div className="font-Pop-L text-xs text-start italic">Impacto de Vida de <span className="underline decoration-gray-400 underline-offset-2" >{refferalUser.name}</span></div>   
+                        {refferalUserInformation.publicProfileConfiguration.showLifeImpact && <><div className="font-Pop-R text-lg text-start">${refferalUserInformation.lifeImpact}</div>
+                        <div className="font-Pop-L text-xs text-start italic">Impacto de Vida de <span className="underline decoration-gray-400 underline-offset-2" >{refferalUser.name}</span></div> </>}
                     </div>
                   </div>
                   <div className="flex flex-col space-y-1 mx-3">
 
                     {refferalUserInformation.publicProfileConfiguration.showTotalAmountDonated &&
-                    refferalUserInformation.publicProfileConfiguration.showReferralsTotalAmountDonated ?
+                    refferalUserInformation.publicProfileConfiguration.showReferralsTotalAmountDonated
+                    &&
+                    refferalUserInformation.publicProfileConfiguration.showLifeImpact ?
                     <>
                       
                       <div className="font-Pop-L text-xs text-gray-700 flex flex-row space-x-2">
-                        <span className="inline-flex rounded-full bg-[#6c3333] h-3 w-3"></span>
+                      <span className="inline-flex rounded-full bg-[#6c3333] h-3 w-3"></span>
                         <div>${refferalUserInformation.totalAmountDonated} donados</div>
                       </div>
                       {refferalUserInformation.publicProfileConfiguration.showReferralsQuantity ?
