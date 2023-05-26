@@ -51,6 +51,36 @@ export function DatePicker(props) {
   );
 }
 
+export function FullDatePicker(props) {
+  return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DesktopDatePicker
+        className="date-picker myDatePicker"
+        disableFuture
+        inputFormat="YYYY-MM-DD"
+        value={props.value}
+        onChange={(newDate) => {
+          props.onChange(newDate.format("YYYY-MM-DD"));
+        }}
+        inputProps={{ readOnly: true }}
+        renderInput={(params) => <TextField {...params}
+          sx={{
+            '.MuiInputBase-input': {
+              fontFamily: "Poppins-Light",
+              color: "#3f3f3f",
+              fontSize: "0.875rem",
+              lineHeight: "1rem",
+              letterSpacing: "0.075em",
+              border: "none",
+            },
+          }} />}
+        views={["day", "year", "month"]}
+        showDaysOutsideCurrentMonth />
+    </LocalizationProvider>
+  );
+}
+
+
 export function PhoneNumberInput(props) {
   const [number, setNumber] = useState(props.value);
 

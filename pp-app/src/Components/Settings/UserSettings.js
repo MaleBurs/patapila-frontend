@@ -19,7 +19,7 @@ import ImageService from "../../services/images.service";
 import PersonalInformationServices from "../../services/userPersonalInformation.service";
 import 'react-phone-number-input/style.css';
 
-import { TextInput, DatePicker, PhoneNumberInput, CountryCitySelector } from "./MyInputs";
+import { TextInput, FullDatePicker, PhoneNumberInput, CountryCitySelector } from "./MyInputs";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
 
 
@@ -210,7 +210,7 @@ function bringUserInformation(name, onChangeName, lastname, onChangeLastname, bi
           value: birthday,
           onChange: onChangeBirthday,
           validations: [],
-          component: DatePicker,
+          component: FullDatePicker,
         }
       ],
     },
