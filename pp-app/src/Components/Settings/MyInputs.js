@@ -4,11 +4,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import PhoneInput, { formatPhoneNumberIntl  } from "react-phone-number-input";
-import flags from "react-phone-number-input/flags";
-import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
-import { parsePhoneNumber } from 'libphonenumber-js';
-import { form } from "react-validation/build/form";
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';;
 
 export function TextInput(props) {
   return (

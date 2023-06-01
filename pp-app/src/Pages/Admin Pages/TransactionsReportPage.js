@@ -12,6 +12,7 @@ const TransactionReportPage = () => {
       subtitle={textos.transactionsSubtitle}
       dataForColumns={TransactionTableInformation.columns}
       functionToLoadData={getTransactionsForTable}
+      selectPage="reporteTransacciones"
     />
   );
 };

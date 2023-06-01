@@ -16,11 +16,11 @@ export function OpenSideBarFromUser({value, row}){
   
   return(
     <button 
-      className="text-xs flex flex-row text-gray-500 font-Pop-L hover:decoration-gray-500 hover:underline hover:underline-offset-4" 
+      className="text-xs flex flex-row text-gray-600 font-Pop-L hover:decoration-gray-500 hover:underline hover:underline-offset-4" 
       onClick={()=>{setShowSidebar(true); setSelectedUser(value)}}>
       <div>{user ? user.email : value}</div>
       {(row.id ==='0') ? 
-        <div className='ml-1'><InformationTooltips.InstructionTooltip size="h-2 w-2" tooltipContent="Haz click aquí o en cualquier email para obtener más información acerca de el usuario."/></div>
+        <div className="-mt-2"><InformationTooltips.InstructionTooltip tooltipContent="Haz click aquí o en cualquier email para obtener más información acerca de el usuario."/></div>
         : <></>}
     </button>
   );
@@ -55,8 +55,8 @@ export function StatusPillTransactions({ value, row }) {
         )}
         {(status ==="p") && (
         <>
-        <FontAwesomeIcon className='px-4' onClick={() => setShowAcceptModal(true)} icon={"fa fa-check"} color='#000' size={14} />
-        <FontAwesomeIcon onClick={() => setShowRejectModal(true)} icon={"fa fa-ban"} color='#000' size={14} />
+        <FontAwesomeIcon className='px-4' onClick={() => setShowAcceptModal(true)} icon={"fa fa-check"} color='#000' size="xs" />
+        <FontAwesomeIcon onClick={() => setShowRejectModal(true)} icon={"fa fa-ban"} color='#000' size="xs" />
         {
           showAcceptModal && ( <ModalWithConfirmation onChange={()=>setShowAcceptModal(false)} title="¿Estás seguro de que quieres aceptar esta transacción?" content="Una vez aceptada, no podrás revertir el cambio." saveChanges={()=>{updateState("A"); setShowAcceptModal(false)}} cancelButton={"Cancelar"} saveButton={"Aceptar"}/>)
         }
@@ -97,7 +97,7 @@ export function StatusPillSubscriptions({ value }) {
 export function PaymentFrecuency({ value }) {
     return (
       <div
-        className="text-xs text-gray-500 font-Pop-L"
+        className="text-xs text-gray-600 font-Pop-L"
       >
          {(value===1) 
         ? '1 vez al mes'
@@ -117,12 +117,12 @@ export function PaymentFrecuency({ value }) {
 export function TransactionType({ value }) {
     return (
       <div
-        className="text-xs text-gray-500 font-Pop-L"
+        className="text-xs text-gray-600 font-Pop-L"
       >
          {(value==="onlyTime") 
-        ? 'donación de una única vez'
+        ? 'Donación'
         : ((value==="recurrent") 
-        ? 'suscripción'
+        ? 'Suscripción'
         : ""
         )}
         

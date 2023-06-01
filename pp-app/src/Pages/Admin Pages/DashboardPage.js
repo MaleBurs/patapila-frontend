@@ -6,26 +6,30 @@ import { OpenChartsContextProvider } from "../../Context/OpenChartsContext";
 import DashboardSection from "../../Components/Dashboards/DashboardSection";
 import SectionTitleIndicator from "../../Components/Utiles/SectionTitleIndicator";
 import AdminNavBar from "../../Components/NavBars/AdminNavBar";
+import AdminInformationSection from "../../Components/Admin/AdminInformationSection";
+import { CurrentAdminContextProvider } from "../../Context/CurrentAdminContext";
 import {textos} from "./AdminPagesTexts";
 const DashboardPage = () => {
   const currentUser = AuthService.getCurrentUser();
 
   return (
     <>
+    <CurrentAdminContextProvider> 
+      <AdminNavBar></AdminNavBar>
       <div className="mx-auto z-10 pb-8 sm:pb-16 md:pb-20 lg:pb-28 xl:pb-32 h-screen bg-cover place-content-center">
       {currentUser ? ( 
         <MonthlySubscriptionStateContextProvider>
         <OpenChartsContextProvider>
-        <AdminNavBar></AdminNavBar>
-        <div className="space-y-12 mx-auto lg:-mt-5 pb-8 sm:pb-16 md:pb-20 lg:pb-28 xl:pb-32">
-          <SectionTitleIndicator
+        <div className="almostWhiteBg">
+          <AdminInformationSection
+            backToHome={false}
             title={textos.dashboardTitle}
-            subtitle={textos.dashboardSubtitle}
-            rightSideFunctionality={
-            <div className="basis-2/10 flex justify-end right-0">
-            <FilterDate></FilterDate>
-            </div>}
-          />
+            description={textos.dashboardSubtitle}
+            select="dashboards"
+          ></AdminInformationSection>
+          <div className="flex justify-start right-0 mt-5 ml-10">
+              <FilterDate></FilterDate>
+          </div>
           <DashboardSection></DashboardSection>
         </div>
         </OpenChartsContextProvider>
@@ -33,7 +37,8 @@ const DashboardPage = () => {
       ) : (
       <></>
     )}
-    </div> 
+    </div>
+    </CurrentAdminContextProvider> 
     </>
   );
 };

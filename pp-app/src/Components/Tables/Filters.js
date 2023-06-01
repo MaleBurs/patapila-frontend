@@ -20,8 +20,8 @@ export function GlobalFilter({
     }, 200)
   
     return (
-      <label className="px-6 py-1 bg-white flex flex-row gap-x-2 w-fit items-baseline border rounded-xl border-[#f3f1f1] shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-        <FontAwesomeIcon icon={faSearch} color="gray" className='pt-1' size='2' />
+      <label className="px-5 py-1 bg-white flex flex-row items-center w-fit border rounded-md border-[#f3f1f1] shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+        <FontAwesomeIcon icon={faSearch} color="gray" size='sm'/>
         <Inputs.BoxInput 
         value={value || ""}
         onChange={value => {
@@ -83,7 +83,7 @@ export function SelectModoFilter({
                       value={shownSelection} 
                       placeholder={capitalizeFirst((render("Header")).toLowerCase())}
                       onChange={e => {
-                        setShownSelection({value: e.value, label: e.value});
+                        setShownSelection({value: e.value, label: (e.value === "onlyTime") ? "Donación de única vez" : "Suscripción"});
                         setFilter(e.value || undefined);
                       }}/>
     </div>
@@ -126,7 +126,7 @@ export function SelectStateFilter({
                 value={shownSelection} 
                 placeholder={capitalizeFirst((render("Header")).toLowerCase())}
                 onChange={e => {
-                  setShownSelection({value: e.value, label: e.value});
+                  setShownSelection({value: e.value, label: (e.value==="P") ? "Pendiente" : (e.value==="A") ? "Aceptado" : "Rechazado"});
                   setFilter(e.value || undefined);
                 }}/>
     </div>
@@ -173,7 +173,7 @@ export function SelectStateFilterSubscriptions({
                 value={shownSelection} 
                 placeholder={capitalizeFirst((render("Header")).toLowerCase())}
                 onChange={e => {
-                  setShownSelection({value: e.value, label: e.value});
+                  setShownSelection({value: e.value, label: (e.value==="A") ? "Activa" : (e.value==="P") ? "Pausada" : "Cancelada"});
                   setFilter(e.value || undefined);
                 }}/>
     </div>
@@ -246,7 +246,7 @@ export function DateRangeColumnFilter({
           }}
           value={filterValue[0] || ''}
         />
-         <div className='text-center' style={{ fontFamily: 'Poppins-Regular', fontSize: 12, color: "gray", marginTop: 18}}> a </div>
+         <div className='text-center' style={{ fontFamily: 'Poppins-Regular', fontSize: 12, color: "gray", marginTop: 18, tracking: "wider"}}> a </div>
         <Inputs.BottomLineDateInput
           max={max.toISOString().slice(0, 10)}
           onChange={val => {
@@ -342,7 +342,7 @@ export function SelectPeriodicidadFilter({
                       value={shownSelection} 
                       placeholder={capitalizeFirst((render("Header")).toLowerCase())}
                       onChange={e => {
-                        setShownSelection({value: e.value, label: e.value});
+                        setShownSelection({value: e.value, label: (e.value === 1) ? "1 vez al mes" : (e.value === 2) ? "1 vez cada 3 meses" : (e.value === 3) ? "1 vez cada 6 meses" : (e.value === 4) ? "1 vez cada 1 año" : ""});
                         setFilter(e.value || undefined);
                       }}/>
     </div>

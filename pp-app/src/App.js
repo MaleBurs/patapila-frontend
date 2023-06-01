@@ -34,7 +34,7 @@ export default function App() {
           <Route exact path="/inicio" element={<TransactionReportPage></TransactionReportPage>} />
           <Route exact path="/reporteTransacciones" element={<TransactionReportPage></TransactionReportPage>} />
           <Route exact path="/reporteSubscripciones" element={<SubscriptionReportPage></SubscriptionReportPage>} />
-          <Route exact path="/reportes" element={<DashboardPage></DashboardPage>} />
+          <Route exact path="/dashboards" element={<DashboardPage></DashboardPage>} />
           <Route exact path="/settings" element={<UserSettingsPage />} />
           </>
           :

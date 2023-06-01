@@ -26,12 +26,12 @@ const FilterDate = (props) => {
   return (
     <>
       <Popover className={"grid relative"}>
-      <Popover.Button className="justify-self-end lightgreyBgTranslucentHover h-fit py-3 rounded-3xl md:rounded-xl w-fit px-3 focus:ring-0" >
+      <Popover.Button className="justify-self-end mx-10 lightgreyBgTranslucentHover h-fit py-3 rounded-full w-fit px-3 focus:ring-0 focus:outline-none focus:border-none" >
           <div className="justify-center flex z-50 space-x-4 overflow-hidden mx-auto lg:flex-row">
-          <FontAwesomeIcon icon={faFilter} color="gray"/>
+          <FontAwesomeIcon icon={faFilter} color="gray" size="xs"/>
           </div>
       </Popover.Button>
-      <Popover.Panel className={"p-10 absolute text-xs z-50 font-Pop-R top-0 right-0 mt-16 p-3 rounded-lg almostWhiteBg grayBorder space-y-6 w-fit"} >
+      <Popover.Panel className="p-10 absolute text-xs z-50 font-Pop-R top-0 -right-32 mt-12 p-3 rounded-lg almostWhiteBg grayBorder space-y-6 w-fit" >
           {datesValues.map((dataItem) => (
               <label className="flex gap-x-2 items-baseline">
               <span className="text-gray-700 font-Pop-R">{dataItem.tittle}</span>

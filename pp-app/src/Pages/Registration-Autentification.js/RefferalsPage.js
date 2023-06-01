@@ -139,10 +139,10 @@ export default function RefferalsPage() {
                 </div>
 
                 <div className="flex flex-row justify-start space-x-3 px-3 mt-12">
-                  {refferalUserInformation.facebookProfile!="" && <button onClick={() => window.location.replace(refferalUserInformation.facebookProfile)} ><FontAwesomeIcon icon={faFacebookF} size="base" color="gray" /></button>}
-                  {refferalUserInformation.instagramProfile!="" && <button onClick={() => window.location.replace(refferalUserInformation.instagramProfile)} ><FontAwesomeIcon icon={faInstagram} size="base" color="gray"/></button>}
-                  {refferalUserInformation.twitterProfile!="" && <button onClick={() => window.location.replace(refferalUserInformation.twitterProfile)} ><FontAwesomeIcon icon={faTwitter} size="base" color="gray"/></button>}
-                  {refferalUserInformation.linkedInProfile!="" && <button onClick={() => window.location.replace(refferalUserInformation.linkedInProfile)} ><FontAwesomeIcon icon={faLinkedinIn} size="base" color="gray"/> </button>}
+                  {refferalUserInformation.facebookProfile!=="" && <button onClick={() => window.location.replace(refferalUserInformation.facebookProfile)} ><FontAwesomeIcon icon={faFacebookF} size="base" color="gray" /></button>}
+                  {refferalUserInformation.instagramProfile!=="" && <button onClick={() => window.location.replace(refferalUserInformation.instagramProfile)} ><FontAwesomeIcon icon={faInstagram} size="base" color="gray"/></button>}
+                  {refferalUserInformation.twitterProfile!=="" && <button onClick={() => window.location.replace(refferalUserInformation.twitterProfile)} ><FontAwesomeIcon icon={faTwitter} size="base" color="gray"/></button>}
+                  {refferalUserInformation.linkedInProfile!=="" && <button onClick={() => window.location.replace(refferalUserInformation.linkedInProfile)} ><FontAwesomeIcon icon={faLinkedinIn} size="base" color="gray"/> </button>}
                 </div>
 
           </div>

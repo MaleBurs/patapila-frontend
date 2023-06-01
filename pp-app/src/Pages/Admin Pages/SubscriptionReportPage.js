@@ -12,6 +12,7 @@ const SubscriptionReportPage = () => {
       subtitle={textos.suscriptionsSubtitle}
       dataForColumns={SubscriptionTableInformation.columns}
       functionToLoadData={getSubscriptionsForTable}
+      selectPage="reporteSubscripciones"
     />
   );
 };

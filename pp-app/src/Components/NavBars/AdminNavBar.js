@@ -12,7 +12,7 @@ fontawesome.library.add(faBars);
 
 export default function AdminNavBar() {
   const [toggleDropdown, setToggleDropdown] = useState(false);
-  const [showSideBar, setShowSideBar] = useState(true);
+  const [showSideBar, setShowSideBar] = useState(false);
   const navigate = useNavigate();
 
   const logOut = () => {
@@ -22,9 +22,9 @@ export default function AdminNavBar() {
   };
 
   return (
-    <> 
-    {TopBar(setShowSideBar, setToggleDropdown)}
+    <div className=""> 
+    {TopBar(setShowSideBar, showSideBar, setToggleDropdown)}
     {SideBar(showSideBar, setShowSideBar, navigate, setToggleDropdown, toggleDropdown, logOut)}
-    </>
+    </div>
   )};
 

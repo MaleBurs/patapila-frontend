@@ -18,7 +18,7 @@ const DashboardSection = () => {
   const { BarChartLabel, PieChartLabel } = ChartLabels();
   const { year, month } = useMonthlySubscriptionStateContext();
   return (
-    <div> 
+    <div className="mt-5"> 
         {(showBarChart) ? 
          <ChartModal 
             chart={<BarChart ></BarChart>} 
