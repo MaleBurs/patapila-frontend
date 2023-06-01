@@ -18,28 +18,20 @@ const AdminSettings = () => {
   const [lastname, setLastname] = useState(currentUser.lastname);
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
-  /* const [birthday, setBirthday] = useState(userPersonalInf.dateOfBirth);
-  const [celphone, setCelphone] = useState(userPersonalInf.phoneNumber);
-  const [country, setCountry] = useState(userPersonalInf.country);
-  const [city, setCity] = useState(userPersonalInf.city); */
   const [errorMessage, setErrorMessage] = useState("");
 
   const onChangeName = (e) => setName(e.target.value);
   const onChangeLastname = (e) => setLastname(e.target.value);
-  /* const onChangeCelphone = (newCelphone) => setCelphone(newCelphone);
-  const onChangeBirthday = (newDate) => setBirthday(newDate);
-  const onChangeCity = (newCity) => setCity(newCity);
-  const onChangeCountry = (newCountry) => setCountry(newCountry); */
   
   const changeLoadingState = () =>{
     setLoading(current => !current);
   }
 
-  const userInformation = bringUserInformation(name, onChangeName, lastname, onChangeLastname); //, birthday, onChangeBirthday, celphone, onChangeCelphone, country, onChangeCountry, city, onChangeCity);
+  const userInformation = bringUserInformation(name, onChangeName, lastname, onChangeLastname); 
 
   function handleDataChange() {
     let completedOperations = 0;
-    const totalOperations = (file ? 1 : 0) + (name !== currentUser.name || lastname !== currentUser.lastname ? 1 : 0); // + (birthday !== currentUser.birthday || celphone !== currentUser.celphone || country !== currentUser.country || city !== currentUser.city ? 1 : 0);
+    const totalOperations = (file ? 1 : 0) + (name !== currentUser.name || lastname !== currentUser.lastname ? 1 : 0);
   
     changeLoadingState();
     if (file) {
@@ -74,35 +66,7 @@ const AdminSettings = () => {
       );
     }
   
-    /* if (birthday !== currentUser.birthday || celphone !== currentUser.celphone || country !== currentUser.country || city !== currentUser.city) {
-      if (celphone) {
-        if (!isPossiblePhoneNumber(celphone)) {
-          setErrorMessage("La longitud del numero de celular no es valida.");
-          return;
-        }
-      }
-      PersonalInformationServices.updateUserPersonalInformation(currentUser.id, city, country, birthday, celphone).then(
-        () => {
-          PersonalInformationServices.updateUserPersonalInformationInLocalStorage(currentUser.id).then(
-            () => {
-              setCurrentUser(PersonalInformationServices.getUserPersonalInf());
-              completedOperations++;
-              if (completedOperations === totalOperations) {
-                window.location.reload();
-              }
-            });
-        },
-        (error) => {
-          const resMessage =
-            (error.response && error.response.data && error.response.data.message) ||
-            error.message ||
-            error.toString();
-          setErrorMessage(resMessage);
-        }
-      );
-    } */
-  
-    if (!file && !name && !lastname) {// && birthday === currentUser.birthday && celphone === currentUser.celphone && country === currentUser.country && city === currentUser.city) {
+    if (!file && !name && !lastname) {
       changeLoadingState();
       return;
     }
@@ -165,48 +129,6 @@ function bringUserInformation(name, onChangeName, lastname, onChangeLastname) { 
         },
       ]
     },
-   /*  {
-      title: "Fecha de nacimiento",
-      content: [
-        {
-          title:"YYYY-MM-DD",
-          value: birthday,
-          onChange: onChangeBirthday,
-          validations: [],
-          component: FullDatePicker,
-        }
-      ],
-    },
-    {
-      title: "Celular",
-      content: [
-        {
-          title: "Celular",
-          value: celphone,
-          onChange: onChangeCelphone,
-          validations: [],
-          component: PhoneNumberInput,
-        },
-      ]  
-    },
-    {
-      title: "Lugar de Residencia",
-      content: [
-        {
-          title: "País",
-          value: {
-            country: country,
-            city: city,
-          },
-          onChange: {
-            onChangeCountry: onChangeCountry,
-            onChangeCity: onChangeCity,
-          },
-          validations: [],
-          component: CountryCitySelector,
-        },
-      ]  
-    } */
   ];
 }
 

@@ -16,18 +16,16 @@ const ModalWithConfirmation= (props) =>{
           <div
             className="darkGreyBg justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
           >
-            <div className="relative w-auto my-6 mx-auto max-w-3xl p-16">
+            <div className="relative w-auto my-6 mx-auto max-w-3xl p-16 h-fit">
               
-              <div className="  space-y-9 p-12 rounded-lg relative flex flex-col w-auto bg-white outline-none focus:outline-none">
+              <div className=" space-y-5 p-12 w-fit rounded-lg flex flex-col bg-white outline-none focus:outline-none">
                 
-                <div className="flex items-start justify-between rounded-t">
-                  <h3 className="font-Pop-SB text-base purpleText">
+                <div className="px-5 font-Pop-R text-base purpleText tracking-widest text-center">
                     {props.title}
-                  </h3>
                 </div>
                
-                <div className="relative flex flex-col space-y-10">
-                    <div className="font-Pop-M flex flex-wrap space-x-1 leading-relaxed font-Pop-R text-sm tracking-[0.2px] purpleText">
+                <div className="relative flex flex-col space-y-4">
+                    <div className="normal-case font-Pop-R flex flex-wrap space-x-1 leading-relaxed font-Pop-R text-sm tracking-[0.2px] purpleText">
                       {props.content}
                     </div>
                   <p className="text-center font-Pop-R text-sm text-gray-400">
