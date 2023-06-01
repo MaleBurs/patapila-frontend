@@ -44,8 +44,6 @@ const login = async (email, password) => {
       delete response.data.profilePicture;
       localStorage.setItem("user", JSON.stringify(response.data));
 
-      console.log(response.data)
-
       if(response.data.roles.includes("ROLE_USER")){
         const userPublicProfileConfig = await PublicProfileConfigurationServices.getPublicProfileConfiguration(response.data.id);
         localStorage.setItem("publicProfileConfig", JSON.stringify(userPublicProfileConfig.data));

@@ -14,13 +14,6 @@ const AdminInformationSection = (props) => {
     <div className = "flex flex-col relative z-10 space-y-4 md:space-y-0 md:flex-row border border-[#e7e6e6] divide-x divide-[#e7e6e6]">
        
         <div className="py-6 pl-6 md:pl-12 lg:pl-24 pr-12 basis-1/2 flex flex-row space-x-5 md:space-x-6 lg:space-x-10 items-center">
-            {profilePicture!=="null" ? 
-            <img
-                className="object-cover h-24 w-24 md:h-28 md:w-28 lg:h-32 lg:w-32 rounded "
-                src={profilePicture}
-                alt="ProfilePhoto"
-            />
-            :null}
             <div className = "flex flex-col justify-center items-start basis-8/10 flex z-10 space-y-1 md:space-y-3 lg:space-y-4 py-1">
                 {props.backToHome &&
                 <button onClick={()=>navigate("/inicio")} className="font-Pop-L text-xs text-gray-500"> &#60; <span className="underline">Volver al inicio</span> </button>
@@ -71,6 +64,7 @@ const AdminInformationSection = (props) => {
                     <div className="font-Pop-R text-xs text-center">Transacciones</div> 
                 </div>  
             </div>
+
         </div> 
     </div> 
     </>

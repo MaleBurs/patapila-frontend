@@ -25,7 +25,7 @@ const required = (value) => {
           Debe ser solamente texto, no puede contener otro tipo de caracteres.
         </div>
     }else{
-      alert('Valid name given.');
+      //alert('Valid name given.');
     }
   };
   const vpassword = (value) => {

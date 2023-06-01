@@ -2,7 +2,7 @@ import UserSettingsPage from './Pages/UserHomePage/UserSettingsPage';
 import LoginPage from './Pages/Registration-Autentification.js/LoginPage';
 import ChangePasswordPage from './Pages/ChangeViaMailPasswordPages/PasswordResetEmailPage';
 import PasswordResetPage from './Pages/ChangeViaMailPasswordPages/PasswordResetPage';
-import React from "react";
+import React, { useEffect } from "react";
 import AuthService from './services/auth.service';
 import { Routes, Route } from "react-router-dom";
 import RegistrationPage from './Pages/Registration-Autentification.js/RegistrationPage';
@@ -15,6 +15,7 @@ import UserHome from './Pages/UserHomePage/UserHomePage';
 import PaginaAgradecimiento from './Pages/Donations/PaginaAgradecimiento';
 import UserDonationHistoryPage from './Pages/UserHomePage/UserDonationHistoryPage';
 import UserPublicProfilePage from './Pages/UserHomePage/UserPublicProfilePage';
+import AdminSettingsPage from './Pages/Admin Pages/AdminSettingsPage';
 
 export default function App() {
   return (
@@ -35,7 +36,7 @@ export default function App() {
           <Route exact path="/reporteTransacciones" element={<TransactionReportPage></TransactionReportPage>} />
           <Route exact path="/reporteSubscripciones" element={<SubscriptionReportPage></SubscriptionReportPage>} />
           <Route exact path="/dashboards" element={<DashboardPage></DashboardPage>} />
-          <Route exact path="/settings" element={<UserSettingsPage />} />
+          <Route exact path="/settingsAdmin" element={<AdminSettingsPage />} />
           </>
           :
           <>

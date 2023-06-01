@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css"
-import { useCurrentUser } from "../../Context/CurrentUserContext";
+import { useCurrentAdmin } from "../../Context/CurrentAdminContext";
 
 const UploadProfileImage = (props) => {
-  const { profilePicture } = useCurrentUser();
+  const { profilePicture } = useCurrentAdmin();
   const [imgSrc, setImgSrc] = useState(null);
 
   useEffect(() => {
