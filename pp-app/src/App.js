@@ -16,6 +16,7 @@ import PaginaAgradecimiento from './Pages/Donations/PaginaAgradecimiento';
 import UserDonationHistoryPage from './Pages/UserHomePage/UserDonationHistoryPage';
 import UserPublicProfilePage from './Pages/UserHomePage/UserPublicProfilePage';
 import AdminSettingsPage from './Pages/Admin Pages/AdminSettingsPage';
+import UsersReportPage from './Pages/Admin Pages/UsersReportPage';
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
           <Route exact path="/inicio" element={<TransactionReportPage></TransactionReportPage>} />
           <Route exact path="/reporteTransacciones" element={<TransactionReportPage></TransactionReportPage>} />
           <Route exact path="/reporteSubscripciones" element={<SubscriptionReportPage></SubscriptionReportPage>} />
+          <Route exact path='/reporteUsuarios' element={<UsersReportPage></UsersReportPage>} />
           <Route exact path="/dashboards" element={<DashboardPage></DashboardPage>} />
           <Route exact path="/settingsAdmin" element={<AdminSettingsPage />} />
           </>

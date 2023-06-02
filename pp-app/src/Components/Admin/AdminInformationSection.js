@@ -2,7 +2,6 @@ import React from "react";
 import { useCurrentAdmin } from "../../Context/CurrentAdminContext";
 import LogoCorazon from "../../Components/Images/LogoCorazon.png";
 import logoHerramienta from "../../Components/Images/logoHerramienta.png";
-import NiñaSaltandoFondoAmarillo from "../../Components/Images/NinaSaltandoFondoAmarillo.png";
 import { useNavigate } from "react-router-dom";
 
 const AdminInformationSection = (props) => {
@@ -41,7 +40,7 @@ const AdminInformationSection = (props) => {
                 <button onClick={()=>navigate("/reporteSubscripciones")} className={`rounded-full w-fit ${props.select==="reporteSubscripciones" ? "bg-[#fdfcfc] border-[#e7e6e6] border" : "hover:bg-[#fdfcfc] hover:border-[#e7e6e6] hover:border"}`}>
                     <img
                         className="object-cover h-10 w-10 md:h-20 md:w-20 "
-                        src={NiñaSaltandoFondoAmarillo}
+                        src={logoHerramienta}
                         alt="ProfilePhoto"
                     />
                 </button>
@@ -62,6 +61,19 @@ const AdminInformationSection = (props) => {
                 <div className="flex flex-col">
                     <div className="font-Pop-R text-xs text-center">Reporte</div> 
                     <div className="font-Pop-R text-xs text-center">Transacciones</div> 
+                </div>  
+            </div>
+            <div className="flex flex-col justify-center items-center z-10 py-1">
+                <button onClick={()=>navigate("/reporteUsuarios")} className={`rounded-full w-fit ${props.select==="reporteUsuarios" ? "bg-[#fdfcfc] border-[#e7e6e6] border " : "hover:bg-[#fdfcfc] hover:border-[#e7e6e6] hover:border"}`}>
+                    <img
+                        className="object-cover h-10 w-10 md:h-20 md:w-20 "
+                        src={logoHerramienta}
+                        alt="ProfilePhoto"
+                    />
+                </button>
+                <div className="flex flex-col">
+                    <div className="font-Pop-R text-xs text-center">Reporte</div> 
+                    <div className="font-Pop-R text-xs text-center">Usuarios</div> 
                 </div>  
             </div>
 

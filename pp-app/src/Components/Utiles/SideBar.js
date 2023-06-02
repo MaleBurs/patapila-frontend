@@ -19,11 +19,11 @@ const Sidebar = ({displaySubscriptionInformation}) => {
   }
 
   useEffect(() => {
-    if (selectedUserInfotmation) setUserData([{title: "Nombre y Apellido", information: selectedUserInfotmation.name+' '+selectedUserInfotmation.lastname},{title: "Se unió a la comunidad el", information:formatoFecha.format(new Date(selectedUserInfotmation.createdAt))}, {title: "Id del usuario", information: selectedUserInfotmation.id},{title:"Email", information:selectedUserInfotmation.email}]);
+    if (selectedUserInfotmation) setUserData([{title: "Nombre y Apellido", information: selectedUserInfotmation.name+' '+selectedUserInfotmation.lastname},{title: "Se unió a la comunidad el", information:  formatoFecha.format(new Date(selectedUserInfotmation.createdAt))}, {title: "Id del usuario", information: selectedUserInfotmation.id},{title:"Email", information:selectedUserInfotmation.email}]);
     if(selectedUserPersonalInfo) setUserPersonalData(
       [{title: "País", information: (selectedUserPersonalInfo.country==="") ? "-": selectedUserPersonalInfo.country},
       {title: "Ciudad", information: (selectedUserPersonalInfo.city==="" ) ? "-": selectedUserPersonalInfo.city}, 
-      {title: "Fecha de Nacimiento", information: (selectedUserPersonalInfo.dateOfBirth===null) ? "-": formatoFecha.format(new Date(selectedUserPersonalInfo.dateOfBirth))},
+      {title: "Fecha de Nacimiento", information: (selectedUserPersonalInfo.dateOfBirth===null) ? "-":   formatoFecha.format(new Date(selectedUserPersonalInfo.dateOfBirth))},
       {title: "Celular", information:(selectedUserPersonalInfo.phoneNumber==="") ? "-": selectedUserPersonalInfo.phoneNumber}])
 
     if (displaySubscriptionInformation && selectedUserSubs){  
@@ -47,7 +47,7 @@ const Sidebar = ({displaySubscriptionInformation}) => {
                                           ? "Cancelada"
                                           :""))},
       {title:"Fecha del próximo pago", information:(selectedUserSubs.nextPaymentDate === null) ? "-":  formatoFecha.format(new Date(selectedUserSubs.nextPaymentDate))}, 
-      {title:"Fecha del último pago", information:(selectedUserSubs.lastPaymentDate===null)? "-":  formatoFecha.format(new Date(selectedUserSubs.lastPaymentDate)) }]);}
+      {title:"Fecha del último pago", information:(selectedUserSubs.lastPaymentDate===null)? "-":   formatoFecha.format(new Date(selectedUserSubs.lastPaymentDate)) }]);}
   }, [selectedUserInfotmation, displaySubscriptionInformation, selectedUserSubs])
   
 

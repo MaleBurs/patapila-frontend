@@ -25,6 +25,22 @@ export function OpenSideBarFromUser({value, row}){
     </button>
   );
 }
+
+export function OpenSideBarFromUserId({value, row}){
+  const {setSelectedUser, setShowSidebar} = useSelectionOnTable();
+  
+  return(
+    <button 
+      className="text-xs flex flex-row text-gray-600 font-Pop-L hover:decoration-gray-500 hover:underline hover:underline-offset-4" 
+      onClick={()=>{setShowSidebar(true); setSelectedUser(value)}}>
+      <div>{value}</div>
+      {(row.id ==='0') ? 
+        <div className="-mt-2"><InformationTooltips.InstructionTooltip tooltipContent="Haz click aquí o en cualquier Id para obtener más información acerca de el usuario."/></div>
+        : <></>}
+    </button>
+  );
+}
+
 export function StatusPillTransactions({ value, row }) {
     const [showAcceptModal, setShowAcceptModal] = useState(false);
     const [showRejectModal, setShowRejectModal] = useState(false);
@@ -128,4 +144,33 @@ export function TransactionType({ value }) {
         
       </div>
     );
+}
+
+export function TraductorBooleano({value}){
+  return(
+    <div
+      className="text-xs text-gray-600 font-Pop-L"
+    >
+      {value ? "Si" : "No"}
+    </div>
+  )
+}
+
+export function EmprolijadorFechas({value}){
+
+  const formatoParaLaFecha = {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+    };
+
+  const formatoFecha = new Intl.DateTimeFormat('es', formatoParaLaFecha);
+
+  return (
+    <div
+      className="text-xs text-gray-600 font-Pop-L"
+    >
+    {formatoFecha.format(new Date(value))}
+    </div>
+  );
 }

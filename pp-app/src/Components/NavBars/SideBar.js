@@ -26,6 +26,9 @@ export function SideBar(showSideBar, setShowSideBar, navigate, setToggleDropdown
                             <li onClick={() => navigate("/reporteSubscripciones")}>
                                 <a href="#" className="flex w-full p-3 text-gray-700 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200  font-Pop-L tracking-widest text-xs">Reporte Suscripciones</a>
                             </li>
+                            <li onClick={() => navigate("/reporteUsuarios")}>
+                                <a href="#" className="flex w-full p-3 text-gray-700 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200  font-Pop-L tracking-widest text-xs">Reporte Usuarios</a>
+                            </li>
                         </ul>
                     )}
                 </li>

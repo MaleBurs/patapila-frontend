@@ -26,12 +26,18 @@ const modifyTransactionState =  (transactionId,state) => {
     state
     });
 }
-
+const getUsersForReport = (limit, offset) => {
+  return axios.post("http://localhost:8080/api/auth/getUsersForReport", {
+    limit,
+    offset,
+  });
+};
 const AdminServices = {
     getTransactions,
     getMonthIncome,
     getSubscriptions,
-    modifyTransactionState
+    modifyTransactionState,
+    getUsersForReport,
   }
 
 export default AdminServices;

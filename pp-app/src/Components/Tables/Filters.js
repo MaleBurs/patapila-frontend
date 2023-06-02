@@ -359,3 +359,48 @@ export function SelectPeriodicidadFilter({
       options.push({ value: row, label: "1 vez cada 1 año" })
   }
 }
+
+export function SelectBoolFilter({
+  column: { filterValue, setFilter, preFilteredRows, id, render },
+}) {
+  const noValueSelected = {value: "Si/No", label:"Si/No"};
+  const [shownSelection, setShownSelection] = useState(noValueSelected);
+  const options = React.useMemo(() => {
+    const optionsSet = new Set()
+    const options = []
+    preFilteredRows.forEach(row => {
+      optionsSet.add(row.values[id])
+    })
+    optionsSet.forEach(row => {
+      determineLabelOfState(row, options)
+    })
+    return [...options.values()]
+  }, [id, preFilteredRows]);
+
+  useEffect(() => {
+    if (!filterValue) setShownSelection({value: "Si/No", label:"Si/No"}) ;
+  }, [filterValue])
+  
+  return (
+    <>
+    <div className='flex flex-col '>
+    <Labels.FilterLabel text= {"Filtrar según si " + (render("Header").toLowerCase())}></Labels.FilterLabel>
+    <Inputs.SelectInput  
+                options={options}
+                value={shownSelection} 
+                placeholder={capitalizeFirst((render("Header")).toLowerCase())}
+                onChange={e => {
+                  setShownSelection({value: e.value, label: (e.value===true) ? "Si" : "No"});
+                  setFilter(e.value || undefined);
+                }}/>
+    </div>
+    </>
+  )
+
+  function determineLabelOfState(row, options) {
+    if (row === true)
+      options.push({ value: row, label: "Si" })
+    if (row === false)
+      options.push({ value: row, label: "No" })
+  }
+}
