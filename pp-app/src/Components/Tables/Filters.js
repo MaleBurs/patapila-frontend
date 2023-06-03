@@ -312,6 +312,37 @@ export function AmountRangeColumnFilter({
     )
 }
 
+export function RefferalsRangeColumnFilter({
+  column: {
+    filterValue = [],
+    setFilter,
+    render,
+  }})
+{
+  return (
+    <div className='flex flex-col '>
+    <Labels.FilterLabel text= {"Filtrar según el " + (render("Header").toLowerCase())}></Labels.FilterLabel>
+    <div className="grid grid-cols-5">
+      <Inputs.BottomLineNumberInput
+        placeholder="Cantidad"
+        value={filterValue[0] || ''}
+        onChange={val => {
+          setFilter((old = []) => [val ? val : undefined, old[1]])
+        }} 
+      />
+      <div className="text-center" style={{ fontFamily: 'Poppins-Regular', fontSize: 12, color: "gray", marginTop: 18}}> y </div>
+      <Inputs.BottomLineNumberInput
+        placeholder="Cantidad"
+        value={filterValue[1] || ''}
+        onChange={val => {
+          setFilter((old = []) => [old[0], val ? val : undefined])
+        }}
+      />
+    </div>
+    </div>
+  )
+}
+
 export function SelectPeriodicidadFilter({
   column: { filterValue, setFilter, preFilteredRows, id, render },
 }) {

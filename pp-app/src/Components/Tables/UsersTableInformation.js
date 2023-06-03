@@ -1,5 +1,5 @@
 import { TraductorBooleano, EmprolijadorFechas, OpenSideBarFromUserId} from './SpecialCells';
-import { SelectBoolFilter, NumberSearchFilter, DateRangeColumnFilter, dateBetweenFilterFn, AmountRangeColumnFilter, amountBetweenFilterFn } from './Filters'
+import { SelectBoolFilter,RefferalsRangeColumnFilter, NumberSearchFilter, DateRangeColumnFilter, dateBetweenFilterFn, AmountRangeColumnFilter, amountBetweenFilterFn } from './Filters'
 
 const columns =[
   {
@@ -40,7 +40,7 @@ const columns =[
   {
     Header: "Cantidad de Referidos",
     accessor: 'refferalsQuantity',
-    Filter: AmountRangeColumnFilter,
+    Filter: RefferalsRangeColumnFilter,
     filter: amountBetweenFilterFn,
   },
   {
