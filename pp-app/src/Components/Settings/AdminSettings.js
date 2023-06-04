@@ -10,9 +10,10 @@ import ValidationFunctions from "../../functions/validations";
 import ImageService from "../../services/images.service";
 import 'react-phone-number-input/style.css';
 import { TextInput} from "./MyInputs";
-
+import { useCurrentAdmin } from "../../Context/CurrentAdminContext";
 
 const AdminSettings = () => {
+  const {profilePicture} = useCurrentAdmin();
   const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
   const [name, setName] = useState(currentUser.name);
   const [lastname, setLastname] = useState(currentUser.lastname);
@@ -84,7 +85,7 @@ const AdminSettings = () => {
             title="Información del Usuario"
             content={
                 <>
-                <UploadProfileImage file={file} setFile={setFile}/>
+                <UploadProfileImage file={file} setFile={setFile} profilePicture={profilePicture}/>
                 <InformationColumn message={errorMessage} onChangeMessage={setErrorMessage} information={userInformation} submitFunction={handleDataChange} loading={()=>loading}/>
                 </>
             }

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css"
-import { useCurrentAdmin } from "../../Context/CurrentAdminContext";
 
 const UploadProfileImage = (props) => {
-  const { profilePicture } = useCurrentAdmin();
+  const profilePicture = props.profilePicture;
   const [imgSrc, setImgSrc] = useState(null);
 
   useEffect(() => {
@@ -40,5 +39,6 @@ const UploadProfileImage = (props) => {
       </div>
     </>
   );
+
 };
 export default UploadProfileImage;

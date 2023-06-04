@@ -24,7 +24,7 @@ import { isPossiblePhoneNumber } from "react-phone-number-input";
 
 
 const UserSettings = () => {
-  const {userPersonalInf} = useCurrentUser();
+  const {userPersonalInf, profilePicture} = useCurrentUser();
   const [setRequestToChangeDonation] = useState(false);
   const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
   const onCloseChangeDonationForm = () => setRequestToChangeDonation(false);
@@ -141,7 +141,7 @@ const UserSettings = () => {
             title="Información del Usuario"
             content={
                 <>
-                <UploadProfileImage file={file} setFile={setFile}/>
+                <UploadProfileImage file={file} setFile={setFile} profilePicture={profilePicture}/>
                 <InformationColumn message={errorMessage} onChangeMessage={setErrorMessage} information={userInformation} submitFunction={handleDataChange} loading={()=>loading}/>
                 </>
             }
