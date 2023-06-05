@@ -12,8 +12,6 @@ export function DashboardContextProvider(props) {
   const [ monthlyAmountByTrans , setMonthlyAmountByTrans ] = useState([]);
   const [ monthlyAmountBySubs , setMonthlyAmountBySubs ] = useState([]);
   const [totalAmountMonth, setTotalAmountMonth] = useState(0);
-  const [totalAmountMonthTrans, setTotalAmountMonthTrans] = useState(0);
-  const [totalAmountMonthSubs, setTotalAmountMonthSubs] = useState(0);
   const [totalAmountByMode, setTotalAmountByMode] = useState([]);
   const [totalAmountByModeMonth, setTotalAmountByModeMonth] = useState({onlyTimeAmount: 0, recurrentAmount: 0}); 
   const [loading, setLoading] = useState(true);
@@ -38,8 +36,6 @@ export function DashboardContextProvider(props) {
         setTotalAmountByMode(totalAmountByModeAux);
   
         setTotalAmountMonth(monthlyAmountAux[month - 1].value);
-        setTotalAmountMonthTrans(monthlyAmountAuxByTrans[month - 1].value);
-        setTotalAmountMonthSubs(monthlyAmountAuxBySubs[month - 1].value);
         setTotalAmountByModeMonth(totalAmountByModeAux[month - 1]);
 
         setLoading(false);
@@ -61,14 +57,12 @@ export function DashboardContextProvider(props) {
       monthlyAmountByTrans,
       monthlyAmountBySubs,
       totalAmountMonth,
-      totalAmountMonthTrans,
-      totalAmountMonthSubs,
       totalAmountByMode,
       totalAmountByModeMonth,
       loading,
       setLoading
     }
-  }, [year, dashboardData, monthlyAmount, monthlyAmountByTrans, monthlyAmountBySubs, totalAmountMonth, totalAmountMonthTrans, totalAmountMonthSubs, totalAmountByMode, totalAmountByModeMonth])
+  }, [year, dashboardData, monthlyAmount, monthlyAmountByTrans, monthlyAmountBySubs, totalAmountMonth, totalAmountByMode, totalAmountByModeMonth])
 
   return (
     <DashboardContext.Provider value={value}>

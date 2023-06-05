@@ -31,9 +31,9 @@ const DashboardSection = () => {
     <div className="mt-5"> 
         {(showBarChart1) ? 
          <ChartModal 
-            chart={<BarChart label="REPORTE COBRANZAS" data={monthlyAmount} id="bar1"></BarChart>} 
+            chart={<BarChart label="REPORTE COBRANZAS Y PROXIMOS PAGOS POR SUSCRIPCIONES" data={monthlyAmount} id="bar1"></BarChart>} 
             chartContainerStyle={{ height:'60vh', width:'100vh'}}
-            label ={<Label title="RESUMEN DE COBRANZAS" subtitle={year} />}/>   
+            label ={<Label title="REPORTE DE COBRANZAS Y PROXIMOS PAGOS POR SUSCRIPCIONES" subtitle={year} />}/>   
         :
         <></>}
          {(showBarChart2) ? 
@@ -73,22 +73,24 @@ const DashboardSection = () => {
                     {/* <PieChartModule label={PieChartLabel}></PieChartModule> */}
                     </div>}
                 />
+                {!(year> (new Date().getFullYear()) || (year=== (new Date().getFullYear()) && month> (new Date().getMonth() + 1)))&&
                 <Card 
                     title={
-                        (month<(new Date().getMonth() + 1) && year===(new Date().getFullYear()))?
+                        (year<(new Date().getFullYear())) || (month<(new Date().getMonth() + 1) && year===(new Date().getFullYear()))?
                         "IMPORTE TOTAL COBRADO"
                         :
-                        "IMPORTE TOTAL A COBRAR"
+                        "IMPORTE TOTAL COBRADO EN LO TRANSURRIDO DEL MES"
                         }
                     subtitle={datesValues[0].options[month-1].label + " de " + year}
                     content={<TotalAmountModule></TotalAmountModule>}
                 />
+                }
                 </>
             }
             column2={
                 <>
                 <Card
-                title="REPORTE COBRANZAS"
+                title="REPORTE COBRANZAS Y PROXIMOS PAGOS POR SUSCRIPCIONES"
                 subtitle = {year}
                 content={<BarChartModule openModule={()=>setShowBarChart1(true)} label="REPORTE COBRANZAS" data={monthlyAmount} id="bar1"></BarChartModule>}
                 />
