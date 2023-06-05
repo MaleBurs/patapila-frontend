@@ -100,7 +100,7 @@ const DashboardSection = () => {
                 content={<BarChartModule openModule={()=>setShowBarChart2(true)} label="INGRESOS POR DONACIONES" data={totalAmountOnlyTime} id="bar2"></BarChartModule>}
                 />
                 <Card
-                title="INGRESOSO POR SUSCRIPCIONES"
+                title="INGRESOS POR SUSCRIPCIONES"
                 subtitle = {year}
                 content={<BarChartModule openModule={()=>setShowBarChart3(true)} label="INGRESOS POR SUSCRIPCIONES" data={totalAmountRecurrent} id="bar3"></BarChartModule>}
                 /> 
