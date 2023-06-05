@@ -7,7 +7,7 @@ export default function TotalAmountModule(props) {
   const { totalAmountByModeMonth, totalAmountMonth } = useDashboardContext();
   return (
         <>          
-        <div className="flex p-7 flex-col space-y-4 divide-y divide-dashed divide-[#e7e6e6]"> 
+        <div className="flex p-7 flex-col space-y-8 divide-y divide-dashed divide-[#e7e6e6]"> 
 
         <div className="inline-block w-full px-4 block flex flex-row justify-around font-Pop-M purpleText rounded-md uppercase h-auto py-1 md:py-1 focus:purpleBorder border-[1px] border-gray-300 mx-15">
           <div className='self-center md:basis-1/8 text-sm '>
@@ -25,11 +25,11 @@ export default function TotalAmountModule(props) {
           </div>
         </div>
 
-        <div className='flex flex-col space-y-8'>
-          <div className="chart-container place-self-center" style={{position: 'relative', width:'40vh'}}>
+        <div className='flex flex-row'>
+          <div className="chart-container justify-self-start mt-2" style={{position: 'relative', width:'38vh'}}>
             <SubsAmountVSTransAmount amountByTrans={totalAmountByModeMonth.onlyTimeAmount} amountBySubs={totalAmountByModeMonth.recurrentAmount}></SubsAmountVSTransAmount>
           </div>
-          <div className="flex flex-col space-y-1">
+          <div className="flex flex-col space-y-1 place-self-center -ml-10 mt-2">
             <div className="font-Pop-L text-xs text-gray-700 flex flex-row space-x-2">
               <span className="inline-flex rounded-full bg-[#6c3333] h-3 w-3"></span>
               <div>Importe total por donaciones: ${totalAmountByModeMonth.onlyTimeAmount}</div>
@@ -69,12 +69,12 @@ function SubsAmountVSTransAmount(props) {
       ]);
     };
 
-    ( props.amountBySubs=== 0 && props.amountByTran=== 0) ?
+    ( props.amountBySubs=== 0 && props.amountByTrans=== 0) ?
       setBgColorAndDataToDefault()
       :
       setBgColorAndDataToCorrect();
         
-  }, [props.amountByTrans])
+  }, [props.amountBySubs, props.amountByTrans])
 
   useEffect(() => {
 
@@ -102,7 +102,7 @@ function SubsAmountVSTransAmount(props) {
     ctx.height = 10;
     window.myBar = new Chart(ctx, config);
     
-  }, []);
+  }, [data, bgColor]);
   return (
     <>
       <canvas id="doughnut" ref={mustReload}></canvas>
