@@ -1,6 +1,5 @@
 import React from "react";
 import AuthService from "../../services/auth.service";
-import { MonthlySubscriptionStateContextProvider } from "../../Context/MonthlySubscriptionStateContext";
 import FilterDate from "../../Components/Dashboards/FilterDate";
 import { OpenChartsContextProvider } from "../../Context/OpenChartsContext";
 import DashboardSection from "../../Components/Dashboards/DashboardSection";
@@ -19,7 +18,6 @@ const DashboardPage = () => {
       <div className="mx-auto z-10 pb-8 sm:pb-16 md:pb-20 lg:pb-28 xl:pb-32 h-screen bg-cover place-content-center">
       {currentUser ? ( 
         <DashboardContextProvider>
-        <MonthlySubscriptionStateContextProvider>
         <OpenChartsContextProvider>
         <div className="almostWhiteBg">
           <AdminInformationSection
@@ -34,7 +32,6 @@ const DashboardPage = () => {
           <DashboardSection></DashboardSection>
         </div>
         </OpenChartsContextProvider>
-        </MonthlySubscriptionStateContextProvider> 
         </DashboardContextProvider>
       ) : (
       <></>

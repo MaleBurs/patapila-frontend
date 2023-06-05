@@ -62,7 +62,7 @@ function SubsAmountVSTransAmount(props) {
     };
 
     const setBgColorAndDataToCorrect = () => {
-      setData([props.amountByTrans, props.amountBySubs]);
+      setData([props.amountBySubs, props.amountByTrans]);
       setBgColor([
         'rgba(244, 220, 191)',
         'rgba(108, 51, 51)',
@@ -74,7 +74,7 @@ function SubsAmountVSTransAmount(props) {
       :
       setBgColorAndDataToCorrect();
         
-  }, [props.amountByTrans, props.amountBySubs])
+  }, [props.amountByTrans])
 
   useEffect(() => {
 

@@ -16,35 +16,39 @@ export function DashboardContextProvider(props) {
   const [totalAmountMonthSubs, setTotalAmountMonthSubs] = useState(0);
   const [totalAmountByMode, setTotalAmountByMode] = useState([]);
   const [totalAmountByModeMonth, setTotalAmountByModeMonth] = useState({onlyTimeAmount: 0, recurrentAmount: 0}); 
+  const [loading, setLoading] = useState(true);
   
   useEffect(() => {
-    AdminServices.getDashboardsInfo(year).then(res => {
-      setDashboardData(res.data);
-      console.log("Dashboard data:")
-      console.log(dashboardData)
+    const fetchData = async () => {
+      // Should change year
+      const dashboardInfo = await AdminServices.getDashboardsInfo(2023);
+      setDashboardData(dashboardInfo.data);
+  
+      if (dashboardInfo.data && Object.keys(dashboardInfo.data).length !== 0) {
+        let monthlyAmountAuxByTrans = giveCorrectFormatToTransactionAmounts(dashboardInfo.data);
+        setMonthlyAmountByTrans(monthlyAmountAuxByTrans);
+  
+        let monthlyAmountAuxBySubs = giveCorrectFormatToSuscriptionsAmounts(dashboardInfo.data);
+        setMonthlyAmountBySubs(monthlyAmountAuxBySubs);
+  
+        let monthlyAmountAux = getTotalIncomeByMonth(monthlyAmountAuxByTrans, monthlyAmountAuxBySubs);
+        setMonthlyAmount(monthlyAmountAux);
+  
+        let totalAmountByModeAux = giveCorrectFormatToAmountByMode(dashboardInfo)
+        setTotalAmountByMode(totalAmountByModeAux);
+  
+        setTotalAmountMonth(monthlyAmountAux[month - 1].value);
+        setTotalAmountMonthTrans(monthlyAmountAuxByTrans[month - 1].value);
+        setTotalAmountMonthSubs(monthlyAmountAuxBySubs[month - 1].value);
+        setTotalAmountByModeMonth(totalAmountByModeAux[month - 1]);
 
-      let monthlyAmountAuxByTrans = giveCorrectFormatToTransactionAmounts(dashboardData)
-      setMonthlyAmountByTrans(monthlyAmountAuxByTrans);
-
-      let monthlyAmountAuxBySubs = giveCorrectFormatToSuscriptionsAmounts(dashboardData)
-      setMonthlyAmountBySubs(monthlyAmountAuxBySubs);
-
-      let monthlyAmountAux = getTotalIncomeByMonth(monthlyAmountAuxByTrans, monthlyAmountAuxBySubs);
-      setMonthlyAmount(monthlyAmountAux);
-
-      let totalAmountByModeAux = Object.entries(dashboardData.montoPorModo);
-      totalAmountByModeAux = totalAmountByModeAux.map((m) => {
-        return { label: datesValues[0].options[m[0] - 1].label, onlyTimeAmount: m[1].onlyTime, recurrentAmount: m[1].recurrent }
-      })
-      setTotalAmountByMode(totalAmountByModeAux);
-      
-      setTotalAmountMonth(monthlyAmount[month-1].value);
-      setTotalAmountMonthTrans(monthlyAmountByTrans[month-1].value);
-      setTotalAmountMonthSubs(monthlyAmountBySubs[month-1].value);
-      setTotalAmountByModeMonth(totalAmountByMode[month-1])
-     
-    })
-  }, [year, month])
+        setLoading(false);
+      }
+    };
+  
+    fetchData();
+  }, [year, month]);
+  
 
   const value = useMemo(() => {
     return {
@@ -61,6 +65,7 @@ export function DashboardContextProvider(props) {
       totalAmountMonthSubs,
       totalAmountByMode,
       totalAmountByModeMonth,
+      loading 
     }
   }, [year, dashboardData, monthlyAmount, monthlyAmountByTrans, monthlyAmountBySubs, totalAmountMonth, totalAmountMonthTrans, totalAmountMonthSubs, totalAmountByMode, totalAmountByModeMonth])
 
@@ -69,6 +74,18 @@ export function DashboardContextProvider(props) {
       { props.children }
     </DashboardContext.Provider>
   )
+}
+
+function giveCorrectFormatToAmountByMode(dashboardInfo) {
+  let totalAmountByModeAux = Object.entries(dashboardInfo.data.montoPorModo)
+  totalAmountByModeAux = totalAmountByModeAux.map((m) => {
+    return {
+      label: datesValues[0].options[m[0] - 1].label,
+      onlyTimeAmount: m[1].onlyTime,
+      recurrentAmount: m[1].recurrent,
+    }
+  })
+  return totalAmountByModeAux
 }
 
 function getTotalIncomeByMonth(monthlyAmountAuxByTrans, monthlyAmountAuxBySubs) {

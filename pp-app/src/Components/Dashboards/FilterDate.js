@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilter } from '@fortawesome/fontawesome-free-solid'
 import { Popover } from '@headlessui/react'
 import datesValues from "../../Values/datesValues";
-import { useMonthlySubscriptionStateContext } from "../../Context/MonthlySubscriptionStateContext";
+import { useDashboardContext } from "../../Context/DashboardContext";
 
 const FilterDate = (props) => {
-  const { year, setYear, month, setMonth, monthlyData} = useMonthlySubscriptionStateContext();
+  const { year, setYear, month, setMonth } = useDashboardContext();
 
   const setFilter =(value, tittle) => {
     if (tittle === "Mes"){
@@ -46,7 +46,7 @@ const FilterDate = (props) => {
                 <option className={"font-Pop-R text-xs"} value="">Seleccionar</option>
                 { (dataItem.tittle==="Mes") ?
                 <>
-                {monthlyData.map((option) => (
+                {datesValues[0].options.map((option) => (
                   <option key={option.value} value={option.value} className={"font-Pop-R text-xs"}>
                     {option.label}
                   </option>

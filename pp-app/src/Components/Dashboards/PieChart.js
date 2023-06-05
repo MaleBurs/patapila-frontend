@@ -4,7 +4,7 @@ import { useEffect} from 'react';
 import {useMonthlySubscriptionStateContext} from  '../../Context/MonthlySubscriptionStateContext'
 
 export default function PieChart(props) {
-  const { monthlyData, month } = useMonthlySubscriptionStateContext();
+  const { monthlyData, month } = {}//useMonthlySubscriptionStateContext();
 
   const pieChartData = () =>{
     for (const md of monthlyData){

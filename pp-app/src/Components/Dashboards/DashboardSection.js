@@ -7,18 +7,18 @@ import ChartModal from "./ChartsModal";
 import BarChart from "./BarChart";
 import PieChart from "./PieChart";
 import ChartLabels from "./ChartLabels";
-import { useMonthlySubscriptionStateContext } from "../../Context/MonthlySubscriptionStateContext";
 import Card from "../Utiles/Card";
 import datesValues from "../../Values/datesValues";
 import TwoColumnsPage from "../Utiles/TwoColumnsPage";
 import InformationTooltips from "../Utiles/InformationDisplayTooltip";
 import { useDashboardContext } from "../../Context/DashboardContext";
 import Label from "../Dashboards/Label";
+import Loading from "../Utiles/Loading";
 
 const DashboardSection = () => {
   const {showBarChart1, showBarChart2, showBarChart3, showPieChart, setShowBarChart1, setShowBarChart2, setShowBarChart3} = useOpenChartsContext();
   const { BarChartLabel, PieChartLabel } = ChartLabels();
-  const { year, month } = useMonthlySubscriptionStateContext();
+  const { year, month, loading } = useDashboardContext();
   const { monthlyAmount, totalAmountByMode} = useDashboardContext();
 
   const totalAmountOnlyTime = totalAmountByMode.map((obj) => {
@@ -58,6 +58,9 @@ const DashboardSection = () => {
         : 
         <></>
         }
+        {loading?    
+        <div className="bg-transparent h-screen flex justify-center mt-20"><Loading></Loading></div>
+        :
         <TwoColumnsPage
             column1={
                 <>
@@ -67,7 +70,7 @@ const DashboardSection = () => {
                 content={
                     <div className="flex flex-col">
                     <div className="p-2 self-end"><InformationTooltips.InstructionTooltip size="h-3 w-3" tooltipContent="Haz click en cualquier gráfico para expandirlo" /></div>
-                    <PieChartModule label={PieChartLabel}></PieChartModule>
+                    {/* <PieChartModule label={PieChartLabel}></PieChartModule> */}
                     </div>}
                 />
                 <Card 
@@ -102,7 +105,7 @@ const DashboardSection = () => {
                 </>
             }
         />
-              
+        }    
     </div>
   );
 };
