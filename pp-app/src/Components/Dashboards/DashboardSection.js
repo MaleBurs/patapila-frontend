@@ -13,9 +13,10 @@ import datesValues from "../../Values/datesValues";
 import TwoColumnsPage from "../Utiles/TwoColumnsPage";
 import InformationTooltips from "../Utiles/InformationDisplayTooltip";
 import { useDashboardContext } from "../../Context/DashboardContext";
+import Label from "../Dashboards/Label";
 
 const DashboardSection = () => {
-  const {showBarChart, showPieChart} = useOpenChartsContext();
+  const {showBarChart1, showBarChart2, showBarChart3, showPieChart, setShowBarChart1, setShowBarChart2, setShowBarChart3} = useOpenChartsContext();
   const { BarChartLabel, PieChartLabel } = ChartLabels();
   const { year, month } = useMonthlySubscriptionStateContext();
   const { monthlyAmount, totalAmountByMode} = useDashboardContext();
@@ -28,11 +29,25 @@ const DashboardSection = () => {
 
   return (
     <div className="mt-5"> 
-        {(showBarChart) ? 
+        {(showBarChart1) ? 
          <ChartModal 
-            chart={<BarChart ></BarChart>} 
+            chart={<BarChart label="REPORTE COBRANZAS" data={monthlyAmount} id="bar1"></BarChart>} 
             chartContainerStyle={{ height:'60vh', width:'100vh'}}
-            label = {BarChartLabel}/>   
+            label ={<Label title="RESUMEN DE COBRANZAS" subtitle={year} />}/>   
+        :
+        <></>}
+         {(showBarChart2) ? 
+         <ChartModal 
+            chart={<BarChart label="INGRESOS POR DONACIONES" data={totalAmountOnlyTime} id="bar2"></BarChart>} 
+            chartContainerStyle={{ height:'60vh', width:'100vh'}}
+            label = {<Label title="INGRESOS POR DONACIONES" subtitle={year} />}/>   
+        :
+        <></>}
+         {(showBarChart3) ? 
+         <ChartModal 
+            chart={<BarChart  label="INGRESOS POR SUSCRIPCIONES" data={totalAmountRecurrent} id="bar3"></BarChart>} 
+            chartContainerStyle={{ height:'60vh', width:'100vh'}}
+            label = {<Label title="INGRESOS POR SUSCRIPCIONES" subtitle={year} />}/>   
         :
         <></>}
         {(showPieChart)? 
@@ -72,17 +87,17 @@ const DashboardSection = () => {
                 <Card
                 title="REPORTE COBRANZAS"
                 subtitle = {year}
-                content={<BarChartModule label="REPORTE COBRANZAS" data={monthlyAmount} id="bar1"></BarChartModule>}
+                content={<BarChartModule openModule={()=>setShowBarChart1(true)} label="REPORTE COBRANZAS" data={monthlyAmount} id="bar1"></BarChartModule>}
                 />
                 <Card
                 title="INGRESOS POR DONACIONES"
                 subtitle = {year}
-                content={<BarChartModule label="INGRESOS POR DONACIONES" data={totalAmountOnlyTime} id="bar2"></BarChartModule>}
+                content={<BarChartModule openModule={()=>setShowBarChart2(true)} label="INGRESOS POR DONACIONES" data={totalAmountOnlyTime} id="bar2"></BarChartModule>}
                 />
                 <Card
                 title="INGRESOSO POR SUSCRIPCIONES"
                 subtitle = {year}
-                content={<BarChartModule  label="INGRESOS POR SUSCRIPCIONES" data={totalAmountRecurrent} id="bar3"></BarChartModule>}
+                content={<BarChartModule openModule={()=>setShowBarChart3(true)} label="INGRESOS POR SUSCRIPCIONES" data={totalAmountRecurrent} id="bar3"></BarChartModule>}
                 /> 
                 </>
             }

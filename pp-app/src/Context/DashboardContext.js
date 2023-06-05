@@ -62,7 +62,7 @@ export function DashboardContextProvider(props) {
       totalAmountByMode,
       totalAmountByModeMonth,
     }
-  }, [year, dashboardData])
+  }, [year, dashboardData, monthlyAmount, monthlyAmountByTrans, monthlyAmountBySubs, totalAmountMonth, totalAmountMonthTrans, totalAmountMonthSubs, totalAmountByMode, totalAmountByModeMonth])
 
   return (
     <DashboardContext.Provider value={value}>
