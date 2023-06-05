@@ -20,8 +20,8 @@ export function DashboardContextProvider(props) {
   
   useEffect(() => {
     const fetchData = async () => {
-      // Should change year
-      const dashboardInfo = await AdminServices.getDashboardsInfo(2023);
+      
+      const dashboardInfo = await AdminServices.getDashboardsInfo(year);
       setDashboardData(dashboardInfo.data);
   
       if (dashboardInfo.data && Object.keys(dashboardInfo.data).length !== 0) {
@@ -65,7 +65,8 @@ export function DashboardContextProvider(props) {
       totalAmountMonthSubs,
       totalAmountByMode,
       totalAmountByModeMonth,
-      loading 
+      loading,
+      setLoading
     }
   }, [year, dashboardData, monthlyAmount, monthlyAmountByTrans, monthlyAmountBySubs, totalAmountMonth, totalAmountMonthTrans, totalAmountMonthSubs, totalAmountByMode, totalAmountByModeMonth])
 

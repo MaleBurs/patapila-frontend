@@ -6,12 +6,14 @@ import datesValues from "../../Values/datesValues";
 import { useDashboardContext } from "../../Context/DashboardContext";
 
 const FilterDate = (props) => {
-  const { year, setYear, month, setMonth } = useDashboardContext();
+  const { year, setYear, month, setMonth, setLoading } = useDashboardContext();
 
   const setFilter =(value, tittle) => {
     if (tittle === "Mes"){
+      setLoading(true)
       setMonth(value);
     }else{
+      setLoading(true)
       setYear(value);
     }
   }
@@ -54,7 +56,7 @@ const FilterDate = (props) => {
                 </>
                 :
                 <>
-                {dataItem.options.map((option) => (
+                {datesValues[1].options.map((option) => (
                   <option key={option.value} value={option.value} className={"font-Pop-R text-xs"}>
                     {option.label}
                   </option>
