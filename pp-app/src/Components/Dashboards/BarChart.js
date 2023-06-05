@@ -1,20 +1,19 @@
 import React from 'react';
 import Chart from 'chart.js';
 import { useEffect } from 'react';
-import {useMonthlySubscriptionStateContext} from  '../../Context/MonthlySubscriptionStateContext'
+
 
 export default function BarChart(props) {
-  const { monthlyData } = useMonthlySubscriptionStateContext();
 
   useEffect(() => {
     let config = {
       type: "bar",
       data: {
-        labels: Array.from(monthlyData,(m)=>m.label), 
+        labels: Array.from(props.data,(m)=>m.label), 
         datasets: [
           {
-            label: 'RESUMEN DE COBRANZAS',
-            data: Array.from(monthlyData,(m)=>m.amount),
+            label: props.label,
+            data: Array.from(props.data,(m)=>m.value),
             backgroundColor: [
               'rgba(165, 192, 135)',
               'rgba(131, 157, 154)',
@@ -61,12 +60,12 @@ export default function BarChart(props) {
         
       }
     };
-    let ctx = document.getElementById("bar").getContext('2d');
+    let ctx = document.getElementById(props.id).getContext('2d');
     window.myBar = new Chart(ctx, config);
-  }, [monthlyData]);
+  }, [props.data]);
   return (
     <>
-      <canvas id="bar"></canvas>
+      <canvas id={props.id}></canvas>
     </>
   );
 }

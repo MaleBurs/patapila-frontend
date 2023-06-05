@@ -32,12 +32,20 @@ const getUsersForReport = (limit, offset) => {
     offset,
   });
 };
+
+const getDashboardsInfo = (year) => {
+  return axios.post(API_URL + "getDashboardsInfo", {
+    year,
+  });
+};
+
 const AdminServices = {
     getTransactions,
     getMonthIncome,
     getSubscriptions,
     modifyTransactionState,
     getUsersForReport,
+    getDashboardsInfo
   }
 
 export default AdminServices;

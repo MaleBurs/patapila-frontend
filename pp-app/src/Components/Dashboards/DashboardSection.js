@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PieChartModule from "./PieChartModule";
 import BarChartModule from "./BarChartModule";
 import TotalAmountModule from "./TotalAmountModule";
@@ -12,11 +12,20 @@ import Card from "../Utiles/Card";
 import datesValues from "../../Values/datesValues";
 import TwoColumnsPage from "../Utiles/TwoColumnsPage";
 import InformationTooltips from "../Utiles/InformationDisplayTooltip";
+import { useDashboardContext } from "../../Context/DashboardContext";
 
 const DashboardSection = () => {
   const {showBarChart, showPieChart} = useOpenChartsContext();
   const { BarChartLabel, PieChartLabel } = ChartLabels();
   const { year, month } = useMonthlySubscriptionStateContext();
+  const { monthlyAmount, totalAmountByMode} = useDashboardContext();
+
+  const totalAmountOnlyTime = totalAmountByMode.map((obj) => {
+    return { label: obj.label, value: obj.onlyTimeAmount }})
+  const totalAmountRecurrent = totalAmountByMode.map((obj) => {
+    return { label: obj.label, value: obj.recurrentAmount } })
+
+
   return (
     <div className="mt-5"> 
         {(showBarChart) ? 
@@ -59,11 +68,23 @@ const DashboardSection = () => {
                 </>
             }
             column2={
+                <>
                 <Card
                 title="REPORTE COBRANZAS"
                 subtitle = {year}
-                content={<BarChartModule></BarChartModule>}
-            />
+                content={<BarChartModule label="REPORTE COBRANZAS" data={monthlyAmount} id="bar1"></BarChartModule>}
+                />
+                <Card
+                title="INGRESOS POR DONACIONES"
+                subtitle = {year}
+                content={<BarChartModule label="INGRESOS POR DONACIONES" data={totalAmountOnlyTime} id="bar2"></BarChartModule>}
+                />
+                <Card
+                title="INGRESOSO POR SUSCRIPCIONES"
+                subtitle = {year}
+                content={<BarChartModule  label="INGRESOS POR SUSCRIPCIONES" data={totalAmountRecurrent} id="bar3"></BarChartModule>}
+                /> 
+                </>
             }
         />
               

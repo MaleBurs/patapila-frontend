@@ -69,18 +69,6 @@ export function StatusPillTransactions({ value, row }) {
         ? "Rechazada"
         : "")
         )}
-        {(status ==="p") && (
-        <>
-        <FontAwesomeIcon className='px-4' onClick={() => setShowAcceptModal(true)} icon={"fa fa-check"} color='#000' size="xs" />
-        <FontAwesomeIcon onClick={() => setShowRejectModal(true)} icon={"fa fa-ban"} color='#000' size="xs" />
-        {
-          showAcceptModal && ( <ModalWithConfirmation onChange={()=>setShowAcceptModal(false)} title="¿Estás seguro de que quieres aceptar esta transacción?" content="Una vez aceptada, no podrás revertir el cambio." saveChanges={()=>{updateState("A"); setShowAcceptModal(false)}} cancelButton={"Cancelar"} saveButton={"Aceptar"}/>)
-        }
-        {
-          showRejectModal && ( <ModalWithConfirmation onChange={()=>setShowRejectModal(false)} title="¿Estás seguro de que quieres rechazar esta transacción?" content="Una vez rechazada, no podrás revertir el cambio." saveChanges={()=>{updateState("R"); setShowRejectModal(false)}} cancelButton={"Cancelar"} saveButton={"Rechazar"}/>)
-        }
-        </>
-      )}
       </div>
     );
   };
