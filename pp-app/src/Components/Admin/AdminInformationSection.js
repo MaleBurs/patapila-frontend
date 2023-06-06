@@ -1,7 +1,7 @@
 import React from "react";
 import { useCurrentAdmin } from "../../Context/CurrentAdminContext";
-import LogoCorazon from "../../Components/Images/LogoCorazon.png";
-import logoHerramienta from "../../Components/Images/logoHerramienta.png";
+import Tabla from "../../Components/Images/Tabla.png";
+import Dashboard from "../../Components/Images/Dashboard.png";
 import { useNavigate } from "react-router-dom";
 
 const AdminInformationSection = (props) => {
@@ -24,54 +24,54 @@ const AdminInformationSection = (props) => {
     
         <div className = "bg-[#F6F7F3] py-6 pr-6 md:pr-12 lg:pr-24 basis-1/2 md:justify-end items-start flex flex-row space-x-10">
             <div className="flex flex-col justify-center items-center z-10 py-1">
-                <button onClick={()=>navigate("/dashboards")} className={`rounded-full w-fit ${props.select==="dashboards" ? "bg-[#fdfcfc] border-[#e7e6e6] border" : "hover:bg-[#fdfcfc] hover:border-[#e7e6e6] hover:border"}`}>
+                <button onClick={()=>navigate("/dashboards")} className={`rounded-full w-fit ${props.select==="dashboards" ? "bg-[#fdfcfc] border-[#e7e6e6] border p-3" : "hover:bg-[#fdfcfc] hover:border-[#e7e6e6] hover:border p-3"}`}>
                     <img
                         className="object-cover h-10 w-10 md:h-20 md:w-20 "
-                        src={LogoCorazon}
+                        src={Dashboard}
                         alt="ProfilePhoto"
                     />
                 </button>
-                <div className="flex flex-col space-y-1">
+                <div className="flex flex-col ">
                     <div className="font-Pop-R text-xs text-center">Dashboards</div>
                 </div>  
             </div>
 
             <div className="flex flex-col justify-center items-center z-10 py-1">
-                <button onClick={()=>navigate("/reporteSubscripciones")} className={`rounded-full w-fit ${props.select==="reporteSubscripciones" ? "bg-[#fdfcfc] border-[#e7e6e6] border" : "hover:bg-[#fdfcfc] hover:border-[#e7e6e6] hover:border"}`}>
+                <button onClick={()=>navigate("/reporteSubscripciones")} className={`rounded-full w-fit ${props.select==="reporteSubscripciones" ? "bg-[#fdfcfc] border-[#e7e6e6] border p-3" : "hover:bg-[#fdfcfc] hover:border-[#e7e6e6] hover:border p-3"}`}>
                     <img
                         className="object-cover h-10 w-10 md:h-20 md:w-20 "
-                        src={logoHerramienta}
+                        src={Tabla}
                         alt="ProfilePhoto"
                     />
                 </button>
-                <div className="flex flex-col">
+                <div className="flex flex-col ">
                     <div className="font-Pop-R text-xs text-center">Reporte</div>
                     <div className="font-Pop-R text-xs text-center">Subscripciones</div> 
                 </div>  
             </div>    
 
             <div className="flex flex-col justify-center items-center z-10 py-1">
-                <button onClick={()=>navigate("/reporteTransacciones")} className={`rounded-full w-fit ${props.select==="reporteTransacciones" ? "bg-[#fdfcfc] border-[#e7e6e6] border " : "hover:bg-[#fdfcfc] hover:border-[#e7e6e6] hover:border"}`}>
+                <button onClick={()=>navigate("/reporteTransacciones")} className={`rounded-full w-fit ${props.select==="reporteTransacciones" ? "bg-[#fdfcfc] border-[#e7e6e6] border p-3" : "hover:bg-[#fdfcfc] hover:border-[#e7e6e6] hover:border p-3"}`}>
                     <img
                         className="object-cover h-10 w-10 md:h-20 md:w-20 "
-                        src={logoHerramienta}
+                        src={Tabla}
                         alt="ProfilePhoto"
                     />
                 </button>
-                <div className="flex flex-col">
+                <div className="flex flex-col ">
                     <div className="font-Pop-R text-xs text-center">Reporte</div> 
                     <div className="font-Pop-R text-xs text-center">Transacciones</div> 
                 </div>  
             </div>
             <div className="flex flex-col justify-center items-center z-10 py-1">
-                <button onClick={()=>navigate("/reporteUsuarios")} className={`rounded-full w-fit ${props.select==="reporteUsuarios" ? "bg-[#fdfcfc] border-[#e7e6e6] border " : "hover:bg-[#fdfcfc] hover:border-[#e7e6e6] hover:border"}`}>
+                <button onClick={()=>navigate("/reporteUsuarios")} className={`rounded-full w-fit ${props.select==="reporteUsuarios" ? "bg-[#fdfcfc] border-[#e7e6e6] border p-3" : "hover:bg-[#fdfcfc] hover:border-[#e7e6e6] hover:border p-3"}`}>
                     <img
                         className="object-cover h-10 w-10 md:h-20 md:w-20 "
-                        src={logoHerramienta}
+                        src={Tabla}
                         alt="ProfilePhoto"
                     />
                 </button>
-                <div className="flex flex-col">
+                <div className="flex flex-col ">
                     <div className="font-Pop-R text-xs text-center">Reporte</div> 
                     <div className="font-Pop-R text-xs text-center">Usuarios</div> 
                 </div>  
