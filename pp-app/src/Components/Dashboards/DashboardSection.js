@@ -39,28 +39,28 @@ const DashboardSection = () => {
         <></>}
         {(showBarChart1) ? 
          <ChartModal 
-            chart={<BarChart label="INGRESOS" data={monthlyAmount} id="bar1"></BarChart>} 
+            chart={<BarChart label="INGRESOS" data={monthlyAmount} id="bar1" includeFutureMonths={true}></BarChart>} 
             chartContainerStyle={{ height:'60vh', width:'100vh'}}
             label ={<Label title="REPORTE DE COBRANZAS Y PROXIMOS PAGOS POR SUSCRIPCIONES" subtitle={year} />}/>   
         :
         <></>}
          {(showBarChart2) ? 
          <ChartModal 
-            chart={<BarChart label="INGRESOS POR DONACIONES" data={totalAmountOnlyTime} id="bar2"></BarChart>} 
+            chart={<BarChart label="INGRESOS POR DONACIONES" data={totalAmountOnlyTime} id="bar2" includeFutureMonths={false}></BarChart>} 
             chartContainerStyle={{ height:'60vh', width:'100vh'}}
             label = {<Label title="INGRESOS POR DONACIONES" subtitle={year} />}/>   
         :
         <></>}
          {(showBarChart3) ? 
          <ChartModal 
-            chart={<BarChart  label="INGRESOS POR SUSCRIPCIONES" data={totalAmountRecurrent} id="bar3"></BarChart>} 
+            chart={<BarChart  label="INGRESOS POR SUSCRIPCIONES" data={totalAmountRecurrent} id="bar3" includeFutureMonths={false}></BarChart>} 
             chartContainerStyle={{ height:'60vh', width:'100vh'}}
             label = {<Label title="INGRESOS POR SUSCRIPCIONES" subtitle={year} />}/>   
         :
         <></>}
         {(showBarChart4) ? 
          <ChartModal 
-            chart={<BarChart  label="INGRESOS ESPERADOS POR SUSCRIPCIONES" data={monthlyAmountBySubs} id="bar4"></BarChart>} 
+            chart={<BarChart  label="INGRESOS ESPERADOS POR SUSCRIPCIONES" data={monthlyAmountBySubs} id="bar4" includeFutureMonths={true}></BarChart>} 
             chartContainerStyle={{ height:'60vh', width:'100vh'}}
             label = {<Label title="INGRESOS  ESPERADOS POR SUSCRIPCIONES" subtitle={year} />}/>   
         :
@@ -104,7 +104,7 @@ const DashboardSection = () => {
                 <Card
                 title="INGRESOS ESPERADOS POR SUSCRIPCIONES"
                 subtitle = {year}
-                content={<BarChartModule openModule={()=>setShowBarChart4(true)} label="INGRESOS POR SUSCRIPCIONES" data={monthlyAmountBySubs} id="bar4"></BarChartModule>}
+                content={<BarChartModule openModule={()=>setShowBarChart4(true)} label="INGRESOS POR SUSCRIPCIONES" data={monthlyAmountBySubs} id="bar4" includeFutureMonths={true}></BarChartModule>}
                 /> 
                 <Card
                 title="CANTIDAD USUARIOS DE LA APLICACIÓN Y CANTIDAD DE SUSCRIPCIONES"
@@ -118,17 +118,17 @@ const DashboardSection = () => {
                 <Card
                 title="REPORTE COBRANZAS Y PROXIMOS PAGOS POR SUSCRIPCIONES"
                 subtitle = {year}
-                content={<BarChartModule openModule={()=>setShowBarChart1(true)} label="INGRESOS" data={monthlyAmount} id="bar1"></BarChartModule>}
+                content={<BarChartModule openModule={()=>setShowBarChart1(true)} label="INGRESOS" data={monthlyAmount} id="bar1" includeFutureMonths={true}></BarChartModule>}
                 />
                 <Card
                 title="INGRESOS POR DONACIONES"
                 subtitle = {year}
-                content={<BarChartModule openModule={()=>setShowBarChart2(true)} label="INGRESOS POR DONACIONES" data={totalAmountOnlyTime} id="bar2"></BarChartModule>}
+                content={<BarChartModule openModule={()=>setShowBarChart2(true)} label="INGRESOS POR DONACIONES" data={totalAmountOnlyTime} id="bar2" includeFutureMonths={false}></BarChartModule>}
                 />
                 <Card
                 title="INGRESOS POR SUSCRIPCIONES"
                 subtitle = {year}
-                content={<BarChartModule openModule={()=>setShowBarChart3(true)} label="INGRESOS POR SUSCRIPCIONES" data={totalAmountRecurrent} id="bar3"></BarChartModule>}
+                content={<BarChartModule openModule={()=>setShowBarChart3(true)} label="INGRESOS POR SUSCRIPCIONES" data={totalAmountRecurrent} id="bar3" includeFutureMonths={false}></BarChartModule>}
                 /> 
                 </>
             }

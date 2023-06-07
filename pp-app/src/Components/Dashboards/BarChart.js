@@ -4,12 +4,13 @@ import { useEffect } from 'react';
 
 
 export default function BarChart(props) {
-
+  let date = new Date();
+  let month = date.getMonth();
   useEffect(() => {
     let config = {
       type: "bar",
       data: {
-        labels: Array.from(props.data,(m)=>m.label), 
+        labels: props.includeFutureMonths ? Array.from(props.data,(m)=>m.label) : Array.from(props.data,(m)=>m.label).filter((obj, index) => index < month + 1), 
         datasets: [
           {
             label: props.label,
@@ -17,7 +18,6 @@ export default function BarChart(props) {
             backgroundColor: [
               'rgba(165, 192, 135)',
               'rgba(131, 157, 154)',
-              'rgba(235, 131, 1)',
               '#0B4725',
               '#911229',
               '#141B41',

@@ -7,7 +7,7 @@ export default function BarChartModule(props) {
         <>   
          <div className="flex p-7 flex-[0_0_auto] self-center" onClick={props.openModule}>
           <div className="chart-container" style={{position: 'relative', height:'50vh', width:'60vh'}}> 
-            <BarChart data={props.data} label={props.label} id={props.id}></BarChart>
+            <BarChart data={props.data} label={props.label} id={props.id} includeFutureMonths={props.includeFutureMonths}></BarChart>
           </div>
         </div>     
   </>
