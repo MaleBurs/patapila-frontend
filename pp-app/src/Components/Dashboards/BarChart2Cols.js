@@ -6,14 +6,16 @@ import { useEffect } from 'react';
 export default function BarChart2Cols(props) {
 
   useEffect(() => {
+    let date = new Date();
+    let month = date.getMonth();
     let config = {
       type: "bar",
       data: {
-        labels: Array.from(props.data,(m)=>m.label), 
+        labels: Array.from(props.data,(m)=>m.label).filter((obj, index) => index < month + 1), 
         datasets: [
           {
             label: props.label,
-            data: Array.from(props.data,(m)=>m.value),
+            data: Array.from(props.data,(m)=>m.value).filter((obj, index) => index < month + 1),
             backgroundColor: [
               'rgba(165, 192, 135)',
               'rgba(131, 157, 154)',
