@@ -11,9 +11,13 @@ export function DashboardContextProvider(props) {
   const [ monthlyAmount , setMonthlyAmount ] = useState([]);
   const [ monthlyAmountByTrans , setMonthlyAmountByTrans ] = useState([]);
   const [ monthlyAmountBySubs , setMonthlyAmountBySubs ] = useState([]);
+  const [ expectedFutureAmountBySubsOnMonth, setExpectedFutureAmountBySubsOnMonth ] = useState(0);
   const [totalAmountMonth, setTotalAmountMonth] = useState(0);
   const [totalAmountByMode, setTotalAmountByMode] = useState([]);
   const [totalAmountByModeMonth, setTotalAmountByModeMonth] = useState({onlyTimeAmount: 0, recurrentAmount: 0}); 
+  const [totalSubsAndStatesOnMonth, setTotalSubsAndStatesOnMonth] = useState({});
+  const [totalUsersByMonth , setTotalUsersByMonth] = useState({});
+  const [totalSubsByMonth , setTotalSubsByMonth] = useState({});
   const [loading, setLoading] = useState(true);
   
   useEffect(() => {
@@ -37,6 +41,14 @@ export function DashboardContextProvider(props) {
   
         setTotalAmountMonth(monthlyAmountAux[month - 1].value);
         setTotalAmountByModeMonth(totalAmountByModeAux[month - 1]);
+        setExpectedFutureAmountBySubsOnMonth(monthlyAmountAuxBySubs[month - 1].value)
+
+        setTotalSubsAndStatesOnMonth(dashboardInfo.data.estadosSuscripciones[month]);
+        
+        let totalUsersByMonthAux = giveCorrectFormatToUsersByMonth(dashboardInfo);
+        setTotalUsersByMonth(totalUsersByMonthAux);
+        let totalSubsByMonthAux = giveCorrectFormatToTotalSubsByMonth(dashboardInfo)
+        setTotalSubsByMonth(totalSubsByMonthAux);
 
         setLoading(false);
       }
@@ -60,15 +72,41 @@ export function DashboardContextProvider(props) {
       totalAmountByMode,
       totalAmountByModeMonth,
       loading,
-      setLoading
+      setLoading,
+      totalSubsAndStatesOnMonth,
+      totalSubsByMonth,
+      totalUsersByMonth,
+      expectedFutureAmountBySubsOnMonth
     }
-  }, [year, dashboardData, monthlyAmount, monthlyAmountByTrans, monthlyAmountBySubs, totalAmountMonth, totalAmountByMode, totalAmountByModeMonth])
+  }, [year, dashboardData, monthlyAmount, monthlyAmountByTrans, monthlyAmountBySubs, totalAmountMonth, totalAmountByMode, totalAmountByModeMonth, totalSubsAndStatesOnMonth])
 
   return (
     <DashboardContext.Provider value={value}>
       { props.children }
     </DashboardContext.Provider>
   )
+}
+
+function giveCorrectFormatToTotalSubsByMonth(dashboardInfo) {
+  let totalSubsByMonthAux = Object.entries(dashboardInfo.data.estadosSuscripciones)
+  totalSubsByMonthAux = totalSubsByMonthAux.map((obj) => {
+    return {
+      label: datesValues[0].options[obj[0] - 1].label,
+      value: obj[1].total
+    }
+  })
+  return totalSubsByMonthAux
+}
+
+function giveCorrectFormatToUsersByMonth(dashboardInfo) {
+  let totalUsersByMonthAux = Object.entries(dashboardInfo.data.cantidadUsuarios)
+  totalUsersByMonthAux = totalUsersByMonthAux.map((obj) => {
+    return {
+      label: datesValues[0].options[obj[0] - 1].label,
+      value: obj[1]
+    }
+  })
+  return totalUsersByMonthAux
 }
 
 function giveCorrectFormatToAmountByMode(dashboardInfo) {

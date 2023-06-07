@@ -4,7 +4,7 @@ import Chart from 'chart.js';
 import { useEffect, useState, useRef} from 'react';
 
 export default function TotalAmountModule(props) {
-  const { totalAmountByModeMonth, totalAmountMonth } = useDashboardContext();
+  const { totalAmountByModeMonth, totalAmountMonth, expectedFutureAmountBySubsOnMonth } = useDashboardContext();
   return (
         <>          
         <div className="flex p-7 flex-col space-y-8 divide-y divide-dashed divide-[#e7e6e6]"> 
@@ -27,7 +27,7 @@ export default function TotalAmountModule(props) {
 
         <div className='flex flex-row'>
           <div className="chart-container justify-self-start mt-2" style={{position: 'relative', width:'38vh'}}>
-            <SubsAmountVSTransAmount amountByTrans={totalAmountByModeMonth.onlyTimeAmount} amountBySubs={totalAmountByModeMonth.recurrentAmount}></SubsAmountVSTransAmount>
+            <SubsAmountVSTransAmount amountByTrans={totalAmountByModeMonth.onlyTimeAmount} amountBySubs={totalAmountByModeMonth.recurrentAmount} expectedAmountBySubs={expectedFutureAmountBySubsOnMonth}></SubsAmountVSTransAmount>
           </div>
           <div className="flex flex-col space-y-1 place-self-center -ml-10 mt-2">
             <div className="font-Pop-L text-xs text-gray-700 flex flex-row space-x-2">
@@ -37,6 +37,10 @@ export default function TotalAmountModule(props) {
             <div className="font-Pop-L text-xs text-gray-700 flex flex-row space-x-2">
               <span className="inline-flex rounded-full bg-[#f4dcbf] h-3 w-3"></span>
               <div>Importe total por suscripciones: ${totalAmountByModeMonth.recurrentAmount}</div>
+            </div>
+            <div className="font-Pop-L text-xs text-gray-700 flex flex-row space-x-2">
+              <span className="inline-flex rounded-full bg-[#7BA391] h-3 w-3"></span>
+              <div>Importe esperado por suscripciones todavía no cobrado: ${expectedFutureAmountBySubsOnMonth}</div>
             </div>
           </div>  
         </div> 
@@ -62,19 +66,20 @@ function SubsAmountVSTransAmount(props) {
     };
 
     const setBgColorAndDataToCorrect = () => {
-      setData([props.amountBySubs, props.amountByTrans]);
+      setData([props.amountBySubs, props.amountByTrans, props.expectedAmountBySubs]);
       setBgColor([
         'rgba(244, 220, 191)',
         'rgba(108, 51, 51)',
+        'rgba(123, 163, 145, 1)'
       ]);
     };
 
-    ( props.amountBySubs=== 0 && props.amountByTrans=== 0) ?
+    ( props.amountBySubs=== 0 && props.amountByTrans=== 0 && props.expectedAmountBySubs===0) ?
       setBgColorAndDataToDefault()
       :
       setBgColorAndDataToCorrect();
         
-  }, [props.amountBySubs, props.amountByTrans])
+  }, [props.amountBySubs, props.amountByTrans, props.expectedAmountBySubs])
 
   useEffect(() => {
 

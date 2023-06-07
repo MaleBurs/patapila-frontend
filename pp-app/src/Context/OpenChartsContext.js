@@ -6,7 +6,9 @@ export function OpenChartsContextProvider (props) {
   const [showBarChart1, setShowBarChart1] = useState(false);
   const [showBarChart2, setShowBarChart2] = useState(false);
   const [showBarChart3, setShowBarChart3] = useState(false);
+  const [showBarChart4, setShowBarChart4] = useState(false);
   const [showPieChart, setShowPieChart] = useState(false);
+  const [showBarChart2Cols, setShowBarChart2Cols] = useState(false);
  
   const value = useMemo(() => {
     return {
@@ -16,10 +18,14 @@ export function OpenChartsContextProvider (props) {
         setShowBarChart2,
         showBarChart3,
         setShowBarChart3,
+        showBarChart4,
+        setShowBarChart4,
         showPieChart, 
-        setShowPieChart
+        setShowPieChart,
+        showBarChart2Cols,
+        setShowBarChart2Cols
     }
-  }, [showPieChart, showBarChart1, showBarChart2, showBarChart3])
+  }, [showPieChart, showBarChart1, showBarChart2, showBarChart3, showBarChart2Cols])
 
   return (
     <OpenChartsContext.Provider value={value}>
