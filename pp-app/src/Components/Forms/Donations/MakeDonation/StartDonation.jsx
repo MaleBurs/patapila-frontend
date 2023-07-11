@@ -8,6 +8,8 @@ import ModalWithDetails from "../../../Utiles/ModalWithDetails";
 import { useNavigate } from "react-router-dom"
 import Messages from '../../Messages'
 import ActServices from '../../../../services/activities.service'
+import ModalMP from '../../../Utiles/ModalMP'
+
 
 const StartDonation = ({ setStep }) => {
   const { selectedFrequency } = useFrequency();
@@ -17,6 +19,7 @@ const StartDonation = ({ setStep }) => {
   const navigate = useNavigate();
   const currentUser = AuthService.getCurrentUser();
   const [showModal, setShowModal] = useState(false);
+  const [showMpModal, setShowMpModal] = useState(false);
 
   const newSubscriptionEvenctDescription = (amount, frequency, nextPaymentDate) =>{
     return {title: "Te has suscrito!", description: "Has iniciado una suscripción de $"+amount+" que se cobra " + frequency + " y tiene como próxima fecha de pago "+nextPaymentDate+"."}
@@ -31,6 +34,12 @@ const StartDonation = ({ setStep }) => {
 
   const closeModal = () => {
     setShowModal(false);
+    navigate("/inicio");
+    window.location.reload();
+  };
+
+  const closeMpModal = () => {
+    setShowMpModal(false);
     navigate("/inicio");
     window.location.reload();
   };
@@ -52,7 +61,7 @@ const StartDonation = ({ setStep }) => {
     setMessage("");
     if (isFormValid()) {
       if(selectedFrequency === 2){
-      DonationService.generateSubscription(currentUser.id, selectedAmount, selectedFrequency, subsPeriod.value, paymentDay).then(
+      /*DonationService.generateSubscription(currentUser.id, selectedAmount, selectedFrequency, subsPeriod.value, paymentDay).then(
         () => {
           setShowModal(true);
           ActServices.createActivity(newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay).title, newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay).description, currentUser.id). then(
@@ -67,7 +76,8 @@ const StartDonation = ({ setStep }) => {
             error.message ||
             error.toString();
           setMessage(resMessage);
-        })
+        })*/
+        setShowMpModal(true);
         }else{
         DonationService.generateTransaction(currentUser.id, selectedAmount,"onlyTime").then(
           () => {
@@ -92,10 +102,10 @@ const StartDonation = ({ setStep }) => {
 
   return (
     <>
-    
+    {showMpModal ? (<ModalMP onChange={closeMpModal}/>): null}
     {showModal ? (
-      <ModalWithDetails value={showModal} onChange={closeModal} header={(selectedFrequency === 1) ? "Tu donación ha sido realizada con éxito!" : "Tu suscripción ha sido activada con éxito!"} action={(selectedFrequency === 1) ? "realizó una donación" : "activó una suscripción"} body={"Muchas gracias por realizar una donación para brindar atención nutricional a niños/as de la comunidad."} buttonText={"Continuar"}></ModalWithDetails>
-    ) : null}
+      <ModalWithDetails value={showModal} onChange={closeModal} header={(selectedFrequency === 1) ? "Tu donación ha sido realizada con éxito!" : "Tu suscripción ha sido activada con éxito!"} action={(selectedFrequency === 1) ? "realizó una donación" : "activó una suscripción"} body={"Muchas gracias por realizar una donación para brindar atención nutricional a niños/as de la comunidad."} buttonText={"Continuar"}></ModalWithDetails>)
+      : null}
       <button onClick={submitDonation}
         className="rounded-xl p-3 h-auto w-full text-center greenBg yellowBgHover font-Pop-SB text-base text-white">
         {(selectedFrequency === 1)  ? "Donar" : "Donar periódicamente"}
