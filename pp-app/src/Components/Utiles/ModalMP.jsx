@@ -9,7 +9,7 @@ import DOMPurify from "dompurify";
 import { useEffect, useState } from "react";
 import { CardPayment } from '@mercadopago/sdk-react';
 import { initMercadoPago } from '@mercadopago/sdk-react';
-initMercadoPago('TEST-f1525308-046b-487b-9e5d-0c161a26c7ad');
+initMercadoPago('APP_USR-f47fd464-5fff-4477-a671-9bed449388e9');
 
 
 const ModalWithDetails = (props) =>{
