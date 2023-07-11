@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Buffer } from 'buffer';
+import AuthService from "./auth.service";
 
 async function createFileFromPath(path) {
     const response = await fetch(path);
@@ -103,10 +104,23 @@ const getMilestoneUrl = async(milestoneId) => {
     return URL.createObjectURL(blob)
 }
 
+const upload = async(file) => {
+    const fd = new FormData()
+    fd.append('file', file)
+    return axios.post(`http://localhost:8080/profile/picture/${AuthService.getCurrentUser().id}`, fd)
+}
+
+const getImageUrl = async() => {
+    const { data } = await axios.get(`http://localhost:8080/profile/picture/${AuthService.getCurrentUser().id}`, { responseType: 'blob' })
+    const blob = new Blob([data], { type: 'image' })
+    return URL.createObjectURL(blob)
+}
 
 const ImageService = {
     getImage,
+    getImageUrl,
     uploadImage,
+    upload,
     convertBinaryImageToUsableImage,
     convertBiggerBinaryImageToUsableImage,
     setUserProfilePicture,
