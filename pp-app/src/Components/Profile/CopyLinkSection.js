@@ -19,7 +19,7 @@ const CopyLinkSection = () => {
   const {currentUser} = useCurrentUser();
   const [isLinkCopied, setIsLinkCopied] = React.useState(false);
   const generateUserLink = () =>{
-    return "https://patapila-frontend.vercel.app/signup/"+currentUser.id;
+    return "http://localhost:3000/signup/"+currentUser.id;
   }
   const copyLink = () => {
     copyTextToClipboard(generateUserLink())

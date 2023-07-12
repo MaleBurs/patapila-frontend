@@ -4,7 +4,8 @@ import { faHeartPulse } from "@fortawesome/free-solid-svg-icons";
 import AuthService from "../../services/auth.service";
 import ImageService from "../../services/images.service";
 import Handhake from "../Images/Handshake.png"
-
+import Certificate from "../Images/Certificate.png"
+import PersonitasFondoAmarillo from "../Images/PersonitasFondoAmarrillo.png"
 const MileStoneModal = (props) =>{
     function closeModal() {
         props.onCloseModal();
@@ -43,9 +44,18 @@ const MilestonesBox = (props) => {
     const [modal, setModal] = React.useState(false);
     const [milestoneImage, setMilestoneImage] = React.useState("");
     useEffect(() => {
-        ImageService.getMilestoneUrl(props.id)
+        /*ImageService.getMilestoneUrl(props.id)
         .then(res => 
-          res? setMilestoneImage(res) : setMilestoneImage(Handhake));
+          res? setMilestoneImage(res) : */
+        if(props.id === 1){
+            setMilestoneImage(Certificate);
+        }
+        else if(props.id === 2){
+            setMilestoneImage(Handhake);
+        }
+        else if(props.id === 3){
+          setMilestoneImage(PersonitasFondoAmarillo);
+      }
     }, [props.id])
     return (
       <>  
