@@ -7,29 +7,30 @@ import { useSubscriptionPeriod } from "../../Context/SubscriptionContext"
 import { loadMercadoPago } from "@mercadopago/sdk-js";
 import DOMPurify from "dompurify";
 import { useEffect, useState } from "react";
+import AuthService from "../../services/auth.service"
 import { CardPayment } from '@mercadopago/sdk-react';
 import { initMercadoPago } from '@mercadopago/sdk-react';
 initMercadoPago('APP_USR-f47fd464-5fff-4477-a671-9bed449388e9');
 
 
 const ModalWithDetails = (props) =>{
-  const { selectedAmount} = useAmount();
-  const { selectedFrequency } = useFrequency();
-  const { subsPeriod, paymentDay} = useSubscriptionPeriod();
-  const {cardForm, setCardForm} = useState();
+  const currentUser = AuthService.getCurrentUser();
   const initialization = {
     amount: 980,
   };
   
   const onSubmit = async (formData) => {
     // Callback called when the submit button is clicked to send data
+    const body = {data: formData, user_id: currentUser.id}
+    console.log(body);
+
     return new Promise((resolve, reject) => {
       fetch('http://localhost:8080/api/payment/process_payment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(body),
       })
         .then((response) => {
           // Check if the response was successful

@@ -17,8 +17,6 @@ export default function UserNavBar(props) {
   const navigate = useNavigate();
   const userName = props.currentUser.name;
   const userLastName = props.currentUser.lastname;
-  const id = props.currentUser.id;
-  console.log(id);
 
   const logOut = () => {
     AuthService.logout();
@@ -27,7 +25,7 @@ export default function UserNavBar(props) {
   };
 
   useEffect(() => {
-    ImageService.getImage(id).then((url) => {
+    ImageService.getImageUrl().then((url) => {
       setImgSrc(url);
     }).catch();
   }, []);
