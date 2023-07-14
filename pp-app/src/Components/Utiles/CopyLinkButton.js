@@ -21,7 +21,7 @@ export const CopyLinkButton = () => {
   const [isLinkCopied, setIsLinkCopied] = useState(false);
 
   useEffect(() => {
-    setPublicProfileURL("http://localhost:3000/signup/"+publicProfileInf.publicProfileUrl); 
+    setPublicProfileURL("https://dashboard.patapila.org/signup/"+publicProfileInf.publicProfileUrl); 
   }, [publicProfileInf]);
   const copyLink = () => {
     copyTextToClipboard(publicProfileURL)
