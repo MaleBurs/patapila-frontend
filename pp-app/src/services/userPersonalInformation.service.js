@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "http://localhost:8080/api/userInformation/";
+const API_URL = "https://dashboard.patapila.org/api/userInformation/";
 
 
 const updateUserPersonalInformation = (userId, city, country, dateOfBirth, phoneNumber) => {

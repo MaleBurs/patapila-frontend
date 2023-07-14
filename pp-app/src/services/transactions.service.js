@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "http://localhost:8080/api/payment/";
+const API_URL = "https://dashboard.patapila.org/api/payment/";
 const getTransactions = (limit, offset) => {
   return axios.post(API_URL + "getTransactions", {
     limit,
@@ -27,7 +27,7 @@ const modifyTransactionState =  (transactionId,state) => {
     });
 }
 const getUsersForReport = (limit, offset) => {
-  return axios.post("http://localhost:8080/api/auth/getUsersForReport", {
+  return axios.post("https://dashboard.patapila.org/api/auth/getUsersForReport", {
     limit,
     offset,
   });

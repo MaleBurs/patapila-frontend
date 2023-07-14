@@ -4,7 +4,7 @@ import PublicProfileConfigurationServices from "./publicProfileConfiguration.ser
 import PublicProfileInformationServices from "./publicProfileInformation.service";
 import PersonalInformationServices from "./userPersonalInformation.service";
 
-const API_URL = "http://localhost:8080/api/auth/";
+const API_URL = "https://dashboard.patapila.org/api/auth/";
 const register = (name,lastname, email, password, role) => {
   return axios.post(API_URL + "signup", {
     name,
@@ -117,7 +117,7 @@ const findUserById = async (id) => {
 
 const getUserMilestones = async (userId) => {
   try {
-    const response = await axios.post("http://localhost:8080/api/milestone/getUserWithMilestones", {
+    const response = await axios.post("https://dashboard.patapila.org/api/milestone/getUserWithMilestones", {
       userId,
     });
     return response;

@@ -16,7 +16,7 @@ const uploadImage = async (path) => {
 createFileFromPath(path).then(async file => {
     const formData = new FormData();
     formData.append('image', file);
-    const response = await axios.post('http://localhost:8080/api/upload-image', formData, {
+    const response = await axios.post('https://dashboard.patapila.org/api/upload-image', formData, {
         headers: {
         'Content-Type': 'multipart/form-data',
         },
@@ -31,7 +31,7 @@ createFileFromPath(path).then(async file => {
   
 // Retrieve an image by ID
 const getImage = async (id) => {
-    const response = await axios.get(`http://localhost:8080/api/images/${id}`, {
+    const response = await axios.get(`https://dashboard.patapila.org/api/images/${id}`, {
         responseType: 'arraybuffer' // Set the response type to arraybuffer to receive the image data as binary
     });
 
@@ -65,7 +65,7 @@ const setUserProfilePicture = async (id, file) =>{
     const formData = new FormData();
     formData.append('image', file);
     formData.append('id', id);
-    const response = await axios.post('http://localhost:8080/api/auth/setUserProfilePicture', formData, {
+    const response = await axios.post('https://dashboard.patapila.org/api/auth/setUserProfilePicture', formData, {
         headers: {
         'Content-Type': 'multipart/form-data',
         },

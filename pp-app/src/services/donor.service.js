@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "http://localhost:8080/api/publicProfileURL/";
+const API_URL = "https://dashboard.patapila.org/api/publicProfileURL/";
 
 const getpublicProfileURL = (id) => {
   return axios.post(API_URL + "getUserPublicProfileURL", {

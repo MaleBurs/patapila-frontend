@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "http://localhost:8080/api/publicProfile/";
+const API_URL = "https://dashboard.patapila.org/api/publicProfile/";
 
 const updatePublicProfileInformation = (userId, linkedInProfile, facebookProfile, twitterProfile, instagramProfile, headerText, biography, chosenCoverPhotoId ) => {
   return axios.post(API_URL + "updatePublicProfileInformation", {
