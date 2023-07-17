@@ -40,7 +40,7 @@ const ModalWithDetails = (props) =>{
                       <p>, que se cobra </p>
                       <p className="underline decoration-[#eb8301] decoration-wavy underline-offset-4">{subsPeriod.label},</p>
                       <p>con el próximo pago el día </p>
-                      <p className="underline decoration-[#eb8301] decoration-wavy underline-offset-4">{paymentDay}</p>
+                      <p className="underline decoration-[#eb8301] decoration-wavy underline-offset-4">{paymentDay.substring(0,10)}</p>
                       </>
                       : <></>
                       }

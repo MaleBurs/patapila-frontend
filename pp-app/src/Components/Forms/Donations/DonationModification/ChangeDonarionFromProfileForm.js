@@ -38,7 +38,7 @@ const ChangeDonationFromProfileForm = (props) =>{
   const [message, setMessage] = useState("");
 
   const modificationSubscriptionEvenctDescription = (amount, frecuency, nextPaymentDate) =>{
-    return {title: "Has modificado una suscripción", description: "El monto es de "+amount+", se cobra "+frecuency+ " y la próxima fecha de pago es el "+nextPaymentDate+"." }
+    return {title: "Has modificado una suscripción", description: "El monto es de "+amount+", se cobra "+frecuency+ " y la próxima fecha de pago es el "+nextPaymentDate.substring(0,10)+"." }
   }
 
   const resetSubscriptionEvenctDescription = (amount, frecuency, nextPaymentDate) =>{
@@ -55,7 +55,7 @@ const ChangeDonationFromProfileForm = (props) =>{
   };
 
   const handleResetDonation = () =>{
-    DonationService.modifySubscriptionState(subscriptionData.id, 'A').then(
+    DonationService.modifySubscriptionState(subscriptionData.id, 'authorized').then(
         () => {
           setShowModal(true);
           ActServices.createActivity(resetSubscriptionEvenctDescription(selectedAmount,subsPeriod.label,paymentDay).title, resetSubscriptionEvenctDescription(selectedAmount,subsPeriod.label,paymentDay).description, currentUser.id). then(
@@ -73,10 +73,6 @@ const ChangeDonationFromProfileForm = (props) =>{
         })
 }
   const isFormValid = () =>{
-    if (paymentDay===null || paymentDay=== undefined){
-      setMessage("Para realizar una donación recurrente debe ingresar la fecha de pago");
-      return false
-    }
     if (selectedAmount < 1 || selectedAmount===undefined){
       setMessage("El monto ingresado a donar debe de ser al menos $1");
       return false
@@ -114,16 +110,16 @@ const ChangeDonationFromProfileForm = (props) =>{
       <ModalWithConfirmationAndDetails 
       value={showModalWithConfirmation} 
       onChange={closeModalWithConfirmation} 
-      header={(subscriptionData.subscriptionState.state !== 'P') ?
+      header={(subscriptionData.subscriptionState.state !== 'paused') ?
       "¿Estás seguro de que deseas modificar tu donación recurrente?"  :  "¿Estás seguro de que deseas reanudar tu donación recurrente?"
           } 
-      body={(subscriptionData.subscriptionState.state !== 'P') ? "Si guardas los cambios, tu donación actual se modificará."
+      body={(subscriptionData.subscriptionState.state !== 'paused') ? "Si guardas los cambios, tu donación actual se modificará."
               :   "Si guardas los cambios, tu donación recurrente se reanudará."} 
-      saveChanges={(subscriptionData.subscriptionState.state !== 'P') ? modifyDonation : handleResetDonation}
-      action= {(subscriptionData.subscriptionState.state !== 'P') ? "modificará" : "reanudará"} cancelButton="Volver atrás" saveButton="Guardar cambios"></ModalWithConfirmationAndDetails>
+      saveChanges={(subscriptionData.subscriptionState.state !== 'paused') ? modifyDonation : handleResetDonation}
+      action= {(subscriptionData.subscriptionState.state !== 'paused') ? "modificará" : "reanudará"} cancelButton="Volver atrás" saveButton="Guardar cambios"></ModalWithConfirmationAndDetails>
     ) : null}
     {showModal ? (
-      <Modal value={showModal} onChange={closeModal} header={(subscriptionData.subscriptionState.state !== 'P') ?
+      <Modal value={showModal} onChange={closeModal} header={(subscriptionData.subscriptionState.state !== 'paused') ?
       "Tu donación recurrente ha sido modificada con éxito!"  :  "Tu donación recurrente ha sido activada con éxito!"
           }body={""} buttonText={"Continuar"}></Modal>
     ) : null}
@@ -134,11 +130,6 @@ const ChangeDonationFromProfileForm = (props) =>{
       <DashedLine></DashedLine>
       <div className='space-y-6'>
         <SubscriptionPeriod></SubscriptionPeriod>
-        <SelectPaymentDay 
-          explanationText={determineExplanationTextForPaymentDay(subsPeriod, userWantsToModifySubs)}
-          initialValue={subscriptionData.nextPaymentDate}
-          disabled ={!userWantsToModifySubs}  
-        />
       </div>
       {message && (
         <Messages.ErrorMessage message={message}/>
@@ -153,7 +144,7 @@ const ChangeDonationFromProfileForm = (props) =>{
         </div>
       </div>
       :
-        ((subscriptionData.subscriptionState.state !== 'P') ?
+        ((subscriptionData.subscriptionState.state !== 'paused') ?
         <Buttons.IndicationButton  text={"Modificar Donación"} customStyle={"w-full text-white greenBg yellowBgHover "} onClick={()=>setIfUserWantsToModifySubs(true)}></Buttons.IndicationButton>
         :
         <>

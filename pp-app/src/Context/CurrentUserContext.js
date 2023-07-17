@@ -12,7 +12,11 @@ export function CurrentUserContextProvider (props) {
   const [profilePictureURL, setProfilePictureURL] = useState(null);
 
   useEffect(() => {
-    DonationService.getSubscription(currentUser.id).then(res=>{res? setSubscriptionData(res.data) : setSubscriptionData(null)});
+    console.log("SUBS")
+    DonationService.getSubscription(currentUser.id).then(res=>{
+      console.log(res.data.message)
+      res? setSubscriptionData(res.data.message) : setSubscriptionData(null)
+    });
   }, [currentUser.id])
 
   useEffect(() => {

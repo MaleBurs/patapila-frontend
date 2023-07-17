@@ -25,13 +25,13 @@ const addReferred = (userReferredId, userReferrerId) => {
 };
 
 const modifySubscriptionState  = (subscriptionId, state) => {
-  return axios.post(API_URL + "modifySubscriptionState", {
+  return axios.post(API_URL + "modify_mp_subscription", {
     subscriptionId,
     state,
   }); };
   
 const modifySubscription = (subscriptionId, amount, frequency, nextPaymentDate) => {
-  return axios.post(API_URL + "modifySubscription", {
+  return axios.post(API_URL + "modify_mp_subscription", {
     subscriptionId,
     amount,
     frequency,
@@ -41,7 +41,7 @@ const modifySubscription = (subscriptionId, amount, frequency, nextPaymentDate) 
 
 const getSubscription = async (userId) => {
   try {
-    const response = await axios.post(API_URL + "getSubscription", {
+    const response = await axios.post(API_URL + "find_user_mp_subscription", {
       userId,
     });
     return response;
@@ -52,7 +52,7 @@ const getSubscription = async (userId) => {
 
 const subscriptionsByMonth = async (month,year) => {
   try {
-    const response = await axios.post(API_URL + "getSubscriptionsStatesByMonth",{
+    const response = await axios.post(API_URL + "get_mp_subs_by_month",{
       month,
       year,
     });

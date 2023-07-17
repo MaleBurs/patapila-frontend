@@ -28,7 +28,7 @@ const FirstStep = ({ setStep }) => {
     <StepTitle 
       titleText={!(subscriptionData) || (selectedFrequency===1) ? 
       'Únase a la lucha contra la desnutrición infantil' 
-      : ((subscriptionData.subscriptionState.state !== 'P') ?
+      : ((subscriptionData.subscriptionState.state !== 'paused') ?
         "Usted ya esta realizando una donación recurrente"
         :
         "Usted ya tiene una suscripción pausada"

@@ -18,6 +18,12 @@ const ModalWithDetails = (props) =>{
   const initialization = {
     amount: 980,
   };
+  const customization = {
+    paymentMethods: {
+     minInstallments: 1,
+     maxInstallments: 7,
+   },
+  };
   
   const onSubmit = async (formData) => {
     // Callback called when the submit button is clicked to send data
@@ -73,6 +79,7 @@ const ModalWithDetails = (props) =>{
         <>
             <CardPayment
               initialization={initialization}
+              customization={customization}
               onSubmit={onSubmit}
               onReady={onReady}
               onError={onError}

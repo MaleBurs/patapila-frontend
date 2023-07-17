@@ -26,7 +26,7 @@ const SelectPaymentDay = (props) => {
                       inputFormat="YYYY-MM-DD"
                       value={paymentDay}
                       onChange={(newPaymentDay) => {
-                        setPaymentDay(newPaymentDay.format("YYYY-MM-DD"));
+                        setPaymentDay(newPaymentDay.format("YYYY-MM-DDT00:00:00.000Z"));
                       }}
                       inputProps={{readOnly: true}}
                       renderInput={(params) => 

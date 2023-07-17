@@ -8,7 +8,7 @@ const getTransactions = (limit, offset) => {
 };
 
 const getSubscriptions = (limit, offset) => {
-  return axios.post(API_URL + "getSubscriptions", {
+  return axios.post(API_URL + "find_mp_subscriptions", {
     limit,
     offset,
   });

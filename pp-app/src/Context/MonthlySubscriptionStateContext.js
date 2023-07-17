@@ -28,7 +28,10 @@ export function MonthlySubscriptionStateContextProvider(props) {
 
     const options = datesValues[0].options;
     for (const el of options) {
-        await DonationService.subscriptionsByMonth(el.value,year).then(res=> {setChartDataBasedOnMonthlySubs(res, el)});
+        await DonationService.subscriptionsByMonth(el.value,year).then(res=> {
+          console.log(res.data)
+          setChartDataBasedOnMonthlySubs(res, el)
+        });
     }
   }
 

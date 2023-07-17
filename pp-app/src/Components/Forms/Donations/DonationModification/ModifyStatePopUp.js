@@ -46,7 +46,7 @@ const ModifyStatePopUp = ( ) => {
     };
 
     const handleCancelledSubs = () =>{
-        DonationService.modifySubscriptionState(subscriptionData.id, 'C').then(
+        DonationService.modifySubscriptionState(subscriptionData.id, 'cancelled').then(
             () => {
               setShowModal(true);
               ActServices.createActivity(cancelledSubscriptionEvenctDescription(selectedAmount,subsPeriod.label).title, cancelledSubscriptionEvenctDescription(selectedAmount,subsPeriod.label).description, currentUser.id). then(
@@ -64,7 +64,7 @@ const ModifyStatePopUp = ( ) => {
             })
     }
     const handlePausedSubs = () =>{
-        DonationService.modifySubscriptionState(subscriptionData.id, 'P').then(
+        DonationService.modifySubscriptionState(subscriptionData.id, 'paused').then(
             () => {
               setShowModal(true);
               ActServices.createActivity(pausedSubscriptionEvenctDescription(selectedAmount,subsPeriod.label).title, pausedSubscriptionEvenctDescription(selectedAmount,subsPeriod.label).description, currentUser.id). then(
@@ -114,7 +114,7 @@ const ModifyStatePopUp = ( ) => {
                 <button onClick={()=>{setCancellationRequest(true);setShowModalWithWrittenConfirmation(true)}} className='w-full text-left z-50 relative text-gray-400 duration-700 font-Pop-M hover:text-gray-500 focus:text-gray-500 tracking-[0.5px] grayBottomBorder block px-1 py-2 text-xs'>
                     Cancelar suscripción
                 </button>
-                {(subscriptionData.subscriptionState.state !== 'P') ?
+                {(subscriptionData.subscriptionState.state !== 'paused') ?
                 <button onClick={()=>{setShowModalWithConfirmation(true)}} className='w-full text-left z-50 relative text-gray-400 duration-700 hover:text-gray-500 focus:text-gray-500 font-Pop-M tracking-[0.5px] block px-1 py-2 text-xs'>
                     Pausar suscripción
                 </button>

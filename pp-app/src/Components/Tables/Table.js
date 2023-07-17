@@ -59,6 +59,7 @@ function Table({ columns, functionToLoadData }) {
   useEffect(() => {
     skipPageResetRef.current = false
     functionToLoadData(20,0).then(res=>{
+      console.log(res)
       res? setData(res.data) : setData();
     });
   }, [functionToLoadData]);
