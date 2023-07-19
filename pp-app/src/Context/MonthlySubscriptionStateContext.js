@@ -9,6 +9,7 @@ export function MonthlySubscriptionStateContextProvider(props) {
   const [month, setMonth] = useState(new Date().getMonth() + 1)
   const [year, setYear] = useState(new Date().getFullYear())
   const [monthlyData, setMonthlyData] = useState([]);
+  const [monthlyAmounts, setMonthlyAmounts] = useState([]);
 
   const noChartData = (chartData) => {
     var sum =0;
@@ -24,15 +25,33 @@ export function MonthlySubscriptionStateContextProvider(props) {
         await AdminServices.getMonthIncome(el.value).then(res => setMonthlyAmounts(prev => [...prev, res.data.total]))
     }
 }*/
+const setActualIncome = async () => {
+  const month = ((new Date()).getMonth() + 1).toString();
+  await DonationService.subscriptionsByMonth(month,2023).then(res=> {setChartDataBasedOnMonthlySubs(res, 7)})
+}
   const setMonthsIncome = async () => {
-
+    var amount = 0;
+    var newMonthData ={};
     const options = datesValues[0].options;
+    console.log(options)
     for (const el of options) {
-        await DonationService.subscriptionsByMonth(el.value,year).then(res=> {
+      await AdminServices.getMonthIncome(el.value).then(res => 
+        {
+          console.log(el.value, res.data.total)
+          newMonthData ={value:el.value, subsStates: [0,0,0],  amount:res.data.total, label:el.label};
+          setMonthlyAmounts(prev => [...prev, newMonthData]);
+        /*if(!valueInMonthlyData(el.value)){
+          amount = res.data.total;
+          newMonthData ={value:el.value, subsStates: [1,1,1],  amount:amount, label:el.label};
+          setMonthlyData(prev => [...prev, newMonthData]);
+          }*/
+        }
+      )
+    }
+        /*await DonationService.subscriptionsByMonth(el.value,year).then(res=> {
           console.log(res.data)
           setChartDataBasedOnMonthlySubs(res, el)
-        });
-    }
+        });*/
   }
 
   const setChartDataBasedOnMonthlySubs = (res, el) =>{
@@ -50,7 +69,8 @@ export function MonthlySubscriptionStateContextProvider(props) {
         c=c+1
       }
     }
-    if(!(noChartData([a,p,c]))){//Chequear total!=0 aca(llamamos a getmonthincome antes) y si es asi seteamos monthlydata
+    setMonthlyData(prev => [...prev, {value:7, subsStates: [a,p,c],  amount:0, label:"el.label"}]);
+    /*if(!(noChartData([a,p,c]))){//Chequear total!=0 aca(llamamos a getmonthincome antes) y si es asi seteamos monthlydata
       AdminServices.getMonthIncome(el.value).then(res => 
         {
         if(!valueInMonthlyData(el.value)){
@@ -60,7 +80,7 @@ export function MonthlySubscriptionStateContextProvider(props) {
           }
         }
       )
-    }
+    }*/
 }
 
   const valueInMonthlyData = (value) => {
@@ -74,6 +94,7 @@ export function MonthlySubscriptionStateContextProvider(props) {
   
   useEffect(() => {
     setMonthsIncome();
+    setActualIncome();
   }, [month,year])
 
   const value = useMemo(() => {
@@ -83,8 +104,9 @@ export function MonthlySubscriptionStateContextProvider(props) {
       year, 
       setYear,
       monthlyData,
+      monthlyAmounts,
     }
-  }, [month, year, monthlyData])
+  }, [month, year, monthlyData, monthlyAmounts])
 
   return (
     <MonthlySubscriptionStateContext.Provider value={value}>

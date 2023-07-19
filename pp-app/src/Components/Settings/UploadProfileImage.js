@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import "../../App.css"
 import ImageService from "../../services/images.service";
 import { useCurrentUser } from "../../Context/CurrentUserContext";
+import AuthService from "../../services/auth.service"
 
 const UploadProfileImage = (props) => {
   const [file, setFile] = useState(null);
   const { profilePictureURL } = useCurrentUser();
   const [imgSrc, setImgSrc] = useState(null);
+  const currentUser = AuthService.getCurrentUser();
 
   useEffect(() => {
     setImgSrc(profilePictureURL);
@@ -18,8 +20,23 @@ const UploadProfileImage = (props) => {
   }
 
   const upload = async (event) => {
-    ImageService.upload(file).then(res =>{window.location.reload()})
+    //ImageService.upload(file).then(res =>{window.location.reload()})
     //window.location.reload()
+    const formData = new FormData();
+    formData.append("image", file);
+    formData.append("user_id", currentUser.id);
+    console.log(formData)
+    fetch("http://localhost:8080/api/images/upload", {
+      method: "POST",
+      body: formData,
+    }).then((response) => {
+      if (response.status === 200) {
+        window.location.reload();
+      }
+      console.log(response)
+    }).catch((error) => {
+      console.log(error)
+    });
   }
   return (
     <>

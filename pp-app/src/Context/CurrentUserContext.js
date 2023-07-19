@@ -20,7 +20,7 @@ export function CurrentUserContextProvider (props) {
   }, [currentUser.id])
 
   useEffect(() => {
-    ImageService.getImageUrl().then((url) => {
+    ImageService.getImage(currentUser.id).then((url) => {
       url ? setProfilePictureURL(url) : setProfilePictureURL(null)
     })
   }, []);

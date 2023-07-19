@@ -129,7 +129,7 @@ const StartDonation = ({ setStep }) => {
           // Check if the response was successful
           if (response.ok) {
             setShowModal(true);
-            ActServices.createActivity(newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay.substring(0,10)).title, newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay).description, currentUser.id). then(
+            ActServices.createActivity(newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay).title, newSubscriptionEvenctDescription(selectedAmount, subsPeriod.label, paymentDay).description, currentUser.id). then(
               (res)=> console.log(res)
             )
             return response.json();

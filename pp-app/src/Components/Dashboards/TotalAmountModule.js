@@ -2,13 +2,13 @@ import {React, useEffect} from 'react';
 import {useMonthlySubscriptionStateContext} from  '../../Context/MonthlySubscriptionStateContext'
 
 export default function TotalAmountModule(props) {
-  const { month, monthlyData } = useMonthlySubscriptionStateContext();
+  const { month, monthlyAmounts } = useMonthlySubscriptionStateContext();
   useEffect(() => {
-    console.log("data del mes", monthlyData)
-  }, [monthlyData])
+    console.log("data del mes", monthlyAmounts)
+  }, [monthlyAmounts])
 
   const getValue = () => {
-    for (const md of monthlyData){
+    for (const md of monthlyAmounts){
       if(md.value == month){
         return md.amount
       }

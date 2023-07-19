@@ -22,6 +22,7 @@ const FirstStep = ({ setStep }) => {
   const { selectedFrequency } = useFrequency()
   const {subscriptionData} = useCurrentUser()
   const { subsPeriod } = useSubscriptionPeriod()
+  const payment = ((new Date()).getFullYear().toString() +'-'+'0'+((new Date()).getMonth() + 2).toString() + '-' + (new Date()).getDate().toString())
 
   return (
     <>
@@ -55,8 +56,8 @@ const FirstStep = ({ setStep }) => {
             <SelectSubscriptionPeriod></SelectSubscriptionPeriod>
             <SelectPaymentDay 
               explanationText={determineExplanationTextForPaymentDay(subsPeriod)}
-              initialValue={null}
-              disabled ={false}  
+              initialValue={payment}
+              disabled ={true}  
             />
           </div>
           <DashedLine></DashedLine>

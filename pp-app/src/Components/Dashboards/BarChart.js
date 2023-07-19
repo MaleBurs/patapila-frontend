@@ -5,16 +5,18 @@ import {useMonthlySubscriptionStateContext} from  '../../Context/MonthlySubscrip
 
 export default function BarChart(props) {
   const { monthlyData } = useMonthlySubscriptionStateContext();
+  const { monthlyAmounts } = useMonthlySubscriptionStateContext();
+  console.log(monthlyAmounts)
 
   useEffect(() => {
     let config = {
       type: "bar",
       data: {
-        labels: Array.from(monthlyData,(m)=>m.label), 
+        labels: Array.from(monthlyAmounts,(m)=>m.label), 
         datasets: [
           {
             label: 'RESUMEN DE COBRANZAS',
-            data: Array.from(monthlyData,(m)=>m.amount),
+            data: Array.from(monthlyAmounts,(m)=>m.amount),
             backgroundColor: [
               'rgba(165, 192, 135)',
               'rgba(131, 157, 154)',
@@ -63,7 +65,7 @@ export default function BarChart(props) {
     };
     let ctx = document.getElementById("bar").getContext('2d');
     window.myBar = new Chart(ctx, config);
-  }, [monthlyData]);
+  }, [monthlyAmounts]);
   return (
     <>
       <canvas id="bar"></canvas>

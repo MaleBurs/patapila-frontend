@@ -32,13 +32,11 @@ const uploadImage = async (path) => {
   
 // Retrieve an image by ID
 const getImage = async (id) => {
-    const response = await axios.get(`http://localhost:8080/api/images/${id}`, {
-        responseType: 'arraybuffer' // Set the response type to arraybuffer to receive the image data as binary
-    });
-
-    const blob = new Blob([response.data], { type: 'image/png' }); // Convert the binary data to a Blob object
-    return URL.createObjectURL(blob); // Create a URL representing the Blob object, which can be used as the source for an <img> element
+    const response = await axios.get(`http://localhost:8080/api/images/${AuthService.getCurrentUser().id}`);
+    console.log(response)
+    return response.data
 };
+
 //¿Cómo llamo a la función getImage? Esta función retorna una promesa
 //Recurperar la imagen con id=2
 //const [image, setImage] = React.useState('');  

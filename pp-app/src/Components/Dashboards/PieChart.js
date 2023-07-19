@@ -7,6 +7,7 @@ export default function PieChart(props) {
   const { monthlyData, month } = useMonthlySubscriptionStateContext();
 
   const pieChartData = () =>{
+    console.log(month)
     for (const md of monthlyData){
       if(md.value === month){
           return md.subsStates;

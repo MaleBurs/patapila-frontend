@@ -5,6 +5,7 @@ const SubscriptionContext = React.createContext()
 export function SubscriptionContextProvider(props) {
   const [subsPeriod, setSubsPeriod] = useState(subscriptionPeriod[0])
   const [paymentDay, setPaymentDay] = useState(null)
+  console.log(paymentDay)
 
   const value = useMemo(() => {
     return {
