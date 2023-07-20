@@ -40,7 +40,7 @@ export function NumberSearchFilter({
     <div className='flex flex-col '>
     <Labels.FilterLabel text= {"Filtrar según el " + (render("Header").toLowerCase())}></Labels.FilterLabel>
     <div className="flex flex-row items-baseline">
-    <Inputs.BottomLineNumberInput
+    <Inputs.BoxInput
         id="standard-search" 
         placeholder={capitalizeFirst((render("Header")).toLowerCase())}
         value={filterValue || ""}

@@ -9,7 +9,7 @@ const columns =[
     filter: "rankedMatchSorter",
   },
   {
-    Header: "ID de Usuario",
+    Header: "Email del usuario",
     accessor: 'userId',
     Cell: OpenSideBarFromUser,
     Filter: NumberSearchFilter,

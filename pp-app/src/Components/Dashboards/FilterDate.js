@@ -44,7 +44,7 @@ const FilterDate = (props) => {
                 }}
               >
                 <option className={"font-Pop-R text-xs"} value="">Seleccionar</option>
-                { (dataItem.tittle==="Mes") ?
+                { (dataItem.label==="Mes") ?
                 <>
                 {monthlyData.map((option) => (
                   <option key={option.value} value={option.value} className={"font-Pop-R text-xs"}>

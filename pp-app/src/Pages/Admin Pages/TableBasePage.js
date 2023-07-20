@@ -20,7 +20,7 @@ const TableBasePage = (props) => {
         <SectionTitleIndicator
           title={props.title}
           subtitle={props.subtitle}/>
-        <div className="px-6 md:px-12 lg:px-20 mt-10">  
+        <div className="px-10 md:px-5 lg:px-50 mt-10">  
           <Table columns={props.dataForColumns} functionToLoadData={props.functionToLoadData}></Table>
         </div>
       </div>
