@@ -123,15 +123,15 @@ export default function RefferalsPage() {
                     </>
                     :
                     <div className="flex flex-row space-x-4 justify-start">
-                        {refferalUserInformation.publicProfileConfiguration.showTotalAmountDonated &&
+                        {(refferalUserInformation.publicProfileConfiguration.showTotalAmountDonated) ?
                         <DashedImpactBox description="Ha donado a lo largo de su historia" impact={"$" + refferalUserInformation.totalAmountDonated}/>
-                        }
-                        {refferalUserInformation.publicProfileConfiguration.showReferralsTotalAmountDonated &&
+                        : <></>}
+                        {refferalUserInformation.publicProfileConfiguration.showReferralsTotalAmountDonated ?
                         <DashedImpactBox description="Gracias a sus referidos ha ayudado a recaudar," impact={"$" + refferalUserInformation.referralsTotalAmountDonated}/>
-                        }
-                        {refferalUserInformation.publicProfileConfiguration.showReferralsQuantity && 
+                        : <></>}
+                        {refferalUserInformation.publicProfileConfiguration.showReferralsQuantity ? 
                         <DashedImpactBox description="Ha ayudado a que se unan nuevos miembros," impact={refferalUserInformation.referralsQuantity} />
-                        }
+                        : <></>}
                     </div>
                     }
 
