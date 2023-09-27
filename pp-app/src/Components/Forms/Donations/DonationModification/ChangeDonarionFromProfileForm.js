@@ -86,7 +86,7 @@ const ChangeDonationFromProfileForm = () =>{
       DonationService.modifySubscription(subscriptionData.id, selectedAmount, parseInt(subsPeriod.value), paymentDay).then(
         (res) => {
           setIfUserWantsToModifySubs(false);
-          ActServices.createActivity(6, modificationSubscriptionEvenctDescription(selectedAmount,subsPeriod.label,paymentDay).title, modificationSubscriptionEvenctDescription(selectedAmount,subsPeriod.label,paymentDay).description, currentUser.id). then(
+          ActServices.createActivity(6, modificationSubscriptionEvenctDescription(selectedAmount,subsPeriod.label,paymentDay).description, currentUser.id). then(
             (res)=> console.log(res)
           )
         },
